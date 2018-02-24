@@ -12,20 +12,18 @@
 */
 
 
-Route::view('/main', 'layouts.index');
+Route::view('/main', 'layouts.index')->name('main');
 Route::view('/', 'layouts.login');
-Route::view('/mylist', 'layouts.myList');
-Route::view('/testlist', 'layouts.testList');
-Route::view('/clients', 'layouts.clients');
-Route::view('/leads', 'layouts.leads');
-Route::view('/starleads', 'layouts.starLeads');
-Route::view('/newinfo', 'layouts.newInfo');
+Route::view('/product/add', 'layouts.myList')->name('product.add');
+Route::view('/generate/file', 'layouts.testList')->name('generate.file');
+Route::view('/offer/add', 'layouts.clients')->name('offer.add');
 
-Route::view('/reports', 'layouts.reports');
-Route::view('/notices', 'layouts.notices');
-Route::view('/leaves', 'layouts.leaves');
-Route::view('/myteam', 'layouts.myTeam');
-Route::view('/profile', 'layouts.profile');
+
+Route::view('/offer/generate', 'layouts.leads')->name('offer.generate');
+Route::view('/historic/files', 'layouts.starLeads')->name('historic.files');
+Route::view('/settings', 'layouts.newInfo')->name('settings');
+
+
 
 
 Route::get('/user','UserController@index');
@@ -42,7 +40,6 @@ Route::get('/home',function (){
 });
 
 
-Route::view('/lead', 'layouts.lead.add');
-Route::get('/assignreport', 'UserController@test');
+
 
 
