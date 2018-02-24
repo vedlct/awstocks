@@ -8,38 +8,38 @@
             <ul id="sidebarnav">
                 <li class="nav-small-cap">Dashboard</li>
                 <li>
-                    <a href="{{route('main')}}"><i class="mdi mdi-gauge"></i>Stock Info</a>
+                    <a href="{{route('main')}}"><i class="mdi mdi-gauge"></i><span class="hide-menu">Stock Info</span></a>
 
                 </li>
                 <li>
-                    <a href="{{route('product.add')}}" ><i class="fa fa-plus"></i>Enter New Product</a>
-
-                </li>
-
-
-                <li>
-                    <a href="{{route('generate.file')}}"><i class="fa fa-list-alt"></i>Generate Product File</a>
-
-                </li>
-
-                <li>
-                    <a href="{{route('offer.add')}}"><i class="fa fa-plus"></i>Enter Offer Details</a>
-
-                </li>
-
-                <li>
-                    <a href="{{route('offer.generate')}}"><i class="fa fa-briefcase"></i>Generate Offer Files</a>
+                    <a href="{{route('product.add')}}" ><i class="fa fa-plus"></i><span class="hide-menu">Enter New Product</span></a>
 
                 </li>
 
 
                 <li>
-                    <a href="{{route('historic.files')}}"><i class="fa fa-star"></i>Historic uploaded files</a>
+                    <a href="{{route('generate.file')}}"><i class="fa fa-list-alt"></i><span class="hide-menu">Generate Product File</span></a>
 
                 </li>
 
                 <li>
-                    <a href="{{route('settings')}}"><i class="fa fa-plus-square"></i>Settings</a>
+                    <a href="{{route('offer.add')}}"><i class="fa fa-plus"></i><span class="hide-menu">Enter Offer Details</span></a>
+
+                </li>
+
+                <li>
+                    <a href="{{route('offer.generate')}}"><i class="fa fa-briefcase"></i><span class="hide-menu">Generate Offer Files</span></a>
+
+                </li>
+
+
+                <li>
+                    <a href="{{route('historic.files')}}"><i class="fa fa-star"></i><span class="hide-menu">Historic uploaded files</span></a>
+
+                </li>
+
+                <li>
+                    <a href="{{route('settings')}}"><i class="fa fa-plus-square"></i><span class="hide-menu">Settings</span></a>
 
                 </li>
 
@@ -59,7 +59,7 @@
     <!-- Bottom points-->
     <div class="sidebar-footer">
         <!-- item-->
-      
+
         <a href="#" class="link" data-toggle="tooltip" title="Logout"><i class="mdi mdi-power"></i></a>
     </div>
     <!-- End Bottom points-->
