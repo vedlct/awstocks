@@ -33,13 +33,17 @@ Route::view('/test', 'test');
 
 Auth::routes();
 
-Route::get('/dashboard', 'HomeController@index')->name('home');
+//Route::get('/dashboard', 'HomeController@index')->name('home');
 
-Route::get('/home',function (){
-    return redirect('/dashboard');
-});
-
-
+//Route::get('/home',function (){
+//    return redirect('/dashboard');
+//});
 
 
 
+
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
