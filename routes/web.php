@@ -12,8 +12,8 @@
 */
 
 
-Route::view('/main', 'layouts.index')->name('main');
-Route::view('/', 'layouts.login');
+Route::get('/main', 'HomeController@index')->name('main');
+Route::get('/', 'Auth\LoginController@show');
 Route::view('/product/add', 'layouts.myList')->name('product.add');
 Route::view('/generate/file', 'layouts.testList')->name('generate.file');
 Route::view('/offer/add', 'layouts.clients')->name('offer.add');
