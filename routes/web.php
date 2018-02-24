@@ -26,23 +26,11 @@ Route::view('/settings', 'layouts.newInfo')->name('settings');
 
 
 
-Route::get('/user','UserController@index');
-
-
-Route::view('/test', 'test');
-
-Auth::routes();
-
 //Route::get('/dashboard', 'HomeController@index')->name('home');
 
 //Route::get('/home',function (){
 //    return redirect('/dashboard');
 //});
-
-
-
-
-
 
 Auth::routes();
 
