@@ -31,8 +31,5 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function usertype(){
 
-       return $this->belongsTo(Usertype::class,'typeId','typeId');
-    }
 }

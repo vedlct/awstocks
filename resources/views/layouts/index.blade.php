@@ -8,6 +8,5 @@
 
     I am inside content
 
-    {{Auth::user()->userId}}
 
     @endsection
