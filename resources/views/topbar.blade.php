@@ -7,22 +7,16 @@
             <a class="navbar-brand" href="{{route('main')}}">
                 <!-- Logo icon -->
 
-                <img src="{{url('img/logo/TCL_logo.png')}}" alt="homepage" class="dark-logo" width="40px"/>
-                <b>
-                    <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
-                    <!-- Dark Logo icon -->
+                <img src="{{url('img/logo/dummy-logo.png')}}" alt="homepage" class="dark-logo" width="40px"/>
 
-                    <!-- Light Logo icon -->
-                    {{--<img src="{{url('assets/images/logo-light-icon.png')}}" alt="homepage" class="light-logo" />--}}
-                </b>
-                <!--End Logo icon -->
-                <!-- Logo text -->
+
                 <span>
                          <!-- dark Logo text -->
                          {{--<img src="../assets/images/logo-text.png" alt="homepage" class="dark-logo" />--}}
                     <b>Stock</b>
                     <!-- Light Logo text -->
-                         {{--<img src="images/logo-light-text.png" class="light-logo" alt="homepage" /></span> </a>--}}
+                         {{--<img src="images/logo-light-text.png" class="light-logo" alt="homepage" />--}}
+                </span> </a>
         </div>
         <!-- ============================================================== -->
         <!-- End Logo -->
@@ -42,7 +36,7 @@
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Welcome<b> Admin <i class="fa fa-sort-desc" aria-hidden="true"></i></b></a>
+                        Welcome<b> {{strtoupper(Auth::user()->name)}} <i class="fa fa-sort-desc" aria-hidden="true"></i></b></a>
                     <div class="dropdown-menu dropdown-menu-right animated flipInY">
                         <ul class="dropdown-user">
                             <li role="separator" class="divider"></li>
