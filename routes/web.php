@@ -12,8 +12,8 @@
 */
 
 
-Route::view('/main', 'layouts.index')->name('main');
-Route::view('/', 'layouts.login');
+Route::get('/main', 'HomeController@index')->name('main');
+Route::get('/', 'Auth\LoginController@show');
 Route::view('/product/add', 'layouts.myList')->name('product.add');
 Route::view('/generate/file', 'layouts.testList')->name('generate.file');
 Route::view('/offer/add', 'layouts.clients')->name('offer.add');
@@ -26,20 +26,12 @@ Route::view('/settings', 'layouts.newInfo')->name('settings');
 
 
 
-Route::get('/user','UserController@index');
+//Route::get('/dashboard', 'HomeController@index')->name('home');
 
-
-Route::view('/test', 'test');
+//Route::get('/home',function (){
+//    return redirect('/dashboard');
+//});
 
 Auth::routes();
 
-Route::get('/dashboard', 'HomeController@index')->name('home');
-
-Route::get('/home',function (){
-    return redirect('/dashboard');
-});
-
-
-
-
-
+Route::get('/home', 'HomeController@index')->name('home');

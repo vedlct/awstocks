@@ -9,6 +9,4 @@
     I am inside content
 
 
-
-
     @endsection

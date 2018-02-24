@@ -16,6 +16,7 @@ class User extends Authenticatable
      */
 
      public $timestamps = false;
+     public $primaryKey = 'userId';
 
     protected $fillable = [
         'name', 'email', 'password',
@@ -30,8 +31,5 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function usertype(){
 
-       return $this->belongsTo(Usertype::class,'typeId','typeId');
-    }
 }
