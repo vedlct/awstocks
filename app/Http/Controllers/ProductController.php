@@ -25,10 +25,6 @@ class ProductController extends Controller
                         ->get();
 
         $dColors=Color::where('colorType','detailed')->get();
-
-
-
-
         return view('product.add')
             ->with('categories',$categories)
             ->with('sColors',$sColors)
@@ -43,7 +39,6 @@ class ProductController extends Controller
 
         $dColors=Color::where('colorType','detailed')->get();
         $product=Product::findOrFail($id);
-
 
         return view('product.edit')
             ->with('categories',$categories)
@@ -61,7 +56,7 @@ class ProductController extends Controller
             'description' => 'required',
             'style' => 'required|max:45',
             'sku'=>'max:45',
-            'brand'=>'max:5',
+            'brand'=>'max:45',
             'size'=>'required|max:5',
 
         ]);
@@ -77,13 +72,13 @@ class ProductController extends Controller
         $product->fkcategoryId=$r->category;
         $product->fkscolorId=$r->standardColor;
         $product->fkdcolorId=$r->detailedColor;
-        $product->save();
+//        $product->save();
 
         if($r->hasFile('swatchPic')){
 
 
             $img = $r->file('swatchPic');
-            $filename= time().'swatch'.'.'.$img->getClientOriginalExtension();
+            $filename= $product->productId.'swatch'.'.'.$img->getClientOriginalExtension();
             $product->swatch=$filename;
             $location = public_path('productImage/'.$filename);
             Image::make($img)->resize(300,200)->save($location);
@@ -92,21 +87,21 @@ class ProductController extends Controller
 
         if($r->hasFile('outfitPic')){
             $img = $r->file('outfitPic');
-            $filename= time().'outfit'.'.'.$img->getClientOriginalExtension();
+            $filename= $product->productId.'outfit'.'.'.$img->getClientOriginalExtension();
             $product->outfit=$filename;
             $location = public_path('productImage/'.$filename);
             Image::make($img)->resize(300,200)->save($location);
         }
         if($r->hasFile('mainPic')){
             $img = $r->file('mainPic');
-            $filename= time().'main'.'.'.$img->getClientOriginalExtension();
+            $filename= $product->productId.'main'.'.'.$img->getClientOriginalExtension();
             $product->mainImage=$filename;
             $location = public_path('productImage/'.$filename);
             Image::make($img)->resize(300,200)->save($location);
         }
         if($r->hasFile('image2Pic')){
             $img = $r->file('image2Pic');
-            $filename= time().'image2'.'.'.$img->getClientOriginalExtension();
+            $filename= $product->productId.'image2'.'.'.$img->getClientOriginalExtension();
             $product->image2=$filename;
             $location = public_path('productImage/'.$filename);
             Image::make($img)->resize(300,200)->save($location);
@@ -115,10 +110,6 @@ class ProductController extends Controller
         $product->save();
         Session::flash('message', 'Product Updated  successfully');
         return back();
-
-
-
-
 
     }
 
@@ -173,7 +164,7 @@ class ProductController extends Controller
 
 
             $img = $r->file('swatchPic');
-            $filename= time().'swatch'.'.'.$img->getClientOriginalExtension();
+            $filename= $product->productId.'swatch'.'.'.$img->getClientOriginalExtension();
             $product->swatch=$filename;
             $location = public_path('productImage/'.$filename);
             Image::make($img)->resize(300,200)->save($location);
@@ -182,21 +173,21 @@ class ProductController extends Controller
 
         if($r->hasFile('outfitPic')){
             $img = $r->file('outfitPic');
-            $filename= time().'outfit'.'.'.$img->getClientOriginalExtension();
+            $filename= $product->productId.'outfit'.'.'.$img->getClientOriginalExtension();
             $product->outfit=$filename;
             $location = public_path('productImage/'.$filename);
             Image::make($img)->resize(300,200)->save($location);
         }
         if($r->hasFile('mainPic')){
             $img = $r->file('mainPic');
-            $filename= time().'main'.'.'.$img->getClientOriginalExtension();
+            $filename= $product->productId.'main'.'.'.$img->getClientOriginalExtension();
             $product->mainImage=$filename;
             $location = public_path('productImage/'.$filename);
             Image::make($img)->resize(300,200)->save($location);
         }
         if($r->hasFile('image2Pic')){
             $img = $r->file('image2Pic');
-            $filename= time().'image2'.'.'.$img->getClientOriginalExtension();
+            $filename= $product->productId.'image2'.'.'.$img->getClientOriginalExtension();
             $product->image2=$filename;
             $location = public_path('productImage/'.$filename);
             Image::make($img)->resize(300,200)->save($location);
