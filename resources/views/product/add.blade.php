@@ -14,16 +14,16 @@
                     <h2 style="color: #989898;"><b>Add Product Information</b></h2>
                 </div>
 
-                <form class="form-horizontal" method="post" action="{{route('product.insert')}}">
+                <form class="form-horizontal" method="post" action="{{route('product.insert')}}" enctype="multipart/form-data">
                     <div class="form-group row">
                         {{csrf_field()}}
                         <label class="col-sm-2 form-control-label">Product category</label>
                         <div class="col-sm-10">
                             <select name="category" class="form-control form-control-warning" >
                                 <option value="">Select One</option>
-                                <option value="1">Women</option>
-                                <option value="2">Men</option>
-                                <option value="3">Kids</option>
+                                @foreach($categories as $category)
+                                <option value="{{$category->categoryId}}">{{$category->name}}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
@@ -47,9 +47,9 @@
                         <div class="col-sm-10">
                             <select name="standardColor" class="form-control form-control-warning">
                                 <option value="">Select One</option>
-                                <option value="1">Red</option>
-                                <option value="2">Blue</option>
-                                <option value="3">Green</option>
+                                @foreach($sColors as $color)
+                                <option value="{{$color->colorId}}">{{$color->colorName}}</option>
+                                @endforeach
                             </select>
 
                         </div>
@@ -100,8 +100,10 @@
                         <div class="col-sm-10">
                             <select name="detailedColor" class="form-control form-control-warning">
                                 <option value="">Select One</option>
-                                <option value="1">Bordeaux</option>
-                                <option value="2">Cobalt</option>
+                                @foreach($dColors as $color)
+                                    <option value="{{$color->colorId}}">{{$color->colorName}}</option>
+                                @endforeach
+
                             </select>
                         </div>
                     </div>
