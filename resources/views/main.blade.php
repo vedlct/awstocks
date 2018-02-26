@@ -68,7 +68,12 @@
             <!-- ============================================================== -->
             <!-- Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->
-         @yield('content')
+
+            @if(Session::has('message'))
+                <p class="alert {{ Session::get('alert-class', 'alert-success') }}">{{ Session::get('message') }}</p>
+            @endif
+
+        @yield('content')
 
 
             <!-- ============================================================== -->

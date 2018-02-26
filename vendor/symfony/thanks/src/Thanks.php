@@ -12,69 +12,58 @@
 namespace Symfony\Thanks;
 
 use Composer\Composer;
-use Composer\Console\Application;
 use Composer\EventDispatcher\EventSubscriberInterface;
-use Composer\Installer\PackageEvents;
 use Composer\IO\IOInterface;
+use Composer\Plugin\CommandEvent;
+use Composer\Plugin\Capability\CommandProvider;
+use Composer\Plugin\Capable;
+use Composer\Plugin\PluginEvents;
 use Composer\Plugin\PluginInterface;
 use Composer\Script\Event as ScriptEvent;
 use Composer\Script\ScriptEvents;
-use Symfony\Component\Console\Input\ArgvInput;
 
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class Thanks implements EventSubscriberInterface, PluginInterface
+class Thanks implements Capable, CommandProvider, EventSubscriberInterface, PluginInterface
 {
     private $io;
-    private $displayReminder = 0;
+    private $displayReminder = false;
 
     public function activate(Composer $composer, IOInterface $io)
     {
         $this->io = $io;
-
-        foreach (debug_backtrace() as $trace) {
-            if (!isset($trace['object']) || !isset($trace['args'][0])) {
-                continue;
-            }
-
-            if (!$trace['object'] instanceof Application || !$trace['args'][0] instanceof ArgvInput) {
-                continue;
-            }
-
-            $input = $trace['args'][0];
-            $app = $trace['object'];
-
-            try {
-                $command = $input->getFirstArgument();
-                $command = $command ? $app->find($command)->getName() : null;
-            } catch (\InvalidArgumentException $e) {
-            }
-
-            if ('update' === $command) {
-                $this->displayReminder = 1;
-            }
-
-            $app->add(new Command\ThanksCommand());
-            break;
-        }
     }
 
-    public function enableReminder()
+    public function getCapabilities()
     {
-        if (1 === $this->displayReminder) {
-            $this->displayReminder = version_compare('1.1.0', PluginInterface::PLUGIN_API_VERSION, '<=') ? 2 : 0;
+        return [
+            CommandProvider::class => __CLASS__,
+        ];
+    }
+
+    public function getCommands()
+    {
+        return [
+            new Command\ThanksCommand(),
+        ];
+    }
+
+    public function inspectCommand(CommandEvent $event)
+    {
+        if ('update' === $event->getCommandName()) {
+            $this->displayReminder = true;
         }
     }
 
     public function displayReminder(ScriptEvent $event)
     {
-        if (2 !== $this->displayReminder) {
+        if (!$this->displayReminder) {
             return;
         }
 
         $love = '\\' === DIRECTORY_SEPARATOR ? 'love' : '💖 ';
-        $star = '\\' === DIRECTORY_SEPARATOR ? 'star' : '★ ';
+        $star = '\\' === DIRECTORY_SEPARATOR ? 'star' : '⭐ ';
 
         $this->io->writeError('');
         $this->io->writeError('What about running <comment>composer thanks</> now?');
@@ -85,8 +74,8 @@ class Thanks implements EventSubscriberInterface, PluginInterface
     public static function getSubscribedEvents()
     {
         return [
-            PackageEvents::POST_PACKAGE_UPDATE => 'enableReminder',
             ScriptEvents::POST_UPDATE_CMD => 'displayReminder',
+            PluginEvents::COMMAND => 'inspectCommand',
         ];
     }
 }

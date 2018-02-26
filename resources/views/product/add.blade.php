@@ -9,7 +9,7 @@
     <div class="col-lg-12">
         <div class="card" style="margin-left: 10px; border-radius: 10px;">
 
-            <div class="card-body" style="padding: 5%;">
+            <div class="card-body" style="padding: 1%;">
                 <div align="center" style="margin-bottom: 3%;">
                     <h2 style="color: #989898;"><b>Add Product Information</b></h2>
                 </div>
@@ -19,7 +19,7 @@
                         {{csrf_field()}}
                         <label class="col-sm-2 form-control-label">Product category</label>
                         <div class="col-sm-10">
-                            <select name="category" class="form-control form-control-warning" >
+                            <select name="category" class="form-control form-control-warning" required>
                                 <option value="">Select One</option>
                                 @foreach($categories as $category)
                                 <option value="{{$category->categoryId}}">{{$category->name}}</option>
@@ -31,13 +31,13 @@
                     <div class="form-group row">
                         <label class="col-sm-2 form-control-label">Brand Name</label>
                         <div class="col-sm-10">
-                            <input id="inputHorizontalWarning" type="text" name="brand" placeholder="brand" class="form-control form-control-warning">
+                            <input id="inputHorizontalWarning" type="text" name="brand" placeholder="brand" class="form-control form-control-warning" required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-2 form-control-label">sku</label>
                         <div class="col-sm-10">
-                            <input id="inputHorizontalWarning" type="text" name="sku" placeholder="SKU" class="form-control form-control-warning">
+                            <input id="inputHorizontalWarning" type="text" name="sku" placeholder="SKU" class="form-control form-control-warning" required>
                         </div>
                     </div>
 
@@ -45,7 +45,7 @@
                     <div class="form-group row">
                         <label class="col-sm-2 form-control-label">Standard Color</label>
                         <div class="col-sm-10">
-                            <select name="standardColor" class="form-control form-control-warning">
+                            <select name="standardColor" class="form-control form-control-warning" required>
                                 <option value="">Select One</option>
                                 @foreach($sColors as $color)
                                 <option value="{{$color->colorId}}">{{$color->colorName}}</option>
@@ -60,7 +60,7 @@
                     <div class="form-group row">
                         <label class="col-sm-2 form-control-label">Status</label>
                         <div class="col-sm-10">
-                            <select name="status" class="form-control form-control-warning">
+                            <select name="status" class="form-control form-control-warning" required>
                                 <option value="1">Active</option>
                                 <option value="0">Inactive</option>
                             </select>
@@ -70,13 +70,13 @@
                     <div class="form-group row">
                         <label class="col-sm-2 form-control-label">Product Name</label>
                         <div class="col-sm-10">
-                            <input id="inputHorizontalSuccess" type="text" name="productName" placeholder="name" class="form-control form-control-success">
+                            <input id="inputHorizontalSuccess" type="text" name="productName" placeholder="name" class="form-control form-control-success" required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-2 form-control-label">Style</label>
                         <div class="col-sm-10">
-                            <input id="inputHorizontalSuccess" name="style" type="text" placeholder="style" class="form-control form-control-success">
+                            <input id="inputHorizontalSuccess" name="style" type="text" placeholder="style" class="form-control form-control-success" required>
                         </div>
                     </div>
 
@@ -84,7 +84,7 @@
                         <label class="col-sm-2 form-control-label">Size</label>
                         <div class="col-sm-10">
 
-                            <select name="size" class="form-control form-control-warning">
+                            <select name="size" class="form-control form-control-warning" required>
                                 <option value="">Select One</option>
                                 <option value="s">S</option>
                                 <option value="m">M</option>
@@ -98,7 +98,7 @@
                     <div class="form-group row">
                         <label class="col-sm-2 form-control-label">Detailed Color</label>
                         <div class="col-sm-10">
-                            <select name="detailedColor" class="form-control form-control-warning">
+                            <select name="detailedColor" class="form-control form-control-warning" required>
                                 <option value="">Select One</option>
                                 @foreach($dColors as $color)
                                     <option value="{{$color->colorId}}">{{$color->colorName}}</option>
@@ -112,15 +112,15 @@
                     <div class="form-group row">
                         <label class="col-sm-2 form-control-label">Product Description</label>
                         <div class="col-sm-10">
-                            <textarea class="form-control" rows="5" id="comment" name="description"></textarea>
+                            <textarea class="form-control" rows="5" id="comment" name="description" required></textarea>
                         </div>
                     </div>
 
 
                     <div class="form-group row">
-                        <label class="col-sm-2 form-control-label">Swatch</label>
+                        <label class="col-sm-2 form-control-label"><b>Swatch</b></label>
                         <div class="col-sm-10">
-                            <input type="file" name="pic"  value="upload Image" accept="image/*">
+                            <input type="file" name="swatchPic"  value="upload Image" accept="image/*">
                         </div>
                     </div>
 
@@ -128,7 +128,7 @@
                     <div class="form-group row">
                         <label class="col-sm-2 form-control-label"><b>Outfit</b> </label>
                         <div class="col-sm-10">
-                            <input type="file" name="pic"  value="upload Image" accept="image/*">
+                            <input type="file" name="outfitPic"  value="upload Image" accept="image/*">
 
                         </div>
                     </div>
@@ -137,7 +137,7 @@
                     <div class="form-group row">
                         <label class="col-sm-2 form-control-label"><b>Main Image</b> </label>
                         <div class="col-sm-10">
-                            <input type="file" name="pic"  value="upload Image" accept="image/*">
+                            <input type="file" name="mainPic"  value="upload Image" accept="image/*">
 
                         </div>
                     </div>
@@ -146,7 +146,7 @@
                     <div class="form-group row">
                         <label class="col-sm-2 form-control-label"><b>Image 2</b> </label>
                         <div class="col-sm-10">
-                            <input type="file" name="pic"  value="upload Image" accept="image/*">
+                            <input type="file" name="image2Pic"  value="image2Pic" accept="image/*">
 
                         </div>
                     </div>
