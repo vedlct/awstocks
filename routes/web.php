@@ -15,9 +15,11 @@
 Route::get('/main', 'HomeController@index')->name('main');
 Route::get('/', 'Auth\LoginController@show');
 
-//Add Product
+//Product
 Route::get('/product/add', 'ProductController@add')->name('product.add');
+Route::get('/product/edit/{id}', 'ProductController@edit')->name('product.edit');
 Route::post('/product/insert', 'ProductController@insert')->name('product.insert');
+Route::post('/product/update', 'ProductController@update')->name('product.update');
 
 //Generate Product
 Route::get('/product/generate', 'ProductController@generate')->name('generate.file');
