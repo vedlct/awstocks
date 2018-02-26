@@ -58,6 +58,7 @@ class ProductController extends Controller
         $product->fkcategoryId=$r->category;
         $product->sColor=$r->standardColor;
         $product->dColor=$r->detailedColor;
+        $product->save();
 
         if($r->hasFile('swatchPic')){
 
