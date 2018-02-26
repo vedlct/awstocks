@@ -26,10 +26,89 @@ class ProductController extends Controller
         $dColors=Color::where('colorType','detailed')->get();
 
 
+
+
         return view('product.add')
             ->with('categories',$categories)
             ->with('sColors',$sColors)
             ->with('dColors',$dColors);
+    }
+
+    public function edit($id){
+
+        $categories=Category::get();
+        $sColors=Color::where('colorType','standard')
+            ->get();
+
+        $dColors=Color::where('colorType','detailed')->get();
+        $product=Product::findOrFail($id);
+
+
+        return view('product.edit')
+            ->with('categories',$categories)
+            ->with('sColors',$sColors)
+            ->with('dColors',$dColors)
+            ->with('product',$product)
+            ->with('id',$id);
+    }
+
+
+    public function update(Request $r){
+
+        $product=Product::findOrFail($r->id);
+        $product->productName=$r->productName;
+        $product->status=$r->status;
+        $product->productDecription=$r->description;
+        $product->style=$r->style;
+        $product->sku=$r->sku;
+        $product->brand=$r->brand;
+        $product->size=$r->size;
+        $product->fkcategoryId=$r->category;
+        $product->sColor=$r->standardColor;
+        $product->dColor=$r->detailedColor;
+        $product->save();
+
+        if($r->hasFile('swatchPic')){
+
+
+            $img = $r->file('swatchPic');
+            $filename= time().'swatch'.'.'.$img->getClientOriginalExtension();
+            $product->swatch=$filename;
+            $location = public_path('productImage/'.$filename);
+            Image::make($img)->resize(300,200)->save($location);
+
+        }
+
+        if($r->hasFile('outfitPic')){
+            $img = $r->file('outfitPic');
+            $filename= time().'outfit'.'.'.$img->getClientOriginalExtension();
+            $product->outfit=$filename;
+            $location = public_path('productImage/'.$filename);
+            Image::make($img)->resize(300,200)->save($location);
+        }
+        if($r->hasFile('mainPic')){
+            $img = $r->file('mainPic');
+            $filename= time().'main'.'.'.$img->getClientOriginalExtension();
+            $product->mainImage=$filename;
+            $location = public_path('productImage/'.$filename);
+            Image::make($img)->resize(300,200)->save($location);
+        }
+        if($r->hasFile('image2Pic')){
+            $img = $r->file('image2Pic');
+            $filename= time().'image2'.'.'.$img->getClientOriginalExtension();
+            $product->image2=$filename;
+            $location = public_path('productImage/'.$filename);
+            Image::make($img)->resize(300,200)->save($location);
+        }
+
+        $product->save();
+        Session::flash('message', 'Product Updated  successfully');
+        return back();
+
+
+
+
+
     }
 
 
@@ -39,7 +118,13 @@ class ProductController extends Controller
 //        return view('product.generate');
 //    }
     public function allProduct(){
-        return view('product.allproductList');
+        $categories=Category::get();
+        $productsList=Product::select('productId','style','sku','brand','status','productName','LastExportedBy','LastExportedDate','category.name as categoryName')
+            ->leftJoin('category', 'category.categoryId', '=', 'product.fkcategoryId')
+            ->get();
+        return view('product.allproductList')
+            ->with('categories',$categories)
+            ->with('productsList',$productsList);
     }
 
 
