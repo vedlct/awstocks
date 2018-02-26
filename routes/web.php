@@ -14,9 +14,16 @@
 
 Route::get('/main', 'HomeController@index')->name('main');
 Route::get('/', 'Auth\LoginController@show');
-Route::view('/product/add', 'layouts.myList')->name('product.add');
-Route::view('/generate/file', 'layouts.testList')->name('generate.file');
-Route::view('/offer/add', 'layouts.clients')->name('offer.add');
+
+//Add Product
+Route::get('/product/add', 'ProductController@add')->name('product.add');
+Route::post('/product/insert', 'ProductController@insert')->name('product.insert');
+
+//Generate Product
+Route::get('/product/generate', 'ProductController@generate')->name('generate.file');
+
+
+Route::view('/offer/add', 'offer.add')->name('offer.add');
 
 
 Route::view('/offer/generate', 'layouts.leads')->name('offer.generate');

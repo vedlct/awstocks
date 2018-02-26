@@ -11,4 +11,28 @@ class ProductController extends Controller
     {
         $this->middleware('auth');
     }
+
+
+    public function add(){
+
+        return view('product.add');
+    }
+
+
+
+
+    public function generate(){
+        return view('product.generate');
+    }
+
+
+    public function insert(Request $r){
+
+        return $r;
+
+    }
+
+    public function Store(){
+
+    }
 }
