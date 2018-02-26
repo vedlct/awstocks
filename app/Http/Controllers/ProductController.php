@@ -54,6 +54,16 @@ class ProductController extends Controller
 
 
     public function update(Request $r){
+        $this->validate($r,[
+            'productName' => 'required|max:45',
+            'status' => 'max:45',
+            'description' => 'required',
+            'style' => 'required|max:45',
+            'sku'=>'max:45',
+            'brand'=>'max:5',
+            'size'=>'required|max:5',
+
+        ]);
 
         $product=Product::findOrFail($r->id);
         $product->productName=$r->productName;
@@ -64,8 +74,8 @@ class ProductController extends Controller
         $product->brand=$r->brand;
         $product->size=$r->size;
         $product->fkcategoryId=$r->category;
-        $product->sColor=$r->standardColor;
-        $product->dColor=$r->detailedColor;
+        $product->fkscolorId=$r->standardColor;
+        $product->fkdcolorId=$r->detailedColor;
         $product->save();
 
         if($r->hasFile('swatchPic')){
@@ -125,6 +135,16 @@ class ProductController extends Controller
         *
         *
         */
+        $this->validate($r,[
+            'productName' => 'required|max:45',
+            'status' => 'max:45',
+            'description' => 'required',
+            'style' => 'required|max:45',
+            'sku'=>'max:45',
+            'brand'=>'max:45',
+            'size'=>'required|max:5',
+
+        ]);
 
         $product=new Product();
         $product->productName=$r->productName;
@@ -135,8 +155,8 @@ class ProductController extends Controller
         $product->brand=$r->brand;
         $product->size=$r->size;
         $product->fkcategoryId=$r->category;
-        $product->sColor=$r->standardColor;
-        $product->dColor=$r->detailedColor;
+        $product->fkscolorId=$r->standardColor;
+        $product->fkdcolorId=$r->detailedColor;
         $product->save();
 
         if($r->hasFile('swatchPic')){
