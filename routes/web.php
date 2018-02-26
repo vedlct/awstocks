@@ -18,9 +18,10 @@ Route::get('/', 'Auth\LoginController@show');
 //Add Product
 Route::get('/product/add', 'ProductController@add')->name('product.add');
 Route::post('/product/insert', 'ProductController@insert')->name('product.insert');
+Route::get('/product/allProduct', 'ProductController@allProduct')->name('product.list');
 
 //Generate Product
-Route::get('/product/generate', 'ProductController@generate')->name('generate.file');
+//Route::get('/product/generate', 'ProductController@generate')->name('generate.file');
 
 
 Route::view('/offer/add', 'offer.add')->name('offer.add');

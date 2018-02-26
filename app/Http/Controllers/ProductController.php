@@ -35,8 +35,11 @@ class ProductController extends Controller
 
 
 
-    public function generate(){
-        return view('product.generate');
+//    public function generate(){
+//        return view('product.generate');
+//    }
+    public function allProduct(){
+        return view('product.allproductList');
     }
 
 
