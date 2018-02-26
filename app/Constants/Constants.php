@@ -8,6 +8,8 @@ define('SIZE',array(
     "xl" => "xl",
 ));
 
+define('Status',array("Active","Inactive"));
+
 //
 //<option value="s">S</option>
 //                                    <option value="m">M</option>

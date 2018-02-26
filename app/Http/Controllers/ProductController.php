@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use File;
 use Image;
 use Session;
 use App\Product;
@@ -124,8 +125,17 @@ class ProductController extends Controller
 
 
 
-    public function generate(){
-        return view('product.generate');
+//    public function generate(){
+//        return view('product.generate');
+//    }
+    public function allProduct(){
+        $categories=Category::get();
+        $productsList=Product::select('productId','style','sku','brand','status','productName','LastExportedBy','LastExportedDate','category.name as categoryName')
+            ->leftJoin('category', 'category.categoryId', '=', 'product.fkcategoryId')
+            ->get();
+        return view('product.allproductList')
+            ->with('categories',$categories)
+            ->with('productsList',$productsList);
     }
 
 
@@ -204,6 +214,21 @@ class ProductController extends Controller
     }
 
     public function destroy($id){
-
+        $product=Product::findOrFail($id);
+        if($product->swatch!=null){
+            File::delete('productImage/'.$product->swatch);
+        }
+        if($product->outfit!=null){
+            File::delete('productImage/'.$product->outfit);
+        }
+        if($product->image2!=null){
+            File::delete('productImage/'.$product->image2);
+        }
+        if($product->mainImage!=null){
+            File::delete('productImage/'.$product->mainImage);
+        }
+        $product->delete();
+        Session::flash('message', 'Product Deleted successfully');
+        return back();
     }
 }

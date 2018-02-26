@@ -18,7 +18,7 @@
 
 
                 <li>
-                    <a href="{{route('generate.file')}}"><i class="fa fa-list-alt"></i><span class="hide-menu">Generate Product File</span></a>
+                    <a href="{{route('product.list')}}"><i class="fa fa-list-alt"></i><span class="hide-menu">Product List</span></a>
 
                 </li>
 

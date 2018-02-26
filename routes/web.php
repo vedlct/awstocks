@@ -19,10 +19,15 @@ Route::get('/', 'Auth\LoginController@show');
 Route::get('/product/add', 'ProductController@add')->name('product.add');
 Route::get('/product/edit/{id}', 'ProductController@edit')->name('product.edit');
 Route::post('/product/insert', 'ProductController@insert')->name('product.insert');
+Route::get('/product/destroy/{id}', 'ProductController@destroy')->name('product.destroy');
+
+Route::get('/product/allProduct', 'ProductController@allProduct')->name('product.list');
+
 Route::post('/product/update', 'ProductController@update')->name('product.update');
 
+
 //Generate Product
-Route::get('/product/generate', 'ProductController@generate')->name('generate.file');
+//Route::get('/product/generate', 'ProductController@generate')->name('generate.file');
 
 
 Route::view('/offer/add', 'offer.add')->name('offer.add');
