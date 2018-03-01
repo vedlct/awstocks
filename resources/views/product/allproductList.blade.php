@@ -119,7 +119,10 @@
                     },
                 },
                 columns: [
-                    { data: 'check', name: 'productId',orderable: false,searchable: false,},
+                    { "data": function(data){
+                        return '<input type="checkbox" name="selected_rows[]" value="'+ data.productId +'" />';},
+                        "orderable": false, "searchable":false, "name":"selected_rows" },
+
                     { data: 'categoryName', name: 'categoryName' },
                     { data: 'style', name: 'style' },
                     { data: 'sku', name: 'sku' },

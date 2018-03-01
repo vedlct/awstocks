@@ -152,8 +152,7 @@ class ProductController extends Controller
 
         $productList = $list->get();
 
-        $datatables = Datatables::of($productList)
-            ->addColumn('check', '<input type="checkbox" name="selected_users[]" value="{{ $productId }}">');
+        $datatables = Datatables::of($productList);
 
         return $datatables->make(true);
 
