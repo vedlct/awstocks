@@ -136,7 +136,7 @@ class ProductController extends Controller
     {
         $status=$r->status;
 
-        if (empty($status)){
+        if ($status){
 
             return Datatables::of(Product::select('productId','style','sku','brand','status','productName','LastExportedBy','LastExportedDate','category.name as categoryName')
                 ->leftJoin('category', 'category.categoryId', '=', 'product.fkcategoryId')
