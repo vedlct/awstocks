@@ -21,11 +21,6 @@ class OfferController extends Controller
             ->leftJoin('product', 'offer.fkproductId', '=', 'product.productId')
             ->leftJoin('category', 'category.categoryId', '=', 'product.fkcategoryId')
             ->get())
-            ->addColumn('check', '<input type="checkbox">')
-            ->rawColumns(['check'])
-            ->addColumn('action', '<input type="button">test</input>')
-
-
             ->make(true);
 
     }

@@ -73,7 +73,9 @@
 //                    selector: 'td:first-child'
 //                },
                 columns: [
-                    {data: 'check', name: 'check', orderable: false, searchable: false},
+                    { "data": function(data){
+                        return '<input type="checkbox" name="selected_rows[]" value="'+ data.offerId +'" />';},
+                        "orderable": false, "searchable":false, "name":"selected_rows" },
                     { data: 'categoryName', name: 'categoryName' },
                     { data: 'sku', name: 'sku' },
                     { data: 'price', name: 'price' },
@@ -83,7 +85,9 @@
                     { data: 'disPrice', name: 'disPrice' },
                     { data: 'disStartPrice', name: 'disStartPrice' },
                     { data: 'disEndPrice', name: 'disEndPrice' },
-                    {data: 'action', name: 'action', orderable: false, searchable: false}
+                    { "data": function(data){
+                        return '<input type="button" name="editOffer" onclick="test()" value="'+ data.offerId +'" />';},
+                        "orderable": false, "searchable":false, "name":"action" }
 
 
                 ],
@@ -92,5 +96,8 @@
 
         });
 
+        function test() {
+
+        }
     </script>
 @endsection

@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use File;
@@ -11,37 +9,28 @@ use App\Product;
 use App\Category;
 use App\Color;
 use Yajra\DataTables\DataTables;
-
 class ProductController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
     }
-
-
     public function add(){
-
         $categories=Category::get();
         $sColors=Color::where('colorType','standard')
-                        ->get();
-
+            ->get();
         $dColors=Color::where('colorType','detailed')->get();
         return view('product.add')
             ->with('categories',$categories)
             ->with('sColors',$sColors)
             ->with('dColors',$dColors);
     }
-
     public function edit($id){
-
         $categories=Category::get();
         $sColors=Color::where('colorType','standard')
             ->get();
-
         $dColors=Color::where('colorType','detailed')->get();
         $product=Product::findOrFail($id);
-
         return view('product.edit')
             ->with('categories',$categories)
             ->with('sColors',$sColors)
@@ -49,8 +38,6 @@ class ProductController extends Controller
             ->with('product',$product)
             ->with('id',$id);
     }
-
-
     public function update(Request $r){
         $this->validate($r,[
             'productName' => 'required|max:45',
@@ -60,9 +47,7 @@ class ProductController extends Controller
             'sku'=>'max:45',
             'brand'=>'max:45',
             'size'=>'required|max:5',
-
         ]);
-
         $product=Product::findOrFail($r->id);
         $product->productName=$r->productName;
         $product->status=$r->status;
@@ -75,18 +60,13 @@ class ProductController extends Controller
         $product->fkscolorId=$r->standardColor;
         $product->fkdcolorId=$r->detailedColor;
 //        $product->save();
-
         if($r->hasFile('swatchPic')){
-
-
             $img = $r->file('swatchPic');
             $filename= $product->productId.'swatch'.'.'.$img->getClientOriginalExtension();
             $product->swatch=$filename;
             $location = public_path('productImage/'.$filename);
             Image::make($img)->resize(300,200)->save($location);
-
         }
-
         if($r->hasFile('outfitPic')){
             $img = $r->file('outfitPic');
             $filename= $product->productId.'outfit'.'.'.$img->getClientOriginalExtension();
@@ -108,21 +88,14 @@ class ProductController extends Controller
             $location = public_path('productImage/'.$filename);
             Image::make($img)->resize(300,200)->save($location);
         }
-
         $product->save();
         Session::flash('message', 'Product Updated  successfully');
         return back();
-
     }
-
-
-
-
 //    public function generate(){
 //        return view('product.generate');
 //    }
     public function allProduct(){
-
         $categories=Category::get();
         $productsList=Product::select('productId','productName')
             ->get();
@@ -130,35 +103,24 @@ class ProductController extends Controller
             ->with('categories',$categories)
             ->with('productsList',$productsList);
     }
-
-  /* for datatable in all product page */
+    /* for datatable in all product page */
     public function ProductList(Request $r)
     {
-        $status=$r->status;
-
-        if (empty($status)){
-
-            return Datatables::of(Product::select('productId','style','sku','brand','status','productName','LastExportedBy','LastExportedDate','category.name as categoryName')
-                ->leftJoin('category', 'category.categoryId', '=', 'product.fkcategoryId')
-                ->get())->make(true);
-
+        $list=Product::select('productId','style','sku','brand','status','productName','LastExportedBy','LastExportedDate','category.name as categoryName')
+            ->leftJoin('category', 'category.categoryId', '=', 'product.fkcategoryId');
+        if ($status=$r->status){
+            $list->where('product.status',$status);
         }
-        else{
-
-            return Datatables::of(Product::select('productId','style','sku','brand','status','productName','LastExportedBy','LastExportedDate','category.name as categoryName')
-                ->leftJoin('category', 'category.categoryId', '=', 'product.fkcategoryId')
-                ->where('status',$status)
-                ->get())->make(true);
-
-
+        if ($categoryId=$r->categoryId){
+            $list->where('product.fkcategoryId',$categoryId);
         }
-
-
-
+        if ($productName=$r->productName){
+            $list->where('product.productName',$productName);
+        }
+        $productList = $list->get();
+        $datatables = Datatables::of($productList);
+        return $datatables->make(true);
     }
-
-
-
     public function insert(Request $r){
         /*use Image Plugin from http://image.intervention.io/getting_started/installation
         *
@@ -173,9 +135,7 @@ class ProductController extends Controller
             'sku'=>'max:45',
             'brand'=>'max:45',
             'size'=>'required|max:5',
-
         ]);
-
         $product=new Product();
         $product->productName=$r->productName;
         $product->status=$r->status;
@@ -188,18 +148,13 @@ class ProductController extends Controller
         $product->fkscolorId=$r->standardColor;
         $product->fkdcolorId=$r->detailedColor;
         $product->save();
-
         if($r->hasFile('swatchPic')){
-
-
             $img = $r->file('swatchPic');
             $filename= $product->productId.'swatch'.'.'.$img->getClientOriginalExtension();
             $product->swatch=$filename;
             $location = public_path('productImage/'.$filename);
             Image::make($img)->resize(300,200)->save($location);
-
         }
-
         if($r->hasFile('outfitPic')){
             $img = $r->file('outfitPic');
             $filename= $product->productId.'outfit'.'.'.$img->getClientOriginalExtension();
@@ -221,18 +176,13 @@ class ProductController extends Controller
             $location = public_path('productImage/'.$filename);
             Image::make($img)->resize(300,200)->save($location);
         }
-
         $product->save();
         Session::flash('message', 'Product Uploaded successfully');
         return back();
-
     }
-
     public function Store($val){
-
         return $val;
     }
-
     public function destroy($id){
         $product=Product::findOrFail($id);
         if($product->swatch!=null){
