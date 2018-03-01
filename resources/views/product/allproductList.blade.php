@@ -1,8 +1,10 @@
 @extends('main')
-
+@section('header')
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
+@endsection
 @section('content')
 
-    <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
+
 
     <!-- Page Header-->
     <header class="page-header">
@@ -105,8 +107,12 @@
 
 
     </div>
+@endsection
+@section('foot-js')
+
     <script src="//code.jquery.com/jquery.js"></script>
     <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+
     <script>
 
         $(document).ready(function() {
