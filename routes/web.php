@@ -25,7 +25,7 @@ Route::get('/product/allProduct', 'ProductController@allProduct')->name('product
 
 Route::post('/product/update', 'ProductController@update')->name('product.update');
 
-Route::get('/product/ProductList', 'ProductController@ProductList')->name('product.data');
+Route::post('/product/ProductList', 'ProductController@ProductList')->name('product.data');
 
 
 //Route::get('Product', 'ProductController', [

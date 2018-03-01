@@ -58,9 +58,9 @@
         </div>
 
 
-        <table id="allProductList"class="table table-hover">
+        <table id="allProductList" class="table table-bordered table-striped">
             <thead>
-            <tr style="color: #00aba9">
+            <tr>
                 <th>Select</th>
                 <th >Product Category</th>
                 <th>Style</th>
@@ -70,7 +70,7 @@
                 <th>status</th>
                 <th>Last Exported By</th>
                 <th>Last Exported Date</th>
-                <th style="width: 100px">Action</th>
+                <th>Action</th>
             </tr>
             </thead>
             <tbody>
@@ -109,8 +109,22 @@
 @endsection
 @section('foot-js')
 
-    <script src="//code.jquery.com/jquery.js"></script>
-    <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+    {{--<script src="//code.jquery.com/jquery.js"></script>--}}
+    {{--<script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>--}}
+    {{--<script src="{{url('assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>--}}
+
+
+    <script src="{{url('assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>
+
+
+
+    {{--<script src="{{url('cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js')}}"></script>--}}
+    {{--<script src="{{url('cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js')}}"></script>--}}
+
+
+
+    <script src="{{url('cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js')}}"></script>
+
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <script>
@@ -118,12 +132,16 @@
         $(document).ready(function() {
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             $('#allProductList').DataTable({
+
                 processing: true,
                 serverSide: true,
-                type : 'get',
-                ajax: '{!! route('product.data') !!}',
+                stateSave: true,
+                "ajax":{
+                    "url": "{!! route('product.data') !!}",
+                    "type": "POST",
+                    "data":{ _token: "{{csrf_token()}}"}
+                },
                 columns: [
-                    { data: 'CSRF_TOKEN', name: '_token' },
                     { data: 'productId', name: 'productId' },
                     { data: 'categoryName', name: 'categoryName' },
                     { data: 'style', name: 'style' },
@@ -134,6 +152,7 @@
                     { data: 'LastExportedBy', name: 'LastExportedBy' },
                     { data: 'LastExportedDate', name: 'LastExportedDate' },
                     { data: 'LastExportedDate', name: 'LastExportedDate' },
+
                 ]
             });
 
