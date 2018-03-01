@@ -25,6 +25,13 @@ Route::get('/product/allProduct', 'ProductController@allProduct')->name('product
 
 Route::post('/product/update', 'ProductController@update')->name('product.update');
 
+Route::get('/product/ProductList', 'ProductController@ProductList')->name('product.data');
+
+
+//Route::get('Product', 'ProductController', [
+//    'anyData'  => 'product.data',
+//    'allProduct' => 'product.list',
+//]);
 
 //Generate Product
 //Route::get('/product/generate', 'ProductController@generate')->name('generate.file');

@@ -10,6 +10,8 @@ use Session;
 use App\Product;
 use App\Category;
 use App\Color;
+use Yajra\DataTables\DataTables;
+
 class ProductController extends Controller
 {
     public function __construct()
@@ -120,14 +122,24 @@ class ProductController extends Controller
 //        return view('product.generate');
 //    }
     public function allProduct(){
+
         $categories=Category::get();
-        $productsList=Product::select('productId','style','sku','brand','status','productName','LastExportedBy','LastExportedDate','category.name as categoryName')
-            ->leftJoin('category', 'category.categoryId', '=', 'product.fkcategoryId')
-            ->get();
+//        $productsList=Product::select('productId','style','sku','brand','status','productName','LastExportedBy','LastExportedDate','category.name as categoryName')
+//            ->leftJoin('category', 'category.categoryId', '=', 'product.fkcategoryId')
+//            ->get();
         return view('product.allproductList')
-            ->with('categories',$categories)
-            ->with('productsList',$productsList);
+            ->with('categories',$categories);
+//            ->with('productsList',$productsList)
     }
+
+  /* for datatable in all product page */
+    public function ProductList()
+    {
+        return Datatables::of(Product::select('productId','style','sku','brand','status','productName','LastExportedBy','LastExportedDate','category.name as categoryName')
+            ->leftJoin('category', 'category.categoryId', '=', 'product.fkcategoryId')
+            ->get())->make(true);
+    }
+
 
 
     public function insert(Request $r){

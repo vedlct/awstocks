@@ -178,6 +178,12 @@ return [
         App\Providers\RouteServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
 
+        /* datatable */
+
+        Yajra\DataTables\DataTablesServiceProvider::class,
+
+        /* end datatable */
+
     ],
 
     /*
@@ -227,6 +233,12 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Image' => Intervention\Image\Facades\Image::class,
+
+        /* datatable */
+
+        'DataTables' => Yajra\DataTables\Facades\DataTables::class,
+
+        /* datatable */
 
     ],
 

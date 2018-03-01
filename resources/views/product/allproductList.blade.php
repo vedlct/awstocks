@@ -2,6 +2,8 @@
 
 @section('content')
 
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
+
     <!-- Page Header-->
     <header class="page-header">
         <div class="container-fluid">
@@ -37,15 +39,15 @@
             </select>
 
         </div>
-        <div class="col-md-3 dropdown">
-            <label class="form-control-label">Product Name</label> <br>
-            <select class="form-control" id="status" name="status" onchange="status(this.value)">
-                <option value="">--Select Status--</option>
-                @foreach($productsList as $products)
-                    <option value="{{$products->productId}}">{{$products->productName}}</option>
-                @endforeach
-            </select>
-        </div>
+        {{--<div class="col-md-3 dropdown">--}}
+            {{--<label class="form-control-label">Product Name</label> <br>--}}
+            {{--<select class="form-control" id="status" name="status" onchange="status(this.value)">--}}
+                {{--<option value="">--Select Status--</option>--}}
+                {{--@foreach($productsList as $products)--}}
+                    {{--<option value="{{$products->productId}}">{{$products->productName}}</option>--}}
+                {{--@endforeach--}}
+            {{--</select>--}}
+        {{--</div>--}}
 
             <div class="col-md-3 form-group">
                 <label class="form-control-label" >Search</label>
@@ -55,7 +57,7 @@
         </div>
 
 
-        <table class="table table-hover">
+        <table id="allProductList"class="table table-hover">
             <thead>
             <tr style="color: #00aba9">
                 <th>Select</th>
@@ -71,26 +73,26 @@
             </tr>
             </thead>
             <tbody>
-            @foreach($productsList as $products)
-            <tr>
-                <td><input type="checkbox"></td>
-                <td>{{$products->categoryName}}</td>
-                <td>{{$products->style}}</td>
-                <td>{{$products->sku}}</td>
-                <td>{{$products->productName}}</td>
-                <td>{{$products->brand}}</td>
-                <td>{{$products->status}}</td>
-                <td>{{$products->LastExportedBy}}</td>
-                <td>{{$products->LastExportedDate}}</td>
+            {{--@foreach($productsList as $products)--}}
+            {{--<tr>--}}
+                {{--<td><input type="checkbox"></td>--}}
+                {{--<td>{{$products->categoryName}}</td>--}}
+                {{--<td>{{$products->style}}</td>--}}
+                {{--<td>{{$products->sku}}</td>--}}
+                {{--<td>{{$products->productName}}</td>--}}
+                {{--<td>{{$products->brand}}</td>--}}
+                {{--<td>{{$products->status}}</td>--}}
+                {{--<td>{{$products->LastExportedBy}}</td>--}}
+                {{--<td>{{$products->LastExportedDate}}</td>--}}
 
-                <td>
-                    <a href="{{route('product.edit',['id' => $products->productId])}}"> <i class="fa fa-pencil-square-o" aria-hidden="true" style="color: red"></i></a> &nbsp;&nbsp;&nbsp;
-                    <a  href="{{route('product.destroy',['id' => $products->productId])}}" id="myBtn2" onClick="return confirm('Are you sure delete this product?')">
-                        <i class="fa fa-trash-o" aria-hidden="true" style="color: red"></i></a> &nbsp;&nbsp;&nbsp;
-                </td>
+                {{--<td>--}}
+                    {{--<a href="{{route('product.edit',['id' => $products->productId])}}"> <i class="fa fa-pencil-square-o" aria-hidden="true" style="color: red"></i></a> &nbsp;&nbsp;&nbsp;--}}
+                    {{--<a  href="{{route('product.destroy',['id' => $products->productId])}}" id="myBtn2" onClick="return confirm('Are you sure delete this product?')">--}}
+                        {{--<i class="fa fa-trash-o" aria-hidden="true" style="color: red"></i></a> &nbsp;&nbsp;&nbsp;--}}
+                {{--</td>--}}
 
-            </tr>
-            @endforeach
+            {{--</tr>--}}
+            {{--@endforeach--}}
 
             </tbody>
 
@@ -103,5 +105,38 @@
 
 
     </div>
+    <script src="//code.jquery.com/jquery.js"></script>
+    <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+    <script>
+
+        $(document).ready(function() {
+            $('#allProductList').DataTable({
+                processing: true,
+                serverSide: true,
+                type : 'get',
+                ajax: '{!! route('product.data') !!}',
+                columns: [
+                    { data: 'id', name: 'id' },
+                    { data: 'categoryName', name: 'categoryName' },
+                    { data: 'style', name: 'style' },
+                    { data: 'sku', name: 'sku' },
+                    { data: 'productName', name: 'productName' },
+                    { data: 'brand', name: 'brand' },
+                    { data: 'status', name: 'status' },
+                    { data: 'LastExportedBy', name: 'LastExportedBy' },
+                    { data: 'LastExportedDate', name: 'LastExportedDate' },
+                ]
+            });
+
+        });
+
+    </script>
+
+
 
 @endsection
+
+
+
+
+
