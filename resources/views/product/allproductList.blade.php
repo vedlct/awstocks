@@ -12,7 +12,6 @@
         </div>
     </header>
 
-
     <div class="table table-responsive" style="padding: 10px; background-color:white";>
 
         <div class="row">

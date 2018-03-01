@@ -11,7 +11,7 @@
 |
 */
 
-
+//HOme
 Route::get('/main', 'HomeController@index')->name('main');
 Route::get('/', 'Auth\LoginController@show');
 
@@ -37,10 +37,13 @@ Route::post('/product/ProductList', 'ProductController@ProductList')->name('prod
 //Route::get('/product/generate', 'ProductController@generate')->name('generate.file');
 
 
+//offer
 Route::view('/offer/add', 'offer.add')->name('offer.add');
+Route::view('/offer/generate', 'offer.generate')->name('offer.generate');
+Route::post('/offer/OfferList', 'OfferController@getOfferList')->name('offer.offerList');
 
 
-Route::view('/offer/generate', 'layouts.leads')->name('offer.generate');
+//setting
 Route::view('/historic/files', 'layouts.starLeads')->name('historic.files');
 Route::view('/settings', 'layouts.newInfo')->name('settings');
 
