@@ -39,7 +39,7 @@
                         Welcome<b> {{strtoupper(Auth::user()->name)}} <i class="fa fa-sort-desc" aria-hidden="true"></i></b></a>
                     <div class="dropdown-menu dropdown-menu-right animated flipInY">
                         <ul class="dropdown-user">
-                            <li role="separator" class="divider"></li>
+
                             <li><a href="#"><i class="ti-settings"></i> Account Setting</a></li>
                             <li role="separator" class="divider"></li>
                             <li>

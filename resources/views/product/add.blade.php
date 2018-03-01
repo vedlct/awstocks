@@ -116,11 +116,11 @@
                         </div>
                     </div>
 
-
                     <div class="form-group row">
                         <label class="col-sm-2 form-control-label"><b>Swatch</b></label>
                         <div class="col-sm-10">
-                            <input type="file" name="swatchPic"  value="upload Image" accept="image/*">
+                            <input type="file" name="swatchPic"  value="upload Image" accept="image/*" id="swatchPic">
+                            <img height="50px" width="50px" id="imgSwatchPic">
                         </div>
                     </div>
 
@@ -128,8 +128,8 @@
                     <div class="form-group row">
                         <label class="col-sm-2 form-control-label"><b>Outfit</b> </label>
                         <div class="col-sm-10">
-                            <input type="file" name="outfitPic"  value="upload Image" accept="image/*">
-
+                            <input type="file" name="outfitPic"  value="upload Image" accept="image/*" id="outfitPic">
+                            <img height="50px" width="50px" id="imgOutfitPic">
                         </div>
                     </div>
 
@@ -137,8 +137,8 @@
                     <div class="form-group row">
                         <label class="col-sm-2 form-control-label"><b>Main Image</b> </label>
                         <div class="col-sm-10">
-                            <input type="file" name="mainPic"  value="upload Image" accept="image/*">
-
+                            <input type="file" name="mainPic"  value="upload Image" accept="image/*" id="mainPic">
+                            <img height="50px" width="50px" id="imgMainPic">
                         </div>
                     </div>
 
@@ -146,8 +146,8 @@
                     <div class="form-group row">
                         <label class="col-sm-2 form-control-label"><b>Image 2</b> </label>
                         <div class="col-sm-10">
-                            <input type="file" name="image2Pic"  value="image2Pic" accept="image/*">
-
+                            <input type="file" name="image2Pic" value="image2Pic" accept="image/*" id="image2Pic">
+                            <img height="50px" width="50px" id="imgImage2Pic">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -155,7 +155,8 @@
                             <input type="submit" value="Submit" class="btn btn-primary">
                         </div>
                     </div>
-                    
+
+
                 </form>
                 
             </div>
@@ -169,15 +170,72 @@
 </div>
 
 
+@endsection
+@section('foot-js')
+
+    <script>
+
+        function swatchPic(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#imgSwatchPic').attr('src', e.target.result);}
+                reader.readAsDataURL(input.files[0]);}
+        }
 
 
+        function swatchPic(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
 
+                reader.onload = function (e) {
+                    $('#imgSwatchPic').attr('src', e.target.result);}
+                reader.readAsDataURL(input.files[0]);}
+        }
 
+        function outfitPic(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
 
+                reader.onload = function (e) {
+                    $('#imgOutfitPic').attr('src', e.target.result);}
+                reader.readAsDataURL(input.files[0]);}
+        }
 
+        function mainPic(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
 
+                reader.onload = function (e) {
+                    $('#imgMainPic').attr('src', e.target.result);}
+                reader.readAsDataURL(input.files[0]);}
+        }
 
+        function image2Pic(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
 
+                reader.onload = function (e) {
+                    $('#imgImage2Pic').attr('src', e.target.result);}
+                reader.readAsDataURL(input.files[0]);}
+        }
 
+        $("#swatchPic").change(function(){
+            swatchPic(this);
+        });
+        $("#outfitPic").change(function(){
+            outfitPic(this);
+        });
+
+        $("#mainPic").change(function(){
+            mainPic(this);
+        });
+
+        $("#image2Pic").change(function(){
+            image2Pic(this);
+        });
+
+    </script>
 
 @endsection

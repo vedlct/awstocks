@@ -84,8 +84,9 @@
                 <td>{{$products->LastExportedDate}}</td>
 
                 <td>
-                    <a href="#"> <i class="fa fa-pencil-square-o" aria-hidden="true" style="color: red"></i></a> &nbsp;&nbsp;&nbsp;
-                    <a data-panel-id="#" id="myBtn2" onClick=""> <i class="fa fa-trash-o" aria-hidden="true" style="color: red"></i></a> &nbsp;&nbsp;&nbsp;
+                    <a href="{{route('product.edit',['id' => $products->productId])}}"> <i class="fa fa-pencil-square-o" aria-hidden="true" style="color: red"></i></a> &nbsp;&nbsp;&nbsp;
+                    <a  href="{{route('product.destroy',['id' => $products->productId])}}" id="myBtn2" onClick="return confirm('Are you sure delete this product?')">
+                        <i class="fa fa-trash-o" aria-hidden="true" style="color: red"></i></a> &nbsp;&nbsp;&nbsp;
                 </td>
 
             </tr>

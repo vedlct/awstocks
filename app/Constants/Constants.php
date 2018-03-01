@@ -2,10 +2,10 @@
 define('ONE', '1');
 define('TWO', '2');
 define('SIZE',array(
-    "m" => "M",
-    "l" => "L",
-    "s" => "S",
-    "xl" => "XL",
+    "m" => "m",
+    "l" => "l",
+    "s" => "s",
+    "xl" => "xl",
 ));
 
 define('Status',array("Active","Inactive"));
