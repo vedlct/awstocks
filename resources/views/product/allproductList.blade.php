@@ -111,17 +111,20 @@
 
     <script src="//code.jquery.com/jquery.js"></script>
     <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <script>
 
         $(document).ready(function() {
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             $('#allProductList').DataTable({
                 processing: true,
                 serverSide: true,
                 type : 'get',
                 ajax: '{!! route('product.data') !!}',
                 columns: [
-                    { data: 'id', name: 'id' },
+                    { data: 'CSRF_TOKEN', name: '_token' },
+                    { data: 'productId', name: 'productId' },
                     { data: 'categoryName', name: 'categoryName' },
                     { data: 'style', name: 'style' },
                     { data: 'sku', name: 'sku' },
@@ -129,6 +132,7 @@
                     { data: 'brand', name: 'brand' },
                     { data: 'status', name: 'status' },
                     { data: 'LastExportedBy', name: 'LastExportedBy' },
+                    { data: 'LastExportedDate', name: 'LastExportedDate' },
                     { data: 'LastExportedDate', name: 'LastExportedDate' },
                 ]
             });
