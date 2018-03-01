@@ -11,8 +11,8 @@
                 <div align="center" style="margin-bottom: 3%;">
                     <h2 style="color: #989898;"><b>Offer List</b></h2>
                 </div>
-
-        <table id="offerlist" class="table table-hover" style="background-color:white; ">
+        <div class="table table-responsive">
+         <table id="offerlist" class="table table-hover"  >
             <thead>
             <tr>
 
@@ -35,6 +35,7 @@
         </table>
 
         </div>
+            </div>
         </div>
     </div>
     </div>
@@ -42,6 +43,8 @@
 @endsection
 @section('foot-js')
     <script src="{{url('assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>
+    {{--<script src="https://cdn.datatables.net/select/1.2.5/js/dataTables.select.min.js"></script>--}}
+
 
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
@@ -60,9 +63,17 @@
                     "type": "POST",
                     "data":{ _token: "{{csrf_token()}}"}
                 },
+//                columnDefs: [ {
+//                    orderable: false,
+//                    className: 'select-checkbox',
+//                    targets:   0
+//                } ],
+//                select: {
+//                    style:    'os',
+//                    selector: 'td:first-child'
+//                },
                 columns: [
-                    { data: 'productId', name: 'productId' },
-                    { data: 'productId', name: 'productId' },
+                    {data: 'check', name: 'check', orderable: false, searchable: false},
                     { data: 'categoryName', name: 'categoryName' },
                     { data: 'sku', name: 'sku' },
                     { data: 'price', name: 'price' },
@@ -72,9 +83,11 @@
                     { data: 'disPrice', name: 'disPrice' },
                     { data: 'disStartPrice', name: 'disStartPrice' },
                     { data: 'disEndPrice', name: 'disEndPrice' },
+                    {data: 'action', name: 'action', orderable: false, searchable: false}
 
 
-                ]
+                ],
+
             });
 
         });

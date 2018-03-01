@@ -40,7 +40,7 @@ Route::post('/product/ProductList', 'ProductController@ProductList')->name('prod
 //offer
 Route::view('/offer/add', 'offer.add')->name('offer.add');
 Route::view('/offer/generate', 'offer.generate')->name('offer.generate');
-Route::post('/offer/OfferList', 'OfferController@getOfferList')->name('offer.offerList');
+Route::post('/offer/getOfferList', 'OfferController@getOfferList')->name('offer.offerList');
 
 
 //setting
