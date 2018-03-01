@@ -134,24 +134,29 @@ class ProductController extends Controller
   /* for datatable in all product page */
     public function ProductList(Request $r)
     {
-        $status=$r->status;
+        $list=Product::select('productId','style','sku','brand','status','productName','LastExportedBy','LastExportedDate','category.name as categoryName')
+            ->leftJoin('category', 'category.categoryId', '=', 'product.fkcategoryId');
 
-        if ($status){
+        if ($status=$r->status){
 
-            return Datatables::of(Product::select('productId','style','sku','brand','status','productName','LastExportedBy','LastExportedDate','category.name as categoryName')
-                ->leftJoin('category', 'category.categoryId', '=', 'product.fkcategoryId')
-                ->get())->make(true);
-
+            $list->where('product.status',$status);
         }
-        else{
+        if ($categoryId=$r->categoryId){
 
-            return Datatables::of(Product::select('productId','style','sku','brand','status','productName','LastExportedBy','LastExportedDate','category.name as categoryName')
-                ->leftJoin('category', 'category.categoryId', '=', 'product.fkcategoryId')
-                ->where('status',$status)
-                ->get())->make(true);
-
-
+            $list->where('product.fkcategoryId',$categoryId);
         }
+        if ($productName=$r->productName){
+
+            $list->where('product.productName',$productName);
+        }
+
+        $productList = $list->get();
+
+        $datatables = Datatables::of($productList)
+            ->addColumn('check', '<input type="checkbox" name="selected_users[]" value="{{ $productId }}">');
+
+        return $datatables->make(true);
+
 
 
 

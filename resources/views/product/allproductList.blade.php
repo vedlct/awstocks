@@ -16,23 +16,11 @@
 
 
         <div class="row">
-        <div class="col-md-4 dropdown">
-            <label class="form-control-label">Status</label> <br>
-            <select class="form-control" id="status" name="status">
-                <option selected value="">--Select Status--</option>
-                <?php for ($i=0;$i<count(Status);$i++){?>
 
-                <option value="<?php echo Status[$i]?>"><?php echo Status[$i]?></option>
-
-              <?php } ?>
-
-            </select>
-
-        </div>
         <div class="col-md-4 dropdown">
             <label class="form-control-label">Category</label> <br>
-            <select class="form-control" id="status" name="status" onchange="status(this.value)">
-                <option value="">--Select Status--</option>
+            <select class="form-control" id="category" name="category">
+                <option selected value="">--Select Category--</option>
 
                 @foreach($categories as $category)
                     <option value="{{$category->categoryId}}">{{$category->name}}</option>
@@ -43,18 +31,27 @@
 
         <div class="col-md-4 dropdown">
             <label class="form-control-label">Product Name</label> <br>
-            <select class="form-control" id="status" name="status" onchange="status(this.value)">
-                <option value="">--Select Status--</option>
+            <select class="form-control" id="product" name="product">
+                <option selected value="">--Select Product--</option>
                 @foreach($productsList as $products)
-                    <option value="{{$products->productId}}">{{$products->productName}}</option>
+                    <option value="{{$products->productName}}">{{$products->productName}}</option>
                 @endforeach
             </select>
         </div>
 
-            {{--<div class="col-md-3 form-group">--}}
-                {{--<label class="form-control-label" >Search</label>--}}
-                {{--<input name="line2" type="text" class="form-control required validate" onkeyup="search(this.value)">--}}
-            {{--</div>--}}
+            <div class="col-md-4 dropdown">
+                <label class="form-control-label">Status</label> <br>
+                <select class="form-control" id="status" name="status">
+                    <option selected value="">--Select Status--</option>
+                    <?php for ($i=0;$i<count(Status);$i++){?>
+
+                    <option value="<?php echo Status[$i]?>"><?php echo Status[$i]?></option>
+
+                    <?php } ?>
+
+                </select>
+
+            </div>
 
         </div>
 
@@ -106,7 +103,6 @@
         $(document).ready(function() {
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             table = $('#allProductList').DataTable({
-
                 processing: true,
                 serverSide: true,
                 stateSave: true,
@@ -114,14 +110,16 @@
                     "url": "{!! route('product.data') !!}",
                     "type": "POST",
 
-                    "data":{
-                        _token: "{{csrf_token()}}",
-                        status : $('#status').val(),
+                    data:function (d){
+                        d._token="{{csrf_token()}}";
+                        d.status=$('#status').val();
+                        d.categoryId=$('#category').val();
+                        d.productName=$('#product').val();
 
                     },
                 },
                 columns: [
-                    { data: 'productId', name: 'productId' },
+                    { data: 'check', name: 'productId',orderable: false,searchable: false,},
                     { data: 'categoryName', name: 'categoryName' },
                     { data: 'style', name: 'style' },
                     { data: 'sku', name: 'sku' },
@@ -134,14 +132,26 @@
 
                 ],
 
+                columnDefs: [
+                    { "orderable": false, "targets": 0 }
+                ]
+
             });
             $('#status').change(function(){ //button filter event click
                 table.search("").draw(); //just redraw myTableFilter
                 table.ajax.reload();  //just reload table
 
-//                var status = $('#status').val();
-//                alert(status);
+            });
 
+            $('#category').change(function(){ //button filter event click
+                table.search("").draw(); //just redraw myTableFilter
+                table.ajax.reload();  //just reload table
+
+            });
+
+            $('#product').change(function(){ //button filter event click
+                table.search("").draw(); //just redraw myTableFilter
+                table.ajax.reload();  //just reload table
 
             });
 
