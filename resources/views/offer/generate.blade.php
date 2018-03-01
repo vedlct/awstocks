@@ -12,7 +12,7 @@
                     <h2 style="color: #989898;"><b>Offer List</b></h2>
                 </div>
 
-        <table class="table table-hover" style="background-color:white; ">
+        <table id="offerlist" class="table table-hover" style="background-color:white; ">
             <thead>
             <tr>
 
@@ -34,7 +34,7 @@
             </tbody>
         </table>
 
-    </div>
+        </div>
         </div>
     </div>
     </div>
@@ -42,13 +42,15 @@
 @endsection
 @section('foot-js')
     <script src="{{url('assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>
+
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <script>
 
         $(document).ready(function() {
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-            $('#allProductList').DataTable({
+
+            $('#offerlist').DataTable({
 
                 processing: true,
                 serverSide: true,
@@ -60,15 +62,17 @@
                 },
                 columns: [
                     { data: 'productId', name: 'productId' },
+                    { data: 'productId', name: 'productId' },
                     { data: 'categoryName', name: 'categoryName' },
                     { data: 'sku', name: 'sku' },
                     { data: 'price', name: 'price' },
                     { data: 'state', name: 'state' },
                     { data: 'quantity', name: 'quantity' },
-                    { data: 'prodcutIdType', name: 'prodcutIdType' },
-                    { data: 'dprice', name: 'LastExportedBy' },
-                    { data: 'LastExportedDate', name: 'LastExportedDate' },
-                    { data: 'LastExportedDate', name: 'LastExportedDate' },
+                    { data: 'product-id-type', name: 'product-id-type' },
+                    { data: 'disPrice', name: 'disPrice' },
+                    { data: 'disStartPrice', name: 'disStartPrice' },
+                    { data: 'disEndPrice', name: 'disEndPrice' },
+
 
                 ]
             });

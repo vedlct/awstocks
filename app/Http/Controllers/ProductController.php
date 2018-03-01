@@ -124,20 +124,37 @@ class ProductController extends Controller
     public function allProduct(){
 
         $categories=Category::get();
-//        $productsList=Product::select('productId','style','sku','brand','status','productName','LastExportedBy','LastExportedDate','category.name as categoryName')
-//            ->leftJoin('category', 'category.categoryId', '=', 'product.fkcategoryId')
-//            ->get();
+        $productsList=Product::select('productId','productName')
+            ->get();
         return view('product.allproductList')
-            ->with('categories',$categories);
-//            ->with('productsList',$productsList)
+            ->with('categories',$categories)
+            ->with('productsList',$productsList);
     }
 
   /* for datatable in all product page */
-    public function ProductList()
+    public function ProductList(Request $r)
     {
-        return Datatables::of(Product::select('productId','style','sku','brand','status','productName','LastExportedBy','LastExportedDate','category.name as categoryName')
-            ->leftJoin('category', 'category.categoryId', '=', 'product.fkcategoryId')
-            ->get())->make(true);
+        $status=$r->status;
+
+        if (empty($status)){
+
+            return Datatables::of(Product::select('productId','style','sku','brand','status','productName','LastExportedBy','LastExportedDate','category.name as categoryName')
+                ->leftJoin('category', 'category.categoryId', '=', 'product.fkcategoryId')
+                ->get())->make(true);
+
+        }
+        else{
+
+            return Datatables::of(Product::select('productId','style','sku','brand','status','productName','LastExportedBy','LastExportedDate','category.name as categoryName')
+                ->leftJoin('category', 'category.categoryId', '=', 'product.fkcategoryId')
+                ->where('status',$status)
+                ->get())->make(true);
+
+
+        }
+
+
+
     }
 
 
