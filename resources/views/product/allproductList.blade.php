@@ -74,7 +74,7 @@
             @foreach($productsList as $products)
             <tr>
                 <td><input type="checkbox"></td>
-                <td><?php echo $products->categoryName?></td>
+                <td>{{$products->categoryName}}</td>
                 <td>{{$products->style}}</td>
                 <td>{{$products->sku}}</td>
                 <td>{{$products->productName}}</td>
@@ -96,7 +96,7 @@
 
         </table>
 
-        <a href="csv/product.csv" onclick="return myfunc()" download> <button  class="btn btn-danger"  >Export Products file</button></a>
+        <a href="csv/product.csv" onclick="return myfunc()" download> <button class="btn btn-danger"  >Export Products file</button></a>
 
 
 
