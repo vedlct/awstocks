@@ -114,14 +114,12 @@
                         d.status=$('#status').val();
                         d.categoryId=$('#category').val();
                         d.productName=$('#product').val();
-
                     },
                 },
                 columns: [
                     { "data": function(data){
                         return '<input type="checkbox" name="selected_rows[]" value="'+ data.productId +'" />';},
                         "orderable": false, "searchable":false, "name":"selected_rows",},
-
                     { data: 'categoryName', name: 'categoryName' },
                     { data: 'style', name: 'style' },
                     { data: 'sku', name: 'sku' },
@@ -130,61 +128,35 @@
                     { data: 'status', name: 'status' },
                     { data: 'LastExportedBy', name: 'LastExportedBy' },
                     { data: 'LastExportedDate', name: 'LastExportedDate' },
-
                     { "data": function(data){
-                        {{--var url='{{url("product/edit/", ":id") }}';--}}
-                        return '<a class="btn"  data-panel-id="'+data.productId+'" onclick="editProduct(this)"><i class="fa fa-edit"></i></a><a class="btn" data-panel-id="'+data.productId+'" onclick="deleteProduct(this)"><i class="fa fa-trash"></i></a>';},
+                        var url='{{url("product/edit/", ":id") }}';
+                        return '<a class="btn" data-panel-id="'+data.productId+'"onclick="editProduct(this)"><i class="fa fa-edit"></i></a><a class="btn" data-panel-id="'+data.productId+'"onclick="deleteProduct(this)"><i class="fa fa-trash"></i></a>';},
                         "orderable": false, "searchable":false, "name":"selected_rows" },
-
                 ],
-
             });
             $('#status').change(function(){ //button filter event click
                 table.search("").draw(); //just redraw myTableFilter
                 table.ajax.reload();  //just reload table
-
             });
-
             $('#category').change(function(){ //button filter event click
                 table.search("").draw(); //just redraw myTableFilter
                 table.ajax.reload();  //just reload table
-
             });
-
             $('#product').change(function(){ //button filter event click
                 table.search("").draw(); //just redraw myTableFilter
                 table.ajax.reload();  //just reload table
-
             });
-
         });
         function editProduct(x) {
-
-        btn = $(x).data('panel-id');
-
-        var url = '{{route("product.edit", ":id") }}';
-        //alert(url);
-        var t=$.ajax({
-        type:'get',
-        url:url.replace(':id',btn),
-        data:{},
-        cache: false,
-        success:function(data) {
-
-        //                    $("#container").html(data);
-        $('.content').load($(this).attr(t));
+            btn = $(x).data('panel-id');
+            var url = '{{route("product.edit", ":id") }}';
+            //alert(url);
+            var newUrl=url.replace(':id', btn);
+            window.location.href = newUrl;
         }
-
-        });
-
-        }
-
-
     </script>
 
 @endsection
-
-
 
 
 

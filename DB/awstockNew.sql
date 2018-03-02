@@ -8,19 +8,19 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema awstock
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema awstock
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
-USE `mydb` ;
+CREATE SCHEMA IF NOT EXISTS `awstock` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
+USE `awstock` ;
 
 -- -----------------------------------------------------
--- Table `mydb`.`user`
+-- Table `awstock`.`user`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`user` (
+CREATE TABLE IF NOT EXISTS `awstock`.`user` (
   `usreId` INT NOT NULL AUTO_INCREMENT COMMENT '',
   `name` VARCHAR(45) NULL COMMENT '',
   `phone` VARCHAR(45) NULL COMMENT '',
@@ -34,9 +34,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`category`
+-- Table `awstock`.`category`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`category` (
+CREATE TABLE IF NOT EXISTS `awstock`.`category` (
   `categoryId` INT NOT NULL AUTO_INCREMENT COMMENT '',
   `categoryName` VARCHAR(45) NULL COMMENT '',
   `categoryDesc` VARCHAR(45) NULL COMMENT '',
@@ -45,9 +45,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`color`
+-- Table `awstock`.`color`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`color` (
+CREATE TABLE IF NOT EXISTS `awstock`.`color` (
   `colorId` INT NOT NULL AUTO_INCREMENT COMMENT '',
   `colorName` VARCHAR(45) NULL COMMENT '',
   `colorDescription` VARCHAR(45) NULL COMMENT '',
@@ -57,9 +57,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`product`
+-- Table `awstock`.`product`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`product` (
+CREATE TABLE IF NOT EXISTS `awstock`.`product` (
   `productId` INT NOT NULL AUTO_INCREMENT COMMENT '',
   `status` VARCHAR(45) NULL COMMENT '',
   `fkcategoryId` INT NOT NULL COMMENT '',
@@ -89,16 +89,16 @@ CREATE TABLE IF NOT EXISTS `mydb`.`product` (
   INDEX `fk_product_category1_idx` (`fkcategoryId` ASC)  COMMENT '',
   CONSTRAINT `fk_product_category1`
     FOREIGN KEY (`fkcategoryId`)
-    REFERENCES `mydb`.`category` (`categoryId`)
+    REFERENCES `awstock`.`category` (`categoryId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`fileTransfer`
+-- Table `awstock`.`fileTransfer`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`fileTransfer` (
+CREATE TABLE IF NOT EXISTS `awstock`.`fileTransfer` (
   `transferId` INT NOT NULL AUTO_INCREMENT COMMENT '',
   `fileName` VARCHAR(45) NULL COMMENT '',
   `fileType` VARCHAR(15) NULL COMMENT '',
@@ -109,9 +109,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`offer`
+-- Table `awstock`.`offer`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`offer` (
+CREATE TABLE IF NOT EXISTS `awstock`.`offer` (
   `offerId` INT NOT NULL COMMENT '',
   `fkproductId` INT NOT NULL COMMENT '',
   `disPrice` VARCHAR(45) NULL COMMENT '',
@@ -126,16 +126,16 @@ CREATE TABLE IF NOT EXISTS `mydb`.`offer` (
   INDEX `fk_offer_product1_idx` (`fkproductId` ASC)  COMMENT '',
   CONSTRAINT `fk_offer_product1`
     FOREIGN KEY (`fkproductId`)
-    REFERENCES `mydb`.`product` (`productId`)
+    REFERENCES `awstock`.`product` (`productId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`size`
+-- Table `awstock`.`size`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`size` (
+CREATE TABLE IF NOT EXISTS `awstock`.`size` (
   `sizeId` INT NOT NULL AUTO_INCREMENT COMMENT '',
   `sizeName` VARCHAR(45) NULL COMMENT '',
   `sizeDescription` VARCHAR(45) NULL COMMENT '',
@@ -145,9 +145,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`care`
+-- Table `awstock`.`care`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`care` (
+CREATE TABLE IF NOT EXISTS `awstock`.`care` (
   `careId` INT NOT NULL AUTO_INCREMENT COMMENT '',
   `careName` VARCHAR(45) NULL COMMENT '',
   `careDescription` VARCHAR(45) NULL COMMENT '',
@@ -157,9 +157,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`runToSize`
+-- Table `awstock`.`runToSize`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`runToSize` (
+CREATE TABLE IF NOT EXISTS `awstock`.`runToSize` (
   `runToSizeId` INT NOT NULL AUTO_INCREMENT COMMENT '',
   `runToSizeName` VARCHAR(45) NULL COMMENT '',
   `runToSizeDescription` VARCHAR(45) NULL COMMENT '',

@@ -14,6 +14,12 @@ use App\Category;
 class OfferController extends Controller
 {
     //
+
+    public function index(){
+        $catagory = Category::get();
+        return view('offer.generate')
+            ->with('category', $catagory);
+    }
     //this is ajax controller which return all offerlist
     public function getOfferList() {
 
@@ -24,4 +30,13 @@ class OfferController extends Controller
             ->make(true);
 
     }
+
+    public function editoffer (Request $r) {
+
+        $offerid = $r->id;
+        return $offerid;
+    }
+
+    public function test(){}
+
 }

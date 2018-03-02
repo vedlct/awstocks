@@ -86,7 +86,7 @@
                     { data: 'disStartPrice', name: 'disStartPrice' },
                     { data: 'disEndPrice', name: 'disEndPrice' },
                     { "data": function(data){
-                        return '<input type="button" name="editOffer" onclick="test(this)" data-panel-id="'+ data.offerId +'" />';},
+                        return '<input type="button" name="editOffer" onclick="editoffer(this)" data-panel-id="'+ data.offerId +'" />';},
                         "orderable": false, "searchable":false, "name":"action" }
 
 
@@ -96,10 +96,22 @@
 
         });
 
-        function test(x) {
-
+        function editoffer(x) {
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             btn = $(x).data('panel-id');
-            alert(btn);
+          //  alert(btn);
+
+            $.ajax({
+                type:'POST',
+                url:'{!! route('offer.editoffer') !!}',
+                data:{id:btn,_token: CSRF_TOKEN},
+                cache: false,
+                success:function(data) {
+                    //$('#txtHint').html(data);
+                    alert(data);
+
+                }
+            });
         }
     </script>
 @endsection

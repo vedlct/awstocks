@@ -39,9 +39,11 @@ Route::post('/product/ProductList', 'ProductController@ProductList')->name('prod
 
 //offer
 Route::view('/offer/add', 'offer.add')->name('offer.add');
-Route::view('/offer/generate', 'offer.generate')->name('offer.generate');
-Route::post('/offer/getOfferList', 'OfferController@getOfferList')->name('offer.offerList');
 
+Route::get('/offer/generate', 'OfferController@index')->name('offer.generate');
+//Route::view('/offer/generate', 'offer.generate')->name('offer.generate');
+Route::post('/offer/getOfferList', 'OfferController@getOfferList')->name('offer.offerList');
+Route::post('/offer/editoffer', 'OfferController@editoffer')->name('offer.editoffer');
 
 //setting
 Route::view('/historic/files', 'layouts.starLeads')->name('historic.files');
