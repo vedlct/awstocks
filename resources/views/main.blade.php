@@ -15,6 +15,7 @@
     <title>Stock</title>
     <!-- Bootstrap Core CSS -->
     <link href="{{url('assets/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+    
 
     <!-- chartist CSS -->
     {{--<link href="{{url('assets/plugins/chartist-js/dist/chartist.min.css')}}" rel="stylesheet">--}}
