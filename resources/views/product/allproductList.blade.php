@@ -160,24 +160,14 @@
         });
         function editProduct(x) {
 
-        btn = $(x).data('panel-id');
+            btn = $(x).data('panel-id');
 
-        var url = '{{route("product.edit", ":id") }}';
-        //alert(url);
-        var t=$.ajax({
-        type:'get',
-        url:url.replace(':id',btn),
-        data:{},
-        cache: false,
-        success:function(data) {
-
-        //                    $("#container").html(data);
-       // $('.content').load($(this).attr(t));
+            var url = '{{route("product.edit", ":id") }}';
+            //alert(url);
+            var newUrl=url.replace(':id', btn);
+            window.location.href = newUrl;
         }
 
-        });
-
-        }
 
 
     </script>
