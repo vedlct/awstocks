@@ -76,7 +76,7 @@
 
         </div>
 
-        <a href="csv/product.csv" onclick="return myfunc()" download> <button class="btn btn-danger"  >Export Products file</button></a>
+        <a  onclick="return myfunc()"> <button class="btn btn-danger"  >Export Products file</button></a>
 
     </div>
 @endsection
@@ -90,7 +90,7 @@
     <script src="{{url('assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>
 
 
-    {{--<script src="{{url('cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js')}}"></script>--}}
+    {{--    <script src="{{url('cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js')}}"></script>--}}
     {{--<script src="{{url('cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js')}}"></script>--}}
 
 
@@ -118,9 +118,9 @@
                 },
                 columns: [
                     { "data": function(data){
-                        return '<input type="checkbox" name="selected_rows[]" value="'+ data.productId +'" />';},
+                        return '<input data-panel-id="'+data.productId+'"onclick="selected_rows(this)" type="checkbox" name="selected_rows[]" value="'+ data.productId +'" />';},
                         "orderable": false, "searchable":false, "name":"selected_rows",},
-                    { data: 'categoryName', name: 'categoryName' },
+                    { data: 'categoryName',name:'categoryName' },
                     { data: 'style', name: 'style' },
                     { data: 'sku', name: 'sku' },
                     { data: 'productName', name: 'productName' },
@@ -154,9 +154,37 @@
             var newUrl=url.replace(':id', btn);
             window.location.href = newUrl;
         }
+        function deleteProduct(x) {
+            btn = $(x).data('panel-id');
+            var url = '{{route("product.destroy", ":id") }}';
+            //alert(url);
+            var newUrl=url.replace(':id', btn);
+            window.location.href = newUrl;
+        }
+        var selecteds = [];
+        function selected_rows(x) {
+            btn = $(x).data('panel-id');
+            selecteds.push(btn);
+        }
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        function myfunc() {
+            var products=selecteds;
+            alert(products);
+            $.ajax({
+                type:'POST',
+                url:"{!! route('product.csv') !!}",
+                cache: false,
+                data:{'productId':products},
+            });
+        }
     </script>
 
 @endsection
+
 
 
 

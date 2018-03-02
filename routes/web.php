@@ -27,6 +27,8 @@ Route::post('/product/update', 'ProductController@update')->name('product.update
 
 Route::post('/product/ProductList', 'ProductController@ProductList')->name('product.data');
 
+Route::post('/product/csvExport', 'ProductController@csvExport')->name('product.csv');
+
 
 //Route::get('Product', 'ProductController', [
 //    'anyData'  => 'product.data',

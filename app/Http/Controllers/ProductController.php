@@ -9,6 +9,7 @@ use App\Product;
 use App\Category;
 use App\Color;
 use Yajra\DataTables\DataTables;
+use Response;
 class ProductController extends Controller
 {
     public function __construct()
@@ -200,5 +201,52 @@ class ProductController extends Controller
         $product->delete();
         Session::flash('message', 'Product Deleted successfully');
         return back();
+    }
+    public function csvExport(Request $r){
+
+        $headers = [
+            'Cache-Control'       => 'must-revalidate, post-check=0, pre-check=0'
+            ,   'Content-type'        => 'text/csv'
+            ,   'Content-Disposition' => 'attachment; filename=galleries.csv'
+            ,   'Expires'             => '0'
+            ,   'Pragma'              => 'public'
+        ];
+
+
+
+        $productList=$r->productId;
+        $list=array();
+        for ($i=0;$i<=count($productList);$i++){
+            $productId=$i;
+            $newlist=Product::select('productId','style','sku','brand','status','productName','LastExportedBy','LastExportedDate','category.name as categoryName')
+                ->leftJoin('category', 'category.categoryId', '=', 'product.fkcategoryId')->where('product.productId',$productId)->get()->toArray();
+
+            $list=array_merge($list,$newlist);
+        }
+
+        //var_dump($newlist);
+
+
+
+//        return $productList;
+//
+//        var_dump($productList);
+
+       // $list = User::all()->toArray();
+
+        # add headers for each column in the CSV download
+        array_unshift($list, array_keys($list[0]));
+
+        $callback = function() use ($list)
+        {
+            $FH = fopen(public_path ()."/csv/product.csv", "w");
+            foreach ($list as $row) {
+                fputcsv($FH, $row);
+            }
+
+            fclose($FH);
+        };
+
+      return Response::stream($callback, 200, $headers); //use Illuminate\Support\Facades\Response;
     }
 }
