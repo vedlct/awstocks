@@ -11,6 +11,43 @@
                 <div align="center" style="margin-bottom: 3%;">
                     <h2 style="color: #989898;"><b>Offer List</b></h2>
                 </div>
+
+                <div class="row">
+
+                    <div class="col-md-4 dropdown">
+                        <label class="form-control-label">Category</label> <br>
+                        <select class="form-control" id="category" name="category">
+                            <option selected value="">--Select Category--</option>
+
+                            @foreach($categories as $category)
+                                <option value="{{$category->categoryId}}">{{$category->name}}</option>
+                            @endforeach
+                        </select>
+
+                    </div>
+
+                    <div class="col-md-4 dropdown">
+                        <label class="form-control-label">Product Status</label> <br>
+                        <select class="form-control" id="product" name="product">
+                            <option selected value="">--Select Product Status--</option>
+                            @foreach($productStatus as $products)
+                                <option value="{{$products->status}}">{{$products->status}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="col-md-4 dropdown">
+                        <label class="form-control-label">Offer Status</label> <br>
+                        <select class="form-control" id="offer" name="product">
+                            <option selected value="">--Select Offer Status--</option>
+                            @foreach($offerStatus as $offer)
+                                <option value="{{$offer->status}}">{{$offer->status}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                </div>
+                <br>
         <div class="table table-responsive">
          <table id="offerlist" class="table table-hover"  >
             <thead>
@@ -53,7 +90,7 @@
         $(document).ready(function() {
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
-            $('#offerlist').DataTable({
+            table =  $('#offerlist').DataTable({
 
                 processing: true,
                 serverSide: true,
@@ -61,7 +98,12 @@
                 "ajax":{
                     "url": "{!! route('offer.offerList') !!}",
                     "type": "POST",
-                    "data":{ _token: "{{csrf_token()}}"}
+                    data:function (d){
+                        d._token="{{csrf_token()}}";
+                        d.offer=$('#offer').val();
+                        d.categoryId=$('#category').val();
+                        d.productstatus=$('#product').val();
+                    },
                 },
 //                columnDefs: [ {
 //                    orderable: false,
@@ -92,6 +134,18 @@
 
                 ],
 
+            });
+            $('#category').change(function(){ //button filter event click
+                table.search("").draw(); //just redraw myTableFilter
+                table.ajax.reload();  //just reload table
+            });
+            $('#product').change(function(){ //button filter event click
+                table.search("").draw(); //just redraw myTableFilter
+                table.ajax.reload();  //just reload table
+            });
+            $('#offer').change(function(){ //button filter event click
+                table.search("").draw(); //just redraw myTableFilter
+                table.ajax.reload();  //just reload table
             });
 
         });

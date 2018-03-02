@@ -17,17 +17,36 @@ class OfferController extends Controller
 
     public function index(){
         $catagory = Category::get();
+        $product = Product::select('status')
+            ->groupBy('status')
+            ->get();
+        $offerstatus = Offer::select('status')
+            ->groupBy('status')
+            ->get();
         return view('offer.generate')
-            ->with('category', $catagory);
+            ->with('categories', $catagory)
+            ->with('productStatus', $product)
+        ->with('offerStatus', $offerstatus);
     }
     //this is ajax controller which return all offerlist
-    public function getOfferList() {
+    public function getOfferList(Request $r) {
 
-        return Datatables::of(Offer::select('offerId','disPrice','disStartPrice','disEndPrice','sku','state','price','quantity','productId','product-id-type','category.name as categoryName')
+        $offersql = Offer::select('offerId','disPrice','disStartPrice','disEndPrice','sku','state','price','quantity','productId','product-id-type','category.name as categoryName')
             ->leftJoin('product', 'offer.fkproductId', '=', 'product.productId')
-            ->leftJoin('category', 'category.categoryId', '=', 'product.fkcategoryId')
-            ->get())
-            ->make(true);
+            ->leftJoin('category', 'category.categoryId', '=', 'product.fkcategoryId');
+        if ($categoryId=$r->categoryId){
+            $offersql->where('product.fkcategoryId',$categoryId);
+        }
+        if ($productstatus=$r->productstatus){
+            $offersql->where('product.status',$productstatus);
+        }
+        if ($offerstatus=$r->offer){
+            $offersql->where('offer.status',$offerstatus);
+        }
+        $offerList = $offersql->get();
+        $datatables = Datatables::of($offerList);
+        return $datatables->make(true);
+
 
     }
 
