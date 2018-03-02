@@ -53,8 +53,9 @@
 
             </div>
 
-            
+
         </div>
+        
 
         <div class="table table-responsive" style="margin-top: 20px">
         <table id="allProductList" class="table table-bordered table-striped">
