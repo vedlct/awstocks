@@ -86,7 +86,7 @@
                     { data: 'disStartPrice', name: 'disStartPrice' },
                     { data: 'disEndPrice', name: 'disEndPrice' },
                     { "data": function(data){
-                        return '<input type="button" name="editOffer" onclick="test()" value="'+ data.offerId +'" />';},
+                        return '<input type="button" name="editOffer" onclick="test(this)" data-panel-id="'+ data.offerId +'" />';},
                         "orderable": false, "searchable":false, "name":"action" }
 
 
@@ -96,8 +96,10 @@
 
         });
 
-        function test() {
+        function test(x) {
 
+            btn = $(x).data('panel-id');
+            alert(btn);
         }
     </script>
 @endsection

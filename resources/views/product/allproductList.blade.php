@@ -7,8 +7,8 @@
 
     <!-- Page Header-->
     <header class="page-header">
-        <div class="container-fluid">
-            <h2 class="no-margin-bottom">Product List</h2>
+        <div align="center" class="container-fluid">
+            <h2 style="color: #989898;" class="no-margin-bottom"><b>Product List</b></h2>
         </div>
     </header>
 
@@ -17,27 +17,27 @@
 
         <div class="row">
 
-        <div class="col-md-4 dropdown">
-            <label class="form-control-label">Category</label> <br>
-            <select class="form-control" id="category" name="category">
-                <option selected value="">--Select Category--</option>
+            <div class="col-md-4 dropdown">
+                <label class="form-control-label">Category</label> <br>
+                <select class="form-control" id="category" name="category">
+                    <option selected value="">--Select Category--</option>
 
-                @foreach($categories as $category)
-                    <option value="{{$category->categoryId}}">{{$category->name}}</option>
-                @endforeach
-            </select>
+                    @foreach($categories as $category)
+                        <option value="{{$category->categoryId}}">{{$category->name}}</option>
+                    @endforeach
+                </select>
 
-        </div>
+            </div>
 
-        <div class="col-md-4 dropdown">
-            <label class="form-control-label">Product Name</label> <br>
-            <select class="form-control" id="product" name="product">
-                <option selected value="">--Select Product--</option>
-                @foreach($productsList as $products)
-                    <option value="{{$products->productName}}">{{$products->productName}}</option>
-                @endforeach
-            </select>
-        </div>
+            <div class="col-md-4 dropdown">
+                <label class="form-control-label">Product Name</label> <br>
+                <select class="form-control" id="product" name="product">
+                    <option selected value="">--Select Product--</option>
+                    @foreach($productsList as $products)
+                        <option value="{{$products->productName}}">{{$products->productName}}</option>
+                    @endforeach
+                </select>
+            </div>
 
             <div class="col-md-4 dropdown">
                 <label class="form-control-label">Status</label> <br>
@@ -53,28 +53,26 @@
 
             </div>
 
-
         </div>
-        
 
         <div class="table table-responsive" style="margin-top: 20px">
-        <table id="allProductList" class="table table-bordered table-striped">
-            <thead>
-            <tr>
-                <th>Select</th>
-                <th >Product Category</th>
-                <th>Style</th>
-                <th>SKU</th>
-                <th>Product name</th>
-                <th>Brand name</th>
-                <th>status</th>
-                <th>Last Exported By</th>
-                <th>Last Exported Date</th>
-                <th>Action</th>
-            </tr>
-            </thead>
+            <table id="allProductList" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th >Select</th>
+                    <th >Product Category</th>
+                    <th >Style</th>
+                    <th >SKU</th>
+                    <th >Product name</th>
+                    <th >Brand name</th>
+                    <th >status</th>
+                    <th >Last Exported By</th>
+                    <th >Last Exported Date</th>
+                    <th >Action</th>
+                </tr>
+                </thead>
 
-        </table>
+            </table>
 
         </div>
 
@@ -86,7 +84,7 @@
 
     {{--<script src="//code.jquery.com/jquery.js"></script>--}}
     {{--<script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>--}}
-{{--    <script src="{{url('assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>--}}
+    {{--    <script src="{{url('assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>--}}
 
 
     <script src="{{url('assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>
@@ -111,7 +109,6 @@
                 "ajax":{
                     "url": "{!! route('product.data') !!}",
                     "type": "POST",
-
                     data:function (d){
                         d._token="{{csrf_token()}}";
                         d.status=$('#status').val();
@@ -123,7 +120,7 @@
                 columns: [
                     { "data": function(data){
                         return '<input type="checkbox" name="selected_rows[]" value="'+ data.productId +'" />';},
-                        "orderable": false, "searchable":false, "name":"selected_rows" },
+                        "orderable": false, "searchable":false, "name":"selected_rows",},
 
                     { data: 'categoryName', name: 'categoryName' },
                     { data: 'style', name: 'style' },
@@ -133,13 +130,13 @@
                     { data: 'status', name: 'status' },
                     { data: 'LastExportedBy', name: 'LastExportedBy' },
                     { data: 'LastExportedDate', name: 'LastExportedDate' },
-                    { data: 'LastExportedDate', name: 'LastExportedDate' },
+
+                    { "data": function(data){
+                        {{--var url='{{url("product/edit/", ":id") }}';--}}
+                        return '<a class="btn"  data-panel-id="'+data.productId+'" onclick="editProduct(this)"><i class="fa fa-edit"></i></a><a class="btn" data-panel-id="'+data.productId+'" onclick="deleteProduct(this)"><i class="fa fa-trash"></i></a>';},
+                        "orderable": false, "searchable":false, "name":"selected_rows" },
 
                 ],
-
-                columnDefs: [
-                    { "orderable": false, "targets": 0 }
-                ]
 
             });
             $('#status').change(function(){ //button filter event click
@@ -161,6 +158,27 @@
             });
 
         });
+        function editProduct(x) {
+
+        btn = $(x).data('panel-id');
+
+        var url = '{{route("product.edit", ":id") }}';
+        //alert(url);
+        var t=$.ajax({
+        type:'get',
+        url:url.replace(':id',btn),
+        data:{},
+        cache: false,
+        success:function(data) {
+
+        //                    $("#container").html(data);
+        $('.content').load($(this).attr(t));
+        }
+
+        });
+
+        }
+
 
     </script>
 
