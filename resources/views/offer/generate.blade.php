@@ -28,10 +28,12 @@
                     <div class="col-md-4 dropdown">
                         <label class="form-control-label">Product Status</label> <br>
                         <select class="form-control" id="product" name="product">
-                            <option selected value="">All Product</option>
-                            @foreach($productStatus as $products)
-                                <option value="{{$products->status}}">{{$products->status}}</option>
-                            @endforeach
+                            <option selected value="">All Product Status</option>
+                            <?php for ($i=0;$i<count(Status);$i++){?>
+
+                            <option value="<?php echo Status[$i]?>"><?php echo Status[$i]?></option>
+
+                            <?php } ?>
                         </select>
                     </div>
 
@@ -39,9 +41,11 @@
                         <label class="form-control-label">Offer Status</label> <br>
                         <select class="form-control" id="offer" name="product">
                             <option selected value="">--Select Offer Status--</option>
-                            @foreach($offerStatus as $offer)
-                                <option value="{{$offer->status}}">{{$offer->status}}</option>
-                            @endforeach
+                            <?php for ($i=0;$i<count(Status);$i++){?>
+
+                            <option value="<?php echo Status[$i]?>"><?php echo Status[$i]?></option>
+
+                            <?php } ?>
                         </select>
                     </div>
 
@@ -53,7 +57,7 @@
             <tr>
 
                 <th>Select</th>
-                <th>Category</th>
+                {{--<th>Category</th>--}}
                 <th>Sku</th>
                 <th>Price</th>
                 <th>State</th>
@@ -70,7 +74,13 @@
             </tbody>
         </table>
 
+
         </div>
+                <a  onclick="return creationFull()" download> <button class="btn btn-danger" >CREATION #FULL</button></a>
+                <a  onclick="return priceUpdate()" download> <button class="btn btn-danger"  >Price Update</button></a>
+                <a  onclick="return stockUpdate()" download> <button class="btn btn-danger"  >Stock Update</button></a>
+                <a  onclick="return markdownUpdate()" download> <button class="btn btn-danger"  >Markdown Update</button></a>
+
             </div>
         </div>
     </div>
@@ -87,6 +97,7 @@
     <script>
 
         $(document).ready(function() {
+
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
             table =  $('#offerlist').DataTable({
@@ -104,24 +115,15 @@
                         d.productstatus=$('#product').val();
                     },
                 },
-//                columnDefs: [ {
-//                    orderable: false,
-//                    className: 'select-checkbox',
-//                    targets:   0
-//                } ],
-//                select: {
-//                    style:    'os',
-//                    selector: 'td:first-child'
-//                },
                 columns: [
                     { "data": function(data){
-                        return '<input type="checkbox" name="selected_rows[]" value="'+ data.offerId +'" />';},
+                        return '<input type="checkbox" name="selected_rows[]" data-panel-id="'+data.offerId+'"onclick="selected_rows(this)" value="'+ data.offerId +'" />';},
                         "orderable": false, "searchable":false, "name":"selected_rows" },
-                    { data: 'categoryName', name: 'categoryName' },
+//                    { data: 'categoryName', name: 'categoryName' },
                     { data: 'sku', name: 'sku' },
                     { data: 'price', name: 'price' },
                     { data: 'state', name: 'state' },
-                    { data: 'quantity', name: 'quantity' },
+                    { data: 'stockQty', name: 'stockQty' },
                     { data: 'product-id-type', name: 'product-id-type' },
                     { data: 'disPrice', name: 'disPrice' },
                     { data: 'disStartPrice', name: 'disStartPrice' },
@@ -149,21 +151,96 @@
 
         });
 
-        function editoffer(x) {
-            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        var selecteds = [];
+        function selected_rows(x) {
             btn = $(x).data('panel-id');
-          //  alert(btn);
+            var index = selecteds.indexOf(btn)
+            if (index == "-1"){
+                selecteds.push(btn);
+            }else {
+                selecteds.splice(index, 1);
+            }
+        }
+
+        function editoffer(x) {
+
+            btn = $(x).data('panel-id');
 
             $.ajax({
-                type:'POST',
-                url:'{!! route('offer.editoffer') !!}',
-                data:{id:btn,_token: CSRF_TOKEN},
+                type: 'POST',
+                url: '{!! route('offer.editoffer') !!}',
+                data: {id: btn, _token: CSRF_TOKEN},
                 cache: false,
-                success:function(data) {
+                success: function (data) {
                     //$('#txtHint').html(data);
                     alert(data);
 
                 }
+            });
+        }
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+            function creationFull() {
+                var offers = selecteds;
+                $.ajax({
+                    type: 'POST',
+                    url: "{!! route('offer.csv') !!}",
+                    cache: false,
+                    data: {'fulloffers': offers},
+                    success: function (data) {
+
+
+                    }
+
+                });
+            }
+
+                function priceUpdate() {
+                    var offers = selecteds;
+                    $.ajax({
+                        type: 'POST',
+                        url: "{!! route('offer.csv') !!}",
+                        cache: false,
+                        data: {'priceCreation': offers},
+                        success: function (data) {
+
+
+                        }
+
+                    });
+                }
+
+        function stockUpdate() {
+            var offers = selecteds;
+            $.ajax({
+                type: 'POST',
+                url: "{!! route('offer.csv') !!}",
+                cache: false,
+                data: {'stockUpdate': offers},
+                success: function (data) {
+
+
+                }
+
+            });
+        }
+
+        function markdownUpdate() {
+            var offers = selecteds;
+            $.ajax({
+                type: 'POST',
+                url: "{!! route('offer.csv') !!}",
+                cache: false,
+                data: {'markdownUpdate': offers},
+                success: function (data) {
+
+
+                }
+
             });
         }
     </script>

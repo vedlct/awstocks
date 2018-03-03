@@ -13,7 +13,6 @@
     <title>Stock</title>
     <!-- Bootstrap Core CSS -->
     <link href="{{url('assets/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
-    
 
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <!-- chartist CSS -->

@@ -47,6 +47,8 @@ Route::get('/offer/generate', 'OfferController@index')->name('offer.generate');
 Route::post('/offer/getOfferList', 'OfferController@getOfferList')->name('offer.offerList');
 Route::post('/offer/editoffer', 'OfferController@editoffer')->name('offer.editoffer');
 
+Route::post('/offer/csvExport', 'OfferController@csvExport')->name('offer.csv');
+
 //setting
 Route::view('/historic/files', 'layouts.starLeads')->name('historic.files');
 Route::view('/settings', 'layouts.newInfo')->name('settings');
