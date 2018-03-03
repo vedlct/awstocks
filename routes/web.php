@@ -42,16 +42,17 @@ Route::post('/product/csvExport', 'ProductController@csvExport')->name('product.
 //offer
 Route::get('/offer/add', 'OfferController@add')->name('offer.add');
 Route::post('/offer/add', 'OfferController@insert')->name('offer.insert');
-
 Route::get('/offer/generate', 'OfferController@index')->name('offer.generate');
 //Route::view('/offer/generate', 'offer.generate')->name('offer.generate');
 Route::post('/offer/getOfferList', 'OfferController@getOfferList')->name('offer.offerList');
 Route::post('/offer/update', 'OfferController@update')->name('offer.update');
-Route::get('/offer/edit/{id}', 'OfferController@edit')->name('offer.editoffer');
+Route::get('/offer/edit/{id}', 'OfferController@edit')->name('offer.edit');
+Route::get('/offer/delete/{id}', 'OfferController@destroy')->name('offer.delete');
 
 //setting
 Route::view('/historic/files', 'layouts.starLeads')->name('historic.files');
-Route::view('/settings', 'layouts.newInfo')->name('settings');
+Route::get('/settings', 'SettingsController@index')->name('settings');
+Route::post('/settings/getColor', 'SettingsController@getColors')->name('settings.getColors');
 
 
 

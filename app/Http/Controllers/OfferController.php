@@ -123,6 +123,14 @@ class OfferController extends Controller
         return $offerid;
     }
 
-    public function test(){}
+    public function destroy($id){
+        $offer=Offer::findOrfail($id);
+        $offer->delete();
+
+
+        Session::flash('message', 'Offer Deleted successfully');
+        return back();
+
+    }
 
 }
