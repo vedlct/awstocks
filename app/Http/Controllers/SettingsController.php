@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Color;
+use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\Response;
 
 class SettingsController extends Controller
 {
@@ -28,5 +30,11 @@ class SettingsController extends Controller
 
 
 
+    }
+
+    public function colorAjax () {
+        $color = Color::get();
+        $datatables = Datatables::of($color);
+        return $datatables->make(true);
     }
 }

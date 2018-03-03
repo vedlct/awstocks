@@ -3,7 +3,15 @@
 
 @section('content')
 
-    <div class="container-fluid">
+    <div class="col-lg-12">
+        <div class="card" style="margin-left: 10px; border-radius: 10px;">
+
+            <div class="card-body" style="padding: 1%;">
+                <div align="center" style="margin-bottom: 3%;">
+                    <h2 style="color: #989898;"><b>Settings</b></h2>
+                </div>
+
+                <div class="container-fluid">
         <label class="col-sm-2 form-control-label"><b>Edit List</b></label>
         <div class="col-sm-10">
             <select id="content" class="form-control form-control-warning" required>
@@ -11,9 +19,12 @@
                     <option value="category">Category</option>
                     <option value="color">Color</option>
                     <option value="size">Size</option>
+                     <option value="size">Care</option>
+                    <option value="size">Run TO Size</option>
 
             </select>
         </div>
+        <br>
 
 
         <div id="element" class="element">
@@ -26,6 +37,9 @@
 
 
 
+        </div>
+            </div>
+            </div>
     </div>
 
 @endsection

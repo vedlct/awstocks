@@ -55,6 +55,7 @@ Route::post('/offer/csvExport', 'OfferController@csvExport')->name('offer.csv');
 Route::view('/historic/files', 'layouts.starLeads')->name('historic.files');
 Route::get('/settings', 'SettingsController@index')->name('settings');
 Route::post('/settings/getColor', 'SettingsController@getColors')->name('settings.getColors');
+Route::post('/settings/colorajax', 'SettingsController@colorAjax')->name('settings.colorajax');
 
 
 
