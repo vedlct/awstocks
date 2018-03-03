@@ -130,7 +130,7 @@
                     { data: 'productName', name: 'productName' },
                     { data: 'brand', name: 'brand' },
                     { data: 'status', name: 'status' },
-                    { data: 'LastExportedBy', name: 'LastExportedBy' },
+                    { data: 'userName', name: 'userName' },
                     { data: 'LastExportedDate', name: 'LastExportedDate' },
                     { "data": function(data){
                         var url='{{url("product/edit/", ":id") }}';
@@ -176,8 +176,6 @@
 
                 selecteds.splice(index, 1);
             }
-
-
         }
 
         $.ajaxSetup({
@@ -187,18 +185,33 @@
         });
         function myfunc() {
             var products=selecteds;
-            alert(products);
-            $.ajax({
-                type:'POST',
-                url:"{!! route('product.csv') !!}",
-                cache: false,
-                data:{'products':products},
-                success:function(data) {
+
+            if (products.length >0) {
+
+                $.ajax({
+                    type: 'POST',
+                    url: "{!! route('product.csv') !!}",
+                    cache: false,
+                    data: {'products': products},
+                    success: function (data) {
+
+                        var link = document.createElement("a");
+                        link.download = "ProductList.csv";
+                        var uri = '{{url("/csv/ProductList.csv")}}';
+                        link.href = uri;
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                        delete link;
 
 
-                }
+                    }
 
-            });
+                });
+            }
+            else {
+                alert("Please Select a product first");
+            }
         }
     </script>
 

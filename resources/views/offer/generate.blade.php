@@ -129,8 +129,8 @@
                     { data: 'disStartPrice', name: 'disStartPrice' },
                     { data: 'disEndPrice', name: 'disEndPrice' },
                     { "data": function(data){
-                        return '<input type="button" name="editOffer" onclick="editoffer(this)" data-panel-id="'+ data.offerId +'" />';},
-                        "orderable": false, "searchable":false, "name":"action" }
+                        return '<a class="btn" data-panel-id="'+data.offerId+'"onclick="editOffer(this)"><i class="fa fa-edit"></i></a><a class="btn" data-panel-id="'+data.offerId+'"onclick="deleteOffer(this)"><i class="fa fa-trash"></i></a>';},
+                        "orderable": false, "searchable":false, "name":"selected_rows" }
 
 
                 ],
@@ -162,22 +162,21 @@
             }
         }
 
-        {{--function editoffer(x) {--}}
+        function editOffer(x) {
+            btn = $(x).data('panel-id');
+            var url = '{{route("offer.edit", ":id") }}';
+            //alert(url);
+            var newUrl=url.replace(':id', btn);
+            window.location.href = newUrl;
+        }
+        function deleteOffer(x) {
 
-            {{--btn = $(x).data('panel-id');--}}
+            btn = $(x).data('panel-id');
+            var url = '{{route("offer.delete", ":id") }}';
+            var newUrl=url.replace(':id', btn);
+            window.location.href = newUrl;
+        }
 
-            {{--$.ajax({--}}
-                {{--type: 'POST',--}}
-                {{--url: '{!! route('offer.editoffer') !!}',--}}
-                {{--data: {id: btn, _token: CSRF_TOKEN},--}}
-                {{--cache: false,--}}
-                {{--success: function (data) {--}}
-                    {{--//$('#txtHint').html(data);--}}
-                    {{--alert(data);--}}
-
-                {{--}--}}
-            {{--});--}}
-        {{--}--}}
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -186,62 +185,115 @@
 
             function creationFull() {
                 var offers = selecteds;
-                $.ajax({
-                    type: 'POST',
-                    url: "{!! route('offer.csv') !!}",
-                    cache: false,
-                    data: {'fulloffers': offers},
-                    success: function (data) {
-
-
-                    }
-
-                });
-            }
-
-                function priceUpdate() {
-                    var offers = selecteds;
+                if (offers.length >0) {
                     $.ajax({
                         type: 'POST',
                         url: "{!! route('offer.csv') !!}",
                         cache: false,
-                        data: {'priceCreation': offers},
+                        data: {'fulloffers': offers},
                         success: function (data) {
+
+
+                            var link = document.createElement("a");
+                            link.download = "FullOfferList.csv";
+                            var uri = '{{url("/csv/FullOfferList.csv")}}';
+                            link.href = uri;
+                            document.body.appendChild(link);
+                            link.click();
+                            document.body.removeChild(link);
+                            delete link;
 
 
                         }
 
                     });
                 }
+                else {
+                    alert("Please Select a offer first");
+                }
+            }
+
+                function priceUpdate() {
+                    var offers = selecteds;
+                    if (offers.length >0) {
+                        $.ajax({
+                            type: 'POST',
+                            url: "{!! route('offer.csv') !!}",
+                            cache: false,
+                            data: {'priceCreation': offers},
+                            success: function (data) {
+
+                                var link = document.createElement("a");
+                                link.download = "PriceUpdateList.csv";
+                                var uri = '{{url("/csv/PriceUpdateList.csv")}}';
+                                link.href = uri;
+                                document.body.appendChild(link);
+                                link.click();
+                                document.body.removeChild(link);
+                                delete link;
+
+
+                            }
+
+                        });
+                    }else {
+                        alert("Please Select a offer first");
+                    }
+                }
 
         function stockUpdate() {
             var offers = selecteds;
-            $.ajax({
-                type: 'POST',
-                url: "{!! route('offer.csv') !!}",
-                cache: false,
-                data: {'stockUpdate': offers},
-                success: function (data) {
+            if (offers.length >0) {
+                $.ajax({
+                    type: 'POST',
+                    url: "{!! route('offer.csv') !!}",
+                    cache: false,
+                    data: {'stockUpdate': offers},
+                    success: function (data) {
+
+                        var link = document.createElement("a");
+                        link.download = "StockUpdateList.csv";
+                        var uri = '{{url("/csv/StockUpdateList.csv")}}';
+                        link.href = uri;
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                        delete link;
 
 
-                }
+                    }
 
-            });
+                });
+            }else {
+                alert("Please Select a offer first");
+            }
         }
 
         function markdownUpdate() {
             var offers = selecteds;
-            $.ajax({
-                type: 'POST',
-                url: "{!! route('offer.csv') !!}",
-                cache: false,
-                data: {'markdownUpdate': offers},
-                success: function (data) {
+            if (offers.length >0) {
+                $.ajax({
+                    type: 'POST',
+                    url: "{!! route('offer.csv') !!}",
+                    cache: false,
+                    data: {'markdownUpdate': offers},
+                    success: function (data) {
 
+                        var link = document.createElement("a");
+                        link.download = "markdownUpdateList.csv";
+                        var uri = '{{url("/csv/markdownUpdateList.csv")}}';
+                        link.href = uri;
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                        delete link;
 
-                }
+                    }
 
-            });
+                });
+            }else {
+                alert("Please Select a offer first");
+            }
         }
     </script>
 @endsection

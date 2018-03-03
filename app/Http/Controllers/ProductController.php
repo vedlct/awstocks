@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use File;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Image;
 use Session;
 use App\Product;
@@ -13,7 +14,8 @@ use App\Size;
 use App\RunToSize;
 use App\Care;
 use Yajra\DataTables\DataTables;
-use Response;
+use Illuminate\Support\Facades\Response;
+
 class ProductController extends Controller
 {
     public function __construct()
@@ -181,12 +183,14 @@ class ProductController extends Controller
         return view('product.allproductList')
             ->with('categories',$categories)
             ->with('productsList',$productsList);
+
     }
     /* for datatable in all product page */
     public function ProductList(Request $r)
     {
-        $list=Product::select('productId','style','sku','brand','status','productName','LastExportedBy','LastExportedDate','category.categoryName')
-            ->leftJoin('category', 'category.categoryId', '=', 'product.fkcategoryId');
+        $list=Product::select('productId','style','sku','brand','product.status','productName','users.name as userName','LastExportedDate','category.categoryName')
+            ->leftJoin('category', 'category.categoryId', '=', 'product.fkcategoryId')
+            ->leftJoin('users', 'users.userId', '=', 'product.LastExportedBy');
 
         if ($status=$r->status){
             $list->where('product.status',$status);
@@ -200,7 +204,7 @@ class ProductController extends Controller
 
 
 //        $productList = $list->get();
-        $productList = $list;
+        $productList = $list->get();
 
         $datatables = Datatables::of($productList);
 
@@ -336,23 +340,37 @@ class ProductController extends Controller
             'Pragma'              => 'public'
         ];
         $productList=$r->products;
+        $data=array(
+            'LastExportedBy'=>Session::get('userId'),
+            'LastExportedDate'=>date('Y-m-d'),
+        );
+
         $list=array();
         for ($i=0;$i<count($productList);$i++){
             $productId=$productList[$i];
-            $newlist=Product::select('productId','style','sku','brand','status','productName','LastExportedBy','LastExportedDate','category.categoryName')
+            $newlist=Product::select('category.categoryName','style','sku','productName','productDesc','brand','color','colorDesc','swatchImage','size','mainImage','outfit','image2')
                 ->leftJoin('category', 'category.categoryId', '=', 'product.fkcategoryId')->where('product.productId',$productId)->get()->toArray();
             $list=array_merge($list,$newlist);
+
+            DB::table('Product')
+                ->where('productId',$productId)
+                ->update($data);
         }
+        $filePath=public_path ()."/csv/ProductList.csv";
+
         # add headers for each column in the CSV download
         array_unshift($list, array_keys($list[0]));
-        $callback = function() use ($list)
+        $callback = function() use ($list,$filePath)
         {
-            $FH = fopen(public_path ()."/csv/ProductList.csv", "w");
+            $FH = fopen($filePath, "w");
             foreach ($list as $row) {
                 fputcsv($FH, $row);
             }
             fclose($FH);
         };
-        return Response::stream($callback, 200, $headers); //use Illuminate\Support\Facades\Response;
+         return Response::stream($callback, 200, $headers); //use Illuminate\Support\Facades\Response;
+
+
+
     }
 }
