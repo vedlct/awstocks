@@ -8,6 +8,13 @@ define('SIZE',array(
     "xl" => "xl",
 ));
 
+define('STATE',array(
+    "11" => "11",
+    "1" => "1",
+    "2" => "2",
+    "3" => "3",
+));
+
 define('Status',array("Active","Inactive"));
 
 //

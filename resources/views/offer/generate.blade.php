@@ -162,22 +162,22 @@
             }
         }
 
-        function editoffer(x) {
+        {{--function editoffer(x) {--}}
 
-            btn = $(x).data('panel-id');
+            {{--btn = $(x).data('panel-id');--}}
 
-            $.ajax({
-                type: 'POST',
-                url: '{!! route('offer.editoffer') !!}',
-                data: {id: btn, _token: CSRF_TOKEN},
-                cache: false,
-                success: function (data) {
-                    //$('#txtHint').html(data);
-                    alert(data);
+            {{--$.ajax({--}}
+                {{--type: 'POST',--}}
+                {{--url: '{!! route('offer.editoffer') !!}',--}}
+                {{--data: {id: btn, _token: CSRF_TOKEN},--}}
+                {{--cache: false,--}}
+                {{--success: function (data) {--}}
+                    {{--//$('#txtHint').html(data);--}}
+                    {{--alert(data);--}}
 
-                }
-            });
-        }
+                {{--}--}}
+            {{--});--}}
+        {{--}--}}
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

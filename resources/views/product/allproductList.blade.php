@@ -124,7 +124,7 @@
                     { "data": function(data){
                         return '<input data-panel-id="'+data.productId+'"onclick="selected_rows(this)" type="checkbox" name="selected_rows[]" value="'+ data.productId +'" />';},
                         "orderable": false, "searchable":false, "name":"selected_rows",},
-                    { data: 'categoryName',name:'categoryName' },
+                    { data: 'categoryName',name:'category.categoryName' },
                     { data: 'style', name: 'style' },
                     { data: 'sku', name: 'sku' },
                     { data: 'productName', name: 'productName' },
