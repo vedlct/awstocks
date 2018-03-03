@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
-<!-- Mirrored from wrappixel.com/demos/admin-templates/monster-admin/main/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 13 Jan 2018 12:28:59 GMT -->
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,7 +13,9 @@
     <title>Stock</title>
     <!-- Bootstrap Core CSS -->
     <link href="{{url('assets/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+    
 
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <!-- chartist CSS -->
     {{--<link href="{{url('assets/plugins/chartist-js/dist/chartist.min.css')}}" rel="stylesheet">--}}
     {{--<link href="{{url('assets/plugins/chartist-js/dist/chartist-init.css')}}" rel="stylesheet">--}}

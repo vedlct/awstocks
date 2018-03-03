@@ -1,107 +1,190 @@
 @extends('main')
+@section('header')
+    {{--<link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">--}}
+@endsection
 
 @section('content')
 
     <!-- Page Header-->
     <header class="page-header">
-        <div class="container-fluid">
-            <h2 class="no-margin-bottom">Product List</h2>
+        <div align="center" class="container-fluid">
+            <h2 style="color: #989898;" class="no-margin-bottom"><b>Product List</b></h2>
         </div>
     </header>
 
+    <div  style="padding: 10px; background-color:white";>
 
-    <div class="table table-responsive" style="padding: 10px; background-color:white";>
 
         <div class="row">
-        <div class="col-md-3 dropdown">
-            <label class="form-control-label">Status</label> <br>
-            <select class="form-control" id="status" name="status" onchange="status(this.value)">
-                <option selected value="">--Select Status--</option>
-                <?php for ($i=0;$i<count(Status);$i++){?>
 
-                <option value="<?php echo Status[$i]?>"><?php echo Status[$i]?></option>
+            <div class="col-md-4 dropdown">
+                <label class="form-control-label">Category</label> <br>
+                <select class="form-control" id="category" name="category">
+                    <option selected value="">--Select Category--</option>
 
-              <?php } ?>
+                    @foreach($categories as $category)
+                        <option value="{{$category->categoryId}}">{{$category->name}}</option>
+                    @endforeach
+                </select>
 
-            </select>
+            </div>
 
-        </div>
-        <div class="col-md-3 dropdown">
-            <label class="form-control-label">Category</label> <br>
-            <select class="form-control" id="status" name="status" onchange="status(this.value)">
-                <option value="">--Select Status--</option>
+            <div class="col-md-4 dropdown">
+                <label class="form-control-label">Product Name</label> <br>
+                <select class="form-control" id="product" name="product">
+                    <option selected value="">--Select Product--</option>
+                    @foreach($productsList as $products)
+                        <option value="{{$products->productName}}">{{$products->productName}}</option>
+                    @endforeach
+                </select>
+            </div>
 
-                @foreach($categories as $category)
-                    <option value="{{$category->categoryId}}">{{$category->name}}</option>
-                @endforeach
-            </select>
+            <div class="col-md-4 dropdown">
+                <label class="form-control-label">Status</label> <br>
+                <select class="form-control" id="status" name="status">
+                    <option selected value="">--Select Status--</option>
+                    <?php for ($i=0;$i<count(Status);$i++){?>
 
-        </div>
-        <div class="col-md-3 dropdown">
-            <label class="form-control-label">Product Name</label> <br>
-            <select class="form-control" id="status" name="status" onchange="status(this.value)">
-                <option value="">--Select Status--</option>
-                @foreach($productsList as $products)
-                    <option value="{{$products->productId}}">{{$products->productName}}</option>
-                @endforeach
-            </select>
-        </div>
+                    <option value="<?php echo Status[$i]?>"><?php echo Status[$i]?></option>
 
-            <div class="col-md-3 form-group">
-                <label class="form-control-label" >Search</label>
-                <input name="line2" type="text" class="form-control required validate" onkeyup="search(this.value)">
+                    <?php } ?>
+
+                </select>
+
             </div>
 
         </div>
 
+        <div class="table table-responsive" style="margin-top: 20px">
+            <table id="allProductList" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th >Select</th>
+                    <th >Product Category</th>
+                    <th >Style</th>
+                    <th >SKU</th>
+                    <th >Product name</th>
+                    <th >Brand name</th>
+                    <th >status</th>
+                    <th >Last Exported By</th>
+                    <th >Last Exported Date</th>
+                    <th >Action</th>
+                </tr>
+                </thead>
 
-        <table class="table table-hover">
-            <thead>
-            <tr style="color: #00aba9">
-                <th>Select</th>
-                <th >Product Category</th>
-                <th>Style</th>
-                <th>SKU</th>
-                <th>Product name</th>
-                <th>Brand name</th>
-                <th>status</th>
-                <th>Last Exported By</th>
-                <th>Last Exported Date</th>
-                <th style="width: 100px">Action</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach($productsList as $products)
-            <tr>
-                <td><input type="checkbox"></td>
-                <td><?php echo $products->categoryName?></td>
-                <td>{{$products->style}}</td>
-                <td>{{$products->sku}}</td>
-                <td>{{$products->productName}}</td>
-                <td>{{$products->brand}}</td>
-                <td>{{$products->status}}</td>
-                <td>{{$products->LastExportedBy}}</td>
-                <td>{{$products->LastExportedDate}}</td>
+            </table>
 
-                <td>
-                    <a href="{{route('product.edit',['id' => $products->productId])}}"> <i class="fa fa-pencil-square-o" aria-hidden="true" style="color: red"></i></a> &nbsp;&nbsp;&nbsp;
-                    <a  href="{{route('product.destroy',['id' => $products->productId])}}" id="myBtn2" onClick="return confirm('Are you sure delete this product?')">
-                        <i class="fa fa-trash-o" aria-hidden="true" style="color: red"></i></a> &nbsp;&nbsp;&nbsp;
-                </td>
+        </div>
 
-            </tr>
-            @endforeach
-
-            </tbody>
-
-
-        </table>
-
-        <a href="csv/product.csv" onclick="return myfunc()" download> <button  class="btn btn-danger"  >Export Products file</button></a>
-
-
-
+        <a  onclick="return myfunc()"> <button class="btn btn-danger"  >Export Products file</button></a>
 
     </div>
+@endsection
+@section('foot-js')
+
+    {{--<script src="//code.jquery.com/jquery.js"></script>--}}
+    {{--<script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>--}}
+    {{--    <script src="{{url('assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>--}}
+
+
+    <script src="{{url('assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>
+
+
+    {{--    <script src="{{url('cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js')}}"></script>--}}
+    {{--<script src="{{url('cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js')}}"></script>--}}
+
+
+    {{--<script src="{{url('cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js')}}"></script>--}}
+
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+
+    <script>
+        var table;
+        $(document).ready(function() {
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            table = $('#allProductList').DataTable({
+                processing: true,
+                serverSide: true,
+                stateSave: true,
+                "ajax":{
+                    "url": "{!! route('product.data') !!}",
+                    "type": "POST",
+                    data:function (d){
+                        d._token="{{csrf_token()}}";
+                        d.status=$('#status').val();
+                        d.categoryId=$('#category').val();
+                        d.productName=$('#product').val();
+                    },
+                },
+                columns: [
+                    { "data": function(data){
+                        return '<input data-panel-id="'+data.productId+'"onclick="selected_rows(this)" type="checkbox" name="selected_rows[]" value="'+ data.productId +'" />';},
+                        "orderable": false, "searchable":false, "name":"selected_rows",},
+                    { data: 'categoryName',name:'categoryName' },
+                    { data: 'style', name: 'style' },
+                    { data: 'sku', name: 'sku' },
+                    { data: 'productName', name: 'productName' },
+                    { data: 'brand', name: 'brand' },
+                    { data: 'status', name: 'status' },
+                    { data: 'LastExportedBy', name: 'LastExportedBy' },
+                    { data: 'LastExportedDate', name: 'LastExportedDate' },
+                    { "data": function(data){
+                        var url='{{url("product/edit/", ":id") }}';
+                        return '<a class="btn" data-panel-id="'+data.productId+'"onclick="editProduct(this)"><i class="fa fa-edit"></i></a><a class="btn" data-panel-id="'+data.productId+'"onclick="deleteProduct(this)"><i class="fa fa-trash"></i></a>';},
+                        "orderable": false, "searchable":false, "name":"selected_rows" },
+                ],
+            });
+            $('#status').change(function(){ //button filter event click
+                table.search("").draw(); //just redraw myTableFilter
+                table.ajax.reload();  //just reload table
+            });
+            $('#category').change(function(){ //button filter event click
+                table.search("").draw(); //just redraw myTableFilter
+                table.ajax.reload();  //just reload table
+            });
+            $('#product').change(function(){ //button filter event click
+                table.search("").draw(); //just redraw myTableFilter
+                table.ajax.reload();  //just reload table
+            });
+        });
+        function editProduct(x) {
+            btn = $(x).data('panel-id');
+            var url = '{{route("product.edit", ":id") }}';
+            //alert(url);
+            var newUrl=url.replace(':id', btn);
+            window.location.href = newUrl;
+        }
+        function deleteProduct(x) {
+            btn = $(x).data('panel-id');
+            var url = '{{route("product.destroy", ":id") }}';
+            //alert(url);
+            var newUrl=url.replace(':id', btn);
+            window.location.href = newUrl;
+        }
+        var selecteds = [];
+        function selected_rows(x) {
+            btn = $(x).data('panel-id');
+            selecteds.push(btn);
+        }
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        function myfunc() {
+            var products=selecteds;
+            alert(products);
+            $.ajax({
+                type:'POST',
+                url:"{!! route('product.csv') !!}",
+                cache: false,
+                data:{'productId':products},
+            });
+        }
+    </script>
 
 @endsection
+
+
+
+

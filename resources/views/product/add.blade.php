@@ -22,7 +22,7 @@
                             <select name="category" class="form-control form-control-warning" required>
                                 <option value="">Select One</option>
                                 @foreach($categories as $category)
-                                <option value="{{$category->categoryId}}">{{$category->name}}</option>
+                                <option value="{{$category->categoryId}}">{{$category->categoryName}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -43,30 +43,27 @@
 
 
                     <div class="form-group row">
-                        <label class="col-sm-2 form-control-label">Standard Color</label>
+                        <label class="col-sm-2 form-control-label">Color</label>
                         <div class="col-sm-10">
-                            <select name="standardColor" class="form-control form-control-warning" required>
+                            <select name="color" class="form-control form-control-warning" required>
                                 <option value="">Select One</option>
                                 @foreach($sColors as $color)
-                                <option value="{{$color->colorId}}">{{$color->colorName}}</option>
+                                <option value="{{$color->colorName}}">{{$color->colorName}}</option>
                                 @endforeach
                             </select>
-
                         </div>
                     </div>
-
 
 
                     <div class="form-group row">
-                        <label class="col-sm-2 form-control-label">Status</label>
+                        <label class="col-sm-2 form-control-label">Color Description</label>
                         <div class="col-sm-10">
-                            <select name="status" class="form-control form-control-warning" required>
-                                <option value="1">Active</option>
-                                <option value="0">Inactive</option>
-                            </select>
+                            <input id="inputHorizontalWarning" type="text" name="colorDesc" placeholder="Color Description" class="form-control form-control-warning" required>
                         </div>
                     </div>
-                    
+
+
+
                     <div class="form-group row">
                         <label class="col-sm-2 form-control-label">Product Name</label>
                         <div class="col-sm-10">
@@ -80,33 +77,90 @@
                         </div>
                     </div>
 
+
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 form-control-label">Size Type</label>
+                        <div class="col-sm-4">
+                            <select name="sizeType" class="form-control form-control-warning" id="sizeType"  required >
+                                <option value="">Select One</option>
+                                @foreach($sizeTypes as $size)
+                                    <option value="{{$size->sizeType}}">{{$size->sizeType}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
                     <div class="form-group row">
                         <label class="col-sm-2 form-control-label">Size</label>
-                        <div class="col-sm-10">
-
-                            <select name="size" class="form-control form-control-warning" required>
+                        <div class="col-sm-4">
+                            <select name="size" id="size" class="form-control form-control-warning" required>
                                 <option value="">Select One</option>
-                                <option value="s">S</option>
-                                <option value="m">M</option>
-                                <option value="l">L</option>
-                                <option value="xl">XL</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 form-control-label">Run to Size</label>
+                        <div class="col-sm-4">
+                            <select name="runToSize" class="form-control form-control-warning" required>
+                                <option value="">Select One</option>
+                                @foreach($runToSizes as $value)
+                                    <option value="{{$value->runToSizeName}}">{{$value->runToSizeName}}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
 
 
                     <div class="form-group row">
-                        <label class="col-sm-2 form-control-label">Detailed Color</label>
-                        <div class="col-sm-10">
-                            <select name="detailedColor" class="form-control form-control-warning" required>
+                        <label class="col-sm-2 form-control-label">Care</label>
+                        <div class="col-sm-4">
+                            <select name="care" class="form-control form-control-warning" required>
                                 <option value="">Select One</option>
-                                @foreach($dColors as $color)
-                                    <option value="{{$color->colorId}}">{{$color->colorName}}</option>
+                                @foreach($cares as $care)
+                                    <option value="{{$care->careName}}">{{$care->careName}}</option>
                                 @endforeach
-
                             </select>
                         </div>
                     </div>
+
+
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 form-control-label">Ean</label>
+                        <div class="col-sm-10">
+                            <input id="inputHorizontalSuccess" name="ean" type="text" placeholder="ean" class="form-control form-control-success" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 form-control-label">Price</label>
+                        <div class="col-sm-10">
+                            <input id="inputHorizontalSuccess" name="price" type="number" placeholder="price" class="form-control form-control-success" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 form-control-label">Stock Qty</label>
+                        <div class="col-sm-10">
+                            <input id="inputHorizontalSuccess" name="stockQty" type="number" placeholder="quantity" class="form-control form-control-success" required>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 form-control-label">Min Qty Alert</label>
+                        <div class="col-sm-10">
+                            <input id="inputHorizontalSuccess" name="minQtyAlert" type="number" placeholder="alert quantity" class="form-control form-control-success" required>
+                        </div>
+                    </div>
+
+
+
 
 
                     <div class="form-group row">
@@ -115,6 +169,17 @@
                             <textarea class="form-control" rows="5" id="comment" name="description" required></textarea>
                         </div>
                     </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 form-control-label">Status</label>
+                        <div class="col-sm-10">
+                            <select name="status" class="form-control form-control-warning" required>
+                                <option value="Active">Active</option>
+                                <option value="Inactive">Inactive</option>
+                            </select>
+                        </div>
+                    </div>
+
 
                     <div class="form-group row">
                         <label class="col-sm-2 form-control-label"><b>Swatch</b></label>
@@ -150,6 +215,29 @@
                             <img height="50px" width="50px" id="imgImage2Pic">
                         </div>
                     </div>
+
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 form-control-label"><b>Image 3</b> </label>
+                        <div class="col-sm-10">
+                            <input type="file" name="image3Pic" value="image3Pic" accept="image/*" id="image3Pic">
+                            <img height="50px" width="50px" id="imgImage3Pic">
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 form-control-label"><b>Image 4</b> </label>
+                        <div class="col-sm-10">
+                            <input type="file" name="image4Pic" value="image4Pic" accept="image/*" id="image4Pic">
+                            <img height="50px" width="50px" id="imgImage4Pic">
+                        </div>
+                    </div>
+
+
+
+
                     <div class="form-group row">
                         <div class="col-sm-10 offset-sm-3">
                             <input type="submit" value="Submit" class="btn btn-primary">
@@ -172,8 +260,25 @@
 
 @endsection
 @section('foot-js')
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <script>
+
+        $("#sizeType").change(function() {
+
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            var type=$(this).val();
+            $.ajax({
+                type : 'post' ,
+                url : '{{route('getSizeByType')}}',
+                data : {_token: CSRF_TOKEN,'type':type} ,
+                success : function(data){
+                    //console.log(data);
+                    document.getElementById("size").innerHTML = data;
+
+                }
+            });
+        });
 
         function swatchPic(input) {
             if (input.files && input.files[0]) {
@@ -221,6 +326,27 @@
                 reader.readAsDataURL(input.files[0]);}
         }
 
+        function image3Pic(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#imgImage3Pic').attr('src', e.target.result);}
+                reader.readAsDataURL(input.files[0]);}
+        }
+
+
+        function image4Pic(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#imgImage4Pic').attr('src', e.target.result);}
+                reader.readAsDataURL(input.files[0]);}
+        }
+
+
+
         $("#swatchPic").change(function(){
             swatchPic(this);
         });
@@ -234,6 +360,12 @@
 
         $("#image2Pic").change(function(){
             image2Pic(this);
+        });
+        $("#image3Pic").change(function(){
+            image3Pic(this);
+        });
+        $("#image4Pic").change(function(){
+            image4Pic(this);
         });
 
     </script>

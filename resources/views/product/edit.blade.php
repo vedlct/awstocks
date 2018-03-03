@@ -30,7 +30,7 @@
                                                     @if($category->categoryId == $product->fkcategoryId)
                                                     selected
                                                     @endif
-                                            >{{$category->name}}</option>
+                                            >{{$category->categoryName}}</option>
 
                                     @endforeach
                                 </select>
@@ -66,14 +66,28 @@
                         </div>
 
 
+
+                        {{--<div class="form-group row">--}}
+                            {{--<label class="col-sm-2 form-control-label">Color</label>--}}
+                            {{--<div class="col-sm-10">--}}
+                                {{--<select name="color" class="form-control form-control-warning" required>--}}
+                                    {{--<option value="">Select One</option>--}}
+                                    {{--@foreach($sColors as $color)--}}
+                                        {{--<option value="{{$color->colorName}}">{{$color->colorName}}</option>--}}
+                                    {{--@endforeach--}}
+                                {{--</select>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+
+
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">Standard Color</label>
+                            <label class="col-sm-2 form-control-label">Color</label>
                             <div class="col-sm-10">
-                                <select name="standardColor" class="form-control form-control-warning" required>
+                                <select name="color" class="form-control form-control-warning" required>
                                     <option value="">Select One</option>
                                     @foreach($sColors as $color)
                                         <option value="{{$color->colorId}}"
-                                                @if($color->colorId == $product->fkscolorId)
+                                                @if($color->color == $product->colorName)
                                                 selected
                                                 @endif
                                         >{{$color->colorName}}</option>
@@ -92,8 +106,8 @@
                             <label class="col-sm-2 form-control-label">Status</label>
                             <div class="col-sm-10">
                                 <select name="status" class="form-control form-control-warning" required>
-                                    <option value="1">Active</option>
-                                    <option value="0"  @if($product->status==0)
+                                    <option value="Active">Active</option>
+                                    <option value="Inactive"  @if($product->status=="Inactive")
                                                     selected
                                             @endif>Inactive</option>
                                 </select>
@@ -121,42 +135,99 @@
                             </div>
                         </div>
 
+
+
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">Size</label>
-                            <div class="col-sm-10">
-
-                                <select name="size" class="form-control form-control-warning" required>
+                            <label class="col-sm-2 form-control-label">Size Type</label>
+                            <div class="col-sm-4">
+                                <select name="sizeType" class="form-control form-control-warning" id="sizeType"  >
                                     <option value="">Select One</option>
-                                    @foreach(SIZE as $item)
-                                        <option value="{{$item}}"
-                                                @if($product->size==$item)
-                                                selected
-                                                @endif
-                                        >{{$item}}</option>
+                                    @foreach($sizeTypes as $size)
+                                        <option value="{{$size->sizeType}}">{{$size->sizeType}}</option>
                                     @endforeach
-
                                 </select>
-                                @if ($errors->has('size'))
-                                    <span class="help-block" style="position: absolute; left: 150px; color: red; font-size:14px">
-								<strong>{{ $errors->first('size') }}</strong>
-							</span> @endif
                             </div>
                         </div>
 
 
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">Detailed Color</label>
-                            <div class="col-sm-10">
-                                <select name="detailedColor" class="form-control form-control-warning" required>
+                            <label class="col-sm-2 form-control-label">Size</label>
+                            <div class="col-sm-4">
+                                <select name="size" id="size" class="form-control form-control-warning" required>
+                                    <option value="{{$product->size}}">{{$product->size}}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 form-control-label">Run to Size</label>
+                            <div class="col-sm-4">
+                                <select name="runToSize" class="form-control form-control-warning" required>
                                     <option value="">Select One</option>
-                                    @foreach($dColors as $color)
-                                        <option value="{{$color->colorId}}"
-                                                @if($color->colorId == $product->fkdcolorId)
+                                    @foreach($runToSizes as $value)
+                                        <option value="{{$value->runToSizeName}}"
+                                                @if($product->runtosize==$value->runToSizeName)
                                                 selected
                                                 @endif
-                                        >{{$color->colorName}}</option>
+                                        >{{$value->runToSizeName}}</option>
                                     @endforeach
                                 </select>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 form-control-label">Color Description</label>
+                            <div class="col-sm-10">
+                                <input id="inputHorizontalWarning" type="text" name="colorDesc" value="{{$product->colorDesc}}" placeholder="Color Description" class="form-control form-control-warning" required>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 form-control-label">Care</label>
+                            <div class="col-sm-4">
+                                <select name="care" class="form-control form-control-warning" required>
+                                    <option value="">Select One</option>
+                                    @foreach($cares as $care)
+                                        <option value="{{$care->careName}}"
+                                                @if($product->care==$care->careName)
+                                                selected
+                                                @endif
+                                        >{{$care->careName}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 form-control-label">Ean</label>
+                            <div class="col-sm-10">
+                                <input id="inputHorizontalSuccess" name="ean" type="text" value="{{$product->ean}}" placeholder="ean" class="form-control form-control-success" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 form-control-label">Price</label>
+                            <div class="col-sm-10">
+                                <input id="inputHorizontalSuccess" name="price" type="number" value="{{$product->price}}" placeholder="price" class="form-control form-control-success" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 form-control-label">Stock Qty</label>
+                            <div class="col-sm-10">
+                                <input id="inputHorizontalSuccess" name="stockQty" type="number" value="{{$product->stockQty}}" placeholder="quantity" class="form-control form-control-success" required>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 form-control-label">Min Qty Alert</label>
+                            <div class="col-sm-10">
+                                <input id="inputHorizontalSuccess" name="minQtyAlert" type="number" value="{{$product->minQtyAlert}}" placeholder="alert quantity" class="form-control form-control-success" required>
                             </div>
                         </div>
 
@@ -164,7 +235,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label">Product Description</label>
                             <div class="col-sm-10">
-                                <textarea class="form-control" rows="5" id="comment" name="description" required>{{$product->productDecription}}</textarea>
+                                <textarea class="form-control" rows="5" id="comment" name="description" required>{{$product->productDesc}}</textarea>
                             </div>
                         </div>
 
@@ -173,8 +244,8 @@
                             <label class="col-sm-2 form-control-label"><b>Swatch</b></label>
                             <div class="col-sm-10">
                                 <input type="file" name="swatchPic"  value="upload Image" accept="image/*" id="swatchPic">
-                                <img @if($product->swatch)
-                                        src="{{url('productImage/'.$product->swatch)}}"
+                                <img @if($product->swatchImage)
+                                        src="{{url('productImage/'.$product->swatchImage)}}"
                                      @endif
                                      height="50px" width="50px" id="imgSwatchPic">
                             </div>
@@ -216,6 +287,40 @@
                                       height="50px" width="50px" id="imgImage2Pic">
                             </div>
                         </div>
+
+
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 form-control-label"><b>Image 3</b> </label>
+                            <div class="col-sm-10">
+                                <input type="file" name="image3Pic" value="image3Pic" accept="image/*" id="image3Pic">
+                                <img height="50px" width="50px" id="imgImage3Pic"
+                                     @if($product->image3)
+                                     src="{{url('productImage/'.$product->image3)}}"
+                                        @endif
+                                >
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 form-control-label"><b>Image 4</b> </label>
+                            <div class="col-sm-10">
+                                <input type="file" name="image4Pic" value="image4Pic" accept="image/*" id="image4Pic">
+                                <img height="50px" width="50px" id="imgImage4Pic"
+                                     @if($product->image3)
+                                     src="{{url('productImage/'.$product->image4)}}"
+                                        @endif
+                                >
+                            </div>
+                        </div>
+
+
+
+
+
+
                         <div class="form-group row">
                             <div class="col-sm-10 offset-sm-3">
                                 <input type="submit" value="Submit" class="btn btn-primary">
@@ -239,8 +344,27 @@
 
 @endsection
 @section('foot-js')
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 
-<script>
+
+    <script>
+
+
+    $("#sizeType").change(function() {
+
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        var type=$(this).val();
+        $.ajax({
+            type : 'post' ,
+            url : '{{route('getSizeByType')}}',
+            data : {_token: CSRF_TOKEN,'type':type} ,
+            success : function(data){
+                //console.log(data);
+                document.getElementById("size").innerHTML = data;
+
+            }
+        });
+    });
 
     function swatchPic(input) {
     if (input.files && input.files[0]) {
@@ -288,6 +412,25 @@
             reader.readAsDataURL(input.files[0]);}
     }
 
+    function image3Pic(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#imgImage3Pic').attr('src', e.target.result);}
+            reader.readAsDataURL(input.files[0]);}
+    }
+
+
+    function image4Pic(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#imgImage4Pic').attr('src', e.target.result);}
+            reader.readAsDataURL(input.files[0]);}
+    }
+
     $("#swatchPic").change(function(){
         swatchPic(this);
     });
@@ -301,6 +444,12 @@
 
     $("#image2Pic").change(function(){
         image2Pic(this);
+    });
+    $("#image3Pic").change(function(){
+        image3Pic(this);
+    });
+    $("#image4Pic").change(function(){
+        image4Pic(this);
     });
 
 </script>

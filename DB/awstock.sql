@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- version 4.7.3
+-- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 24, 2018 at 10:08 AM
--- Server version: 10.1.19-MariaDB
--- PHP Version: 7.0.13
+-- Generation Time: Mar 01, 2018 at 01:16 PM
+-- Server version: 10.1.25-MariaDB
+-- PHP Version: 7.1.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -31,6 +33,13 @@ CREATE TABLE `category` (
   `name` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`categoryId`, `name`) VALUES
+(1, 'Womenswear>Gowns');
+
 -- --------------------------------------------------------
 
 --
@@ -42,6 +51,13 @@ CREATE TABLE `color` (
   `colorName` varchar(45) DEFAULT NULL,
   `colorType` varchar(15) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `color`
+--
+
+INSERT INTO `color` (`colorId`, `colorName`, `colorType`) VALUES
+(1, 'nil', 'sta');
 
 -- --------------------------------------------------------
 
@@ -71,8 +87,19 @@ CREATE TABLE `offer` (
   `disStartPrice` varchar(45) DEFAULT NULL,
   `disEndPrice` varchar(45) DEFAULT NULL,
   `status` varchar(45) DEFAULT NULL,
+  `product-id-type` varchar(11) NOT NULL,
+  `state` varchar(45) NOT NULL,
+  `price` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
   `fkproductId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `offer`
+--
+
+INSERT INTO `offer` (`offerId`, `disPrice`, `disStartPrice`, `disEndPrice`, `status`, `product-id-type`, `state`, `price`, `quantity`, `fkproductId`) VALUES
+(1, '300', '2018-02-18', '2018-02-22', 'active', 'sku-123', 'test', 400, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -96,8 +123,17 @@ CREATE TABLE `product` (
   `LastExportedBy` int(11) DEFAULT NULL,
   `LastExportedDate` varchar(45) DEFAULT NULL,
   `fkcategoryId` int(11) NOT NULL,
-  `fkcolorId` int(11) NOT NULL
+  `fkscolorId` int(11) NOT NULL,
+  `fkdcolorId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `product`
+--
+
+INSERT INTO `product` (`productId`, `productName`, `status`, `productDecription`, `style`, `sku`, `brand`, `size`, `swatch`, `mainImage`, `outfit`, `image2`, `LastExportedBy`, `LastExportedDate`, `fkcategoryId`, `fkscolorId`, `fkdcolorId`) VALUES
+(2, 'Bordeaux low-back satin gown', 'active', '<ul><li>Rosetta Getty Bordeaux wool blend satin gown</li><li>Draped low back with tied sash, partially lined</li><li><ul><li>Concealed zip fastening at back</li><li>43% wool, 34% acetate, 23% viscose; lining: 100% silk</li><li>Length shoulder to hem: 61 inches/ 154cm</li><li>Midweight</li><li>Slim fit</li></ul>', 'ABCD-123', 'ABCD-123-RDS', 'Rosetta Getty', 'S', 'http://media.harveynichols.com/catalog/product/cache/1/gallery/390x546/9df78eab33525d08d6e5fb8d27136e95/6/4/647566_bordeaux_5.jpg\r\n', 'http://media.harveynichols.com/catalog/product/cache/1/gallery/390x546/9df78eab33525d08d6e5fb8d27136e95/6/4/647566_bordeaux_1.jpg\r\n', 'http://media.harveynichols.com/catalog/product/cache/1/gallery/390x546/9df78eab33525d08d6e5fb8d27136e95/6/4/647566_bordeaux_2.jpg\r\n', 'http://media.harveynichols.com/catalog/product/cache/1/gallery/390x546/9df78eab33525d08d6e5fb8d27136e95/6/4/647566_bordeaux_4.jpg\r\n', 1, '2018-02-01', 1, 1, 1),
+(3, 'Bordeaux low-back satin gown', 'Inactive', '<ul><li>Rosetta Getty Bordeaux wool blend satin gown</li><li>Draped low back with tied sash, partially lined</li><li><ul><li>Concealed zip fastening at back</li><li>43% wool, 34% acetate, 23% viscose; lining: 100% silk</li><li>Length shoulder to hem: 61 inches/ 154cm</li><li>Midweight</li><li>Slim fit</li></ul>', 'ABCD-123', 'ABCD-123-RDS', 'Rosetta Getty', 'L', 'http://media.harveynichols.com/catalog/product/cache/1/gallery/390x546/9df78eab33525d08d6e5fb8d27136e95/6/4/647566_bordeaux_5.jpg\r\n', 'http://media.harveynichols.com/catalog/product/cache/1/gallery/390x546/9df78eab33525d08d6e5fb8d27136e95/6/4/647566_bordeaux_1.jpg\r\n', 'http://media.harveynichols.com/catalog/product/cache/1/gallery/390x546/9df78eab33525d08d6e5fb8d27136e95/6/4/647566_bordeaux_2.jpg\r\n', 'http://media.harveynichols.com/catalog/product/cache/1/gallery/390x546/9df78eab33525d08d6e5fb8d27136e95/6/4/647566_bordeaux_4.jpg\r\n', 1, '2018-02-01', 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -122,7 +158,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`userId`, `name`, `phone`, `address`, `email`, `password`, `status`, `fkuserTypeId`, `remember_token`) VALUES
-(1, 'admin', NULL, NULL, 'admin@tcl.com', '$2y$10$iZulWAQ1e/CVhqnnajUZS.GeoNAk2cb6UioJ0f9d1mTchtItfcYaW', 'active', 'admin', 'jPrh7DCmoOG5TCOMHCmltHudZUs68AcYuQRtTB0QjUMzLx5eWY0caNb41SL5');
+(1, 'admin', NULL, NULL, 'admin@tcl.com', '$2y$10$iZulWAQ1e/CVhqnnajUZS.GeoNAk2cb6UioJ0f9d1mTchtItfcYaW', 'active', 'admin', 'mCaBfmA3MkiSA0MLjXdM5gnOMWctwOu75h2mfEZSOhpAODVyvbREbPN1zQEq');
 
 -- --------------------------------------------------------
 
@@ -179,7 +215,7 @@ ALTER TABLE `offer`
 ALTER TABLE `product`
   ADD PRIMARY KEY (`productId`),
   ADD KEY `fk_product_category1_idx` (`fkcategoryId`),
-  ADD KEY `fk_product_color1_idx` (`fkcolorId`);
+  ADD KEY `fk_product_color1_idx` (`fkscolorId`);
 
 --
 -- Indexes for table `users`
@@ -202,12 +238,12 @@ ALTER TABLE `usertype`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `categoryId` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `categoryId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `color`
 --
 ALTER TABLE `color`
-  MODIFY `colorId` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `colorId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `history`
 --
@@ -217,12 +253,12 @@ ALTER TABLE `history`
 -- AUTO_INCREMENT for table `offer`
 --
 ALTER TABLE `offer`
-  MODIFY `offerId` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `offerId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `productId` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `productId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `users`
 --
@@ -250,13 +286,14 @@ ALTER TABLE `offer`
 --
 ALTER TABLE `product`
   ADD CONSTRAINT `fk_product_category1` FOREIGN KEY (`fkcategoryId`) REFERENCES `category` (`categoryId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_product_color1` FOREIGN KEY (`fkcolorId`) REFERENCES `color` (`colorId`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_product_color1` FOREIGN KEY (`fkscolorId`) REFERENCES `color` (`colorId`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `users`
 --
 ALTER TABLE `users`
   ADD CONSTRAINT `fk_user_table1` FOREIGN KEY (`fkuserTypeId`) REFERENCES `usertype` (`userTypeId`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

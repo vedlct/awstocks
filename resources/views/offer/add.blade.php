@@ -3,12 +3,10 @@
 @section('content')
 
     <!-- Page Header-->
-    <header class="page-header">
-        <div class="container-fluid">
-            <h2 class="no-margin-bottom">Test List</h2>
+    <div class="card-body" style="padding: 1%;">
+        <div align="center" style="margin-bottom: 3%;">
+            <h2 style="color: #989898;"><b>Add Product Information</b></h2>
         </div>
-    </header>
-
 
     <div style="padding: 10px;">
 
@@ -74,25 +72,9 @@
 
 
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    </div>
 
 
 
 @endsection
+
