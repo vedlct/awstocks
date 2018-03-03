@@ -107,8 +107,9 @@ class ProductController extends Controller
     /* for datatable in all product page */
     public function ProductList(Request $r)
     {
-        $list=Product::select('productId','style','sku','brand','status','productName','LastExportedBy','LastExportedDate','category.name as categoryName')
+        $list=Product::select('productId','style','sku','brand','status','productName','LastExportedBy','LastExportedDate','category.categoryName')
             ->leftJoin('category', 'category.categoryId', '=', 'product.fkcategoryId');
+
         if ($status=$r->status){
             $list->where('product.status',$status);
         }
@@ -118,8 +119,10 @@ class ProductController extends Controller
         if ($productName=$r->productName){
             $list->where('product.productName',$productName);
         }
+
         $productList = $list->get();
         $datatables = Datatables::of($productList);
+
         return $datatables->make(true);
     }
     public function insert(Request $r){
@@ -204,42 +207,37 @@ class ProductController extends Controller
     }
     public function csvExport(Request $r){
 
-        $headers = [
-            'Cache-Control'       => 'must-revalidate, post-check=0, pre-check=0'
-            ,   'Content-type'        => 'text/csv'
-            ,   'Content-Disposition' => 'attachment; filename=galleries.csv'
-            ,   'Expires'             => '0'
-            ,   'Pragma'              => 'public'
+        $headers =[
+            'Cache-Control'       => 'must-revalidate, post-check=0, pre-check=0',
+            'Content-type'        => 'application/csv',
+            'Content-Disposition' => 'attachment; filename=ProductList.csv',
+            'Expires'             => '0',
+            'Pragma'              => 'public'
         ];
 
-
-
-        $productList=$r->productId;
+        $productList=$r->products;
         $list=array();
-        for ($i=0;$i<=count($productList);$i++){
-            $productId=$i;
-            $newlist=Product::select('productId','style','sku','brand','status','productName','LastExportedBy','LastExportedDate','category.name as categoryName')
+
+
+
+        for ($i=0;$i<count($productList);$i++){
+            $productId=$productList[$i];
+            $newlist=Product::select('productId','style','sku','brand','status','productName','LastExportedBy','LastExportedDate','category.categoryName')
                 ->leftJoin('category', 'category.categoryId', '=', 'product.fkcategoryId')->where('product.productId',$productId)->get()->toArray();
 
             $list=array_merge($list,$newlist);
         }
 
-        //var_dump($newlist);
-
-
-
-//        return $productList;
-//
-//        var_dump($productList);
-
-       // $list = User::all()->toArray();
 
         # add headers for each column in the CSV download
         array_unshift($list, array_keys($list[0]));
 
+
+
         $callback = function() use ($list)
         {
-            $FH = fopen(public_path ()."/csv/product.csv", "w");
+            $FH = fopen(public_path ()."/csv/ProductList.csv", "w");
+
             foreach ($list as $row) {
                 fputcsv($FH, $row);
             }
@@ -247,6 +245,10 @@ class ProductController extends Controller
             fclose($FH);
         };
 
-      return Response::stream($callback, 200, $headers); //use Illuminate\Support\Facades\Response;
+
+         return Response::stream($callback, 200, $headers); //use Illuminate\Support\Facades\Response;
+
+
+
     }
 }
