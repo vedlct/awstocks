@@ -17,10 +17,9 @@
                     <div class="col-md-4 dropdown">
                         <label class="form-control-label">Category</label> <br>
                         <select class="form-control" id="category" name="category">
-                            <option selected value="">--Select Category--</option>
-
+                            <option selected value="">All Category</option>
                             @foreach($categories as $category)
-                                <option value="{{$category->categoryId}}">{{$category->name}}</option>
+                                <option value="{{$category->categoryId}}">{{$category->categoryName}}</option>
                             @endforeach
                         </select>
 
@@ -29,7 +28,7 @@
                     <div class="col-md-4 dropdown">
                         <label class="form-control-label">Product Status</label> <br>
                         <select class="form-control" id="product" name="product">
-                            <option selected value="">--Select Product Status--</option>
+                            <option selected value="">All Product</option>
                             @foreach($productStatus as $products)
                                 <option value="{{$products->status}}">{{$products->status}}</option>
                             @endforeach

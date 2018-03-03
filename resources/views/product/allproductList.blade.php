@@ -5,14 +5,18 @@
 
 @section('content')
 
-    <!-- Page Header-->
-    <header class="page-header">
+
+
+
+
+    <div  style="padding: 10px; background-color:white";>
+
+        <!-- Page Header-->
+        <header class="page-header">
         <div align="center" class="container-fluid">
             <h2 style="color: #989898;" class="no-margin-bottom"><b>Product List</b></h2>
         </div>
-    </header>
-
-    <div  style="padding: 10px; background-color:white";>
+        </header>
 
 
         <div class="row">
@@ -20,10 +24,10 @@
             <div class="col-md-4 dropdown">
                 <label class="form-control-label">Category</label> <br>
                 <select class="form-control" id="category" name="category">
-                    <option selected value="">--Select Category--</option>
+                    <option selected value="">All Category</option>
 
                     @foreach($categories as $category)
-                        <option value="{{$category->categoryId}}">{{$category->name}}</option>
+                        <option value="{{$category->categoryId}}">{{$category->categoryName}}</option>
                     @endforeach
                 </select>
 
@@ -32,7 +36,7 @@
             <div class="col-md-4 dropdown">
                 <label class="form-control-label">Product Name</label> <br>
                 <select class="form-control" id="product" name="product">
-                    <option selected value="">--Select Product--</option>
+                    <option selected value="">All Product</option>
                     @foreach($productsList as $products)
                         <option value="{{$products->productName}}">{{$products->productName}}</option>
                     @endforeach
@@ -42,7 +46,7 @@
             <div class="col-md-4 dropdown">
                 <label class="form-control-label">Status</label> <br>
                 <select class="form-control" id="status" name="status">
-                    <option selected value="">--Select Status--</option>
+                    <option selected value="">Select Status</option>
                     <?php for ($i=0;$i<count(Status);$i++){?>
 
                     <option value="<?php echo Status[$i]?>"><?php echo Status[$i]?></option>
@@ -76,7 +80,7 @@
 
         </div>
 
-        <a  onclick="return myfunc()"> <button class="btn btn-danger"  >Export Products file</button></a>
+        <a  onclick="return myfunc()" download> <button class="btn btn-danger"  >Export Products file</button></a>
 
     </div>
 @endsection
@@ -120,7 +124,7 @@
                     { "data": function(data){
                         return '<input data-panel-id="'+data.productId+'"onclick="selected_rows(this)" type="checkbox" name="selected_rows[]" value="'+ data.productId +'" />';},
                         "orderable": false, "searchable":false, "name":"selected_rows",},
-                    { data: 'categoryName',name:'categoryName' },
+                    { data: 'categoryName',name:'category.categoryName' },
                     { data: 'style', name: 'style' },
                     { data: 'sku', name: 'sku' },
                     { data: 'productName', name: 'productName' },
@@ -161,6 +165,7 @@
             var newUrl=url.replace(':id', btn);
             window.location.href = newUrl;
         }
+
         var selecteds = [];
         function selected_rows(x) {
             btn = $(x).data('panel-id');
@@ -178,7 +183,12 @@
                 type:'POST',
                 url:"{!! route('product.csv') !!}",
                 cache: false,
-                data:{'productId':products},
+                data:{'products':products},
+                success:function(data) {
+
+
+                }
+
             });
         }
     </script>

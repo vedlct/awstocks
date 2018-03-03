@@ -184,7 +184,7 @@
                     <div class="form-group row">
                         <label class="col-sm-2 form-control-label"><b>Swatch</b></label>
                         <div class="col-sm-10">
-                            <input type="file" name="swatchPic"  value="upload Image" accept="image/*" id="swatchPic">
+                            <input type="file" name="swatchPic"  value="upload Image" accept=".jpg, .jpeg" id="swatchPic">
                             <img height="50px" width="50px" id="imgSwatchPic">
                         </div>
                     </div>
@@ -193,7 +193,7 @@
                     <div class="form-group row">
                         <label class="col-sm-2 form-control-label"><b>Outfit</b> </label>
                         <div class="col-sm-10">
-                            <input type="file" name="outfitPic"  value="upload Image" accept="image/*" id="outfitPic">
+                            <input type="file" name="outfitPic"  value="upload Image"  accept=".jpg, .jpeg" id="outfitPic">
                             <img height="50px" width="50px" id="imgOutfitPic">
                         </div>
                     </div>
@@ -202,7 +202,7 @@
                     <div class="form-group row">
                         <label class="col-sm-2 form-control-label"><b>Main Image</b> </label>
                         <div class="col-sm-10">
-                            <input type="file" name="mainPic"  value="upload Image" accept="image/*" id="mainPic">
+                            <input type="file" name="mainPic"  value="upload Image"  accept=".jpg,.jpeg" id="mainPic">
                             <img height="50px" width="50px" id="imgMainPic">
                         </div>
                     </div>
@@ -211,7 +211,7 @@
                     <div class="form-group row">
                         <label class="col-sm-2 form-control-label"><b>Image 2</b> </label>
                         <div class="col-sm-10">
-                            <input type="file" name="image2Pic" value="image2Pic" accept="image/*" id="image2Pic">
+                            <input type="file" name="image2Pic" value="image2Pic" accept=".jpg, .jpeg" id="image2Pic">
                             <img height="50px" width="50px" id="imgImage2Pic">
                         </div>
                     </div>
@@ -220,7 +220,7 @@
                     <div class="form-group row">
                         <label class="col-sm-2 form-control-label"><b>Image 3</b> </label>
                         <div class="col-sm-10">
-                            <input type="file" name="image3Pic" value="image3Pic" accept="image/*" id="image3Pic">
+                            <input type="file" name="image3Pic" value="image3Pic"  accept=".jpg, .jpeg" id="image3Pic">
                             <img height="50px" width="50px" id="imgImage3Pic">
                         </div>
                     </div>
@@ -230,7 +230,7 @@
                     <div class="form-group row">
                         <label class="col-sm-2 form-control-label"><b>Image 4</b> </label>
                         <div class="col-sm-10">
-                            <input type="file" name="image4Pic" value="image4Pic" accept="image/*" id="image4Pic">
+                            <input type="file" name="image4Pic" value="image4Pic"  accept=".jpg,.jpeg" id="image4Pic">
                             <img height="50px" width="50px" id="imgImage4Pic">
                         </div>
                     </div>

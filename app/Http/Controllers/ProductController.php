@@ -55,6 +55,21 @@ class ProductController extends Controller
         //return Response($size);
     }
 
+    public function getProductByCategory(Request $r){
+        $product=Product::where('fkcategoryId',$r->category)->get();
+        if($product==null){
+            echo "<option value=''>select one</option>";
+        }
+        else {
+            foreach ($product as $p) {
+                echo "<option value='$p->productId'>$p->productName</option>";
+            }
+        }
+
+//        return Response($product);
+
+    }
+
     public function edit($id){
         $categories=Category::get();
         $sColors=Color::where('colorType','standard')
@@ -115,42 +130,42 @@ class ProductController extends Controller
             $filename= $product->productId.'swatch'.'.'.$img->getClientOriginalExtension();
             $product->swatch=$filename;
             $location = public_path('productImage/'.$filename);
-            Image::make($img)->resize(300,200)->save($location);
+            Image::make($img)->resize(800,600)->save($location);
         }
         if($r->hasFile('outfitPic')){
             $img = $r->file('outfitPic');
             $filename= $product->productId.'outfit'.'.'.$img->getClientOriginalExtension();
             $product->outfit=$filename;
             $location = public_path('productImage/'.$filename);
-            Image::make($img)->resize(300,200)->save($location);
+            Image::make($img)->resize(800,600)->save($location);
         }
         if($r->hasFile('mainPic')){
             $img = $r->file('mainPic');
             $filename= $product->productId.'main'.'.'.$img->getClientOriginalExtension();
             $product->mainImage=$filename;
             $location = public_path('productImage/'.$filename);
-            Image::make($img)->resize(300,200)->save($location);
+            Image::make($img)->resize(800,600)->save($location);
         }
         if($r->hasFile('image2Pic')){
             $img = $r->file('image2Pic');
             $filename= $product->productId.'image2'.'.'.$img->getClientOriginalExtension();
             $product->image2=$filename;
             $location = public_path('productImage/'.$filename);
-            Image::make($img)->resize(300,200)->save($location);
+            Image::make($img)->resize(800,600)->save($location);
         }
         if($r->hasFile('image3Pic')){
             $img = $r->file('image3Pic');
             $filename= $product->productId.'image3'.'.'.$img->getClientOriginalExtension();
             $product->image3=$filename;
             $location = public_path('productImage/'.$filename);
-            Image::make($img)->resize(300,200)->save($location);
+            Image::make($img)->resize(800,600)->save($location);
         }
         if($r->hasFile('image4Pic')){
             $img = $r->file('image4Pic');
             $filename= $product->productId.'image4'.'.'.$img->getClientOriginalExtension();
             $product->image4=$filename;
             $location = public_path('productImage/'.$filename);
-            Image::make($img)->resize(300,200)->save($location);
+            Image::make($img)->resize(800,600)->save($location);
         }
         $product->save();
         Session::flash('message', 'Product Updated  successfully');
@@ -170,8 +185,9 @@ class ProductController extends Controller
     /* for datatable in all product page */
     public function ProductList(Request $r)
     {
-        $list=Product::select('productId','style','sku','brand','status','productName','LastExportedBy','LastExportedDate','category.name as categoryName')
+        $list=Product::select('productId','style','sku','brand','status','productName','LastExportedBy','LastExportedDate','category.categoryName')
             ->leftJoin('category', 'category.categoryId', '=', 'product.fkcategoryId');
+
         if ($status=$r->status){
             $list->where('product.status',$status);
         }
@@ -181,9 +197,13 @@ class ProductController extends Controller
         if ($productName=$r->productName){
             $list->where('product.productName',$productName);
         }
+
+
 //        $productList = $list->get();
         $productList = $list;
+
         $datatables = Datatables::of($productList);
+
         return $datatables->make(true);
     }
     public function insert(Request $r){
@@ -232,42 +252,42 @@ class ProductController extends Controller
             $filename= $product->productId.'swatch'.'.'.$img->getClientOriginalExtension();
             $product->swatchImage=$filename;
             $location = public_path('productImage/'.$filename);
-            Image::make($img)->resize(300,200)->save($location);
+            Image::make($img)->resize(800,600)->save($location);
         }
         if($r->hasFile('outfitPic')){
             $img = $r->file('outfitPic');
             $filename= $product->productId.'outfit'.'.'.$img->getClientOriginalExtension();
             $product->outfit=$filename;
             $location = public_path('productImage/'.$filename);
-            Image::make($img)->resize(300,200)->save($location);
+            Image::make($img)->resize(800,600)->save($location);
         }
         if($r->hasFile('mainPic')){
             $img = $r->file('mainPic');
             $filename= $product->productId.'main'.'.'.$img->getClientOriginalExtension();
             $product->mainImage=$filename;
             $location = public_path('productImage/'.$filename);
-            Image::make($img)->resize(300,200)->save($location);
+            Image::make($img)->resize(800,600)->save($location);
         }
         if($r->hasFile('image2Pic')){
             $img = $r->file('image2Pic');
             $filename= $product->productId.'image2'.'.'.$img->getClientOriginalExtension();
             $product->image2=$filename;
             $location = public_path('productImage/'.$filename);
-            Image::make($img)->resize(300,200)->save($location);
+            Image::make($img)->resize(800,600)->save($location);
         }
         if($r->hasFile('image3Pic')){
             $img = $r->file('image3Pic');
             $filename= $product->productId.'image3'.'.'.$img->getClientOriginalExtension();
             $product->image3=$filename;
             $location = public_path('productImage/'.$filename);
-            Image::make($img)->resize(300,200)->save($location);
+            Image::make($img)->resize(800,600)->save($location);
         }
         if($r->hasFile('image4Pic')){
             $img = $r->file('image4Pic');
             $filename= $product->productId.'image4'.'.'.$img->getClientOriginalExtension();
             $product->image4=$filename;
             $location = public_path('productImage/'.$filename);
-            Image::make($img)->resize(300,200)->save($location);
+            Image::make($img)->resize(800,600)->save($location);
         }
         $product->save();
         Session::flash('message', 'Product Uploaded successfully');
@@ -287,58 +307,52 @@ class ProductController extends Controller
         if($product->image2!=null){
             File::delete('productImage/'.$product->image2);
         }
+
+        if($product->image3!=null){
+            File::delete('productImage/'.$product->image3);
+        }
+
+
+        if($product->image4!=null){
+            File::delete('productImage/'.$product->image4);
+        }
+
+
         if($product->mainImage!=null){
             File::delete('productImage/'.$product->mainImage);
         }
+
+
         $product->delete();
         Session::flash('message', 'Product Deleted successfully');
         return back();
     }
     public function csvExport(Request $r){
-
-        $headers = [
-            'Cache-Control'       => 'must-revalidate, post-check=0, pre-check=0'
-            ,   'Content-type'        => 'text/csv'
-            ,   'Content-Disposition' => 'attachment; filename=galleries.csv'
-            ,   'Expires'             => '0'
-            ,   'Pragma'              => 'public'
+        $headers =[
+            'Cache-Control'       => 'must-revalidate, post-check=0, pre-check=0',
+            'Content-type'        => 'application/csv',
+            'Content-Disposition' => 'attachment; filename=ProductList.csv',
+            'Expires'             => '0',
+            'Pragma'              => 'public'
         ];
-
-
-
-        $productList=$r->productId;
+        $productList=$r->products;
         $list=array();
-        for ($i=0;$i<=count($productList);$i++){
-            $productId=$i;
-            $newlist=Product::select('productId','style','sku','brand','status','productName','LastExportedBy','LastExportedDate','category.name as categoryName')
-                ->leftJoin('category','category.categoryId','=','product.fkcategoryId')->where('product.productId',$productId)
-                ->get()->toArray();
-
+        for ($i=0;$i<count($productList);$i++){
+            $productId=$productList[$i];
+            $newlist=Product::select('productId','style','sku','brand','status','productName','LastExportedBy','LastExportedDate','category.categoryName')
+                ->leftJoin('category', 'category.categoryId', '=', 'product.fkcategoryId')->where('product.productId',$productId)->get()->toArray();
             $list=array_merge($list,$newlist);
         }
-
-        //var_dump($newlist);
-
-
-
-//        return $productList;
-//
-//        var_dump($productList);
-
-       // $list = User::all()->toArray();
-
         # add headers for each column in the CSV download
         array_unshift($list, array_keys($list[0]));
-
         $callback = function() use ($list)
         {
-            $FH = fopen(public_path ()."/csv/product.csv", "w");
+            $FH = fopen(public_path ()."/csv/ProductList.csv", "w");
             foreach ($list as $row) {
                 fputcsv($FH, $row);
             }
             fclose($FH);
         };
-
-      return Response::stream($callback, 200, $headers); //use Illuminate\Support\Facades\Response;
+        return Response::stream($callback, 200, $headers); //use Illuminate\Support\Facades\Response;
     }
 }

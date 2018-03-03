@@ -243,7 +243,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label"><b>Swatch</b></label>
                             <div class="col-sm-10">
-                                <input type="file" name="swatchPic"  value="upload Image" accept="image/*" id="swatchPic">
+                                <input type="file" name="swatchPic"  value="upload Image" accept=".jpg,.jpeg" id="swatchPic">
                                 <img @if($product->swatchImage)
                                         src="{{url('productImage/'.$product->swatchImage)}}"
                                      @endif
@@ -255,7 +255,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label"><b>Outfit</b> </label>
                             <div class="col-sm-10">
-                                <input type="file" name="outfitPic"  value="upload Image" accept="image/*" id="outfitPic">
+                                <input type="file" name="outfitPic"  value="upload Image" accept=".jpg,.jpeg" id="outfitPic">
                                 <img
                                         @if($product->outfit)
                                         src="{{url('productImage/'.$product->outfit)}}"
@@ -268,7 +268,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label"><b>Main Image</b> </label>
                             <div class="col-sm-10">
-                                <input type="file" name="mainPic"  value="upload Image" accept="image/*" id="mainPic">
+                                <input type="file" name="mainPic"  value="upload Image" accept=".jpg,.jpeg" id="mainPic">
                                 <img   @if($product->mainImage)
                                         src="{{url('productImage/'.$product->mainImage)}}"
                                        @endif
@@ -280,7 +280,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label"><b>Image 2</b> </label>
                             <div class="col-sm-10">
-                                <input type="file" name="image2Pic" value="image2Pic" accept="image/*" id="image2Pic">
+                                <input type="file" name="image2Pic" value="image2Pic" accept=".jpg,.jpeg" id="image2Pic">
                                 <img  @if($product->image2)
                                         src="{{url('productImage/'.$product->image2)}}"
                                       @endif
@@ -293,7 +293,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label"><b>Image 3</b> </label>
                             <div class="col-sm-10">
-                                <input type="file" name="image3Pic" value="image3Pic" accept="image/*" id="image3Pic">
+                                <input type="file" name="image3Pic" value="image3Pic" accept=".jpg,.jpeg" id="image3Pic">
                                 <img height="50px" width="50px" id="imgImage3Pic"
                                      @if($product->image3)
                                      src="{{url('productImage/'.$product->image3)}}"
@@ -307,7 +307,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label"><b>Image 4</b> </label>
                             <div class="col-sm-10">
-                                <input type="file" name="image4Pic" value="image4Pic" accept="image/*" id="image4Pic">
+                                <input type="file" name="image4Pic" value="image4Pic" accept=".jpg,.jpeg" id="image4Pic">
                                 <img height="50px" width="50px" id="imgImage4Pic"
                                      @if($product->image3)
                                      src="{{url('productImage/'.$product->image4)}}"

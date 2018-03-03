@@ -12,19 +12,13 @@
     <link rel="icon" type="image/png" sizes="16x16" href="{{url('assets/images/favicon.png')}}">
     <title>Stock</title>
     <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="{{url('date/date-picker.css')}}">
+
     <link href="{{url('assets/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
     
 
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <!-- chartist CSS -->
-    {{--<link href="{{url('assets/plugins/chartist-js/dist/chartist.min.css')}}" rel="stylesheet">--}}
-    {{--<link href="{{url('assets/plugins/chartist-js/dist/chartist-init.css')}}" rel="stylesheet">--}}
-    {{--<link href="{{url('')}}assets/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css" rel="stylesheet">--}}
-    {{--<link href="{{url('')}}../assets/plugins/css-chart/css-chart.css" rel="stylesheet">--}}
 
-    <!-- toast CSS -->
-    {{--<link href="{{url('assets/plugins/toast-master/css/jquery.toast.css')}}" rel="stylesheet">--}}
-    <!-- Custom CSS -->
     <link href="{{url('css/style.css')}}" rel="stylesheet">
     <!-- You can change the theme colors from here -->
     <link href="{{url('css/colors/blue.css')}}" id="theme" rel="stylesheet">
@@ -33,6 +27,10 @@
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+
     <![endif]-->
 
     @yield('header')
@@ -112,6 +110,8 @@
 <script src="{{url('assets/plugins/sticky-kit-master/dist/sticky-kit.min.js')}}"></script>
 <!--Custom JavaScript -->
 <script src="{{url('js/custom.min.js')}}"></script>
+<script src="{{url('date/jquery-ui.js')}}"></script>
+<script src="{{url('date/script.js')}}"></script>
 
 
 @yield('foot-js')
