@@ -49,6 +49,8 @@ Route::post('/offer/update', 'OfferController@update')->name('offer.update');
 Route::get('/offer/edit/{id}', 'OfferController@edit')->name('offer.edit');
 Route::get('/offer/delete/{id}', 'OfferController@destroy')->name('offer.delete');
 
+Route::post('/offer/csvExport', 'OfferController@csvExport')->name('offer.csv');
+
 //setting
 Route::view('/historic/files', 'layouts.starLeads')->name('historic.files');
 Route::get('/settings', 'SettingsController@index')->name('settings');

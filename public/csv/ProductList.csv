@@ -1,3 +1,3 @@
 productId,style,sku,brand,status,productName,LastExportedBy,LastExportedDate,categoryName
-1,asdasd,dasdaewe,asdasd,Active,shirt,1,,Women->Gown
-2,asdasd,dasdaewe,asdasd,Active,pant,1,,Women->Gown
+2,asdasd,dasdaewe,asdasd,Active,"Test Product 1",1,,Women->Gown
+4,adasda,dfdf,levis,Active,"pant denim",2,"2018-03-03 13:39:17",Men->Pant

@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.3
--- https://www.phpmyadmin.net/
+-- version 4.5.1
+-- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 01, 2018 at 01:16 PM
--- Server version: 10.1.25-MariaDB
--- PHP Version: 7.1.7
+-- Generation Time: Mar 03, 2018 at 01:22 PM
+-- Server version: 10.1.19-MariaDB
+-- PHP Version: 7.0.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -25,20 +23,43 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `care`
+--
+
+CREATE TABLE `care` (
+  `careId` int(11) NOT NULL,
+  `careName` varchar(45) DEFAULT NULL,
+  `careDescription` varchar(45) DEFAULT NULL,
+  `careType` varchar(15) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `care`
+--
+
+INSERT INTO `care` (`careId`, `careName`, `careDescription`, `careType`) VALUES
+(1, 'Dry Clean Only', NULL, NULL),
+(2, 'Hand Wash or Dry Clean Only', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `category`
 --
 
 CREATE TABLE `category` (
   `categoryId` int(11) NOT NULL,
-  `name` varchar(45) DEFAULT NULL
+  `categoryName` varchar(45) DEFAULT NULL,
+  `categoryDesc` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `category`
 --
 
-INSERT INTO `category` (`categoryId`, `name`) VALUES
-(1, 'Womenswear>Gowns');
+INSERT INTO `category` (`categoryId`, `categoryName`, `categoryDesc`) VALUES
+(1, 'Women->Gown', 'asdgausdga'),
+(2, 'Men->Pant', 'gasjdgkasygduashdkuasdkua');
 
 -- --------------------------------------------------------
 
@@ -49,6 +70,7 @@ INSERT INTO `category` (`categoryId`, `name`) VALUES
 CREATE TABLE `color` (
   `colorId` int(11) NOT NULL,
   `colorName` varchar(45) DEFAULT NULL,
+  `colorDescription` varchar(45) DEFAULT NULL,
   `colorType` varchar(15) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -56,23 +78,26 @@ CREATE TABLE `color` (
 -- Dumping data for table `color`
 --
 
-INSERT INTO `color` (`colorId`, `colorName`, `colorType`) VALUES
-(1, 'nil', 'sta');
+INSERT INTO `color` (`colorId`, `colorName`, `colorDescription`, `colorType`) VALUES
+(1, 'Pink', NULL, 'standard'),
+(2, 'Purple', NULL, 'standard'),
+(3, 'Red', NULL, 'standard'),
+(4, 'Silver', NULL, 'standard'),
+(5, 'White', NULL, 'standard'),
+(6, 'Yellow', NULL, 'standard');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `history`
+-- Table structure for table `filetransfer`
 --
 
-CREATE TABLE `history` (
-  `historyId` int(11) NOT NULL,
-  `name` varchar(45) DEFAULT NULL,
+CREATE TABLE `filetransfer` (
+  `transferId` int(11) NOT NULL,
+  `fileName` varchar(45) DEFAULT NULL,
   `fileType` varchar(15) DEFAULT NULL,
   `createDate` datetime DEFAULT NULL,
-  `createBy` int(11) DEFAULT NULL,
-  `fkproductId` int(11) NOT NULL,
-  `fkofferId` int(11) NOT NULL
+  `createBy` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -83,23 +108,25 @@ CREATE TABLE `history` (
 
 CREATE TABLE `offer` (
   `offerId` int(11) NOT NULL,
-  `disPrice` varchar(45) DEFAULT NULL,
+  `fkproductId` int(11) NOT NULL,
+  `disPrice` decimal(10,2) DEFAULT NULL,
   `disStartPrice` varchar(45) DEFAULT NULL,
   `disEndPrice` varchar(45) DEFAULT NULL,
+  `state` varchar(45) DEFAULT NULL,
+  `product-id-type` varchar(45) DEFAULT NULL,
   `status` varchar(45) DEFAULT NULL,
-  `product-id-type` varchar(11) NOT NULL,
-  `state` varchar(45) NOT NULL,
-  `price` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL,
-  `fkproductId` int(11) NOT NULL
+  `lastExportedBy` int(11) NOT NULL,
+  `lastExportedDate` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `offer`
 --
 
-INSERT INTO `offer` (`offerId`, `disPrice`, `disStartPrice`, `disEndPrice`, `status`, `product-id-type`, `state`, `price`, `quantity`, `fkproductId`) VALUES
-(1, '300', '2018-02-18', '2018-02-22', 'active', 'sku-123', 'test', 400, 1, 2);
+INSERT INTO `offer` (`offerId`, `fkproductId`, `disPrice`, `disStartPrice`, `disEndPrice`, `state`, `product-id-type`, `status`, `lastExportedBy`, `lastExportedDate`) VALUES
+(1, 2, '10.50', '2018-03-01', '2018-03-23', '11', 'dfd5454', 'Active', 2, NULL),
+(3, 2, '2.00', 'sdsd', 'dssds', '11', 'sdsd', 'Active', 2, '2018-03-03 16:26:27'),
+(4, 2, '65.55', 'dssd', 'sdsd', '11', 'sdsd', 'Active', 2, '2018-03-03 16:28:30');
 
 -- --------------------------------------------------------
 
@@ -109,31 +136,85 @@ INSERT INTO `offer` (`offerId`, `disPrice`, `disStartPrice`, `disEndPrice`, `sta
 
 CREATE TABLE `product` (
   `productId` int(11) NOT NULL,
-  `productName` varchar(45) DEFAULT NULL,
   `status` varchar(45) DEFAULT NULL,
-  `productDecription` mediumtext,
+  `fkcategoryId` int(11) NOT NULL,
   `style` varchar(45) DEFAULT NULL,
   `sku` varchar(45) DEFAULT NULL,
+  `ean` varchar(45) DEFAULT NULL,
+  `productName` varchar(45) DEFAULT NULL,
+  `productDesc` mediumtext,
   `brand` varchar(25) DEFAULT NULL,
+  `color` varchar(25) DEFAULT NULL,
+  `colorDesc` mediumtext,
   `size` varchar(5) DEFAULT NULL,
-  `swatch` mediumtext,
+  `swatchImage` mediumtext,
   `mainImage` mediumtext,
   `outfit` mediumtext,
   `image2` mediumtext,
+  `image3` mediumtext,
+  `image4` mediumtext,
+  `runtosize` varchar(45) DEFAULT NULL,
+  `care` varchar(45) DEFAULT NULL,
+  `price` int(11) DEFAULT NULL,
+  `stockQty` int(11) DEFAULT NULL,
+  `minQtyAlert` int(11) DEFAULT NULL,
   `LastExportedBy` int(11) DEFAULT NULL,
-  `LastExportedDate` varchar(45) DEFAULT NULL,
-  `fkcategoryId` int(11) NOT NULL,
-  `fkscolorId` int(11) NOT NULL,
-  `fkdcolorId` int(11) NOT NULL
+  `LastExportedDate` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `product`
 --
 
-INSERT INTO `product` (`productId`, `productName`, `status`, `productDecription`, `style`, `sku`, `brand`, `size`, `swatch`, `mainImage`, `outfit`, `image2`, `LastExportedBy`, `LastExportedDate`, `fkcategoryId`, `fkscolorId`, `fkdcolorId`) VALUES
-(2, 'Bordeaux low-back satin gown', 'active', '<ul><li>Rosetta Getty Bordeaux wool blend satin gown</li><li>Draped low back with tied sash, partially lined</li><li><ul><li>Concealed zip fastening at back</li><li>43% wool, 34% acetate, 23% viscose; lining: 100% silk</li><li>Length shoulder to hem: 61 inches/ 154cm</li><li>Midweight</li><li>Slim fit</li></ul>', 'ABCD-123', 'ABCD-123-RDS', 'Rosetta Getty', 'S', 'http://media.harveynichols.com/catalog/product/cache/1/gallery/390x546/9df78eab33525d08d6e5fb8d27136e95/6/4/647566_bordeaux_5.jpg\r\n', 'http://media.harveynichols.com/catalog/product/cache/1/gallery/390x546/9df78eab33525d08d6e5fb8d27136e95/6/4/647566_bordeaux_1.jpg\r\n', 'http://media.harveynichols.com/catalog/product/cache/1/gallery/390x546/9df78eab33525d08d6e5fb8d27136e95/6/4/647566_bordeaux_2.jpg\r\n', 'http://media.harveynichols.com/catalog/product/cache/1/gallery/390x546/9df78eab33525d08d6e5fb8d27136e95/6/4/647566_bordeaux_4.jpg\r\n', 1, '2018-02-01', 1, 1, 1),
-(3, 'Bordeaux low-back satin gown', 'Inactive', '<ul><li>Rosetta Getty Bordeaux wool blend satin gown</li><li>Draped low back with tied sash, partially lined</li><li><ul><li>Concealed zip fastening at back</li><li>43% wool, 34% acetate, 23% viscose; lining: 100% silk</li><li>Length shoulder to hem: 61 inches/ 154cm</li><li>Midweight</li><li>Slim fit</li></ul>', 'ABCD-123', 'ABCD-123-RDS', 'Rosetta Getty', 'L', 'http://media.harveynichols.com/catalog/product/cache/1/gallery/390x546/9df78eab33525d08d6e5fb8d27136e95/6/4/647566_bordeaux_5.jpg\r\n', 'http://media.harveynichols.com/catalog/product/cache/1/gallery/390x546/9df78eab33525d08d6e5fb8d27136e95/6/4/647566_bordeaux_1.jpg\r\n', 'http://media.harveynichols.com/catalog/product/cache/1/gallery/390x546/9df78eab33525d08d6e5fb8d27136e95/6/4/647566_bordeaux_2.jpg\r\n', 'http://media.harveynichols.com/catalog/product/cache/1/gallery/390x546/9df78eab33525d08d6e5fb8d27136e95/6/4/647566_bordeaux_4.jpg\r\n', 1, '2018-02-01', 1, 1, 1);
+INSERT INTO `product` (`productId`, `status`, `fkcategoryId`, `style`, `sku`, `ean`, `productName`, `productDesc`, `brand`, `color`, `colorDesc`, `size`, `swatchImage`, `mainImage`, `outfit`, `image2`, `image3`, `image4`, `runtosize`, `care`, `price`, `stockQty`, `minQtyAlert`, `LastExportedBy`, `LastExportedDate`) VALUES
+(2, 'Active', 1, 'asdasd', 'dasdaewe', 'weqw', 'Test Product 1', 'asdaszxcd\r\najsdiuahs', 'asdasd', '6', 'ddfsfgdyrtyryfghfgh', 'L', '', NULL, '2outfit.jpg', NULL, NULL, NULL, 'This style runs small to size', 'Dry Clean Only', 40, 5, 2, 1, NULL),
+(4, 'Active', 2, 'adasda', 'dfdf', 'sdsa', 'pant denim', 'asdasdas', 'levis', 'White', 'new', 'L', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Dry Clean Only', 565, 6565, 6565, 2, '2018-03-03 07:39:17'),
+(5, 'Active', 1, 'fdfdf', 'dsadasd', 'dfdf', '454', 'dfdfdf', 'asdasd', 'Purple', 'dsadasd', 'XL', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Dry Clean Only', 54354, 5454, 652, 2, '2018-03-03 07:43:14'),
+(6, 'Inactive', 1, 'Test', 'Test', 'Test 6', 'Test', 'Test 6', 'Test', '6', 'Test 6', 'XL', '7swatch.png', '7main.jpg', '7outfit.png', '7image2.jpg', '7image3.jpg', '7image4.jpg', 'This style runs true to size', 'Dry Clean Only', 654, 468, 946, 2, '2018-03-03 08:52:13');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `runtosize`
+--
+
+CREATE TABLE `runtosize` (
+  `runToSizeId` int(11) NOT NULL,
+  `runToSizeName` varchar(45) DEFAULT NULL,
+  `runToSizeDescription` varchar(45) DEFAULT NULL,
+  `runToSizeType` varchar(15) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `runtosize`
+--
+
+INSERT INTO `runtosize` (`runToSizeId`, `runToSizeName`, `runToSizeDescription`, `runToSizeType`) VALUES
+(1, 'This style runs small to size', NULL, NULL),
+(2, 'This style runs true to size', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `size`
+--
+
+CREATE TABLE `size` (
+  `sizeId` int(11) NOT NULL,
+  `sizeName` varchar(45) DEFAULT NULL,
+  `sizeDescription` varchar(45) DEFAULT NULL,
+  `sizeType` varchar(15) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `size`
+--
+
+INSERT INTO `size` (`sizeId`, `sizeName`, `sizeDescription`, `sizeType`) VALUES
+(1, 'S', NULL, 'Womens cloth'),
+(2, 'M', NULL, 'Womens cloth'),
+(3, 'L', NULL, 'Womens cloth'),
+(4, 'XL', NULL, 'Womens shoes');
 
 -- --------------------------------------------------------
 
@@ -149,7 +230,7 @@ CREATE TABLE `users` (
   `email` varchar(45) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   `status` varchar(45) DEFAULT NULL,
-  `fkuserTypeId` varchar(5) NOT NULL,
+  `userType` varchar(5) DEFAULT NULL,
   `remember_token` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -157,30 +238,18 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`userId`, `name`, `phone`, `address`, `email`, `password`, `status`, `fkuserTypeId`, `remember_token`) VALUES
-(1, 'admin', NULL, NULL, 'admin@tcl.com', '$2y$10$iZulWAQ1e/CVhqnnajUZS.GeoNAk2cb6UioJ0f9d1mTchtItfcYaW', 'active', 'admin', 'mCaBfmA3MkiSA0MLjXdM5gnOMWctwOu75h2mfEZSOhpAODVyvbREbPN1zQEq');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `usertype`
---
-
-CREATE TABLE `usertype` (
-  `userTypeId` varchar(5) NOT NULL,
-  `userTypeName` varchar(45) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `usertype`
---
-
-INSERT INTO `usertype` (`userTypeId`, `userTypeName`) VALUES
-('admin', 'admin');
+INSERT INTO `users` (`userId`, `name`, `phone`, `address`, `email`, `password`, `status`, `userType`, `remember_token`) VALUES
+(2, 'rumi', NULL, NULL, 'admin@gmail.com', '$2y$10$6uyV1sPMpuqEQR4iFbdFp.HsIxfquF67nk3zdJlYma8U1Mw6ZZ9E6', NULL, NULL, 's7A9vpy1nyxwfl7aC4tQqAE0UQ73TvpY3kCFda4PVIFoVHZOqAL8v9TnXia5');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `care`
+--
+ALTER TABLE `care`
+  ADD PRIMARY KEY (`careId`);
 
 --
 -- Indexes for table `category`
@@ -195,12 +264,10 @@ ALTER TABLE `color`
   ADD PRIMARY KEY (`colorId`);
 
 --
--- Indexes for table `history`
+-- Indexes for table `filetransfer`
 --
-ALTER TABLE `history`
-  ADD PRIMARY KEY (`historyId`),
-  ADD KEY `fk_history_product1_idx` (`fkproductId`),
-  ADD KEY `fk_history_offer1_idx` (`fkofferId`);
+ALTER TABLE `filetransfer`
+  ADD PRIMARY KEY (`transferId`);
 
 --
 -- Indexes for table `offer`
@@ -214,66 +281,78 @@ ALTER TABLE `offer`
 --
 ALTER TABLE `product`
   ADD PRIMARY KEY (`productId`),
-  ADD KEY `fk_product_category1_idx` (`fkcategoryId`),
-  ADD KEY `fk_product_color1_idx` (`fkscolorId`);
+  ADD KEY `fk_product_category1_idx` (`fkcategoryId`);
+
+--
+-- Indexes for table `runtosize`
+--
+ALTER TABLE `runtosize`
+  ADD PRIMARY KEY (`runToSizeId`);
+
+--
+-- Indexes for table `size`
+--
+ALTER TABLE `size`
+  ADD PRIMARY KEY (`sizeId`);
 
 --
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`userId`),
-  ADD KEY `fk_user_table1_idx` (`fkuserTypeId`);
-
---
--- Indexes for table `usertype`
---
-ALTER TABLE `usertype`
-  ADD PRIMARY KEY (`userTypeId`);
+  ADD PRIMARY KEY (`userId`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
+-- AUTO_INCREMENT for table `care`
+--
+ALTER TABLE `care`
+  MODIFY `careId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `categoryId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `categoryId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `color`
 --
 ALTER TABLE `color`
-  MODIFY `colorId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `colorId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
--- AUTO_INCREMENT for table `history`
+-- AUTO_INCREMENT for table `filetransfer`
 --
-ALTER TABLE `history`
-  MODIFY `historyId` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `filetransfer`
+  MODIFY `transferId` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `offer`
 --
 ALTER TABLE `offer`
-  MODIFY `offerId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `offerId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `productId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `productId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT for table `runtosize`
+--
+ALTER TABLE `runtosize`
+  MODIFY `runToSizeId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `size`
+--
+ALTER TABLE `size`
+  MODIFY `sizeId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `userId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `history`
---
-ALTER TABLE `history`
-  ADD CONSTRAINT `fk_history_offer1` FOREIGN KEY (`fkofferId`) REFERENCES `offer` (`offerId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_history_product1` FOREIGN KEY (`fkproductId`) REFERENCES `product` (`productId`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `offer`
@@ -285,15 +364,7 @@ ALTER TABLE `offer`
 -- Constraints for table `product`
 --
 ALTER TABLE `product`
-  ADD CONSTRAINT `fk_product_category1` FOREIGN KEY (`fkcategoryId`) REFERENCES `category` (`categoryId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_product_color1` FOREIGN KEY (`fkscolorId`) REFERENCES `color` (`colorId`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `users`
---
-ALTER TABLE `users`
-  ADD CONSTRAINT `fk_user_table1` FOREIGN KEY (`fkuserTypeId`) REFERENCES `usertype` (`userTypeId`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-COMMIT;
+  ADD CONSTRAINT `fk_product_category1` FOREIGN KEY (`fkcategoryId`) REFERENCES `category` (`categoryId`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -169,8 +169,17 @@
         var selecteds = [];
         function selected_rows(x) {
             btn = $(x).data('panel-id');
-            selecteds.push(btn);
+            var index = selecteds.indexOf(btn)
+            if (index == "-1"){
+                selecteds.push(btn);
+            }else {
+
+                selecteds.splice(index, 1);
+            }
+
+
         }
+
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

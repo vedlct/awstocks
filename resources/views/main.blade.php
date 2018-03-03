@@ -15,7 +15,6 @@
     <link rel="stylesheet" href="{{url('date/date-picker.css')}}">
 
     <link href="{{url('assets/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
-    
 
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
