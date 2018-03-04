@@ -144,8 +144,14 @@ class OfferController extends Controller
             'Expires'             => '0',
             'Pragma'              => 'public'
         ];
-        $list=array();
 
+        $data=array(
+            'LastExportedBy'=>Session::get('userId'),
+            'LastExportedDate'=>date('Y-m-d'),
+        );
+
+
+        $list=array();
         if ($offerList=$r->fulloffers){
 
             for ($i=0;$i<count($offerList);$i++){
@@ -155,6 +161,10 @@ class OfferController extends Controller
                     ->where('offer.offerId',$productId)->get()->toArray();
 
                 $list=array_merge($list,$newlist);
+
+                DB::table('offer')
+                    ->where('offerId',$productId)
+                    ->update($data);
             }
 
         }
@@ -167,6 +177,10 @@ class OfferController extends Controller
                     ->where('offer.offerId',$productId)->get()->toArray();
 
                 $list=array_merge($list,$newlist);
+
+                DB::table('offer')
+                    ->where('offerId',$productId)
+                    ->update($data);
             }
 
         }
@@ -180,6 +194,10 @@ class OfferController extends Controller
                     ->where('offer.offerId',$productId)->get()->toArray();
 
                 $list=array_merge($list,$newlist);
+
+                DB::table('offer')
+                    ->where('offerId',$productId)
+                    ->update($data);
             }
 
         }
@@ -192,18 +210,15 @@ class OfferController extends Controller
                     ->where('offer.offerId',$productId)->get()->toArray();
 
                 $list=array_merge($list,$newlist);
+
+                DB::table('offer')
+                    ->where('offerId',$productId)
+                    ->update($data);
             }
 
         }
-
-
-
-
-
         # add headers for each column in the CSV download
         array_unshift($list, array_keys($list[0]));
-
-
 
         $callback = function() use ($list,$r)
         {
@@ -220,8 +235,6 @@ class OfferController extends Controller
             if ($offerList=$r->markdownUpdate){
                 $FH = fopen(public_path ()."/csv/markdownUpdateList.csv", "w");
             }
-
-
 
             foreach ($list as $row) {
                 fputcsv($FH, $row);

@@ -55,7 +55,27 @@ Route::post('/offer/csvExport', 'OfferController@csvExport')->name('offer.csv');
 Route::view('/historic/files', 'layouts.starLeads')->name('historic.files');
 Route::get('/settings', 'SettingsController@index')->name('settings');
 Route::post('/settings/getColor', 'SettingsController@getColors')->name('settings.getColors');
+Route::post('/settings/colorajax', 'SettingsController@colorAjax')->name('settings.colorajax');
+Route::post('/settings/categoryajax', 'SettingsController@categoryAjax')->name('settings.categoryajax');
+Route::post('/settings/careajax', 'SettingsController@careAjax')->name('settings.careajax');
+Route::post('/settings/runtosizeajax', 'SettingsController@runtosizeAjax')->name('settings.runtosizeajax');
 
+
+// insert setting
+Route::view('/settings/addCare', 'settings.insertcare')->name('settings.addcare');
+Route::post('/settings/insertCare', 'SettingsController@insertCare')->name('settings.insertCare');
+Route::view('/settings/addCategory', 'settings.insertcategory')->name('settings.addcategory');
+Route::post('/settings/insertCategory', 'SettingsController@insertCategory')->name('settings.insertCategory');
+Route::view('/settings/addColor', 'settings.insertcolor')->name('settings.addcolor');
+Route::post('/settings/insertColor', 'SettingsController@insertColor')->name('settings.insertColor');
+Route::view('/settings/addRuntosize', 'settings.insertruntosize')->name('settings.addruntosize');
+Route::post('/settings/insertRunToSize', 'SettingsController@insertRunToSize')->name('settings.insertRunToSize');
+
+//Edit Settings
+Route::get('edit/category/{id}','SettingsController@editCategory')->name('edit.category');
+Route::get('edit/color/{id}','SettingsController@editColor')->name('edit.color');
+Route::get('edit/care/{id}','SettingsController@editCare')->name('edit.care');
+Route::get('edit/runtosize/{id}','SettingsController@editrunToSize')->name('edit.runToSize');
 
 
 

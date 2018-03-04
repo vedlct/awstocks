@@ -1,3 +1,6 @@
-productId,style,sku,brand,status,productName,LastExportedBy,LastExportedDate,categoryName
-2,asdasd,dasdaewe,asdasd,Active,"Test Product 1",1,,Women->Gown
-4,adasda,dfdf,levis,Active,"pant denim",2,"2018-03-03 13:39:17",Men->Pant
+categoryName,style,sku,productName,productDesc,brand,color,colorDesc,swatchImage,size,mainImage,outfit,image2
+Women->Gown,asdasd,dasdaewe,"Test Product 1","asdaszxcd
+ajsdiuahs",asdasd,6,ddfsfgdyrtyryfghfgh,,L,,2outfit.jpg,
+Men->Pant,adasda,dfdf,"pant denim",asdasdas,levis,White,new,,L,,,
+Women->Gown,fdfdf,dsadasd,454,dfdfdf,asdasd,Purple,dsadasd,,XL,,,
+Women->Gown,Test,Test,Test,"Test 6",Test,6,"Test 6",7swatch.png,XL,7main.jpg,7outfit.png,7image2.jpg
