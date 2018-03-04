@@ -72,6 +72,13 @@ Route::post('/settings/insertColor', 'SettingsController@insertColor')->name('se
 Route::view('/settings/addRuntosize', 'settings.insertruntosize')->name('settings.addruntosize');
 Route::post('/settings/insertRunToSize', 'SettingsController@insertRunToSize')->name('settings.insertRunToSize');
 
+//Edit Settings
+Route::get('edit/category/{id}','SettingsController@editCategory')->name('edit.category');
+Route::get('edit/color/{id}','SettingsController@editColor')->name('edit.color');
+Route::get('edit/care/{id}','SettingsController@editCare')->name('edit.care');
+Route::get('edit/runtosize/{id}','SettingsController@editrunToSize')->name('edit.runToSize');
+
+
 
 //Route::get('/dashboard', 'HomeController@index')->name('home');
 

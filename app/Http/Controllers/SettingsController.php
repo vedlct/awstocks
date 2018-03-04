@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use Session;
 use Illuminate\Http\Request;
 use App\Color;
 use App\Category;
@@ -120,6 +121,60 @@ class SettingsController extends Controller
         $runtosize->save();
         return view('settings.runtosize');
     }
+
+//Edit
+
+    public function editColor($id){
+        $color=Color::findOrFail($id);
+        return $color;
+    }
+
+    public function editCategory($id){
+        $category=Category::findOrFail($id);
+
+        return $category;
+    }
+
+    public function editCare($id){
+        $care=Care::findOrFail($id);
+        return $care;
+    }
+
+    public function editRunToSize($id){
+        $runToSize=RunToSize::findOrFail($id);
+
+        return $runToSize;
+    }
+
+//Delete
+    public function destroyColor($id){
+        $color=Color::findOrFail($id);
+        $color->delete();
+        Session::flash('message', 'Color Deleted successfully');
+        return back();
+    }
+
+    public function destroyCategory($id){
+        $category=Category::findOrFail($id);
+        $category->delete();
+        Session::flash('message', 'Category Deleted successfully');
+        return back();
+    }
+
+    public function destroyCare($id){
+        $care=Care::findOrFail($id);
+        $care->delete();
+        Session::flash('message', 'Care Deleted successfully');
+        return back();
+    }
+
+    public function destroyRunToSize($id){
+        $runToSize=RunToSize::findOrFail($id);
+        $runToSize->delete();
+        Session::flash('message', 'Run To Size Deleted successfully');
+        return back();
+    }
+
 
 
 }
