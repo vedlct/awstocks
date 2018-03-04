@@ -72,8 +72,6 @@ class SettingsController extends Controller
     ///////insert settings////////////
 
     public function insertCare(Request $r){
-
-
         $this->validate($r,[
             'careName' => 'required|max:45',
             'careDescription' => 'max:45',
@@ -88,8 +86,6 @@ class SettingsController extends Controller
     }
     public function insertCategory(Request $r){
 
-
-
         $this->validate($r,[
             'categoryName' => 'required|max:45',
             'categoryDesc' => 'max:45',
@@ -103,7 +99,6 @@ class SettingsController extends Controller
 
     }
     public function insertColor(Request $r){
-
 
         $this->validate($r,[
             'colorName' => 'required|max:45',
@@ -134,24 +129,88 @@ class SettingsController extends Controller
 
     public function editColor($id){
         $color=Color::findOrFail($id);
-        return $color;
+        return view('settings.edit.editcolor')->with('color',$color);
     }
 
     public function editCategory($id){
         $category=Category::findOrFail($id);
 
-        return $category;
+        return view('settings.edit.editcategory')->with('category',$category);
+
     }
 
     public function editCare($id){
         $care=Care::findOrFail($id);
-        return $care;
+        return view('settings.edit.editcare')->with('care',$care);
+
     }
 
     public function editRunToSize($id){
         $runToSize=RunToSize::findOrFail($id);
+        return view('settings.edit.editruntosize')->with('runToSize',$runToSize);
 
-        return $runToSize;
+    }
+
+//Update Settings
+
+    public function updateCare(Request $r){
+        $this->validate($r,[
+            'careName' => 'required|max:45',
+            'careDescription' => 'max:45',
+        ]);
+        $care=Care::findOrFail($r->id);
+        $care->careName=$r->careName;
+        $care->careDescription=$r->careDescription;
+        $care->save();
+
+        Session::flash('message', 'Care Updated successfully');
+        return back();
+
+
+    }
+
+    public function updateColor(Request $r){
+        $this->validate($r,[
+            'colorName' => 'required|max:45',
+            'colorDescription' => 'max:45',
+        ]);
+        $color=Color::findOrFail($r->id);
+        $color->colorName=$r->colorName;
+        $color->colorDescription=$r->colorDescription;
+        $color->save();
+        Session::flash('message', 'Color Updated successfully');
+        return back();
+
+
+    }
+
+    public function updateCategory(Request $r){
+        $this->validate($r,[
+            'categoryName' => 'required|max:45',
+            'categoryDesc' => 'max:45',
+        ]);
+        $category=Category::findOrFail($r->id);
+        $category->categoryName=$r->categoryName;
+        $category->categoryDesc=$r->categoryDesc;
+        $category->save();
+        Session::flash('message', 'Category Updated successfully');
+        return back();
+
+    }
+
+    public function updateRunToSize(Request $r){
+        $this->validate($r,[
+            'runToSizeName' => 'required|max:45',
+            'runToSizeDescription' => 'max:45',
+        ]);
+        $runtosize=RunToSize::findOrFail($r->id);
+        $runtosize->runToSizeName=$r->runToSizeName;
+        $runtosize->runToSizeDescription=$r->runToSizeDescription;
+        $runtosize->save();
+        Session::flash('message', 'Run To Size Updated successfully');
+        return back();
+
+
     }
 
 //Delete

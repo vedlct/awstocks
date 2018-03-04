@@ -19,6 +19,11 @@
                             <label class="col-sm-2 form-control-label">Color Name</label>
                             <div class="col-sm-10">
                                 <input id="inputHorizontalWarning" type="text" name="colorName"  class="form-control form-control-warning" required>
+                                @if ($errors->has('colorName'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('colorName') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
 
@@ -26,6 +31,11 @@
                             <label class="col-sm-2 form-control-label">Color Description</label>
                             <div class="col-sm-10">
                                 <textarea class="form-control" rows="5" id="comment" name="colorDescription" required></textarea>
+                                @if ($errors->has('colorDescription'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('colorDescription') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
 

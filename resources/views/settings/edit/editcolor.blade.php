@@ -10,31 +10,31 @@
 
                 <div class="card-body" style="padding: 1%;">
                     <div align="center" style="margin-bottom: 3%;">
-                        <h2 style="color: #989898;"><b>Add Care </b></h2>
+                        <h2 style="color: #989898;"><b>Edit Color </b></h2>
                     </div>
-                    <form method="post" action="{{route('settings.insertCare')}}">
+                    <form method="post" action="{{route('update.color')}}">
                         {{csrf_field()}}
+                        <input type="hidden" name="id" value="{{$color->colorId}}">
 
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">Care Name</label>
+                            <label class="col-sm-2 form-control-label">Color Name</label>
                             <div class="col-sm-10">
-                                <input id="inputHorizontalWarning" type="text" name="careName"  class="form-control form-control-warning" required>
-
-                                @if ($errors->has('careName'))
+                                <input id="inputHorizontalWarning" type="text" name="colorName" value="{{$color->colorName}}"  class="form-control form-control-warning" required>
+                                @if ($errors->has('colorName'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('careName') }}</strong>
+                                        <strong>{{ $errors->first('colorName') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">Care Description</label>
+                            <label class="col-sm-2 form-control-label">Color Description</label>
                             <div class="col-sm-10">
-                                <textarea class="form-control" rows="5" id="comment" name="careDescription" required></textarea>
-                                @if ($errors->has('careDescription'))
+                                <textarea class="form-control" rows="5" id="comment" name="colorDescription" required>{{$color->colorDescription}}</textarea>
+                                @if ($errors->has('colorDescription'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('careDescription') }}</strong>
+                                        <strong>{{ $errors->first('colorDescription') }}</strong>
                                     </span>
                                 @endif
                             </div>

@@ -4,7 +4,6 @@
 
     <div class="row">
 
-
         <div class="col-lg-12">
             <div class="card" style="margin-left: 10px; border-radius: 10px;">
 
@@ -19,6 +18,11 @@
                             <label class="col-sm-2 form-control-label">Run To Size Name</label>
                             <div class="col-sm-10">
                                 <input id="inputHorizontalWarning" type="text" name="runToSizeName"  class="form-control form-control-warning" required>
+                                @if ($errors->has('runToSizeName'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('runToSizeName') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
 
@@ -26,6 +30,11 @@
                             <label class="col-sm-2 form-control-label">Run To Size Description</label>
                             <div class="col-sm-10">
                                 <textarea class="form-control" rows="5" id="comment" name="runToSizeDescription" required></textarea>
+                                @if ($errors->has('runToSizeDescription'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('runToSizeDescription') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
 

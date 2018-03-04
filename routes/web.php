@@ -76,7 +76,13 @@ Route::post('/settings/insertRunToSize', 'SettingsController@insertRunToSize')->
 Route::get('edit/category/{id}','SettingsController@editCategory')->name('edit.category');
 Route::get('edit/color/{id}','SettingsController@editColor')->name('edit.color');
 Route::get('edit/care/{id}','SettingsController@editCare')->name('edit.care');
-Route::get('edit/runtosize/{id}','SettingsController@editrunToSize')->name('edit.runToSize');
+Route::get('edit/runtosize/{id}','SettingsController@editRunToSize')->name('edit.runToSize');
+
+//Update Settings
+Route::post('edit/category','SettingsController@updateCategory')->name('update.category');
+Route::post('edit/color','SettingsController@updateColor')->name('update.color');
+Route::post('edit/care','SettingsController@updateCare')->name('update.care');
+Route::post('edit/runtosize','SettingsController@updateRunToSize')->name('update.runToSize');
 
 
 
