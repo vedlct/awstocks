@@ -17,7 +17,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label">Care Name</label>
                             <div class="col-sm-10">
-                                <input id="inputHorizontalWarning" type="text" name="carename"  class="form-control form-control-warning" required>
+                                <input id="inputHorizontalWarning" type="text" name="runtosizename"  class="form-control form-control-warning" required>
                             </div>
                         </div>
 

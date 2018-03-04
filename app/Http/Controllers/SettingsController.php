@@ -72,16 +72,53 @@ class SettingsController extends Controller
 
     public function insertCare(Request $r){
 
+        $this->validate($r,[
+            'careName' => 'required|max:45',
+            'careDescription' => 'max:45',
+        ]);
+        $care=new Care();
+        $care->careName=$r->careName;
+        $care->careDescription=$r->description;
+        $care->save();
 
+        return view('settings.care');
     }
     public function insertCategory(Request $r){
+
+        $this->validate($r,[
+            'categoryName' => 'required|max:45',
+            'categoryDesc' => 'max:45',
+        ]);
+        $category=new Category();
+        $category->categoryName=$r->caregoryname;
+        $category->categoryDesc=$r->description;
+        $category->save();
+        return view('settings.category');
 
     }
     public function insertColor(Request $r){
 
+        $this->validate($r,[
+            'colorName' => 'required|max:45',
+            'colorDescription' => 'max:45',
+        ]);
+        $color=new Color();
+        $color->colorName=$r->colorname;
+        $color->colorDescription=$r->description;
+        $color->save();
+        return view('settings.color');
     }
     public function insertRunToSize(Request $r){
 
+        $this->validate($r,[
+            'runToSizeName' => 'required|max:45',
+            'runToSizeDescription' => 'max:45',
+        ]);
+        $runtosize=new RunToSize();
+        $runtosize->runToSizeName=$r->runtosizename;
+        $runtosize->runToSizeDescription=$r->description;
+        $runtosize->save();
+        return view('settings.runtosize');
     }
 
 

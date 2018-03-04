@@ -159,10 +159,6 @@
                         </div>
                     </div>
 
-
-
-
-
                     <div class="form-group row">
                         <label class="col-sm-2 form-control-label">Product Description</label>
                         <div class="col-sm-10">

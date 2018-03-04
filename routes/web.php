@@ -43,6 +43,7 @@ Route::post('/product/csvExport', 'ProductController@csvExport')->name('product.
 Route::get('/offer/add', 'OfferController@add')->name('offer.add');
 Route::post('/offer/add', 'OfferController@insert')->name('offer.insert');
 Route::get('/offer/generate', 'OfferController@index')->name('offer.generate');
+
 //Route::view('/offer/generate', 'offer.generate')->name('offer.generate');
 Route::post('/offer/getOfferList', 'OfferController@getOfferList')->name('offer.offerList');
 Route::post('/offer/update', 'OfferController@update')->name('offer.update');
