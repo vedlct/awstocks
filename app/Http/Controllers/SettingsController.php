@@ -20,10 +20,10 @@ class SettingsController extends Controller
 
         if ($r->option=="color"){
 
-            $colors=Color::get();
+         //   $colors=Color::get();
 
-            return view('settings.color')
-                ->with('colors',$colors);
+            return view('settings.color');
+              //  ->with('colors',$colors);
 
         }
 
