@@ -134,7 +134,7 @@
                     { data: 'LastExportedDate', name: 'LastExportedDate' },
                     { "data": function(data){
                         var url='{{url("product/edit/", ":id") }}';
-                        return '<a class="btn" data-panel-id="'+data.productId+'"onclick="editProduct(this)"><i class="fa fa-edit"></i></a><a class="btn" data-panel-id="'+data.productId+'"onclick="deleteProduct(this)"><i class="fa fa-trash"></i></a>';},
+                        return '<a class="btn btn-default btn-sm" data-panel-id="'+data.productId+'"onclick="editProduct(this)"><i class="fa fa-edit"></i></a><a class="btn" data-panel-id="'+data.productId+'"onclick="deleteProduct(this)"><i class="fa fa-trash"></i></a>';},
                         "orderable": false, "searchable":false, "name":"selected_rows" },
                 ],
             });
@@ -162,8 +162,11 @@
             btn = $(x).data('panel-id');
             var url = '{{route("product.destroy", ":id") }}';
             //alert(url);
-            var newUrl=url.replace(':id', btn);
-            window.location.href = newUrl;
+            var result = confirm("Want to delete?");
+            if (result) {
+
+                var newUrl=url.replace(':id', btn);
+            window.location.href = newUrl;}
         }
 
         var selecteds = [];
