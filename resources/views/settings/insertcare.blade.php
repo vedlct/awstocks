@@ -13,18 +13,19 @@
                         <h2 style="color: #989898;"><b>Add Care </b></h2>
                     </div>
                     <form method="post" action="{{route('settings.insertCare')}}">
+                        {{csrf_field()}}
 
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label">Care Name</label>
                             <div class="col-sm-10">
-                                <input id="inputHorizontalWarning" type="text" name="carename"  class="form-control form-control-warning" required>
+                                <input id="inputHorizontalWarning" type="text" name="careName"  class="form-control form-control-warning" required>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label">Care Description</label>
                             <div class="col-sm-10">
-                                <textarea class="form-control" rows="5" id="comment" name="description" required></textarea>
+                                <textarea class="form-control" rows="5" id="comment" name="careDescription" required></textarea>
                             </div>
                         </div>
 

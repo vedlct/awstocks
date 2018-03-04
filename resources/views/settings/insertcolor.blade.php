@@ -10,21 +10,22 @@
 
                 <div class="card-body" style="padding: 1%;">
                     <div align="center" style="margin-bottom: 3%;">
-                        <h2 style="color: #989898;"><b>Add Care </b></h2>
+                        <h2 style="color: #989898;"><b>Add Color </b></h2>
                     </div>
                     <form method="post" action="{{route('settings.insertColor')}}">
+                        {{csrf_field()}}
 
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">Care Name</label>
+                            <label class="col-sm-2 form-control-label">Color Name</label>
                             <div class="col-sm-10">
-                                <input id="inputHorizontalWarning" type="text" name="colorname"  class="form-control form-control-warning" required>
+                                <input id="inputHorizontalWarning" type="text" name="colorName"  class="form-control form-control-warning" required>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">Care Description</label>
+                            <label class="col-sm-2 form-control-label">Color Description</label>
                             <div class="col-sm-10">
-                                <textarea class="form-control" rows="5" id="comment" name="description" required></textarea>
+                                <textarea class="form-control" rows="5" id="comment" name="colorDescription" required></textarea>
                             </div>
                         </div>
 

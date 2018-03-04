@@ -73,41 +73,48 @@ class SettingsController extends Controller
 
     public function insertCare(Request $r){
 
+
         $this->validate($r,[
             'careName' => 'required|max:45',
             'careDescription' => 'max:45',
         ]);
         $care=new Care();
         $care->careName=$r->careName;
-        $care->careDescription=$r->description;
+        $care->careDescription=$r->careDescription;
         $care->save();
 
-        return view('settings.care');
+        Session::flash('message', 'Care Inserted successfully');
+        return back();
     }
     public function insertCategory(Request $r){
+
+
 
         $this->validate($r,[
             'categoryName' => 'required|max:45',
             'categoryDesc' => 'max:45',
         ]);
         $category=new Category();
-        $category->categoryName=$r->caregoryname;
-        $category->categoryDesc=$r->description;
+        $category->categoryName=$r->categoryName;
+        $category->categoryDesc=$r->categoryDesc;
         $category->save();
-        return view('settings.category');
+        Session::flash('message', 'Category Inserted successfully');
+        return back();
 
     }
     public function insertColor(Request $r){
+
 
         $this->validate($r,[
             'colorName' => 'required|max:45',
             'colorDescription' => 'max:45',
         ]);
         $color=new Color();
-        $color->colorName=$r->colorname;
-        $color->colorDescription=$r->description;
+        $color->colorName=$r->colorName;
+        $color->colorDescription=$r->colorDescription;
         $color->save();
-        return view('settings.color');
+        Session::flash('message', 'Color Inserted successfully');
+        return back();
     }
     public function insertRunToSize(Request $r){
 
@@ -116,10 +123,11 @@ class SettingsController extends Controller
             'runToSizeDescription' => 'max:45',
         ]);
         $runtosize=new RunToSize();
-        $runtosize->runToSizeName=$r->runtosizename;
-        $runtosize->runToSizeDescription=$r->description;
+        $runtosize->runToSizeName=$r->runToSizeName;
+        $runtosize->runToSizeDescription=$r->runToSizeDescription;
         $runtosize->save();
-        return view('settings.runtosize');
+        Session::flash('message', 'Run To Size Inserted successfully');
+        return back();
     }
 
 //Edit
