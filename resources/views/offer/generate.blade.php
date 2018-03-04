@@ -76,11 +76,20 @@
 
 
         </div>
-                <a  onclick="return creationFull()" download> <button class="btn btn-danger" >CREATION #FULL</button></a>
-                <a  onclick="return priceUpdate()" download> <button class="btn btn-danger"  >Price Update</button></a>
-                <a  onclick="return stockUpdate()" download> <button class="btn btn-danger"  >Stock Update</button></a>
-                <a  onclick="return markdownUpdate()" download> <button class="btn btn-danger"  >Markdown Update</button></a>
-
+                <div class="row">
+                    <div class="col-md-3">
+                        <a  onclick="return creationFull()" download> <button class="btn btn-danger" >CREATION #FULL</button></a>
+                    </div>
+                    <div class="col-md-3">
+                        <a  onclick="return priceUpdate()" download> <button class="btn btn-danger"  >Price Update</button></a>
+                    </div>
+                     <div class="col-md-3">
+                        <a  onclick="return stockUpdate()" download> <button class="btn btn-danger"  >Stock Update</button></a>
+                    </div>
+                    <div class="col-md-3">
+                        <a  onclick="return markdownUpdate()" download> <button class="btn btn-danger"  >Markdown Update</button></a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

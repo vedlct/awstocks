@@ -1,4 +1,4 @@
-<button class="btn btn-success" style="float: right">Insert Color</button>
+<a href="{!! route('settings.addcolor') !!}"><button class="btn btn-success" style="float: right">Insert Color</button></a>
 <br><br>
 <table id="colortable" class="table" >
     <thead>

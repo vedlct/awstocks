@@ -19,8 +19,8 @@
                     <option value="category">Category</option>
                     <option value="color">Color</option>
                     <option value="size">Size</option>
-                     <option value="size">Care</option>
-                    <option value="size">Run TO Size</option>
+                     <option value="care">Care</option>
+                    <option value="runtosize">Run TO Size</option>
 
             </select>
         </div>
