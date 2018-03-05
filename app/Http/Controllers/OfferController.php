@@ -226,19 +226,23 @@ class OfferController extends Controller
 
 
         if ($offerList=$r->fulloffers){
-            $fileName="FullOfferList-".date_timestamp_get(now());
+//            $fileName="FullOfferList-".date_timestamp_get(now());
+            $fileName="FullOfferList";
 
         }
         if ($offerList=$r->priceCreation){
             $fileName="PriceUpdateList-".date_timestamp_get(now());
+            $fileName="PriceUpdateList";
 
         }
         if ($offerList=$r->stockUpdate){
-            $fileName="StockUpdateList-".date_timestamp_get(now());
+//            $fileName="StockUpdateList-".date_timestamp_get(now());
+            $fileName="StockUpdateList";
 
         }
         if ($offerList=$r->markdownUpdate){
-            $fileName="markdownUpdateList-".date_timestamp_get(now());
+//            $fileName="markdownUpdateList-".date_timestamp_get(now());
+            $fileName="markdownUpdateList";
 
         }
 
