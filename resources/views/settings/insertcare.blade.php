@@ -2,6 +2,7 @@
 
 @section('content')
 
+
     <div class="row">
 
 
@@ -19,7 +20,6 @@
                             <label class="col-sm-2 form-control-label">Care Name</label>
                             <div class="col-sm-10">
                                 <input id="inputHorizontalWarning" type="text" name="careName"  class="form-control form-control-warning" required>
-
                                 @if ($errors->has('careName'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('careName') }}</strong>
