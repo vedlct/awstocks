@@ -74,7 +74,7 @@
                     { data: 'price', name: 'price' },
                     { data: 'stockQty', name: 'stockQty' },
                     { "data": function(data){
-                        return '<a href="#" data-panel-id="'+data.productId+'"onclick="editOffer(this)">view details</a>';},
+                        return '<a style="cursor: pointer; color: #4881ecfa" data-panel-id="'+data.productId+'"onclick="editProduct(this)">view details</a>';},
                         "orderable": false, "searchable":false, "name":"action" }
 
 
@@ -84,7 +84,13 @@
 
         });
 
-
+        function editProduct(x) {
+            btn = $(x).data('panel-id');
+            var url = '{{route("product.edit", ":id") }}';
+            //alert(url);
+            var newUrl=url.replace(':id', btn);
+            window.location.href = newUrl;
+        }
 
     </script>
 @endsection
