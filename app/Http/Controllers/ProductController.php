@@ -6,6 +6,7 @@ use File;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Image;
+use Input;
 use Session;
 use App\Product;
 use App\Category;

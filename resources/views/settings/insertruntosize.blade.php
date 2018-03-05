@@ -17,7 +17,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label">Run To Size Name</label>
                             <div class="col-sm-10">
-                                <input id="inputHorizontalWarning" type="text" name="runToSizeName"  class="form-control form-control-warning" required>
+                                <input id="inputHorizontalWarning" type="text" value="{{ old('runToSizeName') }}" name="runToSizeName"  class="form-control form-control-warning" required>
                                 @if ($errors->has('runToSizeName'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('runToSizeName') }}</strong>
@@ -29,7 +29,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label">Run To Size Description</label>
                             <div class="col-sm-10">
-                                <textarea class="form-control" rows="5" id="comment" name="runToSizeDescription" required></textarea>
+                                <textarea class="form-control" rows="5" id="comment" name="runToSizeDescription" required>{{ old('runToSizeDescription') }}</textarea>
                                 @if ($errors->has('runToSizeDescription'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('runToSizeDescription') }}</strong>
