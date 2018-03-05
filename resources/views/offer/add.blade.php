@@ -10,7 +10,7 @@
 
                 <div class="card-body" style="padding: 1%;">
                     <div align="center" style="margin-bottom: 3%;">
-                        <h2 style="color: #989898;"><b>Add Product Information</b></h2>
+                        <h2 style="color: #989898;"><b>Add Offer Information</b></h2>
                     </div>
                     <form method="post" action="{{route('offer.insert')}}">
 
@@ -39,19 +39,33 @@
                         </div>
                     </div>
 
+                        <div class="form-group row">
+
+                                 <label  class="col-sm-2 form-control-label" >Discount Price</label>
+                                 <div class="col-sm-4">
+                                <input  id="inputHorizontalWarning" type="number" value="{{ old('disPrice') }}" name="disPrice" placeholder="price" onchange="setTwoNumberDecimal" min="0"  step="0.01" class="form-control form-control-warning " required>
+                                 </div>
+
+                                <label  class="col-sm-1 form-control-label" >Price:</label>
+                                <div class="col-sm-5">
+                                <input  id="price" type="text"  placeholder="price"  class="form-control form-control-warning" readonly>
+                                </div>
 
 
-					<div class="form-group row">
-						<div class="form-group col-md-6">
-							<label style="margin-left: -12px;" class="col-md-2" >Price</label>
-							<input  id="price" type="text"  placeholder="price"  class="form-control form-control-warning col-md-10" readonly>
-						</div>
+                            </div>
 
-						<div class="form-group col-md-6">
-							<label  class="col-md-3" style="margin-left: -30px;">Discount Price</label>
-							<input  id="inputHorizontalWarning" type="number" value="{{ old('disPrice') }}" name="disPrice" placeholder="price" onchange="setTwoNumberDecimal" min="0"  step="0.01" class="form-control form-control-warning col-md-9" required>
-						</div>
-					</div>
+
+					{{--<div class="form-group row">--}}
+						{{--<div class="form-group col-md-7">--}}
+							{{--<label style="margin-left: -12px;" class="col-md-4" >Price</label>--}}
+							{{--<input style="margin-left: -32px;" id="price" type="text"  placeholder="price"  class="form-control form-control-warning col-md-8" readonly>--}}
+						{{--</div>--}}
+
+						{{--<div class="form-group col-md-5">--}}
+							{{--<label  class="col-md-3" style="margin-left: -30px;">Discount Price</label>--}}
+							{{--<input  id="inputHorizontalWarning" type="number" value="{{ old('disPrice') }}" name="disPrice" placeholder="price" onchange="setTwoNumberDecimal" min="0"  step="0.01" class="form-control form-control-warning col-md-9" required>--}}
+						{{--</div>--}}
+					{{--</div>--}}
 
                     <div class="form-group row">
                         <label class="col-sm-2 form-control-label">Product Id Type</label>
@@ -62,18 +76,16 @@
 
                     <div class="form-group row">
                             <label class="col-sm-2 form-control-label">Start Date</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-4">
                                 <input id="fromdate" type="text" value="{{ old('disStartPrice') }}" name="disStartPrice"  placeholder="pick date" class="form-control form-control-warning" required>
                             </div>
+                        <label class="col-sm-1 form-control-label">End Date</label>
+                        <div class="col-sm-5">
+                            <input id="todate" type="text" value="{{ old('disEndPrice') }}" name="disEndPrice" placeholder="pick date" class="form-control form-control-warning" required>
+                        </div>
                         </div>
 
 
-                        <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">End Date</label>
-                            <div class="col-sm-10">
-                                <input id="todate" type="text" value="{{ old('disEndPrice') }}" name="disEndPrice" placeholder="pick date" class="form-control form-control-warning" required>
-                            </div>
-                        </div>
 
 
 
