@@ -60,14 +60,14 @@ class ProductController extends Controller
 
     public function getProductByCategory(Request $r){
         $product=Product::where('fkcategoryId',$r->category)->get();
-        if($product==null){
+
             echo "<option value=''>select one</option>";
-        }
-        else {
+
+
             foreach ($product as $p) {
                 echo "<option value='$p->productId'>$p->productName</option>";
             }
-        }
+
 
 //        return Response($product);
 
@@ -174,9 +174,12 @@ class ProductController extends Controller
         Session::flash('message', 'Product Updated  successfully');
         return back();
     }
-//    public function generate(){
-//        return view('product.generate');
-//    }
+
+    public function getProductPrice(Request $r){
+
+     return Response($r->id);
+    }
+
     public function allProduct(){
         $categories=Category::get();
         $productsList=Product::select('productId','productName')
@@ -342,8 +345,9 @@ class ProductController extends Controller
         ];
         $productList=$r->products;
         $data=array(
-            'LastExportedBy'=>Session::get('userId'),
-            'LastExportedDate'=>date('Y-m-d'),
+            'LastExportedBy'=>Auth::user()->userId,
+            'LastExportedDate'=>date('Y-m-d H:i:s'),
+            'status'=>Status[2],
         );
 
         $list=array();
@@ -357,6 +361,7 @@ class ProductController extends Controller
                 ->where('productId',$productId)
                 ->update($data);
         }
+//        $filePath=public_path ()."/csv/ProductList-".date_timestamp_get(now()).".csv";
         $filePath=public_path ()."/csv/ProductList.csv";
 
         # add headers for each column in the CSV download

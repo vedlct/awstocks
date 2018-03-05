@@ -14,6 +14,8 @@ use App\Category;
 use Response;
 
 use DB;
+use Excel;
+
 
 class OfferController extends Controller
 {
@@ -97,7 +99,7 @@ class OfferController extends Controller
     //this is ajax controller which return all offerlist
     public function getOfferList(Request $r) {
 
-        $offersql = Offer::select('offerId','disPrice','disStartPrice','disEndPrice','sku','state','price','stockQty','product-id-type')
+        $offersql = Offer::select('offerId','disPrice','disStartPrice','disEndPrice','sku','state','price','stockQty','product-id-type','category.categoryName')
             ->leftJoin('product', 'offer.fkproductId', '=', 'product.productId')
             ->leftJoin('category', 'category.categoryId', '=', 'product.fkcategoryId');
         if ($categoryId=$r->categoryId){
@@ -146,8 +148,9 @@ class OfferController extends Controller
         ];
 
         $data=array(
-            'LastExportedBy'=>Session::get('userId'),
-            'LastExportedDate'=>date('Y-m-d'),
+            'LastExportedBy'=> Auth::user()->userId,
+            'LastExportedDate'=>date('Y-m-d H:i:s'),
+            'status'=>Status[2],
         );
 
 
@@ -220,30 +223,61 @@ class OfferController extends Controller
         # add headers for each column in the CSV download
         array_unshift($list, array_keys($list[0]));
 
-        $callback = function() use ($list,$r)
+
+
+        if ($offerList=$r->fulloffers){
+//            $fileName="FullOfferList-".date_timestamp_get(now());
+            $fileName="FullOfferList";
+
+        }
+        if ($offerList=$r->priceCreation){
+            $fileName="PriceUpdateList-".date_timestamp_get(now());
+            $fileName="PriceUpdateList";
+
+        }
+        if ($offerList=$r->stockUpdate){
+//            $fileName="StockUpdateList-".date_timestamp_get(now());
+            $fileName="StockUpdateList";
+
+        }
+        if ($offerList=$r->markdownUpdate){
+//            $fileName="markdownUpdateList-".date_timestamp_get(now());
+            $fileName="markdownUpdateList";
+
+        }
+
+        $callback = function() use ($list,$r,$fileName)
         {
 
             if ($offerList=$r->fulloffers){
-                $FH = fopen(public_path ()."/csv/FullOfferList.csv", "w");
+                //$fileName="FullOfferList-".date_timestamp_get(now());
+                $FH = fopen(public_path ()."/csv/".$fileName.".csv", "w");
             }
             if ($offerList=$r->priceCreation){
-                $FH = fopen(public_path ()."/csv/PriceUpdateList.csv", "w");
+               // $fileName="PriceUpdateList-".date_timestamp_get(now());
+                $FH = fopen(public_path ()."/csv/".$fileName.".csv", "w");
             }
             if ($offerList=$r->stockUpdate){
-                $FH = fopen(public_path ()."/csv/StockUpdateList.csv", "w");
+               // $fileName="StockUpdateList-".date_timestamp_get(now());
+                $FH = fopen(public_path ()."/csv/".$fileName.".csv", "w");
             }
             if ($offerList=$r->markdownUpdate){
-                $FH = fopen(public_path ()."/csv/markdownUpdateList.csv", "w");
+                //$fileName="markdownUpdateList-".date_timestamp_get(now());
+                $FH = fopen(public_path ()."/csv/".$fileName.".csv", "w");
             }
 
             foreach ($list as $row) {
                 fputcsv($FH, $row);
+
             }
 
             fclose($FH);
         };
+//
+         return Response::stream($callback, 200, $headers); //use Illuminate\Support\Facades\Response;
 
-        return Response::stream($callback, 200, $headers); //use Illuminate\Support\Facades\Response;
+
+
 
 
 
