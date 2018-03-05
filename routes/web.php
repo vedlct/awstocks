@@ -84,11 +84,11 @@ Route::get('edit/care/{id}','SettingsController@editCare')->name('edit.care');
 Route::get('edit/runtosize/{id}','SettingsController@editRunToSize')->name('edit.runToSize');
 
 //Update Settings
-Route::post('edit/category','SettingsController@updateCategory')->name('update.category');
-Route::post('edit/color','SettingsController@updateColor')->name('update.color');
-Route::post('edit/care','SettingsController@updateCare')->name('update.care');
-Route::post('edit/care','SettingsController@updateSize')->name('update.size');
-Route::post('edit/runtosize','SettingsController@updateRunToSize')->name('update.runToSize');
+Route::post('update/category','SettingsController@updateCategory')->name('update.category');
+Route::post('update/color','SettingsController@updateColor')->name('update.color');
+Route::post('update/care','SettingsController@updateCare')->name('update.care');
+Route::post('update/care','SettingsController@updateSize')->name('update.size');
+Route::post('update/runtosize','SettingsController@updateRunToSize')->name('update.runToSize');
 
 //stockinfo
 Route::view('/stockinfo', 'stockinfo')->name('stockinfo');
