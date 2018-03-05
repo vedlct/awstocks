@@ -34,7 +34,7 @@
                 { data: 'careName', name: 'careName' },
                 { data: 'careDescription', name: 'careDescription' },
                 { "data": function(data){
-                    return '<a class="btn" data-panel-id="'+data.careId+'"onclick="editCategory(this)"><i class="fa fa-edit"></i></a><a class="btn" data-panel-id="'+data.careId+'"onclick="deletCategory(this)"><i class="fa fa-trash"></i></a>';},
+                    return '<a class="btn" data-panel-id="'+data.careId+'"onclick="editCare(this)"><i class="fa fa-edit"></i></a><a class="btn" data-panel-id="'+data.careId+'"onclick="deleteCare(this)"><i class="fa fa-trash"></i></a>';},
                     "orderable": false, "searchable":false, "name":"selected_rows" }
 
 
@@ -46,7 +46,21 @@
     });
 
 
-    function editCategory() {
+    function editCare(x) {
+        btn = $(x).data('panel-id');
+        var url = '{{route("edit.care", ":id") }}';
+        //alert(url);
+        var newUrl=url.replace(':id', btn);
+        window.location.href = newUrl;
+    }
 
+    function deleteCare(x) {
+        btn = $(x).data('panel-id');
+        var url = '{{route("care.destroy", ":id") }}';
+        //alert(url);
+        var result = confirm("Want to delete?");
+        if (result) {
+            var newUrl=url.replace(':id', btn);
+            window.location.href = newUrl;}
     }
 </script>

@@ -10,30 +10,30 @@
 
                 <div class="card-body" style="padding: 1%;">
                     <div align="center" style="margin-bottom: 3%;">
-                        <h2 style="color: #989898;"><b>Add Category </b></h2>
+                        <h2 style="color: #989898;"><b>Add Size {{$sizeType}}</b></h2>
                     </div>
-                    <form method="post" action="{{route('settings.insertCategory')}}">
+                    <form method="post" action="{{route('settings.insertSize')}}">
                         {{csrf_field()}}
-
+                        <input type="hidden" name="sizeType" value="{{$sizeType}}">
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">Category Name</label>
+                            <label class="col-sm-2 form-control-label">Size Name</label>
                             <div class="col-sm-10">
-                                <input id="inputHorizontalWarning" type="text" value="{{ old('categoryName') }}" name="categoryName"  class="form-control form-control-warning" required>
-                                @if ($errors->has('categoryName'))
+                                <input id="inputHorizontalWarning" type="text" name="sizeName"  class="form-control form-control-warning" required>
+                                @if ($errors->has('sizeName'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('categoryName') }}</strong>
+                                        <strong>{{ $errors->first('sizeName') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">Category Description</label>
+                            <label class="col-sm-2 form-control-label">Size Description</label>
                             <div class="col-sm-10">
-                                <textarea class="form-control" rows="5" id="comment" name="categoryDesc" required>{{ old('categoryDesc') }}</textarea>
-                                @if ($errors->has('categoryDesc'))
+                                <textarea class="form-control" rows="5" id="comment" name="sizeDescription" required></textarea>
+                                @if ($errors->has('sizeDescription'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('categoryDesc') }}</strong>
+                                        <strong>{{ $errors->first('sizeDescription') }}</strong>
                                     </span>
                                 @endif
 

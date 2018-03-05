@@ -46,7 +46,7 @@
                             <label class="col-sm-2 form-control-label">Brand Name</label>
 
                             <div class="col-sm-10">
-                                <input id="inputHorizontalWarning" type="text" name="brand" placeholder="brand" class="form-control form-control-warning" value="{{$product->brand}}" required>
+                                <input id="inputHorizontalWarning" type="text" value="{{ old('brand') }}" name="brand" placeholder="brand" class="form-control form-control-warning" value="{{$product->brand}}" required>
                                 @if ($errors->has('brand'))
                                     <span class="help-block" style="position: absolute; left: 150px; color: red; font-size:14px">
 								<strong>{{ $errors->first('brand') }}</strong>
@@ -57,7 +57,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label">sku</label>
                             <div class="col-sm-10">
-                                <input id="inputHorizontalWarning" type="text" name="sku" placeholder="SKU" class="form-control form-control-warning" value="{{$product->sku}}" required>
+                                <input id="inputHorizontalWarning" type="text" value="{{ old('sku') }}" name="sku" placeholder="SKU" class="form-control form-control-warning" value="{{$product->sku}}" required>
                                 @if ($errors->has('category'))
                                     <span class="help-block" style="position: absolute; left: 150px; color: red; font-size:14px">
 								<strong>{{ $errors->first('category') }}</strong>
@@ -117,7 +117,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label">Product Name</label>
                             <div class="col-sm-10">
-                                <input id="inputHorizontalSuccess" type="text" name="productName" placeholder="name" class="form-control form-control-success" value="{{$product->productName}}" required>
+                                <input id="inputHorizontalSuccess" type="text" value="{{ old('productName') }}" name="productName" placeholder="name" class="form-control form-control-success" value="{{$product->productName}}" required>
                                 @if ($errors->has('productName'))
                                     <span class="help-block" style="position: absolute; left: 150px; color: red; font-size:14px">
 								<strong>{{ $errors->first('productName') }}</strong>
@@ -131,7 +131,7 @@
 								<strong>{{ $errors->first('style') }}</strong>
 							</span> @endif
                             <div class="col-sm-10">
-                                <input id="inputHorizontalSuccess" name="style" type="text" placeholder="style" class="form-control form-control-success" value="{{$product->brand}}" required>
+                                <input id="inputHorizontalSuccess" value="{{ old('style') }}" name="style" type="text" placeholder="style" class="form-control form-control-success" value="{{$product->brand}}" required>
                             </div>
                         </div>
 
@@ -179,7 +179,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label">Color Description</label>
                             <div class="col-sm-10">
-                                <input id="inputHorizontalWarning" type="text" name="colorDesc" value="{{$product->colorDesc}}" placeholder="Color Description" class="form-control form-control-warning" required>
+                                <input id="inputHorizontalWarning" type="text" value="{{ old('colorDesc') }}" name="colorDesc" value="{{$product->colorDesc}}" placeholder="Color Description" class="form-control form-control-warning" required>
                             </div>
                         </div>
 
@@ -205,21 +205,21 @@
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label">Ean</label>
                             <div class="col-sm-10">
-                                <input id="inputHorizontalSuccess" name="ean" type="text" value="{{$product->ean}}" placeholder="ean" class="form-control form-control-success" required>
+                                <input id="inputHorizontalSuccess" value="{{ old('ean') }}" name="ean" type="text" value="{{$product->ean}}" placeholder="ean" class="form-control form-control-success" required>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label">Price</label>
                             <div class="col-sm-10">
-                                <input id="inputHorizontalSuccess" name="price" type="number" value="{{$product->price}}" placeholder="price" class="form-control form-control-success" required>
+                                <input id="inputHorizontalSuccess" value="{{ old('price') }}" name="price" type="number" value="{{$product->price}}" placeholder="price" class="form-control form-control-success" required>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label">Stock Qty</label>
                             <div class="col-sm-10">
-                                <input id="inputHorizontalSuccess" name="stockQty" type="number" value="{{$product->stockQty}}" placeholder="quantity" class="form-control form-control-success" required>
+                                <input id="inputHorizontalSuccess" value="{{ old('stockQty') }}" name="stockQty" type="number" value="{{$product->stockQty}}" placeholder="quantity" class="form-control form-control-success" required>
                             </div>
                         </div>
 
@@ -227,7 +227,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label">Min Qty Alert</label>
                             <div class="col-sm-10">
-                                <input id="inputHorizontalSuccess" name="minQtyAlert" type="number" value="{{$product->minQtyAlert}}" placeholder="alert quantity" class="form-control form-control-success" required>
+                                <input id="inputHorizontalSuccess" value="{{ old('minQtyAlert') }}" name="minQtyAlert" type="number" value="{{$product->minQtyAlert}}" placeholder="alert quantity" class="form-control form-control-success" required>
                             </div>
                         </div>
 
@@ -235,7 +235,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label">Product Description</label>
                             <div class="col-sm-10">
-                                <textarea class="form-control" rows="5" id="comment" name="description" required>{{$product->productDesc}}</textarea>
+                                <textarea class="form-control" rows="5" id="comment" value="{{ old('description') }}" name="description" required>{{$product->productDesc}}</textarea>
                             </div>
                         </div>
 

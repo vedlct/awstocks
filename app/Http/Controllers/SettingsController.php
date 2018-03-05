@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Size;
 use Session;
 use Illuminate\Http\Request;
 use App\Color;
@@ -35,7 +36,13 @@ class SettingsController extends Controller
 
             return view('settings.care');
 
-        }elseif ($r->option=="runtosize"){
+        }
+        elseif ($r->option=="size"){
+
+            return view('settings.size');
+
+        }
+        elseif ($r->option=="runtosize"){
 
             return view('settings.runtosize');
 
@@ -47,6 +54,13 @@ class SettingsController extends Controller
     public function colorAjax () {
         $color = Color::get();
         $datatables = Datatables::of($color);
+        return $datatables->make(true);
+    }
+
+    public function sizeAjax (Request $r) {
+        $size = Size::where('sizeType',$r->type)
+            ->get();
+        $datatables = Datatables::of($size);
         return $datatables->make(true);
     }
     //ajax controller to show category
@@ -111,6 +125,27 @@ class SettingsController extends Controller
         Session::flash('message', 'Color Inserted successfully');
         return back();
     }
+
+    public function addSize(Request $r){
+
+        return view('settings.insertsize')->with('sizeType',$r->type);
+    }
+    public function insertSize(Request $r){
+
+
+        $this->validate($r,[
+            'sizeName' => 'required|max:45',
+            'sizeDescription' => 'max:45',
+            'sizeType' => 'required|max:45',
+        ]);
+        $size=new Size;
+        $size->sizeName=$r->sizeName;
+        $size->sizeDescription=$r->sizeDescription;
+        $size->sizeType=$r->sizeType;
+        $size->save();
+        Session::flash('message','Size Inserted successfully');
+        return view('settings.insertsize')->with('sizeType',$r->sizeType);
+    }
     public function insertRunToSize(Request $r){
 
         $this->validate($r,[
@@ -130,6 +165,11 @@ class SettingsController extends Controller
     public function editColor($id){
         $color=Color::findOrFail($id);
         return view('settings.edit.editcolor')->with('color',$color);
+    }
+
+    public function editSize($id){
+        $size=Size::findOrFail($id);
+        return view('settings.edit.editsize')->with('size',$size);
     }
 
     public function editCategory($id){
@@ -181,6 +221,23 @@ class SettingsController extends Controller
         Session::flash('message', 'Color Updated successfully');
         return back();
 
+
+    }
+
+    public function updateSize(Request $r){
+
+        $this->validate($r,[
+            'sizeName' => 'required|max:45',
+            'sizeDescription' => 'max:45',
+            'sizeType' => 'required|max:45',
+        ]);
+        $size=Size::findOrFail($r->id);
+        $size->sizeName=$r->sizeName;
+        $size->sizeDescription=$r->sizeDescription;
+        $size->sizeType=$r->sizeType;
+        $size->save();
+        Session::flash('message','Size Inserted successfully');
+        return view('settings.insertsize')->with('sizeType',$r->sizeType);
 
     }
 
@@ -239,6 +296,13 @@ class SettingsController extends Controller
         $runToSize=RunToSize::findOrFail($id);
         $runToSize->delete();
         Session::flash('message', 'Run To Size Deleted successfully');
+        return back();
+    }
+
+    public function destroySize($id){
+        $size=Size::findOrFail($id);
+        $size->delete();
+        Session::flash('message', 'Size Deleted successfully');
         return back();
     }
 

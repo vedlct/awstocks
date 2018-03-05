@@ -2,6 +2,7 @@
 
 @section('content')
 
+
     <div class="row">
 
 
@@ -18,7 +19,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label">Care Name</label>
                             <div class="col-sm-10">
-                                <input id="inputHorizontalWarning" type="text" name="careName"  class="form-control form-control-warning" required>
+                                <input id="inputHorizontalWarning" type="text" value="{{ old('careName') }}" name="careName"  class="form-control form-control-warning" required>
 
                                 @if ($errors->has('careName'))
                                     <span class="help-block">
@@ -31,7 +32,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label">Care Description</label>
                             <div class="col-sm-10">
-                                <textarea class="form-control" rows="5" id="comment" name="careDescription" required></textarea>
+                                <textarea class="form-control" rows="5" id="comment" name="careDescription" required>{{ old('careDescription') }}</textarea>
                                 @if ($errors->has('careDescription'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('careDescription') }}</strong>
