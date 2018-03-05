@@ -57,7 +57,7 @@
             <tr>
 
                 <th>Select</th>
-                {{--<th>Category</th>--}}
+                <th>Category</th>
                 <th>Sku</th>
                 <th>Price</th>
                 <th>State</th>
@@ -128,7 +128,7 @@
                     { "data": function(data){
                         return '<input type="checkbox" name="selected_rows[]" data-panel-id="'+data.offerId+'"onclick="selected_rows(this)" value="'+ data.offerId +'" />';},
                         "orderable": false, "searchable":false, "name":"selected_rows" },
-//                    { data: 'categoryName', name: 'categoryName' },
+                    { data: 'categoryName', name: 'categoryName' },
                     { data: 'sku', name: 'sku' },
                     { data: 'price', name: 'price' },
                     { data: 'state', name: 'state' },

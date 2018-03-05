@@ -16,6 +16,7 @@ define('STATE',array(
 ));
 
 
+
 define('SizeCategory',
     array("Womenswear clothing / lingerie",
         "Womenswear shoes",
@@ -43,10 +44,5 @@ define('SizeCategory',
 
 
 );
-define('Status',array("Active","Inactive"));
 
-//
-//<option value="s">S</option>
-//                                    <option value="m">M</option>
-//                                    <option value="l">L</option>
-//                                    <option value="xl">XL</option>
+define('Status',array("Active","Inactive","Downloaded"));
