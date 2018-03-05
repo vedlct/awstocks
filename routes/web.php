@@ -84,6 +84,9 @@ Route::post('edit/color','SettingsController@updateColor')->name('update.color')
 Route::post('edit/care','SettingsController@updateCare')->name('update.care');
 Route::post('edit/runtosize','SettingsController@updateRunToSize')->name('update.runToSize');
 
+//stockinfo
+Route::view('/stockinfo', 'stockinfo')->name('stockinfo');
+Route::post('/stockinfo/showinfo', 'StockController@Showinfo')->name('stockinfo.showinfo');
 
 
 //Route::get('/dashboard', 'HomeController@index')->name('home');
