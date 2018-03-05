@@ -57,7 +57,7 @@
             <tr>
 
                 <th>Select</th>
-                {{--<th>Category</th>--}}
+                <th>Category</th>
                 <th>Sku</th>
                 <th>Price</th>
                 <th>State</th>
@@ -128,7 +128,7 @@
                     { "data": function(data){
                         return '<input type="checkbox" name="selected_rows[]" data-panel-id="'+data.offerId+'"onclick="selected_rows(this)" value="'+ data.offerId +'" />';},
                         "orderable": false, "searchable":false, "name":"selected_rows" },
-//                    { data: 'categoryName', name: 'categoryName' },
+                    { data: 'categoryName', name: 'categoryName' },
                     { data: 'sku', name: 'sku' },
                     { data: 'price', name: 'price' },
                     { data: 'state', name: 'state' },
@@ -202,15 +202,17 @@
                         data: {'fulloffers': offers},
                         success: function (data) {
 
+                          //  alert(data);
 
-                            var link = document.createElement("a");
-                            link.download = "FullOfferList.csv";
-                            var uri = '{{url("/csv/FullOfferList.csv")}}';
-                            link.href = uri;
-                            document.body.appendChild(link);
-                            link.click();
-                            document.body.removeChild(link);
-                            delete link;
+
+                            {{--var link = document.createElement("a");--}}
+                            {{--link.download = "FullOfferList.csv";--}}
+                            {{--var uri = '{{url("/csv/FullOfferList.csv")}}';--}}
+                            {{--link.href = uri;--}}
+                            {{--document.body.appendChild(link);--}}
+                            {{--link.click();--}}
+                            {{--document.body.removeChild(link);--}}
+                            {{--delete link;--}}
 
 
                         }
@@ -232,14 +234,14 @@
                             data: {'priceCreation': offers},
                             success: function (data) {
 
-                                var link = document.createElement("a");
-                                link.download = "PriceUpdateList.csv";
-                                var uri = '{{url("/csv/PriceUpdateList.csv")}}';
-                                link.href = uri;
-                                document.body.appendChild(link);
-                                link.click();
-                                document.body.removeChild(link);
-                                delete link;
+                                {{--var link = document.createElement("a");--}}
+                                {{--link.download = "PriceUpdateList.csv";--}}
+                                {{--var uri = '{{url("/csv/PriceUpdateList.csv")}}';--}}
+                                {{--link.href = uri;--}}
+                                {{--document.body.appendChild(link);--}}
+                                {{--link.click();--}}
+                                {{--document.body.removeChild(link);--}}
+                                {{--delete link;--}}
 
 
                             }
@@ -260,14 +262,14 @@
                     data: {'stockUpdate': offers},
                     success: function (data) {
 
-                        var link = document.createElement("a");
-                        link.download = "StockUpdateList.csv";
-                        var uri = '{{url("/csv/StockUpdateList.csv")}}';
-                        link.href = uri;
-                        document.body.appendChild(link);
-                        link.click();
-                        document.body.removeChild(link);
-                        delete link;
+                        {{--var link = document.createElement("a");--}}
+                        {{--link.download = "StockUpdateList.csv";--}}
+                        {{--var uri = '{{url("/csv/StockUpdateList.csv")}}';--}}
+                        {{--link.href = uri;--}}
+                        {{--document.body.appendChild(link);--}}
+                        {{--link.click();--}}
+                        {{--document.body.removeChild(link);--}}
+                        {{--delete link;--}}
 
 
                     }
@@ -288,14 +290,14 @@
                     data: {'markdownUpdate': offers},
                     success: function (data) {
 
-                        var link = document.createElement("a");
-                        link.download = "markdownUpdateList.csv";
-                        var uri = '{{url("/csv/markdownUpdateList.csv")}}';
-                        link.href = uri;
-                        document.body.appendChild(link);
-                        link.click();
-                        document.body.removeChild(link);
-                        delete link;
+                        {{--var link = document.createElement("a");--}}
+                        {{--link.download = "markdownUpdateList.csv";--}}
+                        {{--var uri = '{{url("/csv/markdownUpdateList.csv")}}';--}}
+                        {{--link.href = uri;--}}
+                        {{--document.body.appendChild(link);--}}
+                        {{--link.click();--}}
+                        {{--document.body.removeChild(link);--}}
+                        {{--delete link;--}}
 
                     }
 
