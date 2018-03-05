@@ -10,7 +10,7 @@
 
                 <div class="card-body" style="padding: 1%;">
                     <div align="center" style="margin-bottom: 3%;">
-                        <h2 style="color: #989898;"><b>Add Product Information</b></h2>
+                        <h2 style="color: #989898;"><b>Add Offer Information</b></h2>
                     </div>
                     <form method="post" action="{{route('offer.insert')}}">
 
@@ -61,19 +61,23 @@
                     </div>
 
                     <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">Start Date</label>
-                            <div class="col-sm-10">
-                                <input id="fromdate" type="text" value="{{ old('disStartPrice') }}" name="disStartPrice"  placeholder="pick date" class="form-control form-control-warning" required>
-                            </div>
-                        </div>
+
+                            <label class="col-md-3 form-control-label">Start Date</label>
+
+                                <input id="fromdate" type="text" value="{{ old('disStartPrice') }}" name="disStartPrice"  placeholder="pick date" class="form-control form-control-warning col-md-3" required>
 
 
-                        <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">End Date</label>
-                            <div class="col-sm-10">
-                                <input id="todate" type="text" value="{{ old('disEndPrice') }}" name="disEndPrice" placeholder="pick date" class="form-control form-control-warning" required>
-                            </div>
-                        </div>
+
+
+
+
+                            <label class="col-md-3">End Date</label>
+
+                                <input id="todate" type="text" value="{{ old('disEndPrice') }}" name="disEndPrice" placeholder="pick date" class="form-control form-control-warning col-md-3" required>
+
+
+
+                    </div>
 
 
 

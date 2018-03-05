@@ -13,7 +13,7 @@
 
                 <div class="card-body" style="padding: 1%;">
                     <div align="center" style="margin-bottom: 3%;">
-                        <h2 style="color: #989898;"><b>Add Product Information</b></h2>
+                        <h2 style="color: #989898;"><b>Edit Product Information</b></h2>
                     </div>
 
                     <form class="form-horizontal" method="post" action="{{route('product.update')}}" enctype="multipart/form-data">
@@ -136,11 +136,10 @@
                         </div>
 
 
-
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label">Size Type</label>
                             <div class="col-sm-4">
-                                <select name="sizeType" class="form-control form-control-warning" id="sizeType"  >
+                                <select name="sizeType" class="form-control form-control-warning" id="sizeType">
                                     <option value="">Select One</option>
                                     @foreach($sizeTypes as $size)
                                         <option value="{{$size->sizeType}}">{{$size->sizeType}}</option>

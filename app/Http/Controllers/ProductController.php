@@ -84,6 +84,7 @@ class ProductController extends Controller
         $runToSizes=RunToSize::get();
         $cares=Care::get();
         $product=Product::findOrFail($id);
+//        $type=Size::where('sizeType',$product->)->get();
         return view('product.edit')
             ->with('categories',$categories)
             ->with('sColors',$sColors)
