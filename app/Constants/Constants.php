@@ -15,7 +15,7 @@ define('STATE',array(
     "3" => "3",
 ));
 
-define('Status',array("Active","Inactive"));
+define('Status',array("Active","Inactive","Downloaded"));
 
 //
 //<option value="s">S</option>

@@ -198,14 +198,14 @@
                     data: {'products': products},
                     success: function (data) {
 
-                        var link = document.createElement("a");
-                        link.download = "ProductList.csv";
-                        var uri = '{{url("/csv/ProductList.csv")}}';
-                        link.href = uri;
-                        document.body.appendChild(link);
-                        link.click();
-                        document.body.removeChild(link);
-                        delete link;
+                        {{--var link = document.createElement("a");--}}
+                        {{--link.download = "ProductList.csv";--}}
+                        {{--var uri = '{{url("/csv/ProductList.csv")}}';--}}
+                        {{--link.href = uri;--}}
+                        {{--document.body.appendChild(link);--}}
+                        {{--link.click();--}}
+                        {{--document.body.removeChild(link);--}}
+                        {{--delete link;--}}
 
 
                     }
