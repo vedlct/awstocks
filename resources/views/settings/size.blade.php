@@ -24,6 +24,7 @@
     <tr>
         <th>Color Name</th>
         <th>Description</th>
+        <th>Action</th>
     </tr>
     </thead>
     <tbody>
@@ -75,53 +76,40 @@
                 { data: 'sizeName', name: 'sizeName' },
                 { data: 'sizeDescription', name: 'sizeDescription' },
 
-//                { "data": function(data){
-//                    return '<a class="btn" data-panel-id="'+data.offerId+'"onclick="editColor(this)"><i class="fa fa-edit"></i></a><a class="btn" data-panel-id="'+data.offerId+'"onclick="deleteOffer(this)"><i class="fa fa-trash"></i></a>';},
-//                    "orderable": false, "searchable":false, "name":"selected_rows" }
+                { "data": function(data){
+                    return '<a class="btn" data-panel-id="'+data.sizeId+'"onclick="editSize(this)"><i class="fa fa-edit"></i></a><a class="btn" data-panel-id="'+data.sizeId+'"onclick="deleteSize(this)"><i class="fa fa-trash"></i></a>';},
+                    "orderable": false, "searchable":false, "name":"selected_rows" }
 
 
             ],
 
         });
 
+
     });
 
-    {{--$(document).ready(function() {--}}
-        {{--var type=$('#sizecat').val();--}}
+    function editSize(x) {
+        btn = $(x).data('panel-id');
+        var url = '{{route("edit.size", ":id") }}';
+        //alert(url);
+        var newUrl=url.replace(':id', btn);
+        window.location.href = newUrl;
+    }
 
-            {{--var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');--}}
+    function deleteSize(x) {
+        btn = $(x).data('panel-id');
+        var url = '{{route("size.destroy", ":id") }}';
+        //alert(url);
+        var result = confirm("Want to delete?");
+        if (result) {
 
-            {{--table = $('#sizetable').DataTable({--}}
-
-                {{--processing: true,--}}
-                {{--serverSide: true,--}}
-                {{--stateSave: true,--}}
-                {{--"ajax": {--}}
-                    {{--"url": "{!! route('settings.sizeajax') !!}",--}}
-                    {{--"type": "POST",--}}
-                    {{--data: {_token: CSRF_TOKEN, 'type': type}--}}
-                {{--},--}}
-                {{--columns: [--}}
-
-                    {{--{data: 'sizeName', name: 'sizeName'},--}}
-                    {{--{data: 'sizeDescription', name: 'sizeDescription'},--}}
-
-{{--//                { "data": function(data){--}}
-{{--//                    return '<a class="btn" data-panel-id="'+data.offerId+'"onclick="editColor(this)"><i class="fa fa-edit"></i></a><a class="btn" data-panel-id="'+data.offerId+'"onclick="deleteOffer(this)"><i class="fa fa-trash"></i></a>';},--}}
-{{--//                    "orderable": false, "searchable":false, "name":"selected_rows" }--}}
+            var newUrl=url.replace(':id', btn);
+            window.location.href = newUrl;}
+    }
 
 
-                {{--],--}}
-
-            {{--});--}}
-
-        {{--$('#sizecat').change(function(){ //button filter event click--}}
-            {{--table.search("").draw(); //just redraw myTableFilter--}}
-            {{--table.ajax.reload();  //just reload table--}}
-        {{--});--}}
 
 
-    {{--});--}}
 
 </script>
 
