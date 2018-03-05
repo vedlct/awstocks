@@ -91,6 +91,9 @@ Route::post('edit/care','SettingsController@updateSize')->name('update.size');
 Route::post('edit/runtosize','SettingsController@updateRunToSize')->name('update.runToSize');
 
 
+//Delete Settings
+Route::get('delete/size/{id}','SettingsController@destroySize')->name('size.destroy');
+
 
 //Route::get('/dashboard', 'HomeController@index')->name('home');
 
