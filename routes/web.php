@@ -94,6 +94,9 @@ Route::post('update/runtosize','SettingsController@updateRunToSize')->name('upda
 Route::view('/stockinfo', 'stockinfo')->name('stockinfo');
 Route::post('/stockinfo/showinfo', 'StockController@Showinfo')->name('stockinfo.showinfo');
 
+//Delete Settings
+Route::get('delete/size/{id}','SettingsController@destroySize')->name('size.destroy');
+
 
 //Route::get('/dashboard', 'HomeController@index')->name('home');
 
