@@ -15,6 +15,10 @@ use Yajra\DataTables\DataTables;
 class StockController extends Controller
 {
     //
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function Showinfo() {
 
