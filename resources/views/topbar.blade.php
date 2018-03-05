@@ -13,7 +13,7 @@
                 <span>
                          <!-- dark Logo text -->
                          {{--<img src="../assets/images/logo-text.png" alt="homepage" class="dark-logo" />--}}
-                    <b>Stock</b>
+                    <b>Baker Leather</b>
                     <!-- Light Logo text -->
                          {{--<img src="images/logo-light-text.png" class="light-logo" alt="homepage" />--}}
                 </span> </a>
