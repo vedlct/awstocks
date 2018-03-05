@@ -53,7 +53,24 @@
     });
 
 
-    function editColor() {
+    function editCategory(x) {
+        btn = $(x).data('panel-id');
+        var url = '{{route("edit.category", ":id") }}';
+        //alert(url);
+        var newUrl=url.replace(':id', btn);
+        window.location.href = newUrl;
 
     }
+
+    function deletCategory(x) {
+        btn = $(x).data('panel-id');
+        var url = '{{route("category.destroy", ":id") }}';
+        //alert(url);
+        var result = confirm("Want to delete?");
+        if (result) {
+
+            var newUrl=url.replace(':id', btn);
+            window.location.href = newUrl;}
+    }
+
 </script>

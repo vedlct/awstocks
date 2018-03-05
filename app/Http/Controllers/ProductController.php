@@ -376,6 +376,5 @@ class ProductController extends Controller
          return Response::stream($callback, 200, $headers); //use Illuminate\Support\Facades\Response;
 
 
-
     }
 }

@@ -8,7 +8,7 @@
             <ul id="sidebarnav">
                 <li class="nav-small-cap">Dashboard</li>
                 <li>
-                    <a href="{{route('main')}}"><i class="mdi mdi-gauge"></i><span class="hide-menu">Stock Info</span></a>
+                    <a href="{{route('stockinfo')}}"><i class="mdi mdi-gauge"></i><span class="hide-menu">Stock Info</span></a>
 
                 </li>
                 <li>
