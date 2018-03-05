@@ -16,6 +16,8 @@ use App\Care;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Response;
 
+//use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+
 class ProductController extends Controller
 {
     public function __construct()

@@ -191,12 +191,17 @@
 
             if (products.length >0) {
 
+
+
                 $.ajax({
                     type: 'POST',
                     url: "{!! route('product.csv') !!}",
                     cache: false,
                     data: {'products': products},
                     success: function (data) {
+
+//                        var w = window.open();
+//                        $(w.document.body).html(data);
 
                         var link = document.createElement("a");
                         link.download = "ProductList.csv";
