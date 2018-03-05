@@ -44,7 +44,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label">Discount Price</label>
                             <div class="col-sm-10">
-                                <input id="inputHorizontalWarning" type="number" name="disPrice" value="{{$offer->disPrice}}" placeholder="price" onchange="setTwoNumberDecimal"   step="0.01" class="form-control form-control-warning" required>
+                                <input id="inputHorizontalWarning" type="number" value="{{ old('disPrice') }}" name="disPrice" value="{{$offer->disPrice}}" placeholder="price" onchange="setTwoNumberDecimal"   step="0.01" class="form-control form-control-warning" required>
                             </div>
                         </div>
 
@@ -52,14 +52,14 @@
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label">Product Id Type</label>
                             <div class="col-sm-10">
-                                <input id="inputHorizontalWarning" type="text" name="productIdType" value="<?php echo $offer['product-id-type']; ?>" placeholder="insert Id" class="form-control form-control-warning" required>
+                                <input id="inputHorizontalWarning" type="text" value="{{ old('productIdType') }}" name="productIdType" value="<?php echo $offer['product-id-type']; ?>" placeholder="insert Id" class="form-control form-control-warning" required>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label">Start Date</label>
                             <div class="col-sm-10">
-                                <input id="fromdate" type="text" name="disStartPrice" value="{{$offer->disStartPrice}}" placeholder="pick date" class="form-control form-control-warning" required>
+                                <input id="fromdate" type="text" value="{{ old('disStartPrice') }}" name="disStartPrice" value="{{$offer->disStartPrice}}" placeholder="pick date" class="form-control form-control-warning" required>
                             </div>
                         </div>
 
@@ -67,7 +67,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label">End Date</label>
                             <div class="col-sm-10">
-                                <input id="todate" type="text" name="disEndPrice" placeholder="pick date" value="{{$offer->disEndPrice}}" class="form-control form-control-warning" required>
+                                <input id="todate" type="text" value="{{ old('disEndPrice') }}" name="disEndPrice" placeholder="pick date" value="{{$offer->disEndPrice}}" class="form-control form-control-warning" required>
                             </div>
                         </div>
 
