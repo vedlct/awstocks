@@ -39,14 +39,23 @@
                         </div>
                     </div>
 
+                        <div class="row">
 
-                <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">Discount Price</label>
-                            <div class="col-sm-10">
-                                <input id="inputHorizontalWarning" type="number" name="disPrice" placeholder="price" onchange="setTwoNumberDecimal"   step="0.01" class="form-control form-control-warning" required>
-                            </div>
+                                <div class="form-group col-md-6">
+
+                                        <label style="margin-left: -12px;" class="col-md-2" >Price</label>
+                                        <input  id="price" type="text"  placeholder="price"  class="form-control form-control-warning col-md-10" readonly>
+
+                                </div>
+
+
+                            <div class="form-group col-md-6">
+
+                                        <label  class="col-md-3" style="margin-left: -30px;">Discount Price</label>
+                                    <input  id="inputHorizontalWarning" type="number" name="disPrice" placeholder="price" onchange="setTwoNumberDecimal" min="0"  step="0.01" class="form-control form-control-warning col-md-9" required>
+                                    </div>
+
                         </div>
-
 
                     <div class="form-group row">
                         <label class="col-sm-2 form-control-label">Product Id Type</label>
@@ -93,11 +102,6 @@
                         </div>
                     </div>
 
-
-
-
-
-
                         <div class="form-group row">
                             <div class="col-sm-10 offset-sm-3">
                                 <input type="submit" value="Submit" class="btn btn-primary">
@@ -137,9 +141,34 @@
                 success : function(data){
 //                    console.log(data);
                     document.getElementById("product").innerHTML = data;
+                    document.getElementById("price").value = '';
+
 
                 }
             });
+        });
+
+        $("#product").change(function() {
+            var type=$(this).val();
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            $.ajax({
+                type : 'post' ,
+                url : '{{route('getProductPrice')}}',
+                data : {_token: CSRF_TOKEN,'id':type} ,
+                success : function(data){
+//                    console.log(data);
+                    if(data !=null){
+                        document.getElementById("price").value = data;
+                    }
+                    else {
+                        document.getElementById("price").value = '';
+
+                    }
+
+                }
+            });
+
+
         });
 
 

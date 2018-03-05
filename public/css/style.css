@@ -39,6 +39,11 @@ File: scss
     top: calc(50% - 3.5px);
     left: calc(50% - 3.5px); }
 
+
+.help-block {
+  color:red !important;
+}
+
 /*
 Template Name: Monster Admin
 Author: Themedesigner
