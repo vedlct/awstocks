@@ -20,6 +20,7 @@
                         <label class="col-sm-2 form-control-label">Product category</label>
                         <div class="col-sm-10">
                             <select name="category" class="form-control form-control-warning" required>
+							
                                 <option value="">Select One</option>
                                 @foreach($categories as $category)
                                 <option value="{{$category->categoryId}}">{{$category->categoryName}}</option>
@@ -31,7 +32,7 @@
                     <div class="form-group row">
                         <label class="col-sm-2 form-control-label">Brand Name</label>
                         <div class="col-sm-10">
-                            <input id="inputHorizontalWarning" type="text" name="brand" placeholder="brand" class="form-control form-control-warning" required>
+                            <input id="inputHorizontalWarning" type="text" value="{{ old('brand') }}" name="brand" placeholder="brand" class="form-control form-control-warning" required>
                             @if ($errors->has('brand'))
                                 <span class="help-block">
                                         <strong>{{ $errors->first('brand') }}</strong>
@@ -42,7 +43,8 @@
                     <div class="form-group row">
                         <label class="col-sm-2 form-control-label">sku</label>
                         <div class="col-sm-10">
-                            <input id="inputHorizontalWarning" type="text" name="sku" placeholder="SKU" class="form-control form-control-warning" required>
+                            <input id="inputHorizontalWarning" type="text" value="{{ old('sku') }}" name="sku" placeholder="SKU" class="form-control form-control-warning" required>
+
                             @if ($errors->has('sku'))
                                 <span class="help-block">
                                         <strong>{{ $errors->first('sku') }}</strong>
@@ -68,7 +70,7 @@
                     <div class="form-group row">
                         <label class="col-sm-2 form-control-label">Color Description</label>
                         <div class="col-sm-10">
-                            <input id="inputHorizontalWarning" type="text" name="colorDesc" placeholder="Color Description" class="form-control form-control-warning" required>
+                            <input id="inputHorizontalWarning" type="text" value="{{ old('colorDesc') }}" name="colorDesc" placeholder="Color Description" class="form-control form-control-warning" required>
                             @if ($errors->has('colorDesc'))
                                 <span class="help-block">
                                         <strong>{{ $errors->first('colorDesc') }}</strong>
@@ -82,8 +84,9 @@
                     <div class="form-group row">
                         <label class="col-sm-2 form-control-label">Product Name</label>
                         <div class="col-sm-10">
-                            <input id="inputHorizontalSuccess" type="text" name="productName" placeholder="name" class="form-control form-control-success" required>
-                            @if ($errors->has('productName'))
+                            <input id="inputHorizontalSuccess" type="text" value="{{ old('productName') }}" name="productName" placeholder="name" class="form-control form-control-success" required>
+							
+							@if ($errors->has('productName'))
                                 <span class="help-block">
                                         <strong>{{ $errors->first('productName') }}</strong>
                                     </span>
@@ -93,8 +96,9 @@
                     <div class="form-group row">
                         <label class="col-sm-2 form-control-label">Style</label>
                         <div class="col-sm-10">
-                            <input id="inputHorizontalSuccess" name="style" type="text" placeholder="style" class="form-control form-control-success" required>
-                            @if ($errors->has('style'))
+                            <input id="inputHorizontalSuccess" value="{{ old('style') }}" name="style" type="text" placeholder="style" class="form-control form-control-success" required>
+
+							@if ($errors->has('style'))
                                 <span class="help-block">
                                         <strong>{{ $errors->first('style') }}</strong>
                                     </span>
@@ -158,20 +162,24 @@
                     <div class="form-group row">
                         <label class="col-sm-2 form-control-label">Ean</label>
                         <div class="col-sm-10">
-                            <input id="inputHorizontalSuccess" name="ean" type="text" placeholder="ean" class="form-control form-control-success" required>
-                            @if ($errors->has('ean'))
+                            <input id="inputHorizontalSuccess" value="{{ old('ean') }}" name="ean" type="text" placeholder="ean" class="form-control form-control-success" required>
+
+							@if ($errors->has('ean'))
                                 <span class="help-block">
                                         <strong>{{ $errors->first('ean') }}</strong>
                                     </span>
                             @endif
+							
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label class="col-sm-2 form-control-label">Price</label>
                         <div class="col-sm-10">
-                            <input id="inputHorizontalSuccess" name="price" type="number" placeholder="price" class="form-control form-control-success" required>
-                            @if ($errors->has('price'))
+						
+                            <input id="inputHorizontalSuccess" value="{{ old('price') }}" name="price" type="number" placeholder="price" class="form-control form-control-success" required>
+
+							@if ($errors->has('price'))
                                 <span class="help-block">
                                         <strong>{{ $errors->first('price') }}</strong>
                                     </span>
@@ -182,12 +190,15 @@
                     <div class="form-group row">
                         <label class="col-sm-2 form-control-label">Stock Qty</label>
                         <div class="col-sm-10">
-                            <input id="inputHorizontalSuccess" name="stockQty" type="number" placeholder="quantity" class="form-control form-control-success" required>
-                            @if ($errors->has('stockQty'))
+						
+                            <input id="inputHorizontalSuccess" value="{{ old('stockQty') }}" name="stockQty" type="number" placeholder="quantity" class="form-control form-control-success" required>
+
+							@if ($errors->has('stockQty'))
                                 <span class="help-block">
                                         <strong>{{ $errors->first('stockQty') }}</strong>
                                     </span>
                             @endif
+							
                         </div>
                     </div>
 
@@ -195,8 +206,10 @@
                     <div class="form-group row">
                         <label class="col-sm-2 form-control-label">Min Qty Alert</label>
                         <div class="col-sm-10">
-                            <input id="inputHorizontalSuccess" name="minQtyAlert" type="number" placeholder="alert quantity" class="form-control form-control-success" required>
-                            @if ($errors->has('minQtyAlert'))
+						
+                            <input id="inputHorizontalSuccess" value="{{ old('minQtyAlert') }}" name="minQtyAlert" type="number" placeholder="alert quantity" class="form-control form-control-success" required>
+
+							@if ($errors->has('minQtyAlert'))
                                 <span class="help-block">
                                         <strong>{{ $errors->first('minQtyAlert') }}</strong>
                                     </span>
@@ -207,12 +220,15 @@
                     <div class="form-group row">
                         <label class="col-sm-2 form-control-label">Product Description</label>
                         <div class="col-sm-10">
-                            <textarea class="form-control" rows="5" id="comment" name="description" required></textarea>
-                            @if ($errors->has('description'))
+						
+                            <textarea class="form-control" rows="5" id="comment" value="{{ old('description') }}" name="description" required></textarea>
+
+							@if ($errors->has('description'))
                                 <span class="help-block">
                                         <strong>{{ $errors->first('description') }}</strong>
                                     </span>
                             @endif
+							
                         </div>
                     </div>
 
@@ -286,7 +302,8 @@
                     <div class="form-group row">
                         <label class="col-sm-2 form-control-label"><b>Image 3</b> </label>
                         <div class="col-sm-10">
-                            <input type="file" name="image3Pic" value="image3Pic"  accept=".jpg, .jpeg" id="image3Pic">
+
+						<input type="file" name="image3Pic" value="image3Pic"  accept=".jpg, .jpeg" id="image3Pic">
                             @if ($errors->has('image3Pic'))
                                 <span class="help-block">
                                         <strong>{{ $errors->first('image3Pic') }}</strong>
@@ -301,12 +318,14 @@
                     <div class="form-group row">
                         <label class="col-sm-2 form-control-label"><b>Image 4</b> </label>
                         <div class="col-sm-10">
+						
                             <input type="file" name="image4Pic" value="image4Pic"  accept=".jpg,.jpeg" id="image4Pic">
                             @if ($errors->has('image4Pic'))
                                 <span class="help-block">
                                         <strong>{{ $errors->first('image4Pic') }}</strong>
                                     </span>
                             @endif
+
                             <img height="50px" width="50px" id="imgImage4Pic">
                         </div>
                     </div>

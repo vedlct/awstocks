@@ -84,18 +84,31 @@ Route::get('edit/care/{id}','SettingsController@editCare')->name('edit.care');
 Route::get('edit/runtosize/{id}','SettingsController@editRunToSize')->name('edit.runToSize');
 
 //Update Settings
+
+Route::post('edit/category','SettingsController@updateCategory')->name('update.category');
+Route::post('edit/color','SettingsController@updateColor')->name('update.color');
+Route::post('edit/care','SettingsController@updateCare')->name('update.care');
+Route::post('edit/size','SettingsController@updateSize')->name('update.size');
+Route::post('edit/runtosize','SettingsController@updateRunToSize')->name('update.runToSize');
+
+
 Route::post('update/category','SettingsController@updateCategory')->name('update.category');
 Route::post('update/color','SettingsController@updateColor')->name('update.color');
 Route::post('update/care','SettingsController@updateCare')->name('update.care');
-Route::post('update/care','SettingsController@updateSize')->name('update.size');
+Route::post('update/size','SettingsController@updateSize')->name('update.size');
 Route::post('update/runtosize','SettingsController@updateRunToSize')->name('update.runToSize');
 
 //stockinfo
 Route::view('/stockinfo', 'stockinfo')->name('stockinfo');
 Route::post('/stockinfo/showinfo', 'StockController@Showinfo')->name('stockinfo.showinfo');
 
+
 //Delete Settings
 Route::get('delete/size/{id}','SettingsController@destroySize')->name('size.destroy');
+Route::get('delete/category/{id}','SettingsController@destroyCategory')->name('category.destroy');
+Route::get('delete/care/{id}','SettingsController@destroyCare')->name('care.destroy');
+Route::get('delete/color/{id}','SettingsController@destroyColor')->name('color.destroy');
+Route::get('delete/runtosize/{id}','SettingsController@destroyRunToSize')->name('runtosize.destroy');
 
 
 //Route::get('/dashboard', 'HomeController@index')->name('home');

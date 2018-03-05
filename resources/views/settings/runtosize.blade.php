@@ -41,7 +41,7 @@
                 { data: 'runToSizeName', name: 'runToSizeName' },
                 { data: 'runToSizeDescription', name: 'runToSizeDescription' },
                 { "data": function(data){
-                    return '<a class="btn" data-panel-id="'+data.categoryId+'"onclick="editCategory(this)"><i class="fa fa-edit"></i></a><a class="btn" data-panel-id="'+data.categoryId+'"onclick="deletCategory(this)"><i class="fa fa-trash"></i></a>';},
+                    return '<a class="btn" data-panel-id="'+data.runToSizeId+'"onclick="editruntosize(this)"><i class="fa fa-edit"></i></a><a class="btn" data-panel-id="'+data.runToSizeId+'"onclick="deleteruntosize(this)"><i class="fa fa-trash"></i></a>';},
                     "orderable": false, "searchable":false, "name":"selected_rows" }
 
 
@@ -53,7 +53,21 @@
     });
 
 
-    function editColor() {
+    function editruntosize(x) {
+        btn = $(x).data('panel-id');
+        var url = '{{route("edit.runToSize", ":id") }}';
+        //alert(url);
+        var newUrl=url.replace(':id', btn);
+        window.location.href = newUrl;
+    }
 
+    function deleteruntosize(x) {
+        btn = $(x).data('panel-id');
+        var url = '{{route("runtosize.destroy", ":id") }}';
+        //alert(url);
+        var result = confirm("Want to delete?");
+        if (result) {
+            var newUrl=url.replace(':id', btn);
+            window.location.href = newUrl;}
     }
 </script>

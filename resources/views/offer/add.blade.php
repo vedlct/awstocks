@@ -39,35 +39,31 @@
                         </div>
                     </div>
 
-                        <div class="row">
-
-                                <div class="form-group col-md-6">
-
-                                        <label style="margin-left: -12px;" class="col-md-2" >Price</label>
-                                        <input  id="price" type="text"  placeholder="price"  class="form-control form-control-warning col-md-10" readonly>
-
-                                </div>
 
 
-                            <div class="form-group col-md-6">
+					<div class="form-group row">
+						<div class="form-group col-md-6">
+							<label style="margin-left: -12px;" class="col-md-2" >Price</label>
+							<input  id="price" type="text"  placeholder="price"  class="form-control form-control-warning col-md-10" readonly>
+						</div>
 
-                                        <label  class="col-md-3" style="margin-left: -30px;">Discount Price</label>
-                                    <input  id="inputHorizontalWarning" type="number" name="disPrice" placeholder="price" onchange="setTwoNumberDecimal" min="0"  step="0.01" class="form-control form-control-warning col-md-9" required>
-                                    </div>
-
-                        </div>
+						<div class="form-group col-md-6">
+							<label  class="col-md-3" style="margin-left: -30px;">Discount Price</label>
+							<input  id="inputHorizontalWarning" type="number" value="{{ old('disPrice') }}" name="disPrice" placeholder="price" onchange="setTwoNumberDecimal" min="0"  step="0.01" class="form-control form-control-warning col-md-9" required>
+						</div>
+					</div>
 
                     <div class="form-group row">
                         <label class="col-sm-2 form-control-label">Product Id Type</label>
                         <div class="col-sm-10">
-                            <input id="inputHorizontalWarning" type="text" name="productIdType" placeholder="insert Id" class="form-control form-control-warning" required>
+                            <input id="inputHorizontalWarning" type="text" value="{{ old('productIdType') }}" name="productIdType" placeholder="insert Id" class="form-control form-control-warning" required>
                         </div>
                     </div>
 
                     <div class="form-group row">
                             <label class="col-sm-2 form-control-label">Start Date</label>
                             <div class="col-sm-10">
-                                <input id="fromdate" type="text" name="disStartPrice"  placeholder="pick date" class="form-control form-control-warning" required>
+                                <input id="fromdate" type="text" value="{{ old('disStartPrice') }}" name="disStartPrice"  placeholder="pick date" class="form-control form-control-warning" required>
                             </div>
                         </div>
 
@@ -75,7 +71,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label">End Date</label>
                             <div class="col-sm-10">
-                                <input id="todate" type="text" name="disEndPrice" placeholder="pick date" class="form-control form-control-warning" required>
+                                <input id="todate" type="text" value="{{ old('disEndPrice') }}" name="disEndPrice" placeholder="pick date" class="form-control form-control-warning" required>
                             </div>
                         </div>
 

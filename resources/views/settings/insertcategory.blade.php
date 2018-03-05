@@ -18,7 +18,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label">Category Name</label>
                             <div class="col-sm-10">
-                                <input id="inputHorizontalWarning" type="text" name="categoryName"  class="form-control form-control-warning" required>
+                                <input id="inputHorizontalWarning" type="text" value="{{ old('categoryName') }}" name="categoryName"  class="form-control form-control-warning" required>
                                 @if ($errors->has('categoryName'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('categoryName') }}</strong>
@@ -30,7 +30,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label">Category Description</label>
                             <div class="col-sm-10">
-                                <textarea class="form-control" rows="5" id="comment" name="categoryDesc" required></textarea>
+                                <textarea class="form-control" rows="5" id="comment" name="categoryDesc" required>{{ old('categoryDesc') }}</textarea>
                                 @if ($errors->has('categoryDesc'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('categoryDesc') }}</strong>
