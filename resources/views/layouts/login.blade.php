@@ -12,7 +12,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{{url('assets/images/favicon.png')}}">
-    <title>Stock</title>
+    <title>Baker</title>
     <!-- Bootstrap Core CSS -->
     <link href="{{url('assets/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
     <!-- Custom CSS -->
