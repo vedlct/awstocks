@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- version 4.7.3
+-- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 03, 2018 at 01:22 PM
--- Server version: 10.1.19-MariaDB
--- PHP Version: 7.0.13
+-- Generation Time: Mar 05, 2018 at 10:07 AM
+-- Server version: 10.1.25-MariaDB
+-- PHP Version: 7.1.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -125,8 +127,8 @@ CREATE TABLE `offer` (
 
 INSERT INTO `offer` (`offerId`, `fkproductId`, `disPrice`, `disStartPrice`, `disEndPrice`, `state`, `product-id-type`, `status`, `lastExportedBy`, `lastExportedDate`) VALUES
 (1, 2, '10.50', '2018-03-01', '2018-03-23', '11', 'dfd5454', 'Active', 2, NULL),
-(3, 2, '2.00', 'sdsd', 'dssds', '11', 'sdsd', 'Active', 2, '2018-03-03 16:26:27'),
-(4, 2, '65.55', 'dssd', 'sdsd', '11', 'sdsd', 'Active', 2, '2018-03-03 16:28:30');
+(3, 2, '2.00', 'sdsd', 'dssds', '11', 'sdsd', 'Downloaded', 2, '2018-03-05 07:54:52'),
+(4, 2, '65.55', 'dssd', 'sdsd', '11', 'sdsd', 'Downloaded', 2, '2018-03-05 07:54:52');
 
 -- --------------------------------------------------------
 
@@ -138,12 +140,12 @@ CREATE TABLE `product` (
   `productId` int(11) NOT NULL,
   `status` varchar(45) DEFAULT NULL,
   `fkcategoryId` int(11) NOT NULL,
-  `style` varchar(45) DEFAULT NULL,
-  `sku` varchar(45) DEFAULT NULL,
-  `ean` varchar(45) DEFAULT NULL,
-  `productName` varchar(45) DEFAULT NULL,
+  `style` varchar(20) DEFAULT NULL,
+  `sku` varchar(25) DEFAULT NULL,
+  `ean` varchar(20) DEFAULT NULL,
+  `productName` varchar(75) DEFAULT NULL,
   `productDesc` mediumtext,
-  `brand` varchar(25) DEFAULT NULL,
+  `brand` varchar(45) DEFAULT NULL,
   `color` varchar(25) DEFAULT NULL,
   `colorDesc` mediumtext,
   `size` varchar(5) DEFAULT NULL,
@@ -365,6 +367,7 @@ ALTER TABLE `offer`
 --
 ALTER TABLE `product`
   ADD CONSTRAINT `fk_product_category1` FOREIGN KEY (`fkcategoryId`) REFERENCES `category` (`categoryId`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
