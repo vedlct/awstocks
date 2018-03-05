@@ -12,7 +12,9 @@
 */
 
 //HOme
-Route::get('/main', 'HomeController@index')->name('main');
+//Route::get('/main', 'HomeController@index')->name('main');
+Route::view('/main', 'stockinfo')->name('main');
+
 Route::get('/', 'Auth\LoginController@show');
 
 //Product
