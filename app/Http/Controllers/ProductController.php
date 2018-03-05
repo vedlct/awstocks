@@ -360,7 +360,7 @@ class ProductController extends Controller
                 ->leftJoin('category', 'category.categoryId', '=', 'product.fkcategoryId')->where('product.productId',$productId)->get()->toArray();
             $list=array_merge($list,$newlist);
 
-            DB::table('Product')
+            DB::table('product')
                 ->where('productId',$productId)
                 ->update($data);
         }
