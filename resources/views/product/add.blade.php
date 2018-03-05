@@ -193,7 +193,7 @@
 						
                             <input id="inputHorizontalSuccess" value="{{ old('stockQty') }}" name="stockQty" type="number" placeholder="quantity" class="form-control form-control-success" required>
 
-							if ($errors->has('stockQty'))
+							@if ($errors->has('stockQty'))
                                 <span class="help-block">
                                         <strong>{{ $errors->first('stockQty') }}</strong>
                                     </span>
