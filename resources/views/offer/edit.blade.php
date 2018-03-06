@@ -12,7 +12,7 @@
                     <div align="center" style="margin-bottom: 3%;">
                         <h2 style="color: #989898;"><b>Edit Product Information</b></h2>
                     </div>
-                    <form method="post" action="{{route('offer.update')}}">
+                    <form method="post" action="{{route('offer.update')}}" onsubmit="return checkOfferInsert()">
 
                         <div class="form-group row">
                             {{csrf_field()}}
@@ -52,7 +52,14 @@
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label">Product Id Type</label>
                             <div class="col-sm-10">
-                                <input id="inputHorizontalWarning" type="text" name="productIdType" value="<?php echo $offer['product-id-type']; ?>" placeholder="insert Id" class="form-control form-control-warning" required>
+
+                                <select name="productIdType" class="form-control form-control-warning" required>
+                                    <option selected value="">Select Product Id Type</option>
+                                    <?php for ($i=0;$i<count(ProductIdType);$i++){?>
+                                    <option @if(ProductIdType[$i] == $offer['product-id-type']) selected @endif value="<?php echo ProductIdType[$i]?>"><?php echo ProductIdType[$i]?></option>
+                                    <?php }?>
+                                </select>
+
                             </div>
                         </div>
 
@@ -125,6 +132,20 @@
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <script>
+
+        function checkOfferInsert() {
+
+            var fromdate =  document.getElementById("fromdate").value;
+            var todate =   document.getElementById("todate").value;
+//        alert(fromdate);
+//        alert(todate);
+
+            if (fromdate > todate) {
+                alert ("Event End Date Can not be before Event Start Date!!");
+                return false;
+            }
+
+        }
 
 
         $("#category").change(function() {

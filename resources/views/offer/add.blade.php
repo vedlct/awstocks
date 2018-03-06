@@ -12,7 +12,7 @@
                     <div align="center" style="margin-bottom: 3%;">
                         <h2 style="color: #989898;"><b>Add Offer Information</b></h2>
                     </div>
-                    <form method="post" action="{{route('offer.insert')}}">
+                    <form method="post" action="{{route('offer.insert')}}" onsubmit="return checkOfferInsert()">
 
                         <div class="form-group row">
                             {{csrf_field()}}
@@ -70,7 +70,13 @@
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label">Product Id Type</label>
                             <div class="col-sm-10">
-                                <input id="inputHorizontalWarning" type="text" value="{{ old('productIdType') }}" name="productIdType" placeholder="insert Id" class="form-control form-control-warning" required>
+                                {{--<input id="inputHorizontalWarning" type="text" value="{{ old('productIdType') }}" name="productIdType" placeholder="insert Id" class="form-control form-control-warning" required>--}}
+                                <select name="productIdType" class="form-control form-control-warning" required>
+                                    <option selected value="">Select Product Id Type</option>
+                                    <?php for ($i=0;$i<count(ProductIdType);$i++){?>
+                                    <option @if(ProductIdType[$i] == old('productIdType')) selected @endif value="<?php echo ProductIdType[$i]?>"><?php echo ProductIdType[$i]?></option>
+                                    <?php }?>
+                                </select>
                             </div>
                         </div>
 
@@ -93,6 +99,7 @@
                             <label class="col-sm-2 form-control-label">State</label>
                             <div class="col-sm-10">
                                 <select name="state" class="form-control form-control-warning" required>
+                                    <option selected value="">Select State</option>
                                     @foreach(STATE as $s)
                                         <option value="{{$s}}">{{$s}}</option>
                                     @endforeach
@@ -104,8 +111,10 @@
                             <label class="col-sm-2 form-control-label">Status</label>
                             <div class="col-sm-10">
                                 <select name="status" class="form-control form-control-warning" required>
-                                    <option value="Active">Active</option>
-                                    <option value="Inactive">Inactive</option>
+                                    <option selected value="">Select Status</option>
+                                    <?php for ($i=0;$i<count(Status);$i++){ if (Status[$i] != Status[2]){?>
+                                    <option value="<?php echo Status[$i]?>"><?php echo Status[$i]?></option>
+                                    <?php }}?>
                                 </select>
                             </div>
                         </div>
@@ -135,6 +144,20 @@
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <script>
+
+        function checkOfferInsert() {
+
+        var fromdate =  document.getElementById("fromdate").value;
+        var todate =   document.getElementById("todate").value;
+//        alert(fromdate);
+//        alert(todate);
+
+        if (fromdate > todate) {
+            alert ("Event End Date Can not be before Event Start Date!!");
+            return false;
+        }
+
+        }
 
 
         $("#category").change(function() {
@@ -178,6 +201,7 @@
 
 
         });
+
 
 
         function setTwoNumberDecimal(event) {

@@ -15,6 +15,8 @@ define('STATE',array(
     "3" => "3",
 ));
 
+define('ProductIdType',array("SHOP_SKU"));
+
 
 
 define('SizeCategory',
