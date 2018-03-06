@@ -205,7 +205,7 @@
 
                             var link = document.createElement("a");
                             link.download = "FullOfferList.csv";
-                            var uri = '{{url("/csv/FullOfferList.csv")}}';
+                            var uri = '{{url("/public/csv/FullOfferList.csv")}}';
                             link.href = uri;
                             document.body.appendChild(link);
                             link.click();
@@ -234,7 +234,7 @@
 
                                 var link = document.createElement("a");
                                 link.download = "PriceUpdateList.csv";
-                                var uri = '{{url("/csv/PriceUpdateList.csv")}}';
+                                var uri = '{{url("/public/csv/PriceUpdateList.csv")}}';
                                 link.href = uri;
                                 document.body.appendChild(link);
                                 link.click();
@@ -262,7 +262,7 @@
 
                         var link = document.createElement("a");
                         link.download = "StockUpdateList.csv";
-                        var uri = '{{url("/csv/StockUpdateList.csv")}}';
+                        var uri = '{{url("/public/csv/StockUpdateList.csv")}}';
                         link.href = uri;
                         document.body.appendChild(link);
                         link.click();
@@ -290,7 +290,7 @@
 
                         var link = document.createElement("a");
                         link.download = "markdownUpdateList.csv";
-                        var uri = '{{url("/csv/markdownUpdateList.csv")}}';
+                        var uri = '{{url("/public/csv/markdownUpdateList.csv")}}';
                         link.href = uri;
                         document.body.appendChild(link);
                         link.click();
