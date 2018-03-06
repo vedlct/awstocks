@@ -84,13 +84,12 @@
                             <label class="col-sm-2 form-control-label">State</label>
                             <div class="col-sm-10">
                                 <select name="state" class="form-control form-control-warning" required>
-                                    @foreach(STATE as $s)
-                                        <option value="{{$s}}"
-                                        @if($offer->state == $s)
-                                            selected
-                                                @endif
-                                        >{{$s}}</option>
-                                    @endforeach
+                                    <?php for ($i=0;$i<count(STATE);$i++){?>
+                                        <option @if($offer->state == STATE[$i]) selected @endif value="<?php echo STATE[$i]?>"><?php echo STATE[$i]?></option>
+                                        <?php } ?>
+                                    {{--@foreach(STATE as $s)--}}
+                                        {{--<option value="{{$s}}" @if($offer->state == $s)selected @endif >{{$s}}</option>--}}
+                                    {{--@endforeach--}}
                                 </select>
                             </div>
                         </div>
@@ -99,10 +98,13 @@
                             <label class="col-sm-2 form-control-label">Status</label>
                             <div class="col-sm-10">
                                 <select name="status" class="form-control form-control-warning" required>
-                                    <option value="Active">Active</option>
-                                    <option value="Inactive"  @if($offer->status=="Inactive")
-                                    selected
-                                            @endif>Inactive</option>
+
+
+                                        <option selected value="">Select Status</option>
+                                        <?php for ($i=0;$i<count(Status);$i++){ if (Status[$i] != Status[2]){?>
+                                        <option @if($offer->status==Status[$i]) selected @endif value="<?php echo Status[$i]?>"><?php echo Status[$i]?></option>
+                                        <?php }} ?>
+
                                 </select>
                             </div>
                         </div>

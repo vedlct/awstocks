@@ -8,12 +8,7 @@ define('SIZE',array(
     "xl" => "xl",
 ));
 
-define('STATE',array(
-    "11" => "11",
-    "1" => "1",
-    "2" => "2",
-    "3" => "3",
-));
+define('STATE',array("11", "1", "2", "3"));
 
 define('ProductIdType',array("SHOP_SKU"));
 
@@ -43,8 +38,6 @@ define('SizeCategory',
         "Babywear shoes",
         "Babywear accessories"
         )
-
-
 );
 
 define('Status',array("Active","Inactive","Downloaded"));
