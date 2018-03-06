@@ -177,8 +177,7 @@
                         <label class="col-sm-2 form-control-label">Price(£)<span style="color: red" class="required">*</span></label>
                         <div class="col-sm-10">
 						
-                            <input id="inputHorizontalSuccess" value="{{ old('price') }}" name="price" type="number"  step=".01" class="form-control form-control-success" required>
-
+                            <input id="inputHorizontalSuccess" value="{{ old('price') }}" name="price" type="number" min="0" pattern="^\d*(\.\d{0,2})?$" step=".01" class="form-control form-control-success" required>
 							@if ($errors->has('price'))
                                 <span class="help-block">
                                         <strong>{{ $errors->first('price') }}</strong>
