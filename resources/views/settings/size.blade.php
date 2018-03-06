@@ -59,8 +59,6 @@
             $('#addform').hide();
         }
 
-
-
        table.DataTable({
 
             processing: true,

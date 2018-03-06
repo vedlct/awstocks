@@ -99,11 +99,11 @@ class OfferController extends Controller
         $offer=array(
             'fkproductId'=>$r->product,
             'disPrice'=>$r->disPrice,
-            'disStartPrice'=>$r->disStartPrice,
-            'disEndPrice'=>$r->disEndPrice,
+            'disStartPrice'=>date("Y-m-d", strtotime($r->disStartPrice)),
+            'disEndPrice'=>date("Y-m-d", strtotime($r->disEndPrice)),
             'state'=>$r->state,
             'status'=>$r->status,
-            'lastExportedBy'=>Auth::user()->userId,
+
             'product-id-type'=>$r->productIdType,
 
         );
