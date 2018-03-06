@@ -10,19 +10,22 @@
 
                 <div class="card-body" style="padding: 1%;">
                     <div align="center" style="margin-bottom: 3%;">
-                        <h2 style="color: #989898;"><b>Edit Offer Information</b></h2>
+
+                        <h2 style="color: #989898;"><b>Edit Offer Info</b></h2>
+
                     </div>
                     <form method="post" action="{{route('offer.update')}}" onsubmit="return checkOfferInsert()">
 
                         <div class="form-group row">
                             {{csrf_field()}}
                             <input type="hidden" name="id" value="{{$id}}">
-                            <label class="col-sm-2 form-control-label">Product category</label>
+                            <label class="col-sm-2 form-control-label">Product category<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-10">
                                 <select name="category" class="form-control form-control-warning" id="category" >
                                     <option value="">Select One</option>
                                     @foreach($categories as $category)
-                                        <option value="{{$category->categoryId}}">{{$category->categoryName}}</option>
+
+                                        <option value="{{$category->categoryId}}"<?php if (!empty($offer->product->fkcategoryId) && $offer->product->fkcategoryId == $category->categoryId)  echo 'selected = "selected"'; ?>>{{$category->categoryName}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -32,7 +35,7 @@
 
                         <div class="form-group row">
 
-                            <label class="col-sm-2 form-control-label">Product Name</label>
+                            <label class="col-sm-2 form-control-label">Product Name<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-10">
                                 <select name="product" class="form-control form-control-warning" id="product" required>
                                     <option value="{{$offer->fkproductId}}">{{$offer->product->productName}}</option>
@@ -42,15 +45,24 @@
 
 
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">Discount Price</label>
+                            <label class="col-sm-2 form-control-label">Discount Price<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-10">
-                                <input id="inputHorizontalWarning" type="number"  name="disPrice" value="{{$offer->disPrice}}" placeholder="price" onchange="setTwoNumberDecimal"   step="0.01" class="form-control form-control-warning" required>
+                                <input id="inputHorizontalWarning" type="number"  name="disPrice" value="{{$offer->disPrice}}" placeholder="price"  step="0.01" class="form-control form-control-warning myInputField" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 form-control-label">Discount Price<span style="color: red" class="required">*</span></label>
+                            <div class="col-sm-10">
+                                <input  id="price" type="text" name="price" class="form-control form-control-warning producprice" value="{{$offer->product->price}}" readonly>
                             </div>
                         </div>
 
 
+
+
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">Product Id Type</label>
+                            <label class="col-sm-2 form-control-label">Product Id Type<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-10">
 
                                 <select name="productIdType" class="form-control form-control-warning" required>
@@ -64,24 +76,24 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">Start Date</label>
+                            <label class="col-sm-2 form-control-label">Start Date<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-10">
-                                <input id="fromdate" type="text"  name="disStartPrice" value="{{$offer->disStartPrice}}" placeholder="pick date" class="form-control form-control-warning" required>
+                                <input id="fromdate" type="date"  name="disStartPrice" value="{{$offer->disStartPrice}}" placeholder="pick date" class="form-control form-control-warning" required>
                             </div>
                         </div>
 
 
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">End Date</label>
+                            <label class="col-sm-2 form-control-label">End Date<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-10">
-                                <input id="todate" type="text"  name="disEndPrice" placeholder="pick date" value="{{$offer->disEndPrice}}" class="form-control form-control-warning" required>
+                                <input id="todate" type="date"  name="disEndPrice" placeholder="pick date" value="{{$offer->disEndPrice}}" class="form-control form-control-warning" required>
                             </div>
                         </div>
 
 
 
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">State</label>
+                            <label class="col-sm-2 form-control-label">State<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-10">
                                 <select name="state" class="form-control form-control-warning" required>
                                     <option selected value="">Select State</option>
@@ -93,7 +105,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">Status</label>
+                            <label class="col-sm-2 form-control-label">Status<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-10">
                                 <select name="status" class="form-control form-control-warning" required>
 
@@ -164,6 +176,32 @@
                 }
             });
         });
+
+
+        var typingTimer;
+        var doneTypingInterval = 1000;
+
+        $('.myInputField').keyup(function(){
+            clearTimeout(typingTimer);
+            if ($('.myInputField').val) {
+                typingTimer = setTimeout(doneTyping, doneTypingInterval);
+            }
+        });
+
+        function doneTyping () {
+            var vale = $('.myInputField').val();
+            var price = $('.producprice').val();
+            var regexTest = /^\d+(?:\.\d\d?)?$/;
+            var ok = regexTest.test(vale);
+            if(!ok){
+                alert('please enter only two decimal number');
+                $('.myInputField').val('');
+            }
+            if (vale >= price){
+                alert('discount price cannot be more than product price');
+                $('.myInputField').val('');
+            }
+        }
 
 
         function setTwoNumberDecimal(event) {

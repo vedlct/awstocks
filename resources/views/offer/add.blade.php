@@ -16,7 +16,7 @@
 
                         <div class="form-group row">
                             {{csrf_field()}}
-                            <label class="col-sm-2 form-control-label">Product category</label>
+                            <label class="col-sm-2 form-control-label">Product category<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-10">
                                 <select name="category" class="form-control form-control-warning" id="category" required>
                                     <option value="">Select One</option>
@@ -31,7 +31,7 @@
 
                         <div class="form-group row">
 
-                            <label class="col-sm-2 form-control-label">Product Name</label>
+                            <label class="col-sm-2 form-control-label">Product Name<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-10">
                                 <select name="product" class="form-control form-control-warning" id="product" required>
                                     <option value="">Select Product</option>
@@ -41,34 +41,25 @@
 
                         <div class="form-group row">
 
-                            <label  class="col-sm-2 form-control-label" >Discount Price</label>
+                            <label  class="col-sm-2 form-control-label" >Discount Price<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-4">
-                                <input  id="inputHorizontalWarning" type="number" value="{{ old('disPrice') }}" minlength="1.00" name="disPrice" placeholder="price" onchange="setTwoNumberDecimal" min="0"  step="0.01" class="form-control form-control-warning " required>
+
+                                <input  id="inputHorizontalWarning" type="number" value="{{ old('disPrice') }}" name="disPrice"  class="form-control form-control-warning myInputField" required>
+
                             </div>
 
                             <label  class="col-sm-1 form-control-label" >Price:</label>
                             <div class="col-sm-5">
-                                <input  id="price" type="text"  name="price"  class="form-control form-control-warning" readonly>
+
+                                <input  id="price" type="text" name="price" class="form-control form-control-warning producprice" readonly>
+
                             </div>
 
 
                         </div>
 
-
-                        {{--<div class="form-group row">--}}
-                        {{--<div class="form-group col-md-7">--}}
-                        {{--<label style="margin-left: -12px;" class="col-md-4" >Price</label>--}}
-                        {{--<input style="margin-left: -32px;" id="price" type="text"  placeholder="price"  class="form-control form-control-warning col-md-8" readonly>--}}
-                        {{--</div>--}}
-
-                        {{--<div class="form-group col-md-5">--}}
-                        {{--<label  class="col-md-3" style="margin-left: -30px;">Discount Price</label>--}}
-                        {{--<input  id="inputHorizontalWarning" type="number" value="{{ old('disPrice') }}" name="disPrice" placeholder="price" onchange="setTwoNumberDecimal" min="0"  step="0.01" class="form-control form-control-warning col-md-9" required>--}}
-                        {{--</div>--}}
-                        {{--</div>--}}
-
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">Product Id Type</label>
+                            <label class="col-sm-2 form-control-label">Product Id Type<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-10">
                                 {{--<input id="inputHorizontalWarning" type="text" value="{{ old('productIdType') }}" name="productIdType" placeholder="insert Id" class="form-control form-control-warning" required>--}}
                                 <select name="productIdType" class="form-control form-control-warning" required>
@@ -81,22 +72,18 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">Start Date</label>
+                            <label class="col-sm-2 form-control-label">Start Date<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-4">
                                 <input id="fromdate" type="text" value="{{ old('disStartPrice') }}" name="disStartPrice"  placeholder="pick date" class="form-control form-control-warning" required>
                             </div>
-                            <label class="col-sm-1 form-control-label">End Date</label>
+                            <label class="col-sm-1 form-control-label">End Date<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-5">
                                 <input id="todate" type="text" value="{{ old('disEndPrice') }}" name="disEndPrice" placeholder="pick date" class="form-control form-control-warning" required>
                             </div>
                         </div>
 
-
-
-
-
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">State</label>
+                            <label class="col-sm-2 form-control-label">State<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-10">
                                 <select name="state" class="form-control form-control-warning" required>
                                     <option selected value="">Select State</option>
@@ -108,7 +95,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">Status</label>
+                            <label class="col-sm-2 form-control-label">Status<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-10">
                                 <select name="status" class="form-control form-control-warning" required>
                                     <option selected value="">Select Status</option>
@@ -124,7 +111,6 @@
                                 <input type="submit" value="Submit" class="btn btn-primary">
                             </div>
                         </div>
-
 
                     </form>
 
@@ -181,6 +167,7 @@
 
         $("#product").change(function() {
             var type=$(this).val();
+
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             $.ajax({
                 type : 'post' ,
@@ -189,7 +176,7 @@
                 success : function(data){
 //                    console.log(data);
                     if(data !=null){
-                        document.getElementById("price").value = data;
+                        document.getElementById("price").value = data.price;
                     }
                     else {
                         document.getElementById("price").value = '';
@@ -202,6 +189,31 @@
 
         });
 
+
+        var typingTimer;
+        var doneTypingInterval = 1000;
+
+        $('.myInputField').keyup(function(){
+            clearTimeout(typingTimer);
+            if ($('.myInputField').val) {
+                typingTimer = setTimeout(doneTyping, doneTypingInterval);
+            }
+        });
+
+        function doneTyping () {
+            var vale = $('.myInputField').val();
+            var price = $('.producprice').val();
+            var regexTest = /^\d+(?:\.\d\d?)?$/;
+            var ok = regexTest.test(vale);
+            if(!ok){
+                alert('please enter only two decimal number');
+                $('.myInputField').val('');
+            }
+            if (vale >= price){
+                alert('discount price cannot be more than product price');
+                $('.myInputField').val('');
+            }
+        }
 
 
         function setTwoNumberDecimal(event) {

@@ -76,11 +76,14 @@
                 </tr>
                 </thead>
 
-            </table>
-
+            </table><br>
+            
+            <input type="checkbox" id="selectall" onClick="selectAll(this)" /><b>Select All</b><br>
         </div>
 
+
         <a  onclick="return myfunc()" download> <button class="btn btn-danger"  >Export Products file</button></a>
+
 
     </div>
 @endsection
@@ -151,6 +154,11 @@
                 table.ajax.reload();  //just reload table
             });
         });
+        function selectAll(source) {
+            checkboxes = document.getElementsByName('selected_rows[]');
+            for(var i in checkboxes)
+                checkboxes[i].checked = source.checked;
+        }
         function editProduct(x) {
             btn = $(x).data('panel-id');
             var url = '{{route("product.edit", ":id") }}';

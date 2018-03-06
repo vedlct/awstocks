@@ -180,7 +180,9 @@ class ProductController extends Controller
 
     public function getProductPrice(Request $r){
 
-     return Response($r->id);
+        $price=Product::findOrFail($r->id);
+
+         return Response($price);
     }
 
     public function allProduct(){
