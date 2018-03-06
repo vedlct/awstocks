@@ -10,7 +10,7 @@
 
                 <div class="card-body" style="padding: 1%;">
                     <div align="center" style="margin-bottom: 3%;">
-                        <h2 style="color: #989898;"><b>Edit Product Information</b></h2>
+                        <h2 style="color: #989898;"><b>Edit Offer Info</b></h2>
                     </div>
                     <form method="post" action="{{route('offer.update')}}">
 
@@ -22,7 +22,8 @@
                                 <select name="category" class="form-control form-control-warning" id="category" >
                                     <option value="">Select One</option>
                                     @foreach($categories as $category)
-                                        <option value="{{$category->categoryId}}">{{$category->categoryName}}</option>
+
+                                        <option value="{{$category->categoryId}}"<?php if (!empty($offer->product->fkcategoryId) && $offer->product->fkcategoryId == $category->categoryId)  echo 'selected = "selected"'; ?>>{{$category->categoryName}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -59,7 +60,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label">Start Date</label>
                             <div class="col-sm-10">
-                                <input id="fromdate" type="text"  name="disStartPrice" value="{{$offer->disStartPrice}}" placeholder="pick date" class="form-control form-control-warning" required>
+                                <input id="fromdate" type="date"  name="disStartPrice" value="{{$offer->disStartPrice}}" placeholder="pick date" class="form-control form-control-warning" required>
                             </div>
                         </div>
 
@@ -67,7 +68,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label">End Date</label>
                             <div class="col-sm-10">
-                                <input id="todate" type="text"  name="disEndPrice" placeholder="pick date" value="{{$offer->disEndPrice}}" class="form-control form-control-warning" required>
+                                <input id="todate" type="date"  name="disEndPrice" placeholder="pick date" value="{{$offer->disEndPrice}}" class="form-control form-control-warning" required>
                             </div>
                         </div>
 

@@ -38,6 +38,10 @@ class OfferController extends Controller
 
     public function edit($id){
         $offer=Offer::findOrFail($id);
+//        $offer = Offer::select('offerId','fkproductId','disPrice','disStartPrice','disEndPrice','sku','state','price','stockQty','product-id-type','category.categoryName','product.fkcategoryId','productId')
+//            ->leftJoin('product', 'offer.fkproductId', '=', 'product.productId')
+//            ->leftJoin('category', 'category.categoryId', '=', 'product.fkcategoryId')
+//        ->get();
         $categories=Category::get();
 
         return view('offer.edit')

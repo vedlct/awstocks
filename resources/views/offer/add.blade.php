@@ -54,19 +54,6 @@
 
                         </div>
 
-
-                        {{--<div class="form-group row">--}}
-                        {{--<div class="form-group col-md-7">--}}
-                        {{--<label style="margin-left: -12px;" class="col-md-4" >Price</label>--}}
-                        {{--<input style="margin-left: -32px;" id="price" type="text"  placeholder="price"  class="form-control form-control-warning col-md-8" readonly>--}}
-                        {{--</div>--}}
-
-                        {{--<div class="form-group col-md-5">--}}
-                        {{--<label  class="col-md-3" style="margin-left: -30px;">Discount Price</label>--}}
-                        {{--<input  id="inputHorizontalWarning" type="number" value="{{ old('disPrice') }}" name="disPrice" placeholder="price" onchange="setTwoNumberDecimal" min="0"  step="0.01" class="form-control form-control-warning col-md-9" required>--}}
-                        {{--</div>--}}
-                        {{--</div>--}}
-
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label">Product Id Type</label>
                             <div class="col-sm-10">
@@ -84,10 +71,6 @@
                                 <input id="todate" type="text" value="{{ old('disEndPrice') }}" name="disEndPrice" placeholder="pick date" class="form-control form-control-warning" required>
                             </div>
                         </div>
-
-
-
-
 
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label">State</label>
@@ -115,7 +98,6 @@
                                 <input type="submit" value="Submit" class="btn btn-primary">
                             </div>
                         </div>
-
 
                     </form>
 
@@ -158,6 +140,7 @@
 
         $("#product").change(function() {
             var type=$(this).val();
+
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             $.ajax({
                 type : 'post' ,
@@ -166,7 +149,8 @@
                 success : function(data){
 //                    console.log(data);
                     if(data !=null){
-                        document.getElementById("price").value = data;
+
+                        document.getElementById("price").value = data.price;
                     }
                     else {
                         document.getElementById("price").value = '';

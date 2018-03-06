@@ -37,18 +37,6 @@
                         </select>
                     </div>
 
-                    <div class="col-md-4 dropdown">
-                        <label class="form-control-label">Offer Status</label> <br>
-                        <select class="form-control" id="offer" name="product">
-                            <option selected value="">--Select Offer Status--</option>
-                            <?php for ($i=0;$i<count(Status);$i++){?>
-
-                            <option value="<?php echo Status[$i]?>"><?php echo Status[$i]?></option>
-
-                            <?php } ?>
-                        </select>
-                    </div>
-
                 </div>
                 <br>
         <div class="table table-responsive">
@@ -62,7 +50,6 @@
                 <th>Price</th>
                 <th>State</th>
                 <th>Quantity</th>
-                <th>Product-Id-Type</th>
                 <th>Discount Price</th>
                 <th>Discount Start Date</th>
                 <th>Discount End Date</th>
@@ -73,7 +60,8 @@
 
             </tbody>
         </table>
-
+            <br>
+            <input type="checkbox" id="selectall" onClick="selectAll(this)" /><b>Select All</b>
 
         </div>
                 <div class="row">
@@ -133,7 +121,6 @@
                     { data: 'price', name: 'price' },
                     { data: 'state', name: 'state' },
                     { data: 'stockQty', name: 'stockQty' },
-                    { data: 'product-id-type', name: 'product-id-type' },
                     { data: 'disPrice', name: 'disPrice' },
                     { data: 'disStartPrice', name: 'disStartPrice' },
                     { data: 'disEndPrice', name: 'disEndPrice' },
@@ -144,7 +131,11 @@
 
                 ],
 
+
+
             });
+
+
             $('#category').change(function(){ //button filter event click
                 table.search("").draw(); //just redraw myTableFilter
                 table.ajax.reload();  //just reload table
@@ -159,7 +150,11 @@
             });
 
         });
-
+        function selectAll(source) {
+            checkboxes = document.getElementsByName('selected_rows[]');
+            for(var i in checkboxes)
+                checkboxes[i].checked = source.checked;
+        }
         var selecteds = [];
         function selected_rows(x) {
             btn = $(x).data('panel-id');
@@ -182,8 +177,12 @@
 
             btn = $(x).data('panel-id');
             var url = '{{route("offer.delete", ":id") }}';
-            var newUrl=url.replace(':id', btn);
-            window.location.href = newUrl;
+
+            var result = confirm("Want to delete?");
+            if (result) {
+                var newUrl = url.replace(':id', btn);
+                window.location.href = newUrl;
+            }
         }
 
         $.ajaxSetup({
