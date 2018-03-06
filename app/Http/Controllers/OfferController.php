@@ -34,8 +34,6 @@ class OfferController extends Controller
 
     }
 
-
-
     public function edit($id){
         $offer=Offer::findOrFail($id);
 //        $offer = Offer::select('offerId','fkproductId','disPrice','disStartPrice','disEndPrice','sku','state','price','stockQty','product-id-type','category.categoryName','product.fkcategoryId','productId')
@@ -51,6 +49,22 @@ class OfferController extends Controller
     }
 
     public function insert(Request $r){
+
+
+
+
+        $this->validate($r,[
+            'product' => 'required|max:70',
+            'category' => 'required',
+            'disPrice' => 'required',
+            'price' => 'required',
+            'productIdType'=>'required',
+            'disStartPrice'=>'required|date',
+            'disEndPrice'=>'required|date|after:disStartPrice',
+            'state'=>'required',
+            'status'=>'required|max:20',
+
+        ]);
 
 
         $offer=array(
@@ -72,6 +86,20 @@ class OfferController extends Controller
 
 
     public function update(Request $r){
+
+        $this->validate($r,[
+            'product' => 'required|max:70',
+            'category' => 'required',
+            'disPrice' => 'required',
+            'price' => 'required',
+            'productIdType'=>'required',
+            'disStartPrice'=>'required|date',
+            'disEndPrice'=>'required|date|after:disStartPrice',
+            'state'=>'required',
+            'status'=>'required|max:20',
+
+        ]);
+
         $offer=array(
             'fkproductId'=>$r->product,
             'disPrice'=>$r->disPrice,

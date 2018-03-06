@@ -43,12 +43,16 @@
 
                             <label  class="col-sm-2 form-control-label" >Discount Price<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-4">
+
                                 <input  id="inputHorizontalWarning" type="number" value="{{ old('disPrice') }}" name="disPrice"  class="form-control form-control-warning myInputField" required>
+
                             </div>
 
                             <label  class="col-sm-1 form-control-label" >Price:</label>
                             <div class="col-sm-5">
-                                <input  id="price" type="text"    class="form-control form-control-warning producprice" readonly>
+
+                                <input  id="price" type="text" name="price" class="form-control form-control-warning producprice" readonly>
+
                             </div>
 
 
@@ -135,7 +139,7 @@
 //        alert(todate);
 
         if (fromdate > todate) {
-            alert ("Event End Date Can not be before Event Start Date!!");
+            alert ("End Date Can not be before Start Date!!");
             return false;
         }
 

@@ -10,7 +10,9 @@
 
                 <div class="card-body" style="padding: 1%;">
                     <div align="center" style="margin-bottom: 3%;">
+
                         <h2 style="color: #989898;"><b>Edit Offer Info</b></h2>
+
                     </div>
                     <form method="post" action="{{route('offer.update')}}" onsubmit="return checkOfferInsert()">
 
@@ -45,9 +47,18 @@
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label">Discount Price<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-10">
-                                <input id="inputHorizontalWarning" type="number"  name="disPrice" value="{{$offer->disPrice}}" placeholder="price" onchange="setTwoNumberDecimal"   step="0.01" class="form-control form-control-warning" required>
+                                <input id="inputHorizontalWarning" type="number"  name="disPrice" value="{{$offer->disPrice}}" placeholder="price"  step="0.01" class="form-control form-control-warning myInputField" required>
                             </div>
                         </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 form-control-label">Discount Price<span style="color: red" class="required">*</span></label>
+                            <div class="col-sm-10">
+                                <input  id="price" type="text" name="price" class="form-control form-control-warning producprice" value="{{$offer->product->price}}" readonly>
+                            </div>
+                        </div>
+
+
 
 
                         <div class="form-group row">
@@ -85,12 +96,10 @@
                             <label class="col-sm-2 form-control-label">State<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-10">
                                 <select name="state" class="form-control form-control-warning" required>
+                                    <option selected value="">Select State</option>
                                     <?php for ($i=0;$i<count(STATE);$i++){?>
                                         <option @if($offer->state == STATE[$i]) selected @endif value="<?php echo STATE[$i]?>"><?php echo STATE[$i]?></option>
                                         <?php } ?>
-                                    {{--@foreach(STATE as $s)--}}
-                                        {{--<option value="{{$s}}" @if($offer->state == $s)selected @endif >{{$s}}</option>--}}
-                                    {{--@endforeach--}}
                                 </select>
                             </div>
                         </div>
@@ -144,7 +153,7 @@
 //        alert(todate);
 
             if (fromdate > todate) {
-                alert ("Event End Date Can not be before Event Start Date!!");
+                alert ("End Date Can not be before Start Date!!");
                 return false;
             }
 
@@ -167,6 +176,32 @@
                 }
             });
         });
+
+
+        var typingTimer;
+        var doneTypingInterval = 1000;
+
+        $('.myInputField').keyup(function(){
+            clearTimeout(typingTimer);
+            if ($('.myInputField').val) {
+                typingTimer = setTimeout(doneTyping, doneTypingInterval);
+            }
+        });
+
+        function doneTyping () {
+            var vale = $('.myInputField').val();
+            var price = $('.producprice').val();
+            var regexTest = /^\d+(?:\.\d\d?)?$/;
+            var ok = regexTest.test(vale);
+            if(!ok){
+                alert('please enter only two decimal number');
+                $('.myInputField').val('');
+            }
+            if (vale >= price){
+                alert('discount price cannot be more than product price');
+                $('.myInputField').val('');
+            }
+        }
 
 
         function setTwoNumberDecimal(event) {

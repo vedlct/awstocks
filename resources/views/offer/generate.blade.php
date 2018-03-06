@@ -36,7 +36,6 @@
                             <?php } ?>
                         </select>
                     </div>
-
                 </div>
                 <br>
         <div class="table table-responsive">
