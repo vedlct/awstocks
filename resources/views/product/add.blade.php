@@ -14,7 +14,7 @@
                     <h2 style="color: #989898;"><b>Add Product Information</b></h2>
                 </div>
 
-                <form class="form-horizontal" method="post" action="{{route('product.insert')}}" enctype="multipart/form-data">
+                <form name="addProductForm" class="form-horizontal" method="post" action="{{route('product.insert')}}" onsubmit="return checkProduct()" enctype="multipart/form-data">
                     <div class="form-group row">
                         {{csrf_field()}}
                         <label class="col-sm-2 form-control-label">Product category<span style="color: red" class="required">*</span></label>
@@ -25,6 +25,7 @@
                                 @foreach($categories as $category)
                                 <option value="{{$category->categoryId}}">{{$category->categoryName}}</option>
                                 @endforeach
+
                             </select>
                         </div>
                     </div>
@@ -43,7 +44,7 @@
                     <div class="form-group row">
                         <label class="col-sm-2 form-control-label">sku<span style="color: red" class="required">*</span></label>
                         <div class="col-sm-10">
-                            <input id="inputHorizontalWarning" type="text" value="{{ old('sku') }}" name="sku" maxlength="20" placeholder="20 characters maximum"  class="form-control form-control-warning" required>
+                            <input id="sku" type="text" value="{{ old('sku') }}" name="sku" maxlength="20" placeholder="20 characters maximum"  class="form-control form-control-warning" required>
 
                             @if ($errors->has('sku'))
                                 <span class="help-block">
@@ -96,7 +97,7 @@
                     <div class="form-group row">
                         <label class="col-sm-2 form-control-label">Style<span style="color: red" class="required">*</span></label>
                         <div class="col-sm-10">
-                            <input id="inputHorizontalSuccess" value="{{ old('style') }}" name="style"  maxlength="15" placeholder="15 characters maximum"type="text"  class="form-control form-control-success" required>
+                            <input id="style" value="{{ old('style') }}" name="style"  maxlength="15" placeholder="15 characters maximum"type="text"  class="form-control form-control-success" required>
 
 							@if ($errors->has('style'))
                                 <span class="help-block">
@@ -359,6 +360,38 @@
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <script>
+
+        {{--function checkspecialChar() {--}}
+
+            {{--var iChars = "!@#$%^&*()+=-[]\\\';,./{}|\":<>?";--}}
+
+//            for (var i = 0; i < document.addProductForm.style.value.length; i++) {
+//                if (iChars.indexOf(document.addProductForm.style.value.charAt(i)) != -1) {
+//                    alert ("Your username has special characters. \nThese are not allowed.\n Please remove them and try again.");
+//                    return false;
+//                }
+//            }
+
+        {{--}--}}
+
+        function checkProduct() {
+
+                    var iChars = "!@#$%^&*()+=-[]\\\';,./{}|\":<>?";
+
+                    for (var i = 0; i < document.addProductForm.style.value.length; i++) {
+                        if (iChars.indexOf(document.addProductForm.style.value.charAt(i)) != -1) {
+                            alert ("Your can not use not use any special character nor ‘/’ nor ‘\’ nor space");
+                            return false;
+                        }
+                    }
+                    for (var i = 0; i < document.addProductForm.sku.value.length; i++) {
+                        if (iChars.indexOf(document.addProductForm.style.value.charAt(i)) != -1) {
+                            alert ("Your can not use not use any special character nor ‘/’ nor ‘\’ nor space");
+                            return false;
+                        }
+                    }
+
+                }
 
         function setTwoNumberDecimal(event) {
             alert(asd);

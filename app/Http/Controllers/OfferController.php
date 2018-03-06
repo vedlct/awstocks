@@ -34,8 +34,6 @@ class OfferController extends Controller
 
     }
 
-
-
     public function edit($id){
         $offer=Offer::findOrFail($id);
         $categories=Category::get();
@@ -47,6 +45,22 @@ class OfferController extends Controller
     }
 
     public function insert(Request $r){
+
+
+        $disPrice = floatval($r->disPrice);
+
+        $this->validate($r,[
+            'productName' => 'required|max:70',
+            'category' => 'required',
+            'disPrice' => 'required|regex:/^(?:d*.d{1,2}|d+)$/',
+            'price' => 'required|regex:/^(?:d*.d{1,2}|d+)$/|min:'. ($disPrice+.01) .'',
+            'productIdType'=>'required',
+            'disStartPrice'=>'required|date',
+            'disEndPrice'=>'required|date|after:disStartPrice',
+            'state'=>'required',
+            'status'=>'required|max:20',
+
+        ]);
 
 
         $offer=array(
@@ -68,6 +82,22 @@ class OfferController extends Controller
 
 
     public function update(Request $r){
+
+        $disPrice = floatval($r->disPrice);
+
+        $this->validate($r,[
+            'productName' => 'required|max:70',
+            'category' => 'required',
+            'disPrice' => 'required|regex:/^(?:d*.d{1,2}|d+)$/',
+            'price' => 'required|regex:/^(?:d*.d{1,2}|d+)$/|min:'. ($disPrice+.01) .'',
+            'productIdType'=>'required',
+            'disStartPrice'=>'required|date',
+            'disEndPrice'=>'required|date|after:disStartPrice',
+            'state'=>'required',
+            'status'=>'required|max:20',
+
+        ]);
+
         $offer=array(
             'fkproductId'=>$r->product,
             'disPrice'=>$r->disPrice,

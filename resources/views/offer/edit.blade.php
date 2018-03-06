@@ -84,12 +84,10 @@
                             <label class="col-sm-2 form-control-label">State</label>
                             <div class="col-sm-10">
                                 <select name="state" class="form-control form-control-warning" required>
+                                    <option selected value="">Select State</option>
                                     <?php for ($i=0;$i<count(STATE);$i++){?>
                                         <option @if($offer->state == STATE[$i]) selected @endif value="<?php echo STATE[$i]?>"><?php echo STATE[$i]?></option>
                                         <?php } ?>
-                                    {{--@foreach(STATE as $s)--}}
-                                        {{--<option value="{{$s}}" @if($offer->state == $s)selected @endif >{{$s}}</option>--}}
-                                    {{--@endforeach--}}
                                 </select>
                             </div>
                         </div>
@@ -143,7 +141,7 @@
 //        alert(todate);
 
             if (fromdate > todate) {
-                alert ("Event End Date Can not be before Event Start Date!!");
+                alert ("End Date Can not be before Start Date!!");
                 return false;
             }
 

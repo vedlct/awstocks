@@ -40,11 +40,9 @@
                     <div class="col-md-4 dropdown">
                         <label class="form-control-label">Offer Status</label> <br>
                         <select class="form-control" id="offer" name="product">
-                            <option selected value="">--Select Offer Status--</option>
+                            <option selected value="">All Offer Status</option>
                             <?php for ($i=0;$i<count(Status);$i++){?>
-
                             <option value="<?php echo Status[$i]?>"><?php echo Status[$i]?></option>
-
                             <?php } ?>
                         </select>
                     </div>

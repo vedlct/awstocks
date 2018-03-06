@@ -48,7 +48,7 @@
 
                             <label  class="col-sm-1 form-control-label" >Price:</label>
                             <div class="col-sm-5">
-                                <input  id="price" type="text"  placeholder="price"  class="form-control form-control-warning" readonly>
+                                <input  id="price" type="text"  name="price"  class="form-control form-control-warning" readonly>
                             </div>
 
 
@@ -153,7 +153,7 @@
 //        alert(todate);
 
         if (fromdate > todate) {
-            alert ("Event End Date Can not be before Event Start Date!!");
+            alert ("End Date Can not be before Start Date!!");
             return false;
         }
 
