@@ -33,15 +33,15 @@
 
             </div>
 
-            <div class="col-md-4 dropdown">
-                <label class="form-control-label">Product Name</label> <br>
-                <select class="form-control" id="product" name="product">
-                    <option selected value="">All Product</option>
-                    @foreach($productsList as $products)
-                        <option value="{{$products->productName}}">{{$products->productName}}</option>
-                    @endforeach
-                </select>
-            </div>
+            {{--<div class="col-md-4 dropdown">--}}
+                {{--<label class="form-control-label">Product Name</label> <br>--}}
+                {{--<select class="form-control" id="product" name="product">--}}
+                    {{--<option selected value="">All Product</option>--}}
+                    {{--@foreach($productsList as $products)--}}
+                        {{--<option value="{{$products->productName}}">{{$products->productName}}</option>--}}
+                    {{--@endforeach--}}
+                {{--</select>--}}
+            {{--</div>--}}
 
             <div class="col-md-4 dropdown">
                 <label class="form-control-label">Status</label> <br>
