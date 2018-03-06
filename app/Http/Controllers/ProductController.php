@@ -99,16 +99,16 @@ class ProductController extends Controller
     public function update(Request $r){
         $this->validate($r,[
             'productName' => 'required|max:70',
-            'status' => 'max:8',
+            'status' => 'required|max:8',
             'description' => 'required|max:1100',
             'style' => 'required|max:15',
-            'sku'=>'max:20',
-            'brand'=>'max:45',
-            'size'=>'required',
-            'color'=>'required',
-            'colorDesc'=>'max:20',
-            'ean'=>'max:13',
-            'care'=>'required',
+            'sku'=>'required|max:20',
+            'brand'=>'required|max:45',
+            'size'=>'required|max:45',
+            'color'=>'required|max:45',
+            'colorDesc'=>'required|max:20',
+            'ean'=>'required|max:13',
+            'care'=>'required|max:45',
         ]);
 
 
@@ -185,11 +185,11 @@ class ProductController extends Controller
 
     public function allProduct(){
         $categories=Category::get();
-        $productsList=Product::select('productId','productName')
-            ->get();
+//        $productsList=Product::select('productId','productName')
+//            ->get();
         return view('product.allproductList')
-            ->with('categories',$categories)
-            ->with('productsList',$productsList);
+            ->with('categories',$categories);
+//            ->with('productsList',$productsList);
 
     }
     /* for datatable in all product page */
@@ -227,16 +227,16 @@ class ProductController extends Controller
 //        return $r;
         $this->validate($r,[
             'productName' => 'required|max:70',
-            'status' => 'max:8',
+            'status' => 'required|max:8',
             'description' => 'required|max:1100',
             'style' => 'required|max:15',
-            'sku'=>'max:20',
-            'brand'=>'max:45',
-            'size'=>'required',
-            'color'=>'required',
-            'colorDesc'=>'max:20',
-            'ean'=>'max:13',
-            'care'=>'required',
+            'sku'=>'required|max:20',
+            'brand'=>'required|max:45',
+            'size'=>'required|max:45',
+            'color'=>'required|max:45',
+            'colorDesc'=>'required|max:20',
+            'ean'=>'required|max:13',
+            'care'=>'required|max:45',
         ]);
         $product=new Product();
         $product->productName=$r->productName;
@@ -332,7 +332,6 @@ class ProductController extends Controller
         if($product->mainImage!=null){
             File::delete('productImage/'.$product->mainImage);
         }
-
 
         $product->delete();
         Session::flash('message', 'Product Deleted successfully');

@@ -20,7 +20,7 @@
                         <div class="form-group row">
                             {{csrf_field()}}
                             <input type="hidden" name="id" value="{{$id}}">
-                            <label class="col-sm-2 form-control-label">Product category</label>
+                            <label class="col-sm-2 form-control-label">Product category<span style="color: red" class="required">*</span></label>
 
                             <div class="col-sm-10">
                                 <select name="category" class="form-control form-control-warning" required>
@@ -43,10 +43,10 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">Brand Name</label>
+                            <label class="col-sm-2 form-control-label">Brand Name<span style="color: red" class="required">*</span></label>
 
                             <div class="col-sm-10">
-                                <input id="inputHorizontalWarning" type="text"  name="brand" placeholder="brand" class="form-control form-control-warning" value="{{$product->brand}}" required>
+                                <input id="inputHorizontalWarning" type="text"  name="brand" placeholder="brand" maxlength="45" placeholder="45 characters maximum" class="form-control form-control-warning" value="{{$product->brand}}" required>
                                 @if ($errors->has('brand'))
                                     <span class="help-block" style="position: absolute; left: 150px; color: red; font-size:14px">
 								<strong>{{ $errors->first('brand') }}</strong>
@@ -55,9 +55,9 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">sku</label>
+                            <label class="col-sm-2 form-control-label">sku<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-10">
-                                <input id="inputHorizontalWarning" type="text" name="sku" placeholder="SKU" class="form-control form-control-warning" value="{{$product->sku}}" required>
+                                <input id="inputHorizontalWarning" type="text" name="sku" maxlength="20" placeholder="20 characters maximum" class="form-control form-control-warning" value="{{$product->sku}}" required>
                                 @if ($errors->has('category'))
                                     <span class="help-block" style="position: absolute; left: 150px; color: red; font-size:14px">
 								<strong>{{ $errors->first('category') }}</strong>
@@ -67,21 +67,8 @@
 
 
 
-                        {{--<div class="form-group row">--}}
-                            {{--<label class="col-sm-2 form-control-label">Color</label>--}}
-                            {{--<div class="col-sm-10">--}}
-                                {{--<select name="color" class="form-control form-control-warning" required>--}}
-                                    {{--<option value="">Select One</option>--}}
-                                    {{--@foreach($sColors as $color)--}}
-                                        {{--<option value="{{$color->colorName}}">{{$color->colorName}}</option>--}}
-                                    {{--@endforeach--}}
-                                {{--</select>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-
-
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">Color</label>
+                            <label class="col-sm-2 form-control-label">Color<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-10">
                                 <select name="color" class="form-control form-control-warning" required>
                                     <option value="">Select One</option>
@@ -100,24 +87,19 @@
                             </div>
                         </div>
 
-
-
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">Status</label>
+                            <label class="col-sm-2 form-control-label">Color Description<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-10">
-                                <select name="status" class="form-control form-control-warning" required>
-                                    <option value="Active">Active</option>
-                                    <option value="Inactive"  @if($product->status=="Inactive")
-                                                    selected
-                                            @endif>Inactive</option>
-                                </select>
+                                <input id="inputHorizontalWarning" type="text"  name="colorDesc" value="{{$product->colorDesc}}" maxlength="20" placeholder="20 characters maximum" class="form-control form-control-warning" required>
                             </div>
                         </div>
 
+
+
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">Product Name</label>
+                            <label class="col-sm-2 form-control-label">Product Name<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-10">
-                                <input id="inputHorizontalSuccess" type="text"  name="productName" placeholder="name" class="form-control form-control-success" value="{{$product->productName}}" required>
+                                <input id="inputHorizontalSuccess" type="text"  name="productName" placeholder="name" maxlength="70" placeholder="70 characters maximum" class="form-control form-control-success" value="{{$product->productName}}" required>
                                 @if ($errors->has('productName'))
                                     <span class="help-block" style="position: absolute; left: 150px; color: red; font-size:14px">
 								<strong>{{ $errors->first('productName') }}</strong>
@@ -125,32 +107,32 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">Style</label>
+                            <label class="col-sm-2 form-control-label">Style<span style="color: red" class="required">*</span></label>
                             @if ($errors->has('style'))
                                 <span class="help-block" style="position: absolute; left: 150px; color: red; font-size:14px">
 								<strong>{{ $errors->first('style') }}</strong>
 							</span> @endif
                             <div class="col-sm-10">
-                                <input id="inputHorizontalSuccess" name="style" type="text" placeholder="style" class="form-control form-control-success" value="{{$product->brand}}" required>
+                                <input id="inputHorizontalSuccess" name="style" type="text" maxlength="15" placeholder="15 characters maximum" class="form-control form-control-success" value="{{$product->style}}" required>
                             </div>
                         </div>
 
 
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">Size Type</label>
+                            <label class="col-sm-2 form-control-label">Size Type<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-4">
                                 <select name="sizeType" class="form-control form-control-warning" id="sizeType">
-                                    <option value="">Select One</option>
+                                    <option value="">Select Size Type</option>
                                     @foreach($sizeTypes as $size)
                                         <option value="{{$size->sizeType}}">{{$size->sizeType}}</option>
                                     @endforeach
                                 </select>
                             </div>
-                        </div>
+                        {{--</div>--}}
 
 
-                        <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">Size</label>
+                        {{--<div class="form-group row">--}}
+                            <label class="col-sm-2 form-control-label">Size<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-4">
                                 <select name="size" id="size" class="form-control form-control-warning" required>
                                     <option value="{{$product->size}}">{{$product->size}}</option>
@@ -159,10 +141,10 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">Run to Size</label>
+                            <label class="col-sm-2 form-control-label">Run to Size<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-4">
                                 <select name="runToSize" class="form-control form-control-warning" required>
-                                    <option value="">Select One</option>
+                                    <option value="">Select Run to Size</option>
                                     @foreach($runToSizes as $value)
                                         <option value="{{$value->runToSizeName}}"
                                                 @if($product->runtosize==$value->runToSizeName)
@@ -172,22 +154,13 @@
                                     @endforeach
                                 </select>
                             </div>
-                        </div>
+                        {{--</div>--}}
 
-
-                        <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">Color Description</label>
-                            <div class="col-sm-10">
-                                <input id="inputHorizontalWarning" type="text"  name="colorDesc" value="{{$product->colorDesc}}" placeholder="Color Description" class="form-control form-control-warning" required>
-                            </div>
-                        </div>
-
-
-                        <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">Care</label>
+                        {{--<div class="form-group row">--}}
+                            <label class="col-sm-2 form-control-label">Care<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-4">
                                 <select name="care" class="form-control form-control-warning" required>
-                                    <option value="">Select One</option>
+                                    <option value="">Select Care</option>
                                     @foreach($cares as $care)
                                         <option value="{{$care->careName}}"
                                                 @if($product->care==$care->careName)
@@ -202,21 +175,21 @@
 
 
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">Ean</label>
+                            <label class="col-sm-2 form-control-label">EAN<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-10">
-                                <input id="inputHorizontalSuccess" name="ean" type="text" value="{{$product->ean}}" placeholder="ean" class="form-control form-control-success" required>
+                                <input id="inputHorizontalSuccess" name="ean" maxlength="13" placeholder="13 characters maximum" type="text" value="{{$product->ean}}" placeholder="ean" class="form-control form-control-success" required>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">Price</label>
+                            <label class="col-sm-2 form-control-label">Price(£)<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-10">
                                 <input id="inputHorizontalSuccess"  name="price" type="number" value="{{$product->price}}" placeholder="price" class="form-control form-control-success" required>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">Stock Qty</label>
+                            <label class="col-sm-2 form-control-label">Stock Qty<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-10">
                                 <input id="inputHorizontalSuccess"  name="stockQty" type="number" value="{{$product->stockQty}}" placeholder="quantity" class="form-control form-control-success" required>
                             </div>
@@ -224,7 +197,7 @@
 
 
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">Min Qty Alert</label>
+                            <label class="col-sm-2 form-control-label">Min Qty Alert<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-10">
                                 <input id="inputHorizontalSuccess"  name="minQtyAlert" type="number" value="{{$product->minQtyAlert}}" placeholder="alert quantity" class="form-control form-control-success" required>
                             </div>
@@ -232,9 +205,22 @@
 
 
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">Product Description</label>
+                            <label class="col-sm-2 form-control-label">Product Description<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-10">
                                 <textarea class="form-control" rows="5" id="comment"  name="description" required>{{$product->productDesc}}</textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 form-control-label">Status<span style="color: red" class="required">*</span></label>
+                            <div class="col-sm-10">
+                                <select name="status" class="form-control form-control-warning" required>
+
+                                    <?php for ($i=0;$i<count(Status);$i++){ if (Status[$i] != Status[2]){?>
+                                    <option @if($product->status == Status[$i]) selected @endif value="<?php echo Status[$i]?>"><?php echo Status[$i]?></option>
+                                    <?php }}?>
+
+                                </select>
                             </div>
                         </div>
 

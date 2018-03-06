@@ -13,7 +13,7 @@
                 <span>
                          <!-- dark Logo text -->
                          {{--<img src="../assets/images/logo-text.png" alt="homepage" class="dark-logo" />--}}
-                    <b>Baker Leather</b>
+                    <b>Lloyd Baker</b>
                     <!-- Light Logo text -->
                          {{--<img src="images/logo-light-text.png" class="light-logo" alt="homepage" />--}}
                 </span> </a>
@@ -36,14 +36,14 @@
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Welcome<b> {{strtoupper(Auth::user()->name)}} <i class="fa fa-sort-desc" aria-hidden="true"></i></b></a>
+                        Welcome <b> {{ucfirst(Auth::user()->name)}} <i class="fa fa-sort-desc" aria-hidden="true"></i></b></a>
                     <div class="dropdown-menu dropdown-menu-right animated flipInY">
                         <ul class="dropdown-user">
 
-                            <li><a href="#"><i class="ti-settings"></i> Account Setting</a></li>
-                            <li role="separator" class="divider"></li>
+                            {{--<li><a href="#"><i class="ti-settings"></i> Account Setting</a></li>--}}
+                            {{--<li role="separator" class="divider"></li>--}}
                             <li>
-                                <a href="{{ route('logout') }}"
+                                <a style="text-align: center" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                     Logout
