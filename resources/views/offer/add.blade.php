@@ -16,7 +16,7 @@
 
                         <div class="form-group row">
                             {{csrf_field()}}
-                            <label class="col-sm-2 form-control-label">Product category</label>
+                            <label class="col-sm-2 form-control-label">Product category<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-10">
                                 <select name="category" class="form-control form-control-warning" id="category" required>
                                     <option value="">Select One</option>
@@ -31,7 +31,7 @@
 
                         <div class="form-group row">
 
-                            <label class="col-sm-2 form-control-label">Product Name</label>
+                            <label class="col-sm-2 form-control-label">Product Name<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-10">
                                 <select name="product" class="form-control form-control-warning" id="product" required>
                                     <option value="">Select Product</option>
@@ -41,7 +41,7 @@
 
                         <div class="form-group row">
 
-                            <label  class="col-sm-2 form-control-label" >Discount Price</label>
+                            <label  class="col-sm-2 form-control-label" >Discount Price<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-4">
                                 <input  id="inputHorizontalWarning" type="number" value="{{ old('disPrice') }}" name="disPrice" placeholder="price" onchange="setTwoNumberDecimal" min="0"  step="0.01" class="form-control form-control-warning " required>
                             </div>
@@ -55,25 +55,25 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">Product Id Type</label>
+                            <label class="col-sm-2 form-control-label">Product Id Type<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-10">
                                 <input id="inputHorizontalWarning" type="text" value="{{ old('productIdType') }}" name="productIdType" placeholder="insert Id" class="form-control form-control-warning" required>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">Start Date</label>
+                            <label class="col-sm-2 form-control-label">Start Date<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-4">
                                 <input id="fromdate" type="text" value="{{ old('disStartPrice') }}" name="disStartPrice"  placeholder="pick date" class="form-control form-control-warning" required>
                             </div>
-                            <label class="col-sm-1 form-control-label">End Date</label>
+                            <label class="col-sm-1 form-control-label">End Date<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-5">
                                 <input id="todate" type="text" value="{{ old('disEndPrice') }}" name="disEndPrice" placeholder="pick date" class="form-control form-control-warning" required>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">State</label>
+                            <label class="col-sm-2 form-control-label">State<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-10">
                                 <select name="state" class="form-control form-control-warning" required>
                                     @foreach(STATE as $s)
@@ -84,7 +84,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">Status</label>
+                            <label class="col-sm-2 form-control-label">Status<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-10">
                                 <select name="status" class="form-control form-control-warning" required>
                                     <option value="Active">Active</option>
@@ -149,8 +149,8 @@
                 success : function(data){
 //                    console.log(data);
                     if(data !=null){
-
-                        document.getElementById("price").value = data.price;
+                        alert(data);
+                        document.getElementById("price").value = data;
                     }
                     else {
                         document.getElementById("price").value = '';

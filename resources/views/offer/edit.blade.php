@@ -17,7 +17,7 @@
                         <div class="form-group row">
                             {{csrf_field()}}
                             <input type="hidden" name="id" value="{{$id}}">
-                            <label class="col-sm-2 form-control-label">Product category</label>
+                            <label class="col-sm-2 form-control-label">Product category<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-10">
                                 <select name="category" class="form-control form-control-warning" id="category" >
                                     <option value="">Select One</option>
@@ -33,7 +33,7 @@
 
                         <div class="form-group row">
 
-                            <label class="col-sm-2 form-control-label">Product Name</label>
+                            <label class="col-sm-2 form-control-label">Product Name<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-10">
                                 <select name="product" class="form-control form-control-warning" id="product" required>
                                     <option value="{{$offer->fkproductId}}">{{$offer->product->productName}}</option>
@@ -43,7 +43,7 @@
 
 
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">Discount Price</label>
+                            <label class="col-sm-2 form-control-label">Discount Price<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-10">
                                 <input id="inputHorizontalWarning" type="number"  name="disPrice" value="{{$offer->disPrice}}" placeholder="price" onchange="setTwoNumberDecimal"   step="0.01" class="form-control form-control-warning" required>
                             </div>
@@ -51,14 +51,14 @@
 
 
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">Product Id Type</label>
+                            <label class="col-sm-2 form-control-label">Product Id Type<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-10">
                                 <input id="inputHorizontalWarning" type="text" name="productIdType" value="<?php echo $offer['product-id-type']; ?>" placeholder="insert Id" class="form-control form-control-warning" required>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">Start Date</label>
+                            <label class="col-sm-2 form-control-label">Start Date<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-10">
                                 <input id="fromdate" type="date"  name="disStartPrice" value="{{$offer->disStartPrice}}" placeholder="pick date" class="form-control form-control-warning" required>
                             </div>
@@ -66,7 +66,7 @@
 
 
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">End Date</label>
+                            <label class="col-sm-2 form-control-label">End Date<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-10">
                                 <input id="todate" type="date"  name="disEndPrice" placeholder="pick date" value="{{$offer->disEndPrice}}" class="form-control form-control-warning" required>
                             </div>
@@ -75,7 +75,7 @@
 
 
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">State</label>
+                            <label class="col-sm-2 form-control-label">State<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-10">
                                 <select name="state" class="form-control form-control-warning" required>
                                     @foreach(STATE as $s)
@@ -90,7 +90,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">Status</label>
+                            <label class="col-sm-2 form-control-label">Status<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-10">
                                 <select name="status" class="form-control form-control-warning" required>
                                     <option value="Active">Active</option>
