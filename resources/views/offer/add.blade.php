@@ -43,12 +43,12 @@
 
                             <label  class="col-sm-2 form-control-label" >Discount Price<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-4">
-                                <input  id="inputHorizontalWarning" type="number" value="{{ old('disPrice') }}" name="disPrice" placeholder="price" onchange="setTwoNumberDecimal" min="0"  step="0.01" class="form-control form-control-warning " required>
+                                <input  id="inputHorizontalWarning" type="number" value="{{ old('disPrice') }}" name="disPrice"  class="form-control form-control-warning myInputField" required>
                             </div>
 
                             <label  class="col-sm-1 form-control-label" >Price:</label>
                             <div class="col-sm-5">
-                                <input  id="price" type="text"  placeholder="price"  class="form-control form-control-warning" readonly>
+                                <input  id="price" type="text"    class="form-control form-control-warning producprice" readonly>
                             </div>
 
 
@@ -172,8 +172,7 @@
                 success : function(data){
 //                    console.log(data);
                     if(data !=null){
-                        alert(data);
-                        document.getElementById("price").value = data;
+                        document.getElementById("price").value = data.price;
                     }
                     else {
                         document.getElementById("price").value = '';
@@ -186,6 +185,31 @@
 
         });
 
+
+        var typingTimer;
+        var doneTypingInterval = 1000;
+
+        $('.myInputField').keyup(function(){
+            clearTimeout(typingTimer);
+            if ($('.myInputField').val) {
+                typingTimer = setTimeout(doneTyping, doneTypingInterval);
+            }
+        });
+
+        function doneTyping () {
+            var vale = $('.myInputField').val();
+            var price = $('.producprice').val();
+            var regexTest = /^\d+(?:\.\d\d?)?$/;
+            var ok = regexTest.test(vale);
+            if(!ok){
+                alert('please enter only two decimal number');
+                $('.myInputField').val('');
+            }
+            if (vale >= price){
+                alert('discount price cannot be more than product price');
+                $('.myInputField').val('');
+            }
+        }
 
 
         function setTwoNumberDecimal(event) {
