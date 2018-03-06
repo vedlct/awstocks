@@ -132,7 +132,7 @@
 
 
                         {{--<div class="form-group row">--}}
-                            <label class="col-sm-2 form-control-label">Size<span style="color: red" class="required">*</span></label>
+                            <label style="text-align: right" class="col-sm-2 form-control-label">Size<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-4">
                                 <select name="size" id="size" class="form-control form-control-warning" required>
                                     <option value="{{$product->size}}">{{$product->size}}</option>
@@ -157,7 +157,7 @@
                         {{--</div>--}}
 
                         {{--<div class="form-group row">--}}
-                            <label class="col-sm-2 form-control-label">Care<span style="color: red" class="required">*</span></label>
+                            <label style="text-align: right" class="col-sm-2 form-control-label">Care<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-4">
                                 <select name="care" class="form-control form-control-warning" required>
                                     <option value="">Select Care</option>
@@ -215,7 +215,6 @@
                             <label class="col-sm-2 form-control-label">Status<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-10">
                                 <select name="status" class="form-control form-control-warning" required>
-
                                     <?php for ($i=0;$i<count(Status);$i++){ if (Status[$i] != Status[2]){?>
                                     <option @if($product->status == Status[$i]) selected @endif value="<?php echo Status[$i]?>"><?php echo Status[$i]?></option>
                                     <?php }}?>

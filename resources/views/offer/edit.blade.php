@@ -12,7 +12,7 @@
                     <div align="center" style="margin-bottom: 3%;">
                         <h2 style="color: #989898;"><b>Edit Offer Info</b></h2>
                     </div>
-                    <form method="post" action="{{route('offer.update')}}">
+                    <form method="post" action="{{route('offer.update')}}" onsubmit="return checkOfferInsert()">
 
                         <div class="form-group row">
                             {{csrf_field()}}
@@ -53,7 +53,14 @@
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label">Product Id Type<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-10">
-                                <input id="inputHorizontalWarning" type="text" name="productIdType" value="<?php echo $offer['product-id-type']; ?>" placeholder="insert Id" class="form-control form-control-warning" required>
+
+                                <select name="productIdType" class="form-control form-control-warning" required>
+                                    <option selected value="">Select Product Id Type</option>
+                                    <?php for ($i=0;$i<count(ProductIdType);$i++){?>
+                                    <option @if(ProductIdType[$i] == $offer['product-id-type']) selected @endif value="<?php echo ProductIdType[$i]?>"><?php echo ProductIdType[$i]?></option>
+                                    <?php }?>
+                                </select>
+
                             </div>
                         </div>
 
@@ -78,13 +85,12 @@
                             <label class="col-sm-2 form-control-label">State<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-10">
                                 <select name="state" class="form-control form-control-warning" required>
-                                    @foreach(STATE as $s)
-                                        <option value="{{$s}}"
-                                        @if($offer->state == $s)
-                                            selected
-                                                @endif
-                                        >{{$s}}</option>
-                                    @endforeach
+                                    <?php for ($i=0;$i<count(STATE);$i++){?>
+                                        <option @if($offer->state == STATE[$i]) selected @endif value="<?php echo STATE[$i]?>"><?php echo STATE[$i]?></option>
+                                        <?php } ?>
+                                    {{--@foreach(STATE as $s)--}}
+                                        {{--<option value="{{$s}}" @if($offer->state == $s)selected @endif >{{$s}}</option>--}}
+                                    {{--@endforeach--}}
                                 </select>
                             </div>
                         </div>
@@ -93,10 +99,13 @@
                             <label class="col-sm-2 form-control-label">Status<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-10">
                                 <select name="status" class="form-control form-control-warning" required>
-                                    <option value="Active">Active</option>
-                                    <option value="Inactive"  @if($offer->status=="Inactive")
-                                    selected
-                                            @endif>Inactive</option>
+
+
+                                        <option selected value="">Select Status</option>
+                                        <?php for ($i=0;$i<count(Status);$i++){ if (Status[$i] != Status[2]){?>
+                                        <option @if($offer->status==Status[$i]) selected @endif value="<?php echo Status[$i]?>"><?php echo Status[$i]?></option>
+                                        <?php }} ?>
+
                                 </select>
                             </div>
                         </div>
@@ -126,6 +135,20 @@
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <script>
+
+        function checkOfferInsert() {
+
+            var fromdate =  document.getElementById("fromdate").value;
+            var todate =   document.getElementById("todate").value;
+//        alert(fromdate);
+//        alert(todate);
+
+            if (fromdate > todate) {
+                alert ("Event End Date Can not be before Event Start Date!!");
+                return false;
+            }
+
+        }
 
 
         $("#category").change(function() {
