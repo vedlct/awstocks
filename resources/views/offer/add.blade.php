@@ -43,7 +43,7 @@
 
                             <label  class="col-sm-2 form-control-label" >Discount Price</label>
                             <div class="col-sm-4">
-                                <input  id="inputHorizontalWarning" type="number" value="{{ old('disPrice') }}" name="disPrice" placeholder="price" onchange="setTwoNumberDecimal" min="0"  step="0.01" class="form-control form-control-warning " required>
+                                <input  id="inputHorizontalWarning" type="number" value="{{ old('disPrice') }}" minlength="1.00" name="disPrice" placeholder="price" onchange="setTwoNumberDecimal" min="0"  step="0.01" class="form-control form-control-warning " required>
                             </div>
 
                             <label  class="col-sm-1 form-control-label" >Price:</label>

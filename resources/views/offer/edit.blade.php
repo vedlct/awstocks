@@ -10,7 +10,7 @@
 
                 <div class="card-body" style="padding: 1%;">
                     <div align="center" style="margin-bottom: 3%;">
-                        <h2 style="color: #989898;"><b>Edit Product Information</b></h2>
+                        <h2 style="color: #989898;"><b>Edit Offer Information</b></h2>
                     </div>
                     <form method="post" action="{{route('offer.update')}}" onsubmit="return checkOfferInsert()">
 
