@@ -61,11 +61,9 @@ class ProductController extends Controller
     }
 
     public function getProductByCategory(Request $r){
-        $product=Product::where('fkcategoryId',$r->category)->get();
+        $product=Product::select('productId','productName')->where('fkcategoryId',$r->category)->where('status',Status[1])->get();
 
             echo "<option value=''>select one</option>";
-
-
             foreach ($product as $p) {
                 echo "<option value='$p->productId'>$p->productName</option>";
             }

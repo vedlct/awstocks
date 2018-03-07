@@ -74,7 +74,7 @@ class OfferController extends Controller
             'disEndPrice'=>$r->disEndPrice,
             'state'=>$r->state,
             'status'=>$r->status,
-            'lastExportedBy'=>Auth::user()->userId,
+//            'lastExportedBy'=>Auth::user()->userId,
             'product-id-type'=>$r->productIdType,
 
         );

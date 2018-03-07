@@ -40,4 +40,4 @@ define('SizeCategory',
         )
 );
 
-define('Status',array("Active","Inactive","Downloaded"));
+define('Status',array("New","Downloaded"));
