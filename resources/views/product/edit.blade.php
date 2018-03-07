@@ -463,6 +463,27 @@
         image4Pic(this);
     });
 
+
+    var typingTimer;
+    var doneTypingInterval = 1000;
+
+    $('.myInputField').keyup(function(){
+        clearTimeout(typingTimer);
+        if ($('.myInputField').val) {
+            typingTimer = setTimeout(doneTyping, doneTypingInterval);
+        }
+    });
+
+    function doneTyping () {
+        var vale = $('.myInputField').val();
+        var regexTest = /^\d+(?:\.\d\d?)?$/;
+        var ok = regexTest.test(vale);
+        if(!ok){
+            alert('please enter only two decimal number');
+            $('.myInputField').val('');
+        }
+    }
+
 </script>
 
     @endsection

@@ -12,7 +12,7 @@
                 </div>
 
                 <div class="container-fluid">
-        <label class="col-sm-2 form-control-label"><b>Edit List</b></label>
+        <label class="col-sm-2 form-control-label"><b>Select List</b></label>
         <div class="col-sm-10">
             <select id="content" class="form-control form-control-warning" required>
                 <option value="">Select One</option>

@@ -31,7 +31,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label">Color Description</label>
                             <div class="col-sm-10">
-                                <textarea class="form-control" rows="5" id="comment" name="colorDescription" required>{{$color->colorDescription}}</textarea>
+                                <textarea class="form-control" rows="5" id="comment" name="colorDescription" >{{$color->colorDescription}}</textarea>
                                 @if ($errors->has('colorDescription'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('colorDescription') }}</strong>

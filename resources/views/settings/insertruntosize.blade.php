@@ -29,7 +29,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label">Run To Size Description</label>
                             <div class="col-sm-10">
-                                <textarea class="form-control" rows="5" id="comment" name="runToSizeDescription" required>{{ old('runToSizeDescription') }}</textarea>
+                                <textarea class="form-control" rows="5" id="comment" name="runToSizeDescription" >{{ old('runToSizeDescription') }}</textarea>
                                 @if ($errors->has('runToSizeDescription'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('runToSizeDescription') }}</strong>

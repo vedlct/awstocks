@@ -48,7 +48,11 @@
                             <div class="col-sm-4">
 
                                 <input  id="inputHorizontalWarning" type="number" value="{{ old('disPrice') }}" name="disPrice"  class="form-control form-control-warning myInputField" required>
-
+                                @if ($errors->has('disPrice'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('disPrice') }}</strong>
+                                </span>
+                                @endif
                             </div>
 
                             <label  class="col-sm-1 form-control-label" >Price:</label>
@@ -78,10 +82,20 @@
                             <label class="col-sm-2 form-control-label">Start Date<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-4">
                                 <input id="fromdate" type="text" value="{{ old('disStartPrice') }}" name="disStartPrice"  placeholder="pick date" class="form-control form-control-warning" required>
+                                @if ($errors->has('disStartPrice'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('disStartPrice') }}</strong>
+                                </span>
+                                @endif
                             </div>
                             <label class="col-sm-1 form-control-label">End Date<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-5">
                                 <input id="todate" type="text" value="{{ old('disEndPrice') }}" name="disEndPrice" placeholder="pick date" class="form-control form-control-warning" required>
+                                @if ($errors->has('disEndPrice'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('disEndPrice') }}</strong>
+                                </span>
+                                @endif
                             </div>
                         </div>
 

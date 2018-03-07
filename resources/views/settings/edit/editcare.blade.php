@@ -32,7 +32,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label">Care Description</label>
                             <div class="col-sm-10">
-                                <textarea class="form-control" rows="5" id="comment" name="careDescription" required>{{$care->careDescription}}</textarea>
+                                <textarea class="form-control" rows="5" id="comment" name="careDescription" >{{$care->careDescription}}</textarea>
                                 @if ($errors->has('careDescription'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('careDescription') }}</strong>
