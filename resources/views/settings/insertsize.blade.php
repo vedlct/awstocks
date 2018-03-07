@@ -30,7 +30,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label">Size Description</label>
                             <div class="col-sm-10">
-                                <textarea class="form-control" rows="5" id="comment" name="sizeDescription" required></textarea>
+                                <textarea class="form-control" rows="5" id="comment" name="sizeDescription" ></textarea>
                                 @if ($errors->has('sizeDescription'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('sizeDescription') }}</strong>
