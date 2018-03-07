@@ -126,6 +126,11 @@
                         <div class="col-sm-4">
                             <select name="size" id="size" class="form-control form-control-warning" required>
                                 <option value="">Select Size</option>
+                                @if (old('size'))
+
+                                    <option selected value="{{old('size')}}">{{old('size')}}</option>
+
+                                @endif
                             </select>
                         </div>
                     </div>
@@ -376,7 +381,7 @@
 
         function checkProduct() {
 
-                    var iChars = "!@#$%^&*()+=-[]\\\';,./{}|\":<>?";
+                    var iChars = "!@#$%^&*()+= []\\\';,./{}|\":<>?";
 
                     for (var i = 0; i < document.addProductForm.style.value.length; i++) {
                         if (iChars.indexOf(document.addProductForm.style.value.charAt(i)) != -1) {

@@ -115,16 +115,15 @@ class ProductController extends Controller
             'colorDesc'=>'required|max:20',
             'ean'=>'required|max:13',
             'care'=>'required|max:45',
-            'swatchPic'=>'image|dimensions:min_width=600,min_height=800|mimes:jpeg,jpg',
-            'outfitPic'=>'image|dimensions:min_width=600,min_height=800|mimes:jpeg,jpg',
-            'mainPic' =>'image|dimensions:min_width=600,min_height=800|mimes:jpeg,jpg',
-            'image2Pic'=>'image|dimensions:min_width=600,min_height=800|mimes:jpeg,jpg',
-            'image3Pic'=>'image|dimensions:min_width=600,min_height=800|mimes:jpeg,jpg',
-            'image4Pic'=>'image|dimensions:min_width=600,min_height=800|mimes:jpeg,jpg',
-
+            'swatchPic'=>'image|mimes:jpeg,jpg',
+            'outfitPic'=>'image|mimes:jpeg,jpg',
+            'mainPic' =>'image|mimes:jpeg,jpg',
+            'image2Pic'=>'image|mimes:jpeg,jpg',
+            'image3Pic'=>'image|mimes:jpeg,jpg',
+            'image4Pic'=>'image|mimes:jpeg,jpg'
         ];
         $messages = [
-            'dimensions' => 'Image dimention should over 800px',
+           // 'dimensions' => 'Image dimention should over 800px',
         ];
         $validator = Validator::make($r->all(), $rules,$messages)->validate();
 
@@ -251,16 +250,16 @@ class ProductController extends Controller
             'colorDesc'=>'required|max:20',
             'ean'=>'required|max:13',
             'care'=>'required|max:45',
-            'swatchPic'=>'image|dimensions:min_width=600,min_height=800|mimes:jpeg,jpg',
-            'outfitPic'=>'image|dimensions:min_width=600,min_height=800|mimes:jpeg,jpg',
-            'mainPic' =>'image|dimensions:min_width=600,min_height=800|mimes:jpeg,jpg',
-            'image2Pic'=>'image|dimensions:min_width=600,min_height=800|mimes:jpeg,jpg',
-            'image3Pic'=>'image|dimensions:min_width=600,min_height=800|mimes:jpeg,jpg',
-            'image4Pic'=>'image|dimensions:min_width=600,min_height=800|mimes:jpeg,jpg'
+            'swatchPic'=>'image|mimes:jpeg,jpg',
+            'outfitPic'=>'image|mimes:jpeg,jpg',
+            'mainPic' =>'image|mimes:jpeg,jpg',
+            'image2Pic'=>'image|mimes:jpeg,jpg',
+            'image3Pic'=>'image|mimes:jpeg,jpg',
+            'image4Pic'=>'image|mimes:jpeg,jpg'
         ];
 
         $messages = [
-            'dimensions' => 'Image dimention should be over 800px',
+           // 'dimensions' => 'Image dimention should be over 800px',
         ];
 
         $validator = Validator::make($r->all(), $rules,$messages)->validate();
