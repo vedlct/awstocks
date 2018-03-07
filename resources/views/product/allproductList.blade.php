@@ -113,6 +113,7 @@
                 processing: true,
                 serverSide: true,
                 stateSave: true,
+//                bSort:false,
                 "ajax":{
                     "url": "{!! route('product.data') !!}",
                     "type": "POST",

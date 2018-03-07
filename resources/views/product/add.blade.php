@@ -23,7 +23,7 @@
 							
                                 <option value="">Select Prduct Category</option>
                                 @foreach($categories as $category)
-                                <option value="{{$category->categoryId}}">{{$category->categoryName}}</option>
+                                <option @if(old('category')==$category->categoryId )selected @endif value="{{$category->categoryId}}">{{$category->categoryName}}</option>
                                 @endforeach
 
                             </select>
@@ -61,7 +61,7 @@
                             <select name="color" class="form-control form-control-warning" required>
                                 <option value="">Select Color</option>
                                 @foreach($sColors as $color)
-                                <option value="{{$color->colorName}}">{{$color->colorName}}</option>
+                                <option @if(old('color')==$color->colorName )selected @endif value="{{$color->colorName}}">{{$color->colorName}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -115,7 +115,7 @@
                             <select name="sizeType" class="form-control form-control-warning" id="sizeType"  required >
                                 <option value="">Select Size Type</option>
                                 @foreach($sizeTypes as $size)
-                                    <option value="{{$size->sizeType}}">{{$size->sizeType}}</option>
+                                    <option @if(old('sizeType')==$size->sizeType )selected @endif value="{{$size->sizeType}}">{{$size->sizeType}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -139,7 +139,7 @@
                             <select name="runToSize" class="form-control form-control-warning" required>
                                 <option value="">Select Run to Size</option>
                                 @foreach($runToSizes as $value)
-                                    <option value="{{$value->runToSizeName}}">{{$value->runToSizeName}}</option>
+                                    <option @if(old('runToSize')==$value->runToSizeName )selected @endif value="{{$value->runToSizeName}}">{{$value->runToSizeName}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -152,7 +152,7 @@
                             <select name="care" class="form-control form-control-warning" required>
                                 <option value="">Select Care</option>
                                 @foreach($cares as $care)
-                                    <option value="{{$care->careName}}">{{$care->careName}}</option>
+                                    <option @if(old('care')==$care->careName )selected @endif value="{{$care->careName}}">{{$care->careName}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -221,7 +221,7 @@
                         <label class="col-sm-2 form-control-label">Product Description<span style="color: red" class="required">*</span></label>
                         <div class="col-sm-10">
 						
-                            <textarea class="form-control" rows="5" id="comment" value="{{ old('description') }}" name="description" required></textarea>
+                            <textarea class="form-control" rows="5" id="comment"  name="description" required> {{ old('description') }}</textarea>
 
 							@if ($errors->has('description'))
                                 <span class="help-block">
@@ -380,13 +380,13 @@
 
                     for (var i = 0; i < document.addProductForm.style.value.length; i++) {
                         if (iChars.indexOf(document.addProductForm.style.value.charAt(i)) != -1) {
-                            alert ("Your can not use not use any special character nor ‘/’ nor ‘\’ nor space");
+                            alert ("Your can not use not use any special character in Style Filed");
                             return false;
                         }
                     }
                     for (var i = 0; i < document.addProductForm.sku.value.length; i++) {
-                        if (iChars.indexOf(document.addProductForm.style.value.charAt(i)) != -1) {
-                            alert ("Your can not use not use any special character nor ‘/’ nor ‘\’ nor space");
+                        if (iChars.indexOf(document.addProductForm.sku.value.charAt(i)) != -1) {
+                            alert ("Your can not use not use any special character in sku Filed");
                             return false;
                         }
                     }

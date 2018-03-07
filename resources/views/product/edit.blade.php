@@ -121,10 +121,12 @@
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label">Size Type<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-4">
+                                {{$sizeType->sizeType}}
+
                                 <select name="sizeType" class="form-control form-control-warning" id="sizeType">
                                     <option value="">Select Size Type</option>
                                     @foreach($sizeTypes as $size)
-                                        <option value="{{$size->sizeType}}">{{$size->sizeType}}</option>
+                                        <option @if($sizeType->sizeType == $size->sizeType ) selected @endif value="{{$size->sizeType}}">{{$size->sizeType}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -215,7 +217,7 @@
                             <label class="col-sm-2 form-control-label">Status<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-10">
                                 <select name="status" class="form-control form-control-warning" required>
-                                    <?php for ($i=0;$i<count(Status);$i++){ if (Status[$i] != Status[2]){?>
+                                    <?php for ($i=0;$i<count(Status);$i++){ if (Status[$i] != Status[1]){?>
                                     <option @if($product->status == Status[$i]) selected @endif value="<?php echo Status[$i]?>"><?php echo Status[$i]?></option>
                                     <?php }}?>
 
@@ -323,7 +325,7 @@
                                     </span>
                                 @endif
                                 <img height="50px" width="50px" id="imgImage4Pic"
-                                     @if($product->image3)
+                                     @if($product->image4)
                                      src="{{url('public/productImage/'.$product->image4)}}"
                                         @endif
                                 >
