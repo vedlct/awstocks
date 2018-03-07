@@ -113,8 +113,8 @@
                             <div class="col-sm-10">
                                 <select name="status" class="form-control form-control-warning" required>
                                     <option selected value="">Select Status</option>
-                                    <?php for ($i=0;$i<count(Status);$i++){ if (Status[$i] != Status[2]){?>
-                                    <option value="<?php echo Status[$i]?>"><?php echo Status[$i]?></option>
+                                    <?php for ($i=0;$i<count(Status);$i++){ if (Status[$i] == Status[0]){?>
+                                    <option selected value="<?php echo Status[$i]?>"><?php echo Status[$i]?></option>
                                     <?php }}?>
                                 </select>
                             </div>
