@@ -228,8 +228,13 @@
                             <label class="col-sm-2 form-control-label"><b>Swatch</b></label>
                             <div class="col-sm-10">
                                 <input type="file" name="swatchPic"  value="upload Image" accept=".jpg,.jpeg" id="swatchPic">
+                                @if ($errors->has('swatchPic'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('swatchPic') }}</strong>
+                                    </span>
+                                @endif
                                 <img @if($product->swatchImage)
-                                        src="{{url('productImage/'.$product->swatchImage)}}"
+                                        src="{{url('public/productImage/'.$product->swatchImage)}}"
                                      @endif
                                      height="50px" width="50px" id="imgSwatchPic">
                             </div>
@@ -240,9 +245,14 @@
                             <label class="col-sm-2 form-control-label"><b>Outfit</b> </label>
                             <div class="col-sm-10">
                                 <input type="file" name="outfitPic"  value="upload Image" accept=".jpg,.jpeg" id="outfitPic">
+                                @if ($errors->has('outfitPic'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('outfitPic') }}</strong>
+                                    </span>
+                                @endif
                                 <img
                                         @if($product->outfit)
-                                        src="{{url('productImage/'.$product->outfit)}}"
+                                        src="{{url('public/productImage/'.$product->outfit)}}"
                                         @endif
                                         height="50px" width="50px" id="imgOutfitPic">
                             </div>
@@ -253,8 +263,13 @@
                             <label class="col-sm-2 form-control-label"><b>Main Image</b> </label>
                             <div class="col-sm-10">
                                 <input type="file" name="mainPic"  value="upload Image" accept=".jpg,.jpeg" id="mainPic">
+                                @if ($errors->has('mainPic'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('mainPic') }}</strong>
+                                    </span>
+                                @endif
                                 <img   @if($product->mainImage)
-                                        src="{{url('productImage/'.$product->mainImage)}}"
+                                        src="{{url('public/productImage/'.$product->mainImage)}}"
                                        @endif
                                        height="50px" width="50px" id="imgMainPic">
                             </div>
@@ -265,8 +280,13 @@
                             <label class="col-sm-2 form-control-label"><b>Image 2</b> </label>
                             <div class="col-sm-10">
                                 <input type="file" name="image2Pic" value="image2Pic" accept=".jpg,.jpeg" id="image2Pic">
+                                @if ($errors->has('image2Pic'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('image2Pic') }}</strong>
+                                    </span>
+                                @endif
                                 <img  @if($product->image2)
-                                        src="{{url('productImage/'.$product->image2)}}"
+                                        src="{{url('public/productImage/'.$product->image2)}}"
                                       @endif
                                       height="50px" width="50px" id="imgImage2Pic">
                             </div>
@@ -278,9 +298,14 @@
                             <label class="col-sm-2 form-control-label"><b>Image 3</b> </label>
                             <div class="col-sm-10">
                                 <input type="file" name="image3Pic" value="image3Pic" accept=".jpg,.jpeg" id="image3Pic">
+                                @if ($errors->has('image3Pic'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('image3Pic') }}</strong>
+                                    </span>
+                                @endif
                                 <img height="50px" width="50px" id="imgImage3Pic"
                                      @if($product->image3)
-                                     src="{{url('productImage/'.$product->image3)}}"
+                                     src="{{url('public/productImage/'.$product->image3)}}"
                                         @endif
                                 >
                             </div>
@@ -292,9 +317,14 @@
                             <label class="col-sm-2 form-control-label"><b>Image 4</b> </label>
                             <div class="col-sm-10">
                                 <input type="file" name="image4Pic" value="image4Pic" accept=".jpg,.jpeg" id="image4Pic">
+                                @if ($errors->has('image4Pic'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('image4Pic') }}</strong>
+                                    </span>
+                                @endif
                                 <img height="50px" width="50px" id="imgImage4Pic"
                                      @if($product->image3)
-                                     src="{{url('productImage/'.$product->image4)}}"
+                                     src="{{url('public/productImage/'.$product->image4)}}"
                                         @endif
                                 >
                             </div>

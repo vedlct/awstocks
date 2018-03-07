@@ -107,6 +107,13 @@ class ProductController extends Controller
             'colorDesc'=>'required|max:20',
             'ean'=>'required|max:13',
             'care'=>'required|max:45',
+            'swatchPic'=>'image|dimensions:min_width=600,min_height=800|mimes:jpeg,jpg',
+            'outfitPic'=>'image|dimensions:min_width=600,min_height=800|mimes:jpeg,jpg',
+            'mainPic' =>'image|dimensions:min_width=600,min_height=800|mimes:jpeg,jpg',
+            'image2Pic'=>'image|dimensions:min_width=600,min_height=800|mimes:jpeg,jpg',
+            'image3Pic'=>'image|dimensions:min_width=600,min_height=800|mimes:jpeg,jpg',
+            'image4Pic'=>'image|dimensions:min_width=600,min_height=800|mimes:jpeg,jpg',
+
         ]);
 
 
@@ -132,44 +139,45 @@ class ProductController extends Controller
         if($r->hasFile('swatchPic')){
             $img = $r->file('swatchPic');
             $filename= $product->productId.'swatch'.'.'.$img->getClientOriginalExtension();
-            $product->swatch=$filename;
+            $product->swatchImage=$filename;
             $location = public_path('productImage/'.$filename);
-            Image::make($img)->resize(800,600)->save($location);
+//            Image::make($img)->resize(800,600)->save($location);
+            Image::make($img)->save($location);
         }
         if($r->hasFile('outfitPic')){
             $img = $r->file('outfitPic');
             $filename= $product->productId.'outfit'.'.'.$img->getClientOriginalExtension();
             $product->outfit=$filename;
             $location = public_path('productImage/'.$filename);
-            Image::make($img)->resize(800,600)->save($location);
+            Image::make($img)->save($location);
         }
         if($r->hasFile('mainPic')){
             $img = $r->file('mainPic');
             $filename= $product->productId.'main'.'.'.$img->getClientOriginalExtension();
             $product->mainImage=$filename;
             $location = public_path('productImage/'.$filename);
-            Image::make($img)->resize(800,600)->save($location);
+            Image::make($img)->save($location);
         }
         if($r->hasFile('image2Pic')){
             $img = $r->file('image2Pic');
             $filename= $product->productId.'image2'.'.'.$img->getClientOriginalExtension();
             $product->image2=$filename;
             $location = public_path('productImage/'.$filename);
-            Image::make($img)->resize(800,600)->save($location);
+            Image::make($img)->save($location);
         }
         if($r->hasFile('image3Pic')){
             $img = $r->file('image3Pic');
             $filename= $product->productId.'image3'.'.'.$img->getClientOriginalExtension();
             $product->image3=$filename;
             $location = public_path('productImage/'.$filename);
-            Image::make($img)->resize(800,600)->save($location);
+            Image::make($img)->save($location);
         }
         if($r->hasFile('image4Pic')){
             $img = $r->file('image4Pic');
             $filename= $product->productId.'image4'.'.'.$img->getClientOriginalExtension();
             $product->image4=$filename;
             $location = public_path('productImage/'.$filename);
-            Image::make($img)->resize(800,600)->save($location);
+            Image::make($img)->save($location);
         }
         $product->save();
         Session::flash('message', 'Product Updated  successfully');
@@ -237,6 +245,12 @@ class ProductController extends Controller
             'colorDesc'=>'required|max:20',
             'ean'=>'required|max:13',
             'care'=>'required|max:45',
+            'swatchPic'=>'image|dimensions:min_width=600,min_height=800|mimes:jpeg,jpg',
+            'outfitPic'=>'image|dimensions:min_width=600,min_height=800|mimes:jpeg,jpg',
+            'mainPic' =>'image|dimensions:min_width=600,min_height=800|mimes:jpeg,jpg',
+            'image2Pic'=>'image|dimensions:min_width=600,min_height=800|mimes:jpeg,jpg',
+            'image3Pic'=>'image|dimensions:min_width=600,min_height=800|mimes:jpeg,jpg',
+            'image4Pic'=>'image|dimensions:min_width=600,min_height=800|mimes:jpeg,jpg'
         ]);
         $product=new Product();
         $product->productName=$r->productName;
@@ -263,42 +277,42 @@ class ProductController extends Controller
             $filename= $product->productId.'swatch'.'.'.$img->getClientOriginalExtension();
             $product->swatchImage=$filename;
             $location = public_path('productImage/'.$filename);
-            Image::make($img)->resize(800,600)->save($location);
+            Image::make($img)->save($location);
         }
         if($r->hasFile('outfitPic')){
             $img = $r->file('outfitPic');
             $filename= $product->productId.'outfit'.'.'.$img->getClientOriginalExtension();
             $product->outfit=$filename;
             $location = public_path('productImage/'.$filename);
-            Image::make($img)->resize(800,600)->save($location);
+            Image::make($img)->save($location);
         }
         if($r->hasFile('mainPic')){
             $img = $r->file('mainPic');
             $filename= $product->productId.'main'.'.'.$img->getClientOriginalExtension();
             $product->mainImage=$filename;
             $location = public_path('productImage/'.$filename);
-            Image::make($img)->resize(800,600)->save($location);
+            Image::make($img)->save($location);
         }
         if($r->hasFile('image2Pic')){
             $img = $r->file('image2Pic');
             $filename= $product->productId.'image2'.'.'.$img->getClientOriginalExtension();
             $product->image2=$filename;
             $location = public_path('productImage/'.$filename);
-            Image::make($img)->resize(800,600)->save($location);
+            Image::make($img)->save($location);
         }
         if($r->hasFile('image3Pic')){
             $img = $r->file('image3Pic');
             $filename= $product->productId.'image3'.'.'.$img->getClientOriginalExtension();
             $product->image3=$filename;
             $location = public_path('productImage/'.$filename);
-            Image::make($img)->resize(800,600)->save($location);
+            Image::make($img)->save($location);
         }
         if($r->hasFile('image4Pic')){
             $img = $r->file('image4Pic');
             $filename= $product->productId.'image4'.'.'.$img->getClientOriginalExtension();
             $product->image4=$filename;
             $location = public_path('productImage/'.$filename);
-            Image::make($img)->resize(800,600)->save($location);
+            Image::make($img)->save($location);
         }
         $product->save();
         Session::flash('message', 'Product Uploaded successfully');
