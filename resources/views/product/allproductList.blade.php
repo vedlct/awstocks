@@ -128,7 +128,7 @@
                     { "data": function(data){
                         return '<input data-panel-id="'+data.productId+'"onclick="selected_rows(this)" type="checkbox" name="selected_rows[]" value="'+ data.productId +'" />';},
                         "orderable": false, "searchable":false, "name":"selected_rows",},
-                    { data: 'categoryName',name:'category.categoryName' },
+                    { data: 'categoryName',name:'categoryName' },
                     { data: 'style', name: 'style' },
                     { data: 'sku', name: 'sku' },
                     { data: 'productName', name: 'productName' },
@@ -141,6 +141,7 @@
                         return '<a class="btn btn-default btn-sm" data-panel-id="'+data.productId+'"onclick="editProduct(this)"><i class="fa fa-edit"></i></a><a class="btn" data-panel-id="'+data.productId+'"onclick="deleteProduct(this)"><i class="fa fa-trash"></i></a>';},
                         "orderable": false, "searchable":false, "name":"selected_rows" },
                 ],
+                order: [[0,'desc'] ],
             });
             $('#status').change(function(){ //button filter event click
                 table.search("").draw(); //just redraw myTableFilter

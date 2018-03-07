@@ -145,7 +145,7 @@ class OfferController extends Controller
         if ($offerstatus=$r->offer){
             $offersql->where('offer.status',$offerstatus);
         }
-        $offerList = $offersql->get();
+        $offerList = $offersql->orderBy('offerId',"desc")->get();
         $datatables = Datatables::of($offerList);
         return $datatables->make(true);
 

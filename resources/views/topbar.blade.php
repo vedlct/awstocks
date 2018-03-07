@@ -21,6 +21,11 @@
         <!-- ============================================================== -->
         <!-- End Logo -->
         <!-- ============================================================== -->
+
+        {{--<div>--}}
+            {{--<span style="text-align: center;color: white"><b>Product and Offer for Mirakl</b></span>--}}
+        {{--</div>--}}
+
         <div class="navbar-collapse">
 
             <ul class="navbar-nav mr-auto mt-md-0 ">
@@ -31,6 +36,9 @@
             </ul>
             <!-- ============================================================== -->
             <!-- User profile and search -->
+
+                <span style="text-align: center; color: white; margin-right: 30%"><b>Product and Offer for Mirakl</b></span>
+
             <!-- ============================================================== -->
             <ul class="navbar-nav my-lg-0">
 

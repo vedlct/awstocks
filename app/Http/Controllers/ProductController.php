@@ -231,7 +231,7 @@ class ProductController extends Controller
 
 
 //        $productList = $list->get();
-        $productList = $list->orderBy('productId',"DESC")->get();
+        $productList = $list->orderBy('productId',"desc")->get();
 
         $datatables = Datatables::of($productList);
 
