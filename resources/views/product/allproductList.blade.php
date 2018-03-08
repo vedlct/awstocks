@@ -108,6 +108,7 @@
     <script>
         var table;
         $(document).ready(function() {
+//            $(':checkbox:checked').prop('checked',false);
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             table = $('#allProductList').DataTable({
                 processing: true,
