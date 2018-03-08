@@ -52,9 +52,9 @@
 
 
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">Discount Price<span style="color: red" class="required">*</span></label>
+                            <label class="col-sm-2 form-control-label"> Price<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-10">
-                                <input  id="price" type="text" name="price" class="form-control form-control-warning producprice" value="{{$offer->product->price}}" readonly>
+                                <input  id="price" type="number" name="price" class="form-control form-control-warning producprice" value="{{$offer->product->price}}" readonly>
                             </div>
                         </div>
 
@@ -74,7 +74,7 @@
 
                             </div>
                         </div>
-                        
+
 
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label">Start Date<span style="color: red" class="required">*</span></label>

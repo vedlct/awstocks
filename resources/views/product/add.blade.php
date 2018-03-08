@@ -1,5 +1,8 @@
 @extends('main')
+@section('header')
 
+    <link href="{{url('css/select2.min.css')}}" rel="stylesheet" />
+@endsection
 @section('content')
 
 <div class="row">
@@ -19,7 +22,7 @@
                         {{csrf_field()}}
                         <label class="col-sm-2 form-control-label">Product category<span style="color: red" class="required">*</span></label>
                         <div class="col-sm-10">
-                            <select name="category" class="form-control form-control-warning" required>
+                            <select name="category" id="select" class="select form-control form-control-warning"   required>
 							
                                 <option value="">Select Prduct Category</option>
                                 @foreach($categories as $category)
@@ -362,9 +365,13 @@
 
 @endsection
 @section('foot-js')
+    <script src="{{url('js/select2.min.js')}}"></script>
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <script>
+        $(document).ready(function() {
+            $('.select').select2();
+        });
 
         {{--function checkspecialChar() {--}}
 
