@@ -192,11 +192,15 @@
             }
         }
         function selectAll(source) {
-            selecteds = '';
+
+            for(var i=0; i <= selecteds.length; i++) {
+                selecteds.pop(i);
+            }
+            //alert(selecteds);
+
 //            $(':checkbox:checked').prop('checked',false);
             checkboxes = document.getElementsByName('selected_rows[]');
             for(var i in checkboxes) {
-
                 checkboxes[i].checked = source.checked;
             }
 
