@@ -364,6 +364,8 @@ class ProductController extends Controller
         return back();
     }
     public function csvExport(Request $r){
+
+        return $r->checkarray;
         $headers =[
             'Cache-Control'       => 'must-revalidate, post-check=0, pre-check=0',
             'Content-type'        => 'application/csv',
