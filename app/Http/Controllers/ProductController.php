@@ -28,7 +28,7 @@ class ProductController extends Controller
         $this->middleware('auth');
     }
     public function add(){
-        $categories=Category::get();
+        $categories=Category::orderBy('categoryName', 'ASC')->get();
         $sColors=Color::where('colorType','standard')
             ->get();
 
