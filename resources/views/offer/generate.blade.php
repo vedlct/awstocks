@@ -150,11 +150,7 @@
             });
 
         });
-        function selectAll(source) {
-            checkboxes = document.getElementsByName('selected_rows[]');
-            for(var i in checkboxes)
-                checkboxes[i].checked = source.checked;
-        }
+
         var selecteds = [];
         function selected_rows(x) {
             btn = $(x).data('panel-id');
@@ -164,6 +160,17 @@
             }else {
                 selecteds.splice(index, 1);
             }
+        }
+
+        function selectAll(source) {
+            checkboxes = document.getElementsByName('selected_rows[]');
+            for(var i in checkboxes) {
+                checkboxes[i].checked = source.checked;
+            }
+
+            $(".chk:checked").each(function () {
+                selecteds.push($(this).val());
+            });
         }
 
         function editOffer(x) {
