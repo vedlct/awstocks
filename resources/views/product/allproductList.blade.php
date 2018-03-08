@@ -193,8 +193,14 @@
         }
         function selectAll(source) {
             checkboxes = document.getElementsByName('selected_rows[]');
-            for(var i in checkboxes)
+            for(var i in checkboxes) {
                 checkboxes[i].checked = source.checked;
+            }
+
+            /* look for all checkboes that have a class 'chk' attached to it and check if it was checked */
+            $(".chk:checked").each(function () {
+                selecteds.push($(this).val());
+            });
         }
         $.ajaxSetup({
             headers: {
@@ -204,38 +210,38 @@
         function myfunc() {
 
 
-            var i;
-            /* look for all checkboes that have a class 'chk' attached to it and check if it was checked */
-            $(".chk:checked").each(function () {
-                selecteds.push($(this).val());
-            });
+//            var i;
+//            /* look for all checkboes that have a class 'chk' attached to it and check if it was checked */
+//            $(".chk:checked").each(function () {
+//                selecteds.push($(this).val());
+//            });
 
 
             var products=selecteds;
 
+            //alert(products);
+
             if (products.length >0) {
-
-
 
                 $.ajax({
                     type: 'POST',
                     url: "{!! route('product.csv') !!}",
                     cache: false,
-                    data: {'products': products , 'checkarray' : products},
+                    data: {'products': products},
                     success: function (data) {
 
-                        alert(data);
+                     //   alert(data);
 //                        var w = window.open();
 //                        $(w.document.body).html(data);
 
-                        {{--var link = document.createElement("a");--}}
-                        {{--link.download = "ProductList.csv";--}}
-                        {{--var uri = '{{url("/public/csv/ProductList.csv")}}';--}}
-                        {{--link.href = uri;--}}
-                        {{--document.body.appendChild(link);--}}
-                        {{--link.click();--}}
-                        {{--document.body.removeChild(link);--}}
-                        {{--delete link;--}}
+                        var link = document.createElement("a");
+                        link.download = "ProductList.csv";
+                        var uri = '{{url("/public/csv/ProductList.csv")}}';
+                        link.href = uri;
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                        delete link;
 
 
                     }
