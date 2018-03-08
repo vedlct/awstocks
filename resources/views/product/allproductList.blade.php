@@ -108,7 +108,7 @@
     <script>
         var table;
         $(document).ready(function() {
-//            $(':checkbox:checked').prop('checked',false);
+            $(':checkbox:checked').prop('checked',false);
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             table = $('#allProductList').DataTable({
                 processing: true,
@@ -192,8 +192,11 @@
             }
         }
         function selectAll(source) {
+            selecteds = '';
+//            $(':checkbox:checked').prop('checked',false);
             checkboxes = document.getElementsByName('selected_rows[]');
             for(var i in checkboxes) {
+
                 checkboxes[i].checked = source.checked;
             }
 
