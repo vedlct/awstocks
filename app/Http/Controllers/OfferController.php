@@ -184,7 +184,7 @@ class OfferController extends Controller
         $data=array(
             'LastExportedBy'=> Auth::user()->userId,
             'LastExportedDate'=>date('Y-m-d H:i:s'),
-            'status'=>Status[2],
+            'status'=>Status[1],
         );
 
 

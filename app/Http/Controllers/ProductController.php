@@ -28,15 +28,12 @@ class ProductController extends Controller
         $this->middleware('auth');
     }
     public function add(){
-        $categories=Category::get();
-        $sColors=Color::where('colorType','standard')
-            ->get();
 
-
-        $sizeTypes=Size::groupBy('sizeType')
-            ->get();
-        $runToSizes=RunToSize::get();
-        $cares=Care::get();
+        $categories=Category::select('categoryId','categoryName')->orderBy('categoryName','ASC')->get();
+        $sColors=Color::select('colorId','colorName')->where('colorType','standard')->orderBy('colorName','ASC')->get();
+        $sizeTypes=Size::select('sizeId','sizeName','sizeType')->orderBy('sizeType','ASC')->groupBy('sizeType')->get();
+        $runToSizes=RunToSize::select('runToSizeId','runToSizeName')->orderBy('runToSizeName','ASC')->get();
+        $cares=Care::select('careId','careName')->orderBy('careName','ASC')->get();
 
         return view('product.add')
             ->with('categories',$categories)
@@ -375,7 +372,7 @@ class ProductController extends Controller
         $data=array(
             'LastExportedBy'=>Auth::user()->userId,
             'LastExportedDate'=>date('Y-m-d H:i:s'),
-            'status'=>Status[2],
+            'status'=>Status[1],
         );
 
         $list=array();
@@ -394,11 +391,16 @@ class ProductController extends Controller
 
         # add headers for each column in the CSV download
         array_unshift($list, array_keys($list[0]));
+        
+       // return $r;
         $callback = function() use ($list,$filePath)
         {
             $FH = fopen($filePath, "w");
+
+
             foreach ($list as $row) {
                 fputcsv($FH, $row);
+
             }
             fclose($FH);
         };
