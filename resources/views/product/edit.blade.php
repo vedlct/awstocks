@@ -16,7 +16,7 @@
                         <h2 style="color: #989898;"><b>Edit Product Information</b></h2>
                     </div>
 
-                    <form class="form-horizontal" method="post" action="{{route('product.update')}}" enctype="multipart/form-data">
+                    <form id="editProduct" name="editProduct" class="form-horizontal" method="post" action="{{route('product.update')}}" onsubmit="return checkProduct()" enctype="multipart/form-data">
                         <div class="form-group row">
                             {{csrf_field()}}
                             <input type="hidden" name="id" value="{{$id}}">
@@ -359,6 +359,25 @@
 
 
     <script>
+
+        function checkProduct() {
+
+            var iChars = "!@#$%^&*()+= []\\\';,./{}|\":<>?";
+
+            for (var i = 0; i < document.editProduct.style.value.length; i++) {
+                if (iChars.indexOf(document.addProductForm.style.value.charAt(i)) != -1) {
+                    alert ("Your can not use not use any special character in Style Filed");
+                    return false;
+                }
+            }
+            for (var i = 0; i < document.editProduct.sku.value.length; i++) {
+                if (iChars.indexOf(document.addProductForm.sku.value.charAt(i)) != -1) {
+                    alert ("Your can not use not use any special character in sku Filed");
+                    return false;
+                }
+            }
+
+        }
 
 
     $("#sizeType").change(function() {
