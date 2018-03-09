@@ -4,7 +4,7 @@
     <select id="sizecat" class="form-control form-control-warning" required>
         <option value="">Select One</option>
         @foreach(SizeCategory as $value)
-            <option value="{{$value}}">{{$value}}</option>
+            <option @if( !empty($sizeType) && $sizeType == $value ) selected @endif value="{{$value}}">{{$value}}</option>
         @endforeach
 
     </select>
@@ -16,7 +16,6 @@
     <button type="submit" class="btn btn-success">Add Size</button>
 
 </form>
-
 
 <br><br>
 <table id="sizetable" class="table" >
@@ -42,6 +41,52 @@
 <meta name="csrf-token" content="{{ csrf_token() }}" />.
 <script src="{{url('assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>
 <script>
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $(document).ready(function() {
+
+        var sizeType = '{{$sizeType}}';
+
+
+
+        if (sizeType != ""){
+
+            $('#addform').show();
+
+            table.DataTable({
+                processing: true,
+                serverSide: true,
+                stateSave: true,
+//                bDestroy: true,
+                "ajax":{
+                    "url": "{!! route('settings.sizeajax') !!}",
+                    "type": "POST",
+                    data : {'type':sizeType}
+                },
+                columns: [
+                    { data: 'sizeName', name: 'sizeName' },
+                    { data: 'sizeDescription', name: 'sizeDescription' },
+
+                    { "data": function(data){
+                        return '<a class="btn" data-panel-id="'+data.sizeId+'"onclick="editSize(this)"><i class="fa fa-edit"></i></a><a class="btn" data-panel-id="'+data.sizeId+'"onclick="deleteSize(this)"><i class="fa fa-trash"></i></a>';},
+                        "orderable": false, "searchable":false, "name":"selected_rows" }
+
+
+                ],
+
+            });
+
+        }
+        else {
+            $('#addform').hide();
+
+        }
+    });
 
 
     var table = $('#sizetable');

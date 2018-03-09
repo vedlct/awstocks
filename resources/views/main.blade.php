@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{{url('assets/images/favicon.png')}}">
-    <title>Baker</title>
+    <title>Lloyd Baker</title>
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="{{url('date/date-picker.css')}}">
 

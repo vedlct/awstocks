@@ -16,6 +16,8 @@ use App\RunToSize;
 use App\Care;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Validator;
+
 
 //use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
@@ -62,12 +64,10 @@ class ProductController extends Controller
 
     public function getProductByCategory(Request $r){
         $product=Product::select('productId','productName')->where('fkcategoryId',$r->category)->where('status',Status[1])->get();
-
             echo "<option value=''>select one</option>";
             foreach ($product as $p) {
                 echo "<option value='$p->productId'>$p->productName</option>";
             }
-
 
 //        return Response($product);
 
@@ -82,7 +82,12 @@ class ProductController extends Controller
         $runToSizes=RunToSize::get();
         $cares=Care::get();
         $product=Product::findOrFail($id);
+        $sizeType=Size::select('sizeType')->where('sizeName',$product->size)->first();
+
 //        $type=Size::where('sizeType',$product->)->get();
+
+//        return $sizeType;
+
         return view('product.edit')
             ->with('categories',$categories)
             ->with('sColors',$sColors)
@@ -90,12 +95,15 @@ class ProductController extends Controller
             ->with('sizeTypes',$sizeTypes)
             ->with('cares',$cares)
             ->with('runToSizes',$runToSizes)
-            ->with('id',$id);
+            ->with('id',$id)
+            ->with('sizeType',$sizeType);
     }
 
 
     public function update(Request $r){
-        $this->validate($r,[
+
+
+        $rules=[
             'productName' => 'required|max:70',
             'status' => 'required|max:8',
             'description' => 'required|max:1100',
@@ -107,14 +115,17 @@ class ProductController extends Controller
             'colorDesc'=>'required|max:20',
             'ean'=>'required|max:13',
             'care'=>'required|max:45',
-            'swatchPic'=>'image|dimensions:min_width=600,min_height=800|mimes:jpeg,jpg',
-            'outfitPic'=>'image|dimensions:min_width=600,min_height=800|mimes:jpeg,jpg',
-            'mainPic' =>'image|dimensions:min_width=600,min_height=800|mimes:jpeg,jpg',
-            'image2Pic'=>'image|dimensions:min_width=600,min_height=800|mimes:jpeg,jpg',
-            'image3Pic'=>'image|dimensions:min_width=600,min_height=800|mimes:jpeg,jpg',
-            'image4Pic'=>'image|dimensions:min_width=600,min_height=800|mimes:jpeg,jpg',
-
-        ]);
+            'swatchPic'=>'image|mimes:jpeg,jpg',
+            'outfitPic'=>'image|mimes:jpeg,jpg',
+            'mainPic' =>'image|mimes:jpeg,jpg',
+            'image2Pic'=>'image|mimes:jpeg,jpg',
+            'image3Pic'=>'image|mimes:jpeg,jpg',
+            'image4Pic'=>'image|mimes:jpeg,jpg'
+        ];
+        $messages = [
+           // 'dimensions' => 'Image dimention should over 800px',
+        ];
+        $validator = Validator::make($r->all(), $rules,$messages)->validate();
 
 
         $product=Product::findOrFail($r->id);
@@ -219,21 +230,15 @@ class ProductController extends Controller
 
 
 //        $productList = $list->get();
-        $productList = $list->get();
+        $productList = $list->orderBy('productId',"desc")->get();
 
         $datatables = Datatables::of($productList);
 
         return $datatables->make(true);
     }
     public function insert(Request $r){
-        /*use Image Plugin from http://image.intervention.io/getting_started/installation
-        *
-        *
-        *
-        */
 
-//        return $r;
-        $this->validate($r,[
+        $rules=[
             'productName' => 'required|max:70',
             'status' => 'required|max:8',
             'description' => 'required|max:1100',
@@ -245,13 +250,20 @@ class ProductController extends Controller
             'colorDesc'=>'required|max:20',
             'ean'=>'required|max:13',
             'care'=>'required|max:45',
-            'swatchPic'=>'image|dimensions:min_width=600,min_height=800|mimes:jpeg,jpg',
-            'outfitPic'=>'image|dimensions:min_width=600,min_height=800|mimes:jpeg,jpg',
-            'mainPic' =>'image|dimensions:min_width=600,min_height=800|mimes:jpeg,jpg',
-            'image2Pic'=>'image|dimensions:min_width=600,min_height=800|mimes:jpeg,jpg',
-            'image3Pic'=>'image|dimensions:min_width=600,min_height=800|mimes:jpeg,jpg',
-            'image4Pic'=>'image|dimensions:min_width=600,min_height=800|mimes:jpeg,jpg'
-        ]);
+            'swatchPic'=>'image|mimes:jpeg,jpg',
+            'outfitPic'=>'image|mimes:jpeg,jpg',
+            'mainPic' =>'image|mimes:jpeg,jpg',
+            'image2Pic'=>'image|mimes:jpeg,jpg',
+            'image3Pic'=>'image|mimes:jpeg,jpg',
+            'image4Pic'=>'image|mimes:jpeg,jpg'
+        ];
+
+        $messages = [
+           // 'dimensions' => 'Image dimention should be over 800px',
+        ];
+
+        $validator = Validator::make($r->all(), $rules,$messages)->validate();
+
         $product=new Product();
         $product->productName=$r->productName;
         $product->status=$r->status;
@@ -269,7 +281,7 @@ class ProductController extends Controller
         $product->stockQty=$r->stockQty;
         $product->minQtyAlert=$r->minQtyAlert;
         $product->runtosize=$r->runToSize;
-        $product->LastExportedBy=Auth::user()->userId;
+        //$product->LastExportedBy=Auth::user()->userId;
         $product->save();
 
         if($r->hasFile('swatchPic')){

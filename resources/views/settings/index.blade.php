@@ -16,14 +16,18 @@
         <div class="col-sm-10">
             <select id="content" class="form-control form-control-warning" required>
                 <option value="">Select One</option>
-                    <option value="category">Category</option>
-                    <option value="color">Color</option>
-                    <option value="size">Size</option>
-                     <option value="care">Care</option>
-                    <option value="runtosize">Run TO Size</option>
+                <?php for($i=0;$i<count(SettingListDropdown);$i++){?>
+                <option @if( Session::has('Cat') && Session::get('Cat')== SettingListDropdown[$i]) selected @endif value="<?php echo SettingListDropdown[$i]?>"><?php echo ucfirst(SettingListDropdown[$i])?></option>
+                <?php } ?>
+                    {{--<option @if( Session::has('Cat') && Session::get('Cat')== "size") selected @endif value="category">Category</option>--}}
+                    {{--<option value="color">Color</option>--}}
+                    {{--<option @if( Session::has('Cat') && Session::get('Cat')== "size") selected @endif value="size">Size</option>--}}
+                     {{--<option value="care">Care</option>--}}
+                    {{--<option value="runtosize">Run TO Size</option>--}}
 
             </select>
         </div>
+
         <br>
 
 
@@ -52,6 +56,19 @@
 
     <script>
 
+        $(document).ready(function() {
+
+            var type ='{{Session::get('Cat')}}';
+            var sizeType ='{{Session::get('sizeType')}}';
+            if( type != "" && type == "size") {
+                changeContent(type,sizeType);
+            }if ( type != "" && type != "size"){
+
+                changeContenttype(type);
+
+            }
+        });
+
 
         $.ajaxSetup({
             headers: {
@@ -70,15 +87,49 @@
                 cache: false,
                 data:{'option':name},
                 success:function(data) {
-
                     $("#element").html(data);
-
 
                 }
 
             });
 
         });
+
+        function changeContent(s,t) {
+
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+            $.ajax({
+                type:'POST',
+                url:"{!! route('settings.getColors') !!}",
+                cache: false,
+                data:{'option':s,'sizeType':t},
+                success:function(data) {
+                    $("#element").html(data);
+
+                }
+            });
+
+
+        }
+
+        function changeContenttype(s) {
+
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+            $.ajax({
+                type:'POST',
+                url:"{!! route('settings.getColors') !!}",
+                cache: false,
+                data:{'option':s},
+                success:function(data) {
+                    $("#element").html(data);
+
+                }
+            });
+
+
+        }
 
 
 

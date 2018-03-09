@@ -21,7 +21,7 @@
                                 <select name="category" class="form-control form-control-warning" id="category" required>
                                     <option value="">Select One</option>
                                     @foreach($categories as $category)
-                                        <option value="{{$category->categoryId}}">{{$category->categoryName}}</option>
+                                        <option @if(old('category') == $category->categoryId ) selected @endif value="{{$category->categoryId}}">{{$category->categoryName}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -35,6 +35,9 @@
                             <div class="col-sm-10">
                                 <select name="product" class="form-control form-control-warning" id="product" required>
                                     <option value="">Select Product</option>
+                                    @if(old('category') !="")
+                                        <option  value="{{old('product')}}">{{old('product')}}</option>
+                                    @endif
                                 </select>
                             </div>
                         </div>
@@ -102,7 +105,7 @@
                                 <select name="state" class="form-control form-control-warning" required>
                                     <option selected value="">Select State</option>
                                     @foreach(STATE as $s)
-                                        <option value="{{$s}}">{{$s}}</option>
+                                        <option @if($s == old('state')) selected @endif value="{{$s}}">{{$s}}</option>
                                     @endforeach
                                 </select>
                             </div>

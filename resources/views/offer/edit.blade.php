@@ -24,7 +24,6 @@
                                 <select name="category" class="form-control form-control-warning" id="category" >
                                     <option value="">Select One</option>
                                     @foreach($categories as $category)
-
                                         <option value="{{$category->categoryId}}"<?php if (!empty($offer->product->fkcategoryId) && $offer->product->fkcategoryId == $category->categoryId)  echo 'selected = "selected"'; ?>>{{$category->categoryName}}</option>
                                     @endforeach
                                 </select>
@@ -76,6 +75,7 @@
                             </div>
                         </div>
 
+
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label">Start Date<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-10">
@@ -112,7 +112,7 @@
 
 
                                         <option selected value="">Select Status</option>
-                                        <?php for ($i=0;$i<count(Status);$i++){ if (Status[$i] != Status[2]){?>
+                                        <?php for ($i=0;$i<count(Status);$i++){ if (Status[$i] != Status[1]){?>
                                         <option @if($offer->status==Status[$i]) selected @endif value="<?php echo Status[$i]?>"><?php echo Status[$i]?></option>
                                         <?php }} ?>
 

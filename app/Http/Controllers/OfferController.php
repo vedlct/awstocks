@@ -28,7 +28,6 @@ class OfferController extends Controller
     public function add(){
 
         $categories=Category::get();
-
         return view('offer.add')
             ->with('categories',$categories);
 
@@ -36,11 +35,13 @@ class OfferController extends Controller
 
     public function edit($id){
         $offer=Offer::findOrFail($id);
+
 //        $offer = Offer::select('offerId','fkproductId','disPrice','disStartPrice','disEndPrice','sku','state','price','stockQty','product-id-type','category.categoryName','product.fkcategoryId','productId')
 //            ->leftJoin('product', 'offer.fkproductId', '=', 'product.productId')
 //            ->leftJoin('category', 'category.categoryId', '=', 'product.fkcategoryId')
 //        ->get();
         $categories=Category::get();
+
 
         return view('offer.edit')
             ->with('offer',$offer)
@@ -49,9 +50,6 @@ class OfferController extends Controller
     }
 
     public function insert(Request $r){
-
-
-
 
         $this->validate($r,[
             'product' => 'required|max:70',
@@ -147,7 +145,7 @@ class OfferController extends Controller
         if ($offerstatus=$r->offer){
             $offersql->where('offer.status',$offerstatus);
         }
-        $offerList = $offersql->get();
+        $offerList = $offersql->orderBy('offerId',"desc")->get();
         $datatables = Datatables::of($offerList);
         return $datatables->make(true);
 

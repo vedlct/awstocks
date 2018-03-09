@@ -44,7 +44,8 @@ class SettingsController extends Controller
         }
         elseif ($r->option=="size"){
 
-            return view('settings.size');
+            return view('settings.size')->with('sizeType',$r->sizeType);
+
 
         }
         elseif ($r->option=="runtosize"){
@@ -143,12 +144,14 @@ class SettingsController extends Controller
             'sizeDescription' => 'max:45',
             'sizeType' => 'required|max:45',
         ]);
+
         $size=new Size;
         $size->sizeName=$r->sizeName;
         $size->sizeDescription=$r->sizeDescription;
         $size->sizeType=$r->sizeType;
         $size->save();
         Session::flash('message','Size Inserted successfully');
+
         return view('settings.insertsize')->with('sizeType',$r->sizeType);
     }
     public function insertRunToSize(Request $r){
@@ -207,9 +210,13 @@ class SettingsController extends Controller
         $care->careName=$r->careName;
         $care->careDescription=$r->careDescription;
         $care->save();
-
         Session::flash('message', 'Care Updated successfully');
-        return back();
+
+        Session::flash('Cat','care');
+
+        return redirect()->route('settings');
+
+        //return back();
 
 
     }
@@ -224,7 +231,12 @@ class SettingsController extends Controller
         $color->colorDescription=$r->colorDescription;
         $color->save();
         Session::flash('message', 'Color Updated successfully');
-        return back();
+
+        Session::flash('Cat','color');
+
+        return redirect()->route('settings');
+
+        //return back();
 
 
     }
@@ -241,8 +253,14 @@ class SettingsController extends Controller
         $size->sizeDescription=$r->sizeDescription;
         $size->sizeType=$r->sizeType;
         $size->save();
-        Session::flash('message','Size Inserted successfully');
-        return view('settings.insertsize')->with('sizeType',$r->sizeType);
+        Session::flash('message','Size Updated successfully');
+
+        Session::flash('Cat','size');
+        Session::flash('sizeType',$size->sizeType);
+
+        return redirect()->route('settings');
+
+        //return view('settings.insertsize')->with('sizeType',$r->sizeType);
 
     }
 
@@ -256,7 +274,10 @@ class SettingsController extends Controller
         $category->categoryDesc=$r->categoryDesc;
         $category->save();
         Session::flash('message', 'Category Updated successfully');
-        return back();
+        Session::flash('Cat','category');
+
+        return redirect()->route('settings');
+       // return back();
 
     }
 
@@ -270,7 +291,12 @@ class SettingsController extends Controller
         $runtosize->runToSizeDescription=$r->runToSizeDescription;
         $runtosize->save();
         Session::flash('message', 'Run To Size Updated successfully');
-        return back();
+
+        Session::flash('Cat','runtosize');
+
+        return redirect()->route('settings');
+
+        //return back();
 
 
     }
@@ -280,35 +306,57 @@ class SettingsController extends Controller
         $color=Color::findOrFail($id);
         $color->delete();
         Session::flash('message', 'Color Deleted successfully');
-        return back();
+        Session::flash('Cat','color');
+
+        return redirect()->route('settings');
+       // return back();
     }
 
     public function destroyCategory($id){
         $category=Category::findOrFail($id);
         $category->delete();
         Session::flash('message', 'Category Deleted successfully');
-        return back();
+        Session::flash('Cat','category');
+
+        return redirect()->route('settings');
+        //return back();
     }
 
     public function destroyCare($id){
         $care=Care::findOrFail($id);
         $care->delete();
         Session::flash('message', 'Care Deleted successfully');
-        return back();
+
+
+        Session::flash('Cat','care');
+
+        return redirect()->route('settings');
+
+       // return back();
     }
 
     public function destroyRunToSize($id){
         $runToSize=RunToSize::findOrFail($id);
         $runToSize->delete();
         Session::flash('message', 'Run To Size Deleted successfully');
-        return back();
+
+        Session::flash('Cat','runtosize');
+
+        return redirect()->route('settings');
+
+        //return back();
     }
 
     public function destroySize($id){
         $size=Size::findOrFail($id);
         $size->delete();
         Session::flash('message', 'Size Deleted successfully');
-        return back();
+
+        Session::flash('Cat','size');
+        Session::flash('sizeType',$size->sizeType);
+
+        return redirect()->route('settings');
+        //return back();
     }
 
 
