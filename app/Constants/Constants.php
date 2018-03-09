@@ -10,6 +10,8 @@ define('SIZE',array(
 
 define('STATE',array("11", "1", "2", "3"));
 
+
+//to get type from history
 define('LISTTYPE',array("ProductList", "OfferList"));
 
 define('ProductIdType',array("SHOP_SKU"));
