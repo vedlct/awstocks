@@ -29,7 +29,7 @@
 
         </table>
         <input type="checkbox" id="selectall" onClick="selectAll(this)" /><b>Select All</b><br>
-
+        <a  onclick="return myfunc()" download> <button class="btn btn-danger"  >Export Products file</button></a>
         <br>
 
 
@@ -124,7 +124,44 @@
 
             alert(selecteds);
         }
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        function myfunc() {
 
+
+//            var i;
+//            /* look for all checkboes that have a class 'chk' attached to it and check if it was checked */
+//            $(".chk:checked").each(function () {
+//                selecteds.push($(this).val());
+//            });
+
+
+            var products=selecteds;
+
+            //alert(products);
+
+            if (products.length >0) {
+
+                $.ajax({
+                    type: 'POST',
+                    url: "{!! route('product.csv') !!}",
+                    cache: false,
+                    data: {'products': products},
+                    success: function (data) {
+
+                       
+
+                    }
+
+                });
+            }
+            else {
+                alert("Please Select a product first");
+            }
+        }
 
         </script>
 
