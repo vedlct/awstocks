@@ -58,7 +58,7 @@
                             <label  class="col-sm-1 form-control-label" >Price:</label>
                             <div class="col-sm-5">
 
-                                <input  id="price" type="text" name="price" class="form-control form-control-warning producprice" readonly>
+                                <input  id="price" type="number" name="price" class="form-control form-control-warning producprice" readonly>
 
                             </div>
 
@@ -226,6 +226,7 @@
                 alert('please enter only two decimal number');
                 $('.myInputField').val('');
             }
+
             if (vale >= price){
                 alert('discount price cannot be more than product price');
                 $('.myInputField').val('');
