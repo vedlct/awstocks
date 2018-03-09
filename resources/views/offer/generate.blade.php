@@ -113,7 +113,7 @@
                 },
                 columns: [
                     { "data": function(data){
-                        return '<input type="checkbox" name="selected_rows[]" data-panel-id="'+data.offerId+'"onclick="selected_rows(this)" value="'+ data.offerId +'" />';},
+                        return '<input type="checkbox" name="selected_rows[]" class="chk" data-panel-id="'+data.offerId+'"onclick="selected_rows(this)" value="'+ data.offerId +'" />';},
                         "orderable": false, "searchable":false, "name":"selected_rows" },
                     { data: 'categoryName', name: 'categoryName' },
                     { data: 'sku', name: 'sku' },
@@ -150,11 +150,7 @@
             });
 
         });
-        function selectAll(source) {
-            checkboxes = document.getElementsByName('selected_rows[]');
-            for(var i in checkboxes)
-                checkboxes[i].checked = source.checked;
-        }
+
         var selecteds = [];
         function selected_rows(x) {
             btn = $(x).data('panel-id');
@@ -164,6 +160,20 @@
             }else {
                 selecteds.splice(index, 1);
             }
+        }
+
+        function selectAll(source) {
+            for(var i=0; i <= selecteds.length; i++) {
+                selecteds.pop(i);
+            }
+            checkboxes = document.getElementsByName('selected_rows[]');
+            for(var i in checkboxes) {
+                checkboxes[i].checked = source.checked;
+            }
+
+            $(".chk:checked").each(function () {
+                selecteds.push($(this).val());
+            });
         }
 
         function editOffer(x) {

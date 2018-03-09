@@ -27,7 +27,8 @@ class OfferController extends Controller
 
     public function add(){
 
-        $categories=Category::get();
+//        $categories=Category::get();
+        $categories=Category::select('categoryId','categoryName')->orderBy('categoryName','ASC')->get();
         return view('offer.add')
             ->with('categories',$categories);
 
@@ -40,8 +41,8 @@ class OfferController extends Controller
 //            ->leftJoin('product', 'offer.fkproductId', '=', 'product.productId')
 //            ->leftJoin('category', 'category.categoryId', '=', 'product.fkcategoryId')
 //        ->get();
-        $categories=Category::get();
-
+//        $categories=Category::get();
+        $categories=Category::select('categoryId','categoryName')->orderBy('categoryName','ASC')->get();
 
         return view('offer.edit')
             ->with('offer',$offer)
@@ -184,7 +185,7 @@ class OfferController extends Controller
         $data=array(
             'LastExportedBy'=> Auth::user()->userId,
             'LastExportedDate'=>date('Y-m-d H:i:s'),
-            'status'=>Status[2],
+            'status'=>Status[1],
         );
 
 

@@ -1,5 +1,8 @@
 @extends('main')
+@section('header')
 
+    <link href="{{url('css/select2.min.css')}}" rel="stylesheet" />
+@endsection
 @section('content')
 
     <div class="row">
@@ -23,7 +26,7 @@
                             <label class="col-sm-2 form-control-label">Product category<span style="color: red" class="required">*</span></label>
 
                             <div class="col-sm-10">
-                                <select name="category" class="form-control form-control-warning" required>
+                                <select name="category" class=" select form-control form-control-warning" required>
                                     <option value="">Select One</option>
                                     @foreach($categories as $category)
                                         <option value="{{$category->categoryId}}"
@@ -236,7 +239,7 @@
                                     </span>
                                 @endif
                                 <img @if($product->swatchImage)
-                                        src="{{url('public/productImage/'.$product->swatchImage)}}"
+                                        src="{{$product->swatchImage}}"
                                      @endif
                                      height="50px" width="50px" id="imgSwatchPic">
                             </div>
@@ -254,7 +257,7 @@
                                 @endif
                                 <img
                                         @if($product->outfit)
-                                        src="{{url('public/productImage/'.$product->outfit)}}"
+                                        src="{{$product->outfit}}"
                                         @endif
                                         height="50px" width="50px" id="imgOutfitPic">
                             </div>
@@ -271,7 +274,7 @@
                                     </span>
                                 @endif
                                 <img   @if($product->mainImage)
-                                        src="{{url('public/productImage/'.$product->mainImage)}}"
+                                        src="{{$product->mainImage}}"
                                        @endif
                                        height="50px" width="50px" id="imgMainPic">
                             </div>
@@ -288,7 +291,7 @@
                                     </span>
                                 @endif
                                 <img  @if($product->image2)
-                                        src="{{url('public/productImage/'.$product->image2)}}"
+                                        src="{{$product->image2}}"
                                       @endif
                                       height="50px" width="50px" id="imgImage2Pic">
                             </div>
@@ -307,7 +310,7 @@
                                 @endif
                                 <img height="50px" width="50px" id="imgImage3Pic"
                                      @if($product->image3)
-                                     src="{{url('public/productImage/'.$product->image3)}}"
+                                     src="{{$product->image3}}"
                                         @endif
                                 >
                             </div>
@@ -326,7 +329,7 @@
                                 @endif
                                 <img height="50px" width="50px" id="imgImage4Pic"
                                      @if($product->image4)
-                                     src="{{url('public/productImage/'.$product->image4)}}"
+                                     src="{{$product->image4}}"
                                         @endif
                                 >
                             </div>
@@ -355,10 +358,14 @@
 
 @endsection
 @section('foot-js')
+    <script src="{{url('js/select2.min.js')}}"></script>
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
 
     <script>
+        $(document).ready(function() {
+            $('.select').select2();
+        });
 
         function checkProduct() {
 

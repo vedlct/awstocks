@@ -108,6 +108,7 @@
     <script>
         var table;
         $(document).ready(function() {
+            $(':checkbox:checked').prop('checked',false);
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             table = $('#allProductList').DataTable({
                 processing: true,
@@ -126,7 +127,7 @@
                 },
                 columns: [
                     { "data": function(data){
-                        return '<input data-panel-id="'+data.productId+'"onclick="selected_rows(this)" type="checkbox" name="selected_rows[]" value="'+ data.productId +'" />';},
+                        return '<input data-panel-id="'+data.productId+'"onclick="selected_rows(this)" type="checkbox" class="chk" name="selected_rows[]" value="'+ data.productId +'" />';},
                         "orderable": false, "searchable":false, "name":"selected_rows",},
                     { data: 'categoryName',name:'categoryName' },
                     { data: 'style', name: 'style' },
@@ -190,18 +191,44 @@
                 selecteds.splice(index, 1);
             }
         }
+        function selectAll(source) {
 
+            for(var i=0; i <= selecteds.length; i++) {
+                selecteds.pop(i);
+            }
+            //alert(selecteds);
+
+//            $(':checkbox:checked').prop('checked',false);
+            checkboxes = document.getElementsByName('selected_rows[]');
+            for(var i in checkboxes) {
+                checkboxes[i].checked = source.checked;
+            }
+
+            /* look for all checkboes that have a class 'chk' attached to it and check if it was checked */
+            $(".chk:checked").each(function () {
+                selecteds.push($(this).val());
+            });
+        }
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
         function myfunc() {
+
+
+//            var i;
+//            /* look for all checkboes that have a class 'chk' attached to it and check if it was checked */
+//            $(".chk:checked").each(function () {
+//                selecteds.push($(this).val());
+//            });
+
+
             var products=selecteds;
 
+            //alert(products);
+
             if (products.length >0) {
-
-
 
                 $.ajax({
                     type: 'POST',
@@ -210,6 +237,7 @@
                     data: {'products': products},
                     success: function (data) {
 
+                     //   alert(data);
 //                        var w = window.open();
 //                        $(w.document.body).html(data);
 
