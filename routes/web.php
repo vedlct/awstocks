@@ -56,7 +56,9 @@ Route::get('/offer/delete/{id}', 'OfferController@destroy')->name('offer.delete'
 Route::post('/offer/csvExport', 'OfferController@csvExport')->name('offer.csv');
 
 //setting
-Route::view('/historic/files', 'layouts.starLeads')->name('historic.files');
+Route::get('/historic/files', 'HistoryController@index')->name('historic.files');
+Route::post('/historic/files', 'HistoryController@getHistoryData')->name('history.data');
+
 Route::get('/settings', 'SettingsController@index')->name('settings');
 Route::post('/settings/getColor', 'SettingsController@getColors')->name('settings.getColors');
 Route::post('/settings/colorajax', 'SettingsController@colorAjax')->name('settings.colorajax');

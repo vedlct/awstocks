@@ -127,11 +127,8 @@
                         return '<a class="btn" data-panel-id="'+data.offerId+'"onclick="editOffer(this)"><i class="fa fa-edit"></i></a><a class="btn" data-panel-id="'+data.offerId+'"onclick="deleteOffer(this)"><i class="fa fa-trash"></i></a>';},
                         "orderable": false, "searchable":false, "name":"selected_rows" }
 
-
                 ],
                 order: [[0,'desc'] ],
-
-
 
             });
 
@@ -213,8 +210,8 @@
 
 
                             var link = document.createElement("a");
-                            link.download = "FullOfferList.csv";
-                            var uri = '{{url("/public/csv/FullOfferList.csv")}}';
+                            link.download = data.fileName;
+                            var uri = '{{url("public/csv")}}'+"/"+data.fileName;
                             link.href = uri;
                             document.body.appendChild(link);
                             link.click();
@@ -242,8 +239,8 @@
                             success: function (data) {
 
                                 var link = document.createElement("a");
-                                link.download = "PriceUpdateList.csv";
-                                var uri = '{{url("/public/csv/PriceUpdateList.csv")}}';
+                                link.download = data.fileName;
+                                var uri = '{{url("public/csv")}}'+"/"+data.fileName;
                                 link.href = uri;
                                 document.body.appendChild(link);
                                 link.click();
@@ -270,8 +267,8 @@
                     success: function (data) {
 
                         var link = document.createElement("a");
-                        link.download = "StockUpdateList.csv";
-                        var uri = '{{url("/public/csv/StockUpdateList.csv")}}';
+                        link.download = data.fileName;
+                        var uri = '{{url("public/csv")}}'+"/"+data.fileName;
                         link.href = uri;
                         document.body.appendChild(link);
                         link.click();
@@ -298,8 +295,8 @@
                     success: function (data) {
 
                         var link = document.createElement("a");
-                        link.download = "markdownUpdateList.csv";
-                        var uri = '{{url("/public/csv/markdownUpdateList.csv")}}';
+                        link.download = data.fileName;
+                        var uri = '{{url("public/csv")}}'+"/"+data.fileName;
                         link.href = uri;
                         document.body.appendChild(link);
                         link.click();
