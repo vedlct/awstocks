@@ -151,7 +151,8 @@
                     cache: false,
                     data: {'products': products,'path':'{{url('public/csv')}}'+"/"},
                     success: function (data) {
-                    alert(1);
+
+                    alert(data);
 
                     }
 

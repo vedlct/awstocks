@@ -473,23 +473,40 @@ class ProductController extends Controller
         $ftp_conn = ftp_connect($ftp_server) or die("Could not connect to $ftp_server");
         $login = ftp_login($ftp_conn, $ftp_username, $ftp_userpass);
 
-        foreach ($r->products as $prod) {
+        $error=array();
+
+        for ($i=0;$i<count($r->products);$i++){
+
+            //        foreach ($r->products as $prod) {
+
+            if(file_exists($r->path.$r->products[$i])){
+
+                // upload file
+                if (ftp_put($ftp_conn, $r->products[$i], $r->path.$r->products[$i], FTP_ASCII)) {
+                    // echo "Successfully uploaded $file.";
 
 
-            //$file = url('public/csv/FullOfferList.csv');
+                } else {
+                    // echo "Error uploading $file.";
+                }
 
-            // upload file
-            if (ftp_put($ftp_conn, $prod, $r->path.$prod, FTP_ASCII)) {
-                // echo "Successfully uploaded $file.";
-
-            } else {
-                // echo "Error uploading $file.";
             }
+            else{
+                $newError=array('fileName'.$i=>$r->products[$i]);
+                $error1=array_merge($error,$newError);
+
+            }
+//        }
+
 
         }
 
+
+
 // close connection
         ftp_close($ftp_conn);
+
+        return $error1;
     }
 
 
