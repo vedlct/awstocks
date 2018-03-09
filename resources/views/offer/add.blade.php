@@ -235,6 +235,7 @@
                 alert('please enter only two decimal number');
                 $('.myInputField').val('');
             }
+
             if (vale >= price){
                 alert('discount price cannot be more than product price');
                 $('.myInputField').val('');
