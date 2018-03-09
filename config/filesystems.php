@@ -62,6 +62,19 @@ return [
             'region' => env('AWS_DEFAULT_REGION'),
             'bucket' => env('AWS_BUCKET'),
         ],
+        'ftp' => [
+            'driver'   => 'ftp',
+            'host'     => 'ftp.sakibrahman.com',
+            'username' => 'baker@sakibrahman.com',
+            'password' => 'baker@123',
+
+            // Optional FTP Settings...
+             'port'     => 21,
+            // 'root'     => '',
+            // 'passive'  => true,
+            // 'ssl'      => true,
+            // 'timeout'  => 30,
+        ],
 
     ],
 

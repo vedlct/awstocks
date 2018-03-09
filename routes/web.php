@@ -124,3 +124,6 @@ Route::get('delete/runtosize/{id}','SettingsController@destroyRunToSize')->name(
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::post('/sendftp', 'ProductController@sendftp')->name('sendftp');
+

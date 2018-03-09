@@ -63,7 +63,7 @@
                 },
                 columns: [
                     { "data": function(data){
-                        return '<input data-panel-id="{{url("public/csv")}}'+"/"+data.historicUploadedFilesName+'"onclick="selected_rows(this)" type="checkbox" class="chk" name="selected_rows[]" value="{{url("public/csv")}}'+"/"+ data.historicUploadedFilesName +'" />';},
+                        return '<input data-panel-id="'+data.historicUploadedFilesName+'"onclick="selected_rows(this)" type="checkbox" class="chk" name="selected_rows[]" value="'+ data.historicUploadedFilesName +'" />';},
                         "orderable": false, "searchable":false, "name":"selected_rows",},
 
                     { data: 'historicUploadedFilesName',name:'historicUploadedFilesName' },
@@ -92,14 +92,14 @@
         var selecteds = [];
         function selected_rows(x) {
                 btn = $(x).data('panel-id');
-                alert(btn);
-//                var index = selecteds.indexOf(btn)
-//                if (index == "-1"){
-//                    selecteds.push(btn);
-//                }else {
-//
-//                    selecteds.splice(index, 1);
-//                }
+//                alert(btn);
+                var index = selecteds.indexOf(btn)
+                if (index == "-1"){
+                    selecteds.push(btn);
+                }else {
+
+                    selecteds.splice(index, 1);
+                }
         }
 
 
@@ -122,7 +122,7 @@
                 selecteds.push($(this).val());
             });
 
-            alert(selecteds);
+           // alert(selecteds);
         }
         $.ajaxSetup({
             headers: {
@@ -147,12 +147,11 @@
 
                 $.ajax({
                     type: 'POST',
-                    url: "{!! route('product.csv') !!}",
+                    url: "{!! route('sendftp') !!}",
                     cache: false,
-                    data: {'products': products},
+                    data: {'products': products,'path':'{{url('public/csv')}}'+"/"},
                     success: function (data) {
-
-                       
+                    alert(1);
 
                     }
 
