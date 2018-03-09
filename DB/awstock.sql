@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.3
--- https://www.phpmyadmin.net/
+-- version 4.5.1
+-- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 05, 2018 at 10:07 AM
--- Server version: 10.1.25-MariaDB
--- PHP Version: 7.1.7
+-- Generation Time: Mar 09, 2018 at 08:03 AM
+-- Server version: 10.1.19-MariaDB
+-- PHP Version: 7.0.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -61,7 +59,9 @@ CREATE TABLE `category` (
 
 INSERT INTO `category` (`categoryId`, `categoryName`, `categoryDesc`) VALUES
 (1, 'Women->Gown', 'asdgausdga'),
-(2, 'Men->Pant', 'gasjdgkasygduashdkuasdkua');
+(2, 'Men->Pant', 'gasjdgkasygduashdkuasdkua'),
+(3, 'hj', 'hjh'),
+(4, 'tyty', 'tytytyt');
 
 -- --------------------------------------------------------
 
@@ -83,10 +83,8 @@ CREATE TABLE `color` (
 INSERT INTO `color` (`colorId`, `colorName`, `colorDescription`, `colorType`) VALUES
 (1, 'Pink', NULL, 'standard'),
 (2, 'Purple', NULL, 'standard'),
-(3, 'Red', NULL, 'standard'),
 (4, 'Silver', NULL, 'standard'),
-(5, 'White', NULL, 'standard'),
-(6, 'Yellow', NULL, 'standard');
+(5, 'White', NULL, 'standard');
 
 -- --------------------------------------------------------
 
@@ -101,6 +99,34 @@ CREATE TABLE `filetransfer` (
   `createDate` datetime DEFAULT NULL,
   `createBy` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `historicuploadedfiles`
+--
+
+CREATE TABLE `historicuploadedfiles` (
+  `historicUploadedFilesId` int(11) NOT NULL,
+  `historicUploadedFilesName` varchar(255) DEFAULT NULL,
+  `historicUploadedFilesType` varchar(50) DEFAULT NULL,
+  `createDate` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `createdBy` int(11) DEFAULT NULL,
+  `exportedBy` int(11) DEFAULT NULL,
+  `exportedDate` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `historicuploadedfiles`
+--
+
+INSERT INTO `historicuploadedfiles` (`historicUploadedFilesId`, `historicUploadedFilesName`, `historicUploadedFilesType`, `createDate`, `createdBy`, `exportedBy`, `exportedDate`) VALUES
+(4, 'ProductList-1520574856.csv', 'ProductList', NULL, 2, NULL, NULL),
+(5, 'ProductList-1520575229.csv', 'ProductList', '2018-03-09 06:00:29', 2, NULL, NULL),
+(6, 'ProductList-1520575264.csv', 'ProductList', '2018-03-09 06:01:04', 2, NULL, NULL),
+(7, 'ProductList-1520575276.csv', 'ProductList', '2018-03-09 06:01:16', 2, NULL, NULL),
+(8, 'ProductList-1520577854.csv', 'ProductList', '2018-03-09 06:44:14', 2, NULL, NULL),
+(9, 'ProductList-1520577872.csv', 'ProductList', '2018-03-09 06:44:32', 2, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -126,9 +152,9 @@ CREATE TABLE `offer` (
 --
 
 INSERT INTO `offer` (`offerId`, `fkproductId`, `disPrice`, `disStartPrice`, `disEndPrice`, `state`, `product-id-type`, `status`, `lastExportedBy`, `lastExportedDate`) VALUES
-(1, 2, '10.50', '2018-03-01', '2018-03-23', '11', 'dfd5454', 'Active', 2, NULL),
-(3, 2, '2.00', 'sdsd', 'dssds', '11', 'sdsd', 'Downloaded', 2, '2018-03-05 07:54:52'),
-(4, 2, '65.55', 'dssd', 'sdsd', '11', 'sdsd', 'Downloaded', 2, '2018-03-05 07:54:52');
+(1, 2, '10.50', '2018-03-01', '2018-03-23', '11', 'dfd5454', 'Downloaded', 2, '2018-03-09 06:50:55'),
+(3, 2, '2.00', 'sdsd', 'dssds', '11', 'sdsd', 'Active', 2, '2018-03-03 16:26:27'),
+(4, 2, '65.55', 'dssd', 'sdsd', '11', 'sdsd', 'Active', 2, '2018-03-03 16:28:30');
 
 -- --------------------------------------------------------
 
@@ -140,12 +166,12 @@ CREATE TABLE `product` (
   `productId` int(11) NOT NULL,
   `status` varchar(45) DEFAULT NULL,
   `fkcategoryId` int(11) NOT NULL,
-  `style` varchar(20) DEFAULT NULL,
-  `sku` varchar(25) DEFAULT NULL,
-  `ean` varchar(20) DEFAULT NULL,
-  `productName` varchar(75) DEFAULT NULL,
+  `style` varchar(45) DEFAULT NULL,
+  `sku` varchar(45) DEFAULT NULL,
+  `ean` varchar(45) DEFAULT NULL,
+  `productName` varchar(45) DEFAULT NULL,
   `productDesc` mediumtext,
-  `brand` varchar(45) DEFAULT NULL,
+  `brand` varchar(25) DEFAULT NULL,
   `color` varchar(25) DEFAULT NULL,
   `colorDesc` mediumtext,
   `size` varchar(5) DEFAULT NULL,
@@ -169,10 +195,14 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`productId`, `status`, `fkcategoryId`, `style`, `sku`, `ean`, `productName`, `productDesc`, `brand`, `color`, `colorDesc`, `size`, `swatchImage`, `mainImage`, `outfit`, `image2`, `image3`, `image4`, `runtosize`, `care`, `price`, `stockQty`, `minQtyAlert`, `LastExportedBy`, `LastExportedDate`) VALUES
-(2, 'Active', 1, 'asdasd', 'dasdaewe', 'weqw', 'Test Product 1', 'asdaszxcd\r\najsdiuahs', 'asdasd', '6', 'ddfsfgdyrtyryfghfgh', 'L', '', NULL, '2outfit.jpg', NULL, NULL, NULL, 'This style runs small to size', 'Dry Clean Only', 40, 5, 2, 1, NULL),
-(4, 'Active', 2, 'adasda', 'dfdf', 'sdsa', 'pant denim', 'asdasdas', 'levis', 'White', 'new', 'L', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Dry Clean Only', 565, 6565, 6565, 2, '2018-03-03 07:39:17'),
-(5, 'Active', 1, 'fdfdf', 'dsadasd', 'dfdf', '454', 'dfdfdf', 'asdasd', 'Purple', 'dsadasd', 'XL', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Dry Clean Only', 54354, 5454, 652, 2, '2018-03-03 07:43:14'),
-(6, 'Inactive', 1, 'Test', 'Test', 'Test 6', 'Test', 'Test 6', 'Test', '6', 'Test 6', 'XL', '7swatch.png', '7main.jpg', '7outfit.png', '7image2.jpg', '7image3.jpg', '7image4.jpg', 'This style runs true to size', 'Dry Clean Only', 654, 468, 946, 2, '2018-03-03 08:52:13');
+(2, 'Downloaded', 1, 'asdasd', 'dasdaewe', 'weqw', 'Test Product 1', 'asdaszxcd\r\najsdiuahs', 'asdasd', '5', 'ddfsfgdyrtyryfghfgh', 'L', '2swatch.jpg', NULL, '2outfit.jpg', NULL, NULL, NULL, 'This style runs small to size', 'Dry Clean Only', 40, 5, 2, 2, '2018-03-09 00:00:29'),
+(4, 'Downloaded', 2, 'adasda', 'dfdf', 'sdsa', 'pant denim', 'asdasdas', 'levis', 'White', 'new', 'L', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Dry Clean Only', 565, 6565, 6565, 2, '2018-03-09 00:00:29'),
+(5, 'Active', 1, 'asdasd', 'dsadasd', 'dfdf', '454sadsds', 'dfdfdf', 'asdasd', '5', 'dsadasd', 'XL', NULL, NULL, NULL, NULL, NULL, NULL, 'This style runs small to size', 'Dry Clean Only', 54354, 5454, 652, 2, '2018-03-03 07:43:14'),
+(6, 'Inactive', 1, 'Test', 'Test', 'Test 6', 'Test', 'Test 6', 'Test', '6', 'Test 6', 'XL', '7swatch.png', '7main.jpg', '7outfit.png', '7image2.jpg', '7image3.jpg', '7image4.jpg', 'This style runs true to size', 'Dry Clean Only', 654, 468, 946, 2, '2018-03-03 08:52:13'),
+(7, 'Active', 1, 'sadad', '76', 'dasda', 'sdsd', 'AASASA', 'sdsd', 'Pink', 'test color', 'Mensw', NULL, NULL, NULL, NULL, NULL, NULL, 'This style runs true to size', 'Hand Wash or Dry Clean Only', 44, 98, 9, 2, '2018-03-07 05:23:18'),
+(8, 'Downloaded', 2, '74584', '541', '5146', '1321321', '56414187', '1252', 'Purple', '13516', 'S', '8swatch.png', '8main.jpg', '8outfit.jpg', '8image2.jpg', '8image3.jpg', '8image4.jpg', 'This style runs small to size', 'Hand Wash or Dry Clean Only', 12, 54, 51, 2, '2018-03-09 00:01:16'),
+(9, 'Downloaded', 2, 'test', 'test2', 'test brand by', 'test brand by farzad', 'test brand by farzad', 'test brand by farzad', '5', 'test brand by farzad', 'Mensw', '9swatch.jpg', '9main.jpg', '9outfit.jpg', '9image2.jpg', '9image3.jpg', '9image4.jpg', 'This style runs small to size', 'Dry Clean Only', 654, 65, 4, 2, '2018-03-09 00:01:16'),
+(10, 'Downloaded', 1, 'asdad', 'adasd', '544', 'asdasd', 'dfd', 'asa', 'Silver', 'asdasd', 'Mensw', '10swatch.jpg', '10main.jpg', '10outfit.jpg', '10image2.jpg', '10image3.jpg', '10image4.jpg', 'This style runs small to size', 'Dry Clean Only', 895, 9, 4, 2, '2018-03-09 00:44:32');
 
 -- --------------------------------------------------------
 
@@ -205,7 +235,7 @@ CREATE TABLE `size` (
   `sizeId` int(11) NOT NULL,
   `sizeName` varchar(45) DEFAULT NULL,
   `sizeDescription` varchar(45) DEFAULT NULL,
-  `sizeType` varchar(15) DEFAULT NULL
+  `sizeType` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -213,10 +243,15 @@ CREATE TABLE `size` (
 --
 
 INSERT INTO `size` (`sizeId`, `sizeName`, `sizeDescription`, `sizeType`) VALUES
-(1, 'S', NULL, 'Womens cloth'),
-(2, 'M', NULL, 'Womens cloth'),
-(3, 'L', NULL, 'Womens cloth'),
-(4, 'XL', NULL, 'Womens shoes');
+(1, 'S', NULL, 'Womenswear clothing / lingerie'),
+(3, 'L', NULL, 'Womenswear shoes'),
+(4, 'XL', NULL, 'Womenswear shoes'),
+(5, 'Menswear belts', 'sdsds', 'Menswear belts'),
+(6, 'Menswear belts', 'Menswear beltsMenswear belts', 'Menswear belts'),
+(7, 'test 2', 'adasd', 'Menswear belts'),
+(8, 'dssd', 'dsdsds', 'Womenswear gloves'),
+(9, 'test 2', 'dfdf', 'Womenswear shoes'),
+(10, 'test2', 'test2', 'Womenswear clothing / lingerie');
 
 -- --------------------------------------------------------
 
@@ -241,7 +276,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`userId`, `name`, `phone`, `address`, `email`, `password`, `status`, `userType`, `remember_token`) VALUES
-(2, 'rumi', NULL, NULL, 'admin@gmail.com', '$2y$10$6uyV1sPMpuqEQR4iFbdFp.HsIxfquF67nk3zdJlYma8U1Mw6ZZ9E6', NULL, NULL, 's7A9vpy1nyxwfl7aC4tQqAE0UQ73TvpY3kCFda4PVIFoVHZOqAL8v9TnXia5');
+(2, 'rumi', NULL, NULL, 'admin@gmail.com', '$2y$10$6uyV1sPMpuqEQR4iFbdFp.HsIxfquF67nk3zdJlYma8U1Mw6ZZ9E6', NULL, NULL, 'ArDBXlif0JZWyrHM2vBnr024bOrIiMWrDslFP6JH9dvlh6dQuzB87RbMiMe3');
 
 --
 -- Indexes for dumped tables
@@ -270,6 +305,12 @@ ALTER TABLE `color`
 --
 ALTER TABLE `filetransfer`
   ADD PRIMARY KEY (`transferId`);
+
+--
+-- Indexes for table `historicuploadedfiles`
+--
+ALTER TABLE `historicuploadedfiles`
+  ADD PRIMARY KEY (`historicUploadedFilesId`);
 
 --
 -- Indexes for table `offer`
@@ -316,17 +357,22 @@ ALTER TABLE `care`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `categoryId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `categoryId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `color`
 --
 ALTER TABLE `color`
-  MODIFY `colorId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `colorId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `filetransfer`
 --
 ALTER TABLE `filetransfer`
   MODIFY `transferId` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `historicuploadedfiles`
+--
+ALTER TABLE `historicuploadedfiles`
+  MODIFY `historicUploadedFilesId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `offer`
 --
@@ -336,7 +382,7 @@ ALTER TABLE `offer`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `productId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `productId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `runtosize`
 --
@@ -346,7 +392,7 @@ ALTER TABLE `runtosize`
 -- AUTO_INCREMENT for table `size`
 --
 ALTER TABLE `size`
-  MODIFY `sizeId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `sizeId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `users`
 --
@@ -367,7 +413,6 @@ ALTER TABLE `offer`
 --
 ALTER TABLE `product`
   ADD CONSTRAINT `fk_product_category1` FOREIGN KEY (`fkcategoryId`) REFERENCES `category` (`categoryId`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
