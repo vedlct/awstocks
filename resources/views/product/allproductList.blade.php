@@ -237,19 +237,14 @@
                     data: {'products': products},
                     success: function (data) {
 
-                     //   alert(data);
-//                        var w = window.open();
-//                        $(w.document.body).html(data);
-
-                        {{--var link = document.createElement("a");--}}
-                        {{--link.download = "ProductList.csv";--}}
-                        {{--var uri = '{{url("/public/csv/ProductList.csv")}}';--}}
-                        {{--link.href = uri;--}}
-                        {{--document.body.appendChild(link);--}}
-                        {{--link.click();--}}
-                        {{--document.body.removeChild(link);--}}
-                        {{--delete link;--}}
-
+                        var link = document.createElement("a");
+                        link.download = data.fileName;
+                        var uri = '{{url("public/csv")}}'+"/"+data.fileName;
+                        link.href = uri;
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                        delete link;
 
                     }
 

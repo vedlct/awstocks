@@ -14,7 +14,9 @@ use App\Category;
 use Response;
 
 use DB;
-use Excel;
+
+
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 
 class OfferController extends Controller
@@ -260,56 +262,114 @@ class OfferController extends Controller
 
 
 
+       // $filePath=public_path ()."/csv"."/".$fileName;
+
+
+
         if ($offerList=$r->fulloffers){
-//            $fileName="FullOfferList-".date_timestamp_get(now());
-            $fileName="FullOfferList";
+            $fileName="FullOfferList-".date_timestamp_get(now()).".csv";
+            $filePath=public_path ()."/csv"."/".$fileName;
+           // $fileName="FullOfferList";
+
+            $fileInfo=array('fileName'=>$fileName);
 
         }
         if ($offerList=$r->priceCreation){
-            $fileName="PriceUpdateList-".date_timestamp_get(now());
-            $fileName="PriceUpdateList";
+            $fileName="PriceUpdateList-".date_timestamp_get(now()).".csv";
+           // $fileName="PriceUpdateList";
+            $fileInfo=array('fileName'=>$fileName);
+            $filePath=public_path ()."/csv"."/".$fileName;
 
         }
         if ($offerList=$r->stockUpdate){
-//            $fileName="StockUpdateList-".date_timestamp_get(now());
-            $fileName="StockUpdateList";
-
+            $fileName="StockUpdateList-".date_timestamp_get(now()).".csv";
+//            $fileName="StockUpdateList";
+            $fileInfo=array('fileName'=>$fileName);
+            $filePath=public_path ()."/csv"."/".$fileName;
         }
         if ($offerList=$r->markdownUpdate){
-//            $fileName="markdownUpdateList-".date_timestamp_get(now());
-            $fileName="markdownUpdateList";
-
+            $fileName="markdownUpdateList-".date_timestamp_get(now()).".csv";
+//            $fileName="markdownUpdateList";
+            $fileInfo=array('fileName'=>$fileName);
+            $filePath=public_path ()."/csv"."/".$fileName;
         }
 
-        $callback = function() use ($list,$r,$fileName)
-        {
+//        $callback = function() use ($list,$r,$fileName)
+//        {
+//
+//            if ($offerList=$r->fulloffers){
+//                //$fileName="FullOfferList-".date_timestamp_get(now());
+//                $FH = fopen(public_path ()."/csv/".$fileName.".csv", "w");
+//            }
+//            if ($offerList=$r->priceCreation){
+//               // $fileName="PriceUpdateList-".date_timestamp_get(now());
+//                $FH = fopen(public_path ()."/csv/".$fileName.".csv", "w");
+//            }
+//            if ($offerList=$r->stockUpdate){
+//               // $fileName="StockUpdateList-".date_timestamp_get(now());
+//                $FH = fopen(public_path ()."/csv/".$fileName.".csv", "w");
+//            }
+//            if ($offerList=$r->markdownUpdate){
+//                //$fileName="markdownUpdateList-".date_timestamp_get(now());
+//                $FH = fopen(public_path ()."/csv/".$fileName.".csv", "w");
+//            }
+//
+//            foreach ($list as $row) {
+//                fputcsv($FH, $row);
+//
+//            }
+//
+//            fclose($FH);
+//        };
+////
+//         return Response::stream($callback, 200, $headers); //use Illuminate\Support\Facades\Response;
+
+        $response = new StreamedResponse();
+
+        $response->setCallback(function () use ($list,$r,$filePath){
 
             if ($offerList=$r->fulloffers){
                 //$fileName="FullOfferList-".date_timestamp_get(now());
-                $FH = fopen(public_path ()."/csv/".$fileName.".csv", "w");
+                $FH = fopen($filePath, "w");
             }
             if ($offerList=$r->priceCreation){
-               // $fileName="PriceUpdateList-".date_timestamp_get(now());
-                $FH = fopen(public_path ()."/csv/".$fileName.".csv", "w");
+                // $fileName="PriceUpdateList-".date_timestamp_get(now());
+                $FH = fopen($filePath, "w");
             }
             if ($offerList=$r->stockUpdate){
-               // $fileName="StockUpdateList-".date_timestamp_get(now());
-                $FH = fopen(public_path ()."/csv/".$fileName.".csv", "w");
+                // $fileName="StockUpdateList-".date_timestamp_get(now());
+                $FH = fopen($filePath, "w");
             }
             if ($offerList=$r->markdownUpdate){
                 //$fileName="markdownUpdateList-".date_timestamp_get(now());
-                $FH = fopen(public_path ()."/csv/".$fileName.".csv", "w");
+                $FH = fopen($filePath, "w");
             }
 
+            $FH = fopen($filePath, "w");
             foreach ($list as $row) {
                 fputcsv($FH, $row);
-
             }
-
             fclose($FH);
-        };
-//
-         return Response::stream($callback, 200, $headers); //use Illuminate\Support\Facades\Response;
+        });
+
+        $response->send();
+
+        $data1=array(
+            'historicUploadedFilesName'=>$fileName,
+            'historicUploadedFilesType'=>"OfferList",
+            'createdBy'=>Auth::user()->userId,
+
+        );
+
+        DB::table('historicuploadedfiles')
+            ->insert($data1);
+
+        $fileInfo=array(
+            'fileName'=>$fileName,
+            'filePath'=>$filePath,
+        );
+
+        return $fileInfo;
 
 
 

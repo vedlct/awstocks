@@ -18,6 +18,8 @@ use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
 
+use Symfony\Component\HttpFoundation\StreamedResponse;
+
 
 //use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
@@ -401,21 +403,29 @@ class ProductController extends Controller
         $fileName="ProductList-".date_timestamp_get(now()).".csv";
         $filePath=public_path ()."/csv"."/".$fileName;
 
+        $fileInfo=array(
+            'fileName'=>$fileName,
+            'filePath'=>$filePath,
+        );
+
+
        // $filePath=public_path ()."/csv/ProductList.csv";
 
         # add headers for each column in the CSV download
+
         array_unshift($list, array_keys($list[0]));
         
        // return $r;
-        $callback = function() use ($list,$filePath)
-        {
-            $FH = fopen($filePath, "w");
 
-            foreach ($list as $row) {
-                fputcsv($FH, $row);
-            }
-            fclose($FH);
-        };
+//        $callback = function() use ($list,$filePath)
+//        {
+//            $FH = fopen($filePath, "w");
+//
+//            foreach ($list as $row) {
+//                fputcsv($FH, $row);
+//            }
+//            fclose($FH);
+//        };
 
         $data1=array(
             'historicUploadedFilesName'=>$fileName,
@@ -427,7 +437,24 @@ class ProductController extends Controller
         DB::table('historicuploadedfiles')
             ->insert($data1);
 
-         return Response::stream($callback, 200, $headers); //use Illuminate\Support\Facades\Response;
+//         return Response::stream($callback, 200, $headers); //use Illuminate\Support\Facades\Response;
+
+
+        $response = new StreamedResponse();
+
+        $response->setCallback(function () use ($list,$filePath){
+
+            $FH = fopen($filePath, "w");
+            foreach ($list as $row) {
+                fputcsv($FH, $row);
+            }
+            fclose($FH);
+        });
+
+        $response->send();
+
+        return $fileInfo;
+
 
 
     }
