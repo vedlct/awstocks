@@ -74,7 +74,7 @@
 
                     { "data": function(data){
 
-                    return '<a class="btn btn-default btn-sm" href="{{url("public/csv")}}'+"/"+data.historicUploadedFilesName+'" download><i class="fa fa-edit"></i></a>';},
+                    return '<a class="btn btn-default btn-sm" href="{{url("public/csv")}}'+"/"+data.historicUploadedFilesName+'" download><i class="fa fa-download"></i></a>';},
                         "orderable": false, "searchable":false },
                 ],
                 order: [[0,'desc'] ],
