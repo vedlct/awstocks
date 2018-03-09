@@ -17,7 +17,8 @@ class HistoryController extends Controller
 
     public function index(){
 
-        return view('history.index');
+//        return view('history.index');
+        return view('home');
     }
 
 

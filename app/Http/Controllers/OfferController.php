@@ -354,15 +354,15 @@ class OfferController extends Controller
 
         $response->send();
 
-        $data1=array(
-            'historicUploadedFilesName'=>$fileName,
-            'historicUploadedFilesType'=>"OfferList",
-            'createdBy'=>Auth::user()->userId,
-
-        );
-
-        DB::table('historicuploadedfiles')
-            ->insert($data1);
+//        $data1=array(
+//            'historicUploadedFilesName'=>$fileName,
+//            'historicUploadedFilesType'=>"OfferList",
+//            'createdBy'=>Auth::user()->userId,
+//
+//        );
+//
+//        DB::table('historicuploadedfiles')
+//            ->insert($data1);
 
         $fileInfo=array(
             'fileName'=>$fileName,
