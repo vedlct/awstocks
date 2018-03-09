@@ -241,14 +241,14 @@
 //                        var w = window.open();
 //                        $(w.document.body).html(data);
 
-                        var link = document.createElement("a");
-                        link.download = "ProductList.csv";
-                        var uri = '{{url("/public/csv/ProductList.csv")}}';
-                        link.href = uri;
-                        document.body.appendChild(link);
-                        link.click();
-                        document.body.removeChild(link);
-                        delete link;
+                        {{--var link = document.createElement("a");--}}
+                        {{--link.download = "ProductList.csv";--}}
+                        {{--var uri = '{{url("/public/csv/ProductList.csv")}}';--}}
+                        {{--link.href = uri;--}}
+                        {{--document.body.appendChild(link);--}}
+                        {{--link.click();--}}
+                        {{--document.body.removeChild(link);--}}
+                        {{--delete link;--}}
 
 
                     }

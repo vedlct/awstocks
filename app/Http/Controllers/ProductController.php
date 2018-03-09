@@ -398,8 +398,10 @@ class ProductController extends Controller
                 ->where('productId',$productId)
                 ->update($data);
         }
-//        $filePath=public_path ()."/csv/ProductList-".date_timestamp_get(now()).".csv";
-        $filePath=public_path ()."/csv/ProductList.csv";
+        $fileName="ProductList-".date_timestamp_get(now()).".csv";
+        $filePath=public_path ()."/csv"."/".$fileName;
+
+       // $filePath=public_path ()."/csv/ProductList.csv";
 
         # add headers for each column in the CSV download
         array_unshift($list, array_keys($list[0]));
@@ -414,6 +416,17 @@ class ProductController extends Controller
             }
             fclose($FH);
         };
+
+        $data1=array(
+            'historicUploadedFilesName'=>$fileName,
+            'historicUploadedFilesType'=>"ProductList",
+            'createdBy'=>Auth::user()->userId,
+
+        );
+
+        DB::table('historicuploadedfiles')
+            ->insert($data1);
+
          return Response::stream($callback, 200, $headers); //use Illuminate\Support\Facades\Response;
 
 
