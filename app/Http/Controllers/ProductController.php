@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Image;
 use Input;
+use Exception;
 use Session;
 use Illuminate\Support\Facades\Storage;
 use App\Product;
@@ -472,24 +473,28 @@ class ProductController extends Controller
             $ftp_userpass = "baker@123";
         $ftp_conn = ftp_connect($ftp_server) or die("Could not connect to $ftp_server");
         $login = ftp_login($ftp_conn, $ftp_username, $ftp_userpass);
-
+        $a=array();
         foreach ($r->products as $prod) {
 
 
             //$file = url('public/csv/FullOfferList.csv');
 
             // upload file
-            if (ftp_put($ftp_conn, $prod, $r->path.$prod, FTP_ASCII)) {
-                // echo "Successfully uploaded $file.";
 
-            } else {
-                // echo "Error uploading $file.";
+
+
+            try{
+                ftp_put($ftp_conn, $prod, $r->path.$prod, FTP_ASCII);
+            }
+            catch (Exception $e){
+                array_push($a,"File Not Found ".$prod);
             }
 
         }
 
 // close connection
         ftp_close($ftp_conn);
+        return $a;
     }
 
 
