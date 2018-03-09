@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Image;
 use Input;
 use Session;
+use Illuminate\Support\Facades\Storage;
 use App\Product;
 use App\Category;
 use App\Color;
@@ -418,4 +419,34 @@ class ProductController extends Controller
 
 
     }
+
+    public function sendftp()
+    {
+        //Storage::disk('ftp')->store('test.txt');
+       // Storage::disk('ftp')->putFile('photos', '');
+
+        $ftp_server = "ftp.sakibrahman.com";
+        $ftp_username = "baker@sakibrahman.com";
+            $ftp_userpass = "baker@123";
+        $ftp_conn = ftp_connect($ftp_server) or die("Could not connect to $ftp_server");
+        $login = ftp_login($ftp_conn, $ftp_username, $ftp_userpass);
+
+        $file = url('public/csv/FullOfferList.csv');
+
+// upload file
+        if (ftp_put($ftp_conn, "test.csv", $file, FTP_ASCII))
+        {
+            echo "Successfully uploaded $file.";
+        }
+        else
+        {
+            echo "Error uploading $file.";
+        }
+
+// close connection
+        ftp_close($ftp_conn);
+    }
+
+
+
 }
