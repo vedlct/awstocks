@@ -66,6 +66,7 @@ Route::post('/settings/categoryajax', 'SettingsController@categoryAjax')->name('
 Route::post('/settings/careajax', 'SettingsController@careAjax')->name('settings.careajax');
 Route::post('/settings/sizeajax', 'SettingsController@sizeAjax')->name('settings.sizeajax');
 Route::post('/settings/runtosizeajax', 'SettingsController@runtosizeAjax')->name('settings.runtosizeajax');
+Route::post('/settings/season', 'SettingsController@season')->name('settings.season');
 
 
 // insert setting

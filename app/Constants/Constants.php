@@ -48,6 +48,6 @@ define('SizeCategory',
 define('Status',array("New","Downloaded"));
 
 
-define('SettingListDropdown',array("category","color","size","care","runtosize"));
+define('SettingListDropdown',array("season","category","color","size","care","runtosize"));
 
 

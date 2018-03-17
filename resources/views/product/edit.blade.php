@@ -196,7 +196,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label">RRP(£)<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-10">
-                                <input id="inputHorizontalSuccess"  name="price" type="text" value="{{$product->price}}" placeholder="price" class="form-control form-control-success" required>
+                                <input id="inputHorizontalSuccess"  name="price" type="number" value="{{$product->price}}" placeholder="price" class="form-control form-control-success myInputField" required>
                             </div>
                         </div>
 
@@ -205,7 +205,7 @@
                             <label class="col-sm-2 form-control-label">Cost price</label>
                             <div class="col-sm-10">
 
-                                <input id="inputHorizontalSuccess" value="{{ $product->$product }}" name="$product" placeholder="optional" type="number" min="0" class="form-control form-control-success myInputField">
+                                <input id="inputHorizontalSuccess" value="{{ $product->$product }}" name="$product" placeholder="optional" type="number" min="0" class="form-control form-control-success cost">
                                 @if ($errors->has('costPrice'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('costPrice') }}</strong>
@@ -221,7 +221,7 @@
                             <label class="col-sm-2 form-control-label">Whole sale price</label>
                             <div class="col-sm-10">
 
-                                <input id="inputHorizontalSuccess" value="{{ $product->wholePrice }}" name="wholePrice" placeholder="optional" type="number" min="0" class="form-control form-control-success myInputField">
+                                <input id="inputHorizontalSuccess" value="{{ $product->wholePrice }}" name="wholePrice" placeholder="optional" type="number" min="0" class="form-control form-control-success whole">
                                 @if ($errors->has('wholePrice'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('wholePrice') }}</strong>
@@ -533,6 +533,19 @@
             typingTimer = setTimeout(doneTyping, doneTypingInterval);
         }
     });
+        $('.cost').keyup(function(){
+            clearTimeout(typingTimer);
+            if ($('.cost').val) {
+                typingTimer = setTimeout(cost, doneTypingInterval);
+            }
+        });
+
+        $('.whole').keyup(function(){
+            clearTimeout(typingTimer);
+            if ($('.whole').val) {
+                typingTimer = setTimeout(whole, doneTypingInterval);
+            }
+        });
 
     function doneTyping () {
         var vale = $('.myInputField').val();
@@ -543,6 +556,26 @@
             $('.myInputField').val('');
         }
     }
+
+        function whole () {
+            var vale = $('.whole').val();
+            var regexTest = /^\d+(?:\.\d\d?)?$/;
+            var ok = regexTest.test(vale);
+            if(!ok){
+                alert('please enter only two decimal number');
+                $('.whole').val('');
+            }
+        }
+
+        function cost () {
+            var vale = $('.cost').val();
+            var regexTest = /^\d+(?:\.\d\d?)?$/;
+            var ok = regexTest.test(vale);
+            if(!ok){
+                alert('please enter only two decimal number');
+                $('.cost').val('');
+            }
+        }
 
 </script>
 
