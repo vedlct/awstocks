@@ -58,7 +58,7 @@
         <div class="row">
         <div class="col-md-4 dropdown">
             <label class="form-control-label">Season</label> <br>
-            <select class="form-control" id="category" name="category">
+            <select class="form-control" id="season" name="season">
                 <option selected value="">All Season</option>
 
                 @foreach($season as $season)
@@ -69,14 +69,14 @@
         </div>
         <div class="col-md-4 ">
             <label class="form-control-label">Discount Price</label> <br>
-            <input class="form-control" type="number" name="disprice">
+            <input class="form-control" type="number" id="disprice" name="disprice">
 
         </div>
         </div>
 
 
         <br>
-        <a  onclick="return myfunc()" download> <button class="btn btn-danger" >Insert Bulk Offer</button></a>
+        <a class="btn btn-danger" onclick="insertBulkOffer()">Insert Bulk Offer</a>
 
 
     </div>
@@ -201,38 +201,27 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-        function myfunc() {
 
-
-//            var i;
-//            /* look for all checkboes that have a class 'chk' attached to it and check if it was checked */
-//            $(".chk:checked").each(function () {
-//                selecteds.push($(this).val());
-//            });
-
+        function insertBulkOffer() {
 
             var products=selecteds;
 
-            //alert(products);
+           // alert(products);
 
             if (products.length >0) {
 
+                var disprice=document.getElementById('disprice').value;
+                var season=document.getElementById('season').value;
+
                 $.ajax({
                     type: 'POST',
-                    url: "{!! route('product.csv') !!}",
+                    url: "{!! route('offer.insertBulkOffer') !!}",
                     cache: false,
-                    data: {'products': products},
+                    data: {'offers': products,'season':season,'disprice':disprice},
                     success: function (data) {
 
-                        var link = document.createElement("a");
-                        link.download = data.fileName;
-                        var uri = '{{url("public/csv")}}'+"/"+data.fileName;
-                        link.href = uri;
-                        document.body.appendChild(link);
-                        link.click();
-                        document.body.removeChild(link);
-                        delete link;
-
+                        location.reload();
+                       // alert(data);
 
                     }
 
@@ -245,7 +234,7 @@
     </script>
 
 @endsection
-<script ></script>
+
 
 
 

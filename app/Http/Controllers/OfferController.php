@@ -17,6 +17,7 @@ use Response;
 use DB;
 
 
+
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 
@@ -84,6 +85,40 @@ class OfferController extends Controller
 
         Session::flash('message', 'Offer Added successfully');
         return back();
+    }
+    public function insertBulkOffer(Request $r){
+
+        $seasone=$r->season;
+        $disprice=$r->disprice;
+        $offers=$r->offers;
+
+       // return $seasone;
+
+        $seasones=Season::select('startDate','endDate')->where('seasonId',$seasone)->first();
+
+        foreach ($offers as $offerId) {
+            $offiress = Product::select('*')->where('productId', $offerId)->get();
+
+            foreach ($offiress as $offiress) {
+
+                $offer = array(
+                    'fkproductId' => $offiress->productId,
+                    'disPrice' => $disprice,
+                    'disStartPrice' => $seasones->startDate,
+                    'disEndPrice' => $seasones->endDate,
+                    'state' => $offiress->state,
+                    'status' => Status[0],
+//            'lastExportedBy'=>Auth::user()->userId,
+//                    'product-id-type' => $offiress->productIdType,
+
+                );
+
+                DB::table('offer')->insert($offer);
+            }
+        }
+
+        Session::flash('message', 'Offer Added successfully');
+
     }
 
 
