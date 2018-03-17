@@ -19,11 +19,6 @@
                 <?php for($i=0;$i<count(SettingListDropdown);$i++){?>
                 <option @if( Session::has('Cat') && Session::get('Cat')== SettingListDropdown[$i]) selected @endif value="<?php echo SettingListDropdown[$i]?>"><?php echo ucfirst(SettingListDropdown[$i])?></option>
                 <?php } ?>
-                    {{--<option @if( Session::has('Cat') && Session::get('Cat')== "size") selected @endif value="category">Category</option>--}}
-                    {{--<option value="color">Color</option>--}}
-                    {{--<option @if( Session::has('Cat') && Session::get('Cat')== "size") selected @endif value="size">Size</option>--}}
-                     {{--<option value="care">Care</option>--}}
-                    {{--<option value="runtosize">Run TO Size</option>--}}
 
             </select>
         </div>

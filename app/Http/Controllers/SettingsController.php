@@ -10,8 +10,10 @@ use App\Color;
 use App\Category;
 use App\Care;
 use App\RunToSize;
+use App\Season;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Response;
+
 
 class SettingsController extends Controller
 {
@@ -53,6 +55,11 @@ class SettingsController extends Controller
             return view('settings.runtosize');
 
         }
+        elseif ($r->option=="season"){
+
+            return view('settings.season');
+
+        }
 
     }
 
@@ -85,6 +92,13 @@ class SettingsController extends Controller
     public function runToSizeAjax (){
         $runtosize = RunToSize::get();
         $datatables = Datatables::of($runtosize);
+        return $datatables->make(true);
+    }
+
+    public function season(){
+
+        $season = Season::get();
+        $datatables = Datatables::of($season);
         return $datatables->make(true);
     }
 

@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- version 4.7.7
+-- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 09, 2018 at 08:03 AM
--- Server version: 10.1.19-MariaDB
--- PHP Version: 7.0.13
+-- Generation Time: Mar 17, 2018 at 11:57 AM
+-- Server version: 10.1.30-MariaDB
+-- PHP Version: 7.2.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -126,7 +128,10 @@ INSERT INTO `historicuploadedfiles` (`historicUploadedFilesId`, `historicUploade
 (6, 'ProductList-1520575264.csv', 'ProductList', '2018-03-09 06:01:04', 2, NULL, NULL),
 (7, 'ProductList-1520575276.csv', 'ProductList', '2018-03-09 06:01:16', 2, NULL, NULL),
 (8, 'ProductList-1520577854.csv', 'ProductList', '2018-03-09 06:44:14', 2, NULL, NULL),
-(9, 'ProductList-1520577872.csv', 'ProductList', '2018-03-09 06:44:32', 2, NULL, NULL);
+(9, 'ProductList-1520577872.csv', 'ProductList', '2018-03-09 06:44:32', 2, NULL, NULL),
+(10, 'FullOfferList-1520582908.csv', 'OfferList', '2018-03-09 08:08:28', 2, NULL, NULL),
+(11, 'FullOfferList-1520585072.csv', 'OfferList', '2018-03-09 08:44:32', 2, NULL, NULL),
+(12, 'ProductList-1520589001.csv', 'ProductList', '2018-03-09 09:50:01', 2, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -152,9 +157,9 @@ CREATE TABLE `offer` (
 --
 
 INSERT INTO `offer` (`offerId`, `fkproductId`, `disPrice`, `disStartPrice`, `disEndPrice`, `state`, `product-id-type`, `status`, `lastExportedBy`, `lastExportedDate`) VALUES
-(1, 2, '10.50', '2018-03-01', '2018-03-23', '11', 'dfd5454', 'Downloaded', 2, '2018-03-09 06:50:55'),
-(3, 2, '2.00', 'sdsd', 'dssds', '11', 'sdsd', 'Active', 2, '2018-03-03 16:26:27'),
-(4, 2, '65.55', 'dssd', 'sdsd', '11', 'sdsd', 'Active', 2, '2018-03-03 16:28:30');
+(1, 2, '10.50', '2018-03-01', '2018-03-23', '11', 'dfd5454', 'Downloaded', 2, '2018-03-09 08:44:32'),
+(3, 2, '2.00', 'sdsd', 'dssds', '11', 'sdsd', 'Downloaded', 2, '2018-03-09 08:08:28'),
+(4, 2, '65.55', 'dssd', 'sdsd', '11', 'sdsd', 'Downloaded', 2, '2018-03-09 08:08:28');
 
 -- --------------------------------------------------------
 
@@ -174,7 +179,8 @@ CREATE TABLE `product` (
   `brand` varchar(25) DEFAULT NULL,
   `color` varchar(25) DEFAULT NULL,
   `colorDesc` mediumtext,
-  `size` varchar(5) DEFAULT NULL,
+  `size` varchar(45) DEFAULT NULL,
+  `sizeDescription` varchar(45) DEFAULT NULL,
   `swatchImage` mediumtext,
   `mainImage` mediumtext,
   `outfit` mediumtext,
@@ -183,7 +189,9 @@ CREATE TABLE `product` (
   `image4` mediumtext,
   `runtosize` varchar(45) DEFAULT NULL,
   `care` varchar(45) DEFAULT NULL,
-  `price` int(11) DEFAULT NULL,
+  `price` decimal(11,2) DEFAULT NULL,
+  `costPrice` decimal(11,2) DEFAULT NULL,
+  `wholePrice` decimal(11,2) DEFAULT NULL,
   `stockQty` int(11) DEFAULT NULL,
   `minQtyAlert` int(11) DEFAULT NULL,
   `LastExportedBy` int(11) DEFAULT NULL,
@@ -194,15 +202,16 @@ CREATE TABLE `product` (
 -- Dumping data for table `product`
 --
 
-INSERT INTO `product` (`productId`, `status`, `fkcategoryId`, `style`, `sku`, `ean`, `productName`, `productDesc`, `brand`, `color`, `colorDesc`, `size`, `swatchImage`, `mainImage`, `outfit`, `image2`, `image3`, `image4`, `runtosize`, `care`, `price`, `stockQty`, `minQtyAlert`, `LastExportedBy`, `LastExportedDate`) VALUES
-(2, 'Downloaded', 1, 'asdasd', 'dasdaewe', 'weqw', 'Test Product 1', 'asdaszxcd\r\najsdiuahs', 'asdasd', '5', 'ddfsfgdyrtyryfghfgh', 'L', '2swatch.jpg', NULL, '2outfit.jpg', NULL, NULL, NULL, 'This style runs small to size', 'Dry Clean Only', 40, 5, 2, 2, '2018-03-09 00:00:29'),
-(4, 'Downloaded', 2, 'adasda', 'dfdf', 'sdsa', 'pant denim', 'asdasdas', 'levis', 'White', 'new', 'L', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Dry Clean Only', 565, 6565, 6565, 2, '2018-03-09 00:00:29'),
-(5, 'Active', 1, 'asdasd', 'dsadasd', 'dfdf', '454sadsds', 'dfdfdf', 'asdasd', '5', 'dsadasd', 'XL', NULL, NULL, NULL, NULL, NULL, NULL, 'This style runs small to size', 'Dry Clean Only', 54354, 5454, 652, 2, '2018-03-03 07:43:14'),
-(6, 'Inactive', 1, 'Test', 'Test', 'Test 6', 'Test', 'Test 6', 'Test', '6', 'Test 6', 'XL', '7swatch.png', '7main.jpg', '7outfit.png', '7image2.jpg', '7image3.jpg', '7image4.jpg', 'This style runs true to size', 'Dry Clean Only', 654, 468, 946, 2, '2018-03-03 08:52:13'),
-(7, 'Active', 1, 'sadad', '76', 'dasda', 'sdsd', 'AASASA', 'sdsd', 'Pink', 'test color', 'Mensw', NULL, NULL, NULL, NULL, NULL, NULL, 'This style runs true to size', 'Hand Wash or Dry Clean Only', 44, 98, 9, 2, '2018-03-07 05:23:18'),
-(8, 'Downloaded', 2, '74584', '541', '5146', '1321321', '56414187', '1252', 'Purple', '13516', 'S', '8swatch.png', '8main.jpg', '8outfit.jpg', '8image2.jpg', '8image3.jpg', '8image4.jpg', 'This style runs small to size', 'Hand Wash or Dry Clean Only', 12, 54, 51, 2, '2018-03-09 00:01:16'),
-(9, 'Downloaded', 2, 'test', 'test2', 'test brand by', 'test brand by farzad', 'test brand by farzad', 'test brand by farzad', '5', 'test brand by farzad', 'Mensw', '9swatch.jpg', '9main.jpg', '9outfit.jpg', '9image2.jpg', '9image3.jpg', '9image4.jpg', 'This style runs small to size', 'Dry Clean Only', 654, 65, 4, 2, '2018-03-09 00:01:16'),
-(10, 'Downloaded', 1, 'asdad', 'adasd', '544', 'asdasd', 'dfd', 'asa', 'Silver', 'asdasd', 'Mensw', '10swatch.jpg', '10main.jpg', '10outfit.jpg', '10image2.jpg', '10image3.jpg', '10image4.jpg', 'This style runs small to size', 'Dry Clean Only', 895, 9, 4, 2, '2018-03-09 00:44:32');
+INSERT INTO `product` (`productId`, `status`, `fkcategoryId`, `style`, `sku`, `ean`, `productName`, `productDesc`, `brand`, `color`, `colorDesc`, `size`, `sizeDescription`, `swatchImage`, `mainImage`, `outfit`, `image2`, `image3`, `image4`, `runtosize`, `care`, `price`, `costPrice`, `wholePrice`, `stockQty`, `minQtyAlert`, `LastExportedBy`, `LastExportedDate`) VALUES
+(2, 'Downloaded', 1, 'asdasd', 'dasdaewe', 'weqw', 'Test Product 1', 'asdaszxcd\r\najsdiuahs', 'asdasd', '5', 'ddfsfgdyrtyryfghfgh', 'L', NULL, '2swatch.jpg', NULL, '2outfit.jpg', NULL, NULL, NULL, 'This style runs small to size', 'Dry Clean Only', '40.00', NULL, NULL, 5, 2, 2, '2018-03-09 03:50:01'),
+(4, 'Downloaded', 2, 'adasda', 'dfdf', 'sdsa', 'pant denim', 'asdasdas', 'levis', 'White', 'new', 'L', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Dry Clean Only', '565.00', NULL, NULL, 6565, 6565, 2, '2018-03-09 00:00:29'),
+(5, 'Active', 1, 'asdasd', 'dsadasd', 'dfdf', '454sadsds', 'dfdfdf', 'asdasd', '5', 'dsadasd', 'XL', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'This style runs small to size', 'Dry Clean Only', '54354.00', NULL, NULL, 5454, 652, 2, '2018-03-03 07:43:14'),
+(6, 'Inactive', 1, 'Test', 'Test', 'Test 6', 'Test', 'Test 6', 'Test', '6', 'Test 6', 'XL', NULL, '7swatch.png', '7main.jpg', '7outfit.png', '7image2.jpg', '7image3.jpg', '7image4.jpg', 'This style runs true to size', 'Dry Clean Only', '654.00', NULL, NULL, 468, 946, 2, '2018-03-03 08:52:13'),
+(7, 'Active', 1, 'sadad', '76', 'dasda', 'sdsd', 'AASASA', 'sdsd', 'Pink', 'test color', 'Mensw', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'This style runs true to size', 'Hand Wash or Dry Clean Only', '44.00', NULL, NULL, 98, 9, 2, '2018-03-07 05:23:18'),
+(8, 'Downloaded', 2, '74584', '541', '5146', '1321321', '56414187', '1252', 'Purple', '13516', 'S', NULL, '8swatch.png', '8main.jpg', '8outfit.jpg', '8image2.jpg', '8image3.jpg', '8image4.jpg', 'This style runs small to size', 'Hand Wash or Dry Clean Only', '12.00', NULL, NULL, 54, 51, 2, '2018-03-09 00:01:16'),
+(9, 'Downloaded', 2, 'test', 'test2', 'test brand by', 'test brand by farzad', 'test brand by farzad', 'test brand by farzad', '5', 'test brand by farzad', 'Mensw', NULL, '9swatch.jpg', '9main.jpg', '9outfit.jpg', '9image2.jpg', '9image3.jpg', '9image4.jpg', 'This style runs small to size', 'Dry Clean Only', '654.00', NULL, NULL, 65, 4, 2, '2018-03-09 00:01:16'),
+(10, 'Downloaded', 1, 'asdad', 'adasd', '544', 'asdasd', 'dfd', 'asa', 'Silver', 'asdasd', 'Mensw', NULL, '10swatch.jpg', '10main.jpg', '10outfit.jpg', '10image2.jpg', '10image3.jpg', '10image4.jpg', 'This style runs small to size', 'Dry Clean Only', '895.00', NULL, NULL, 9, 4, 2, '2018-03-09 00:44:32'),
+(11, 'New', 2, 'updateproduct', 'updateproduct', NULL, 'update product', 'update product', 'update product', '5', 'update product', NULL, 'test', NULL, 'http://localhost/awstocks/public/productImage/11main.jpg', NULL, NULL, NULL, NULL, NULL, NULL, '21.65', NULL, NULL, 20, 10, NULL, '2018-03-17 07:28:47');
 
 -- --------------------------------------------------------
 
@@ -224,6 +233,28 @@ CREATE TABLE `runtosize` (
 INSERT INTO `runtosize` (`runToSizeId`, `runToSizeName`, `runToSizeDescription`, `runToSizeType`) VALUES
 (1, 'This style runs small to size', NULL, NULL),
 (2, 'This style runs true to size', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `season`
+--
+
+CREATE TABLE `season` (
+  `seasonId` int(11) NOT NULL,
+  `seasonName` varchar(45) NOT NULL,
+  `startDate` date NOT NULL,
+  `endDate` date NOT NULL,
+  `status` int(1) NOT NULL DEFAULT '1',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `season`
+--
+
+INSERT INTO `season` (`seasonId`, `seasonName`, `startDate`, `endDate`, `status`, `created_at`) VALUES
+(1, 'Summer', '2018-03-17', '2018-03-31', 1, '2018-03-17 10:48:31');
 
 -- --------------------------------------------------------
 
@@ -333,6 +364,12 @@ ALTER TABLE `runtosize`
   ADD PRIMARY KEY (`runToSizeId`);
 
 --
+-- Indexes for table `season`
+--
+ALTER TABLE `season`
+  ADD PRIMARY KEY (`seasonId`);
+
+--
 -- Indexes for table `size`
 --
 ALTER TABLE `size`
@@ -353,51 +390,67 @@ ALTER TABLE `users`
 --
 ALTER TABLE `care`
   MODIFY `careId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
   MODIFY `categoryId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT for table `color`
 --
 ALTER TABLE `color`
   MODIFY `colorId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT for table `filetransfer`
 --
 ALTER TABLE `filetransfer`
   MODIFY `transferId` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `historicuploadedfiles`
 --
 ALTER TABLE `historicuploadedfiles`
-  MODIFY `historicUploadedFilesId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `historicUploadedFilesId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
 --
 -- AUTO_INCREMENT for table `offer`
 --
 ALTER TABLE `offer`
   MODIFY `offerId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `productId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `productId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
 --
 -- AUTO_INCREMENT for table `runtosize`
 --
 ALTER TABLE `runtosize`
   MODIFY `runToSizeId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `season`
+--
+ALTER TABLE `season`
+  MODIFY `seasonId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT for table `size`
 --
 ALTER TABLE `size`
   MODIFY `sizeId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `userId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- Constraints for dumped tables
 --
@@ -413,6 +466,7 @@ ALTER TABLE `offer`
 --
 ALTER TABLE `product`
   ADD CONSTRAINT `fk_product_category1` FOREIGN KEY (`fkcategoryId`) REFERENCES `category` (`categoryId`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
