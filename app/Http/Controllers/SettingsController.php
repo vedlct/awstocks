@@ -105,6 +105,32 @@ class SettingsController extends Controller
 
     ///////insert settings////////////
 
+
+    public function addSeason(){
+
+        return view('settings.insertSeason');
+    }
+
+
+    public function insertSeason(Request $r){
+        $this->validate($r,[
+            'seasonName' => 'required',
+            'startDate' => 'required',
+            'endDate' => 'required',
+        ]);
+
+
+
+        $season=new Season;
+        $season->seasonName=$r->seasonName;
+        $season->startDate=$r->startDate;
+        $season->endDate=$r->endDate;
+        $season->save();
+
+        Session::flash('message', 'Season Inserted successfully');
+        return back();
+    }
+
     public function insertCare(Request $r){
         $this->validate($r,[
             'careName' => 'required|max:45',
@@ -184,6 +210,13 @@ class SettingsController extends Controller
 
 //Edit
 
+    public function editSeason($id){
+        $season=Season::findOrFail($id);
+
+        return view('settings.edit.editseason')->with('season',$season);
+
+    }
+
     public function editColor($id){
         $color=Color::findOrFail($id);
         return view('settings.edit.editcolor')->with('color',$color);
@@ -214,6 +247,30 @@ class SettingsController extends Controller
     }
 
 //Update Settings
+
+    public function updateSeason(Request $r){
+        $this->validate($r,[
+            'id' => 'required',
+            'seasonName' => 'required',
+            'startDate' => 'required',
+            'endDate' => 'required',
+        ]);
+        $season=Season::findOrFail($r->id);
+        $season->seasonName=$r->seasonName;
+        $season->startDate=$r->startDate;
+        $season->endDate=$r->endDate;
+        $season->save();
+
+        Session::flash('message', 'Season Inserted successfully');
+
+        Session::flash('Cat','season');
+
+        return redirect()->route('settings');
+
+
+
+
+    }
 
     public function updateCare(Request $r){
         $this->validate($r,[
