@@ -29,7 +29,7 @@
 
         </table>
         <input type="checkbox" id="selectall" onClick="selectAll(this)" /><b>Select All</b><br>
-        <a  onclick="return myfunc()" download> <button class="btn btn-danger"  >Export Products file</button></a>
+        <a  onclick="return myfunc()" download> <button class="btn btn-danger"  >Send To FTP</button></a>
         <br>
 
 
@@ -152,7 +152,13 @@
                     data: {'products': products,'path':'{{url('public/csv')}}'+"/"},
                     success: function (data) {
 
-                    alert(data);
+                        if (data.length > 0){
+
+                           alert(data);
+                        }else {
+
+                            alert("Files sent successfully");
+                        }
 
                     }
 

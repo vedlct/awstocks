@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Image;
 use Input;
+use Exception;
 use Session;
 use Illuminate\Support\Facades\Storage;
 use App\Product;
@@ -473,27 +474,16 @@ class ProductController extends Controller
         $ftp_conn = ftp_connect($ftp_server) or die("Could not connect to $ftp_server");
         $login = ftp_login($ftp_conn, $ftp_username, $ftp_userpass);
 
-        $error=array();
+        $a=array();
+        foreach ($r->products as $prod) {
 
-        for ($i=0;$i<count($r->products);$i++){
-
-            //        foreach ($r->products as $prod) {
-
-            if(file_exists($r->path.$r->products[$i])){
-
-                // upload file
-                if (ftp_put($ftp_conn, $r->products[$i], $r->path.$r->products[$i], FTP_ASCII)) {
-                    // echo "Successfully uploaded $file.";
-
-
-                } else {
-                    // echo "Error uploading $file.";
-                }
-
+            // upload file
+            
+            try{
+                ftp_put($ftp_conn, $prod, $r->path.$prod, FTP_ASCII);
             }
-            else{
-                $newError=array('fileName'.$i=>$r->products[$i]);
-                $error1=array_merge($error,$newError);
+            catch (Exception $e){
+                array_push($a,"File Not Found ".$prod);
 
             }
 //        }
@@ -506,7 +496,8 @@ class ProductController extends Controller
 // close connection
         ftp_close($ftp_conn);
 
-        return $error1;
+        return $a;
+
     }
 
 
