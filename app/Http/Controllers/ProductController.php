@@ -430,15 +430,17 @@ class ProductController extends Controller
 //            fclose($FH);
 //        };
 
-        $data1=array(
-            'historicUploadedFilesName'=>$fileName,
-            'historicUploadedFilesType'=>"ProductList",
-            'createdBy'=>Auth::user()->userId,
 
-        );
+//        $data1=array(
+//            'historicUploadedFilesName'=>$fileName,
+//            'historicUploadedFilesType'=>"ProductList",
+//            'createdBy'=>Auth::user()->userId,
+//
+//        );
+//
+//        DB::table('historicuploadedfiles')
+//            ->insert($data1);
 
-        DB::table('historicuploadedfiles')
-            ->insert($data1);
 
 //         return Response::stream($callback, 200, $headers); //use Illuminate\Support\Facades\Response;
 

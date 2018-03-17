@@ -77,6 +77,7 @@
                 </thead>
 
             </table><br>
+
             
             <input type="checkbox" id="selectall" onClick="selectAll(this)" /><b>Select All</b><br>
         </div>
@@ -245,6 +246,7 @@
                         link.click();
                         document.body.removeChild(link);
                         delete link;
+
 
                     }
 
