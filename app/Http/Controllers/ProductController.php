@@ -93,11 +93,19 @@ class ProductController extends Controller
 
 
         $product=Product::findOrFail($id);
-        $sizeType=Size::select('sizeType')->where('sizeName',$product->size)->first();
+        $sizeTypess=Size::select('sizeType')->where('sizeName',$product->size)->first();
+        if($sizeTypess ==null){
+            $sizeTypess="none";
+        }
+        else{
+            $sizeTypess=$sizeTypess->sizeType;
+        }
+
+
 
 //        $type=Size::where('sizeType',$product->)->get();
 
-//        return $sizeType;
+        //return $sizeTypess;
 
         return view('product.edit')
             ->with('categories',$categories)
@@ -107,7 +115,7 @@ class ProductController extends Controller
             ->with('cares',$cares)
             ->with('runToSizes',$runToSizes)
             ->with('id',$id)
-            ->with('sizeType',$sizeType);
+            ->with('sizeTypess',$sizeTypess);
     }
 
 
@@ -121,11 +129,13 @@ class ProductController extends Controller
             'style' => 'required|max:15',
             'sku'=>'required|max:20',
             'brand'=>'required|max:45',
-            'size'=>'required|max:45',
+            'size'=>'max:45',
+            'sizeDescription'=>'max:45',
+            'runToSize'=>'max:45',
             'color'=>'required|max:45',
             'colorDesc'=>'required|max:20',
-            'ean'=>'required|max:13',
-            'care'=>'required|max:45',
+            'ean'=>'max:13',
+            'care'=>'max:45',
             'swatchPic'=>'image|mimes:jpeg,jpg',
             'outfitPic'=>'image|mimes:jpeg,jpg',
             'mainPic' =>'image|mimes:jpeg,jpg',
@@ -147,12 +157,17 @@ class ProductController extends Controller
         $product->sku=$r->sku;
         $product->brand=$r->brand;
         $product->size=$r->size;
+        $product->sizeDescription=$r->sizeDescription;
         $product->fkcategoryId=$r->category;
         $product->ean=$r->ean;
         $product->color=$r->color;
         $product->colorDesc=$r->colorDesc;
         $product->care=$r->care;
+
         $product->price=$r->price;
+        $product->costPrice=$r->costPrice;
+        $product->wholePrice=$r->wholePrice;
+
         $product->stockQty=$r->stockQty;
         $product->minQtyAlert=$r->minQtyAlert;
         $product->runtosize=$r->runToSize;
@@ -256,14 +271,16 @@ class ProductController extends Controller
             'style' => 'required|max:15',
             'sku'=>'required|max:20',
             'brand'=>'required|max:45',
-            'size'=>'required|max:45',
+            'size'=>'max:45',
+            'sizeDescription'=>'max:45',
+            'runToSize'=>'max:45',
             'color'=>'required|max:45',
             'colorDesc'=>'required|max:20',
-            'ean'=>'required|max:13',
-            'care'=>'required|max:45',
+            'ean'=>'max:13',
+            'care'=>'max:45',
             'swatchPic'=>'image|mimes:jpeg,jpg',
             'outfitPic'=>'image|mimes:jpeg,jpg',
-            'mainPic' =>'image|mimes:jpeg,jpg',
+            'mainPic' =>'required|image|mimes:jpeg,jpg',
             'image2Pic'=>'image|mimes:jpeg,jpg',
             'image3Pic'=>'image|mimes:jpeg,jpg',
             'image4Pic'=>'image|mimes:jpeg,jpg'
@@ -283,12 +300,15 @@ class ProductController extends Controller
         $product->sku=$r->sku;
         $product->brand=$r->brand;
         $product->size=$r->size;
+        $product->sizeDescription=$r->sizeDescription;
         $product->fkcategoryId=$r->category;
         $product->ean=$r->ean;
         $product->color=$r->color;
         $product->colorDesc=$r->colorDesc;
         $product->care=$r->care;
         $product->price=$r->price;
+        $product->costPrice=$r->costPrice;
+        $product->wholePrice=$r->wholePrice;
         $product->stockQty=$r->stockQty;
         $product->minQtyAlert=$r->minQtyAlert;
         $product->runtosize=$r->runToSize;
