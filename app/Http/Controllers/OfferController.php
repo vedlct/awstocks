@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Season;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -376,6 +377,44 @@ class OfferController extends Controller
 
 
 
+    }
+
+    public function BulkOffer() {
+
+        $categories=Category::get();
+        $season = Season::get();
+//        $productsList=Product::select('productId','productName')
+//            ->get();
+        return view('offer.bulkoffer')
+            ->with('categories',$categories)
+            ->with('season',$season);
+//            ->with('productsList',$productsList);
+
+
+    }
+    public function BulkOfferdt(Request $r) {
+        $list=Product::select('productId','style','sku','brand','product.status','productName','users.name as userName','LastExportedDate','category.categoryName')
+            ->leftJoin('category', 'category.categoryId', '=', 'product.fkcategoryId')
+            ->leftJoin('users', 'users.userId', '=', 'product.LastExportedBy')
+            ->where ('product.status', Status[1]);
+
+        if ($status=$r->status){
+            $list->where('product.status',$status);
+        }
+        if ($categoryId=$r->categoryId){
+            $list->where('product.fkcategoryId',$categoryId);
+        }
+        if ($productName=$r->productName){
+            $list->where('product.productName',$productName);
+        }
+
+
+//        $productList = $list->get();
+        $productList = $list->orderBy('productId',"desc")->get();
+
+        $datatables = Datatables::of($productList);
+
+        return $datatables->make(true);
     }
 
 
