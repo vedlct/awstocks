@@ -563,15 +563,26 @@ class ProductController extends Controller
 
             $excel->sheet('Sheetname', function($sheet) use($data) {
 
-                $sheet->row(1, function($row) use ($sheet) {
+//                $sheet->row(5, function($row) use ($sheet) {
+//
+//                    // call cell manipulation methods
+//                    //$row->setBackground('#000000');
+//
+//                $objDrawing = new PHPExcel_Worksheet_Drawing;
+//                $objDrawing->setPath(public_path('productImage/19.jpg')); //your image path
+//                $objDrawing->setCoordinates('A1');
+//                $objDrawing->setWorksheet($sheet);
+//
+//                });
 
-                    // call cell manipulation methods
-                    //$row->setBackground('#000000');
+                $sheet->cells('A1:A5', function($cells)use($sheet){
 
-                $objDrawing = new PHPExcel_Worksheet_Drawing;
-                $objDrawing->setPath(public_path('productImage/19.jpg')); //your image path
-                $objDrawing->setCoordinates('A2');
-                $objDrawing->setWorksheet($sheet);
+                    // manipulate the range of cells
+
+                    $objDrawing = new PHPExcel_Worksheet_Drawing;
+                    $objDrawing->setPath(public_path('productImage/19.jpg')); //your image path
+                    $objDrawing->setCoordinates($cells);
+                    $objDrawing->setWorksheet($sheet);
 
                 });
 
