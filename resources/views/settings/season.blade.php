@@ -1,4 +1,4 @@
-<a href="{!! route('settings.addruntosize') !!}"> <button class="btn btn-success" style="float: right">Insert Season</button></a>
+<a href="{!! route('settings.addSeason') !!}"> <button class="btn btn-success" style="float: right">Insert Season</button></a>
 <br><br>
 <table id="season" class="table" >
     <thead>
@@ -43,7 +43,7 @@
                 { data: 'startDate', name: 'startDate' },
                 { data: 'endDate', name: 'endDate' },
                 { "data": function(data){
-                    return '<a class="btn" data-panel-id="'+data.seasonId+'"onclick="editruntosize(this)"><i class="fa fa-edit"></i></a><a class="btn" data-panel-id="'+data.seasonId+'"onclick="deleteruntosize(this)"><i class="fa fa-trash"></i></a>';},
+                    return '<a class="btn" data-panel-id="'+data.seasonId+'"onclick="editruntosize(this)"><i class="fa fa-edit"></i></a>';},
                     "orderable": false, "searchable":false, "name":"selected_rows" }
             ],
 
@@ -55,20 +55,11 @@
 
     function editruntosize(x) {
         btn = $(x).data('panel-id');
-        var url = '{{route("edit.runToSize", ":id") }}';
+        var url = '{{route("edit.season", ":id") }}';
         //alert(url);
         var newUrl=url.replace(':id', btn);
         window.location.href = newUrl;
     }
 
-    function deleteruntosize(x) {
-        btn = $(x).data('panel-id');
-        var url = '{{route("runtosize.destroy", ":id") }}';
-        //alert(url);
-        var result = confirm("Want to delete?");
-        if (result) {
-            var newUrl=url.replace(':id', btn);
-            window.location.href = newUrl;}
-    }
 
 </script>

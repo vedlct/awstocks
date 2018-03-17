@@ -83,6 +83,8 @@ Route::post('/settings/insertColor', 'SettingsController@insertColor')->name('se
 Route::view('/settings/addRuntosize', 'settings.insertruntosize')->name('settings.addruntosize');
 Route::post('/settings/insertRunToSize', 'SettingsController@insertRunToSize')->name('settings.insertRunToSize');
 Route::post('/settings/insertSize', 'SettingsController@insertSize')->name('settings.insertSize');
+Route::get('/settings/addSeason', 'SettingsController@addSeason')->name('settings.addSeason');
+Route::post('/settings/addSeason', 'SettingsController@insertSeason')->name('settings.insertSeason');
 
 //Edit Settings
 Route::get('edit/category/{id}','SettingsController@editCategory')->name('edit.category');
@@ -90,6 +92,7 @@ Route::get('edit/color/{id}','SettingsController@editColor')->name('edit.color')
 Route::get('edit/size/{id}','SettingsController@editSize')->name('edit.size');
 Route::get('edit/care/{id}','SettingsController@editCare')->name('edit.care');
 Route::get('edit/runtosize/{id}','SettingsController@editRunToSize')->name('edit.runToSize');
+Route::get('edit/season/{id}','SettingsController@editSeason')->name('edit.season');
 
 //Update Settings
 
@@ -98,6 +101,7 @@ Route::post('edit/color','SettingsController@updateColor')->name('update.color')
 Route::post('edit/care','SettingsController@updateCare')->name('update.care');
 Route::post('edit/size','SettingsController@updateSize')->name('update.size');
 Route::post('edit/runtosize','SettingsController@updateRunToSize')->name('update.runToSize');
+Route::post('edit/updateSeason','SettingsController@updateSeason')->name('update.season');
 
 
 Route::post('update/category','SettingsController@updateCategory')->name('update.category');

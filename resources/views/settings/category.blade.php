@@ -41,7 +41,7 @@
                 { data: 'categoryName', name: 'categoryName' },
                 { data: 'categoryDesc', name: 'categoryDesc' },
                 { "data": function(data){
-                    return '<a class="btn" data-panel-id="'+data.categoryId+'"onclick="editCategory(this)"><i class="fa fa-edit"></i></a><a class="btn" data-panel-id="'+data.categoryId+'"onclick="deletCategory(this)"><i class="fa fa-trash"></i></a>';},
+                    return '<a class="btn" data-panel-id="'+data.categoryId+'"onclick="editCategory(this)"><i class="fa fa-edit"></i></a>';},
                     "orderable": false, "searchable":false, "name":"selected_rows" }
 
 
@@ -62,15 +62,6 @@
 
     }
 
-    function deletCategory(x) {
-        btn = $(x).data('panel-id');
-        var url = '{{route("category.destroy", ":id") }}';
-        //alert(url);
-        var result = confirm("Want to delete?");
-        if (result) {
-
-            var newUrl=url.replace(':id', btn);
-            window.location.href = newUrl;}
-    }
+    
 
 </script>
