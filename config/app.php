@@ -184,6 +184,8 @@ return [
 
         /* end datatable */
 
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+
     ],
 
     /*
@@ -235,10 +237,10 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
 
         /* datatable */
-
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
-
         /* datatable */
+
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 
     ],
 
