@@ -408,6 +408,7 @@ class ProductController extends Controller
         $fileInfo=array(
             'fileName'=>$fileName,
             'filePath'=>$filePath,
+            'alllist'=>$list
         );
 
 
