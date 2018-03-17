@@ -58,7 +58,7 @@
         <div class="row">
         <div class="col-md-4 dropdown">
             <label class="form-control-label">Season</label> <br>
-            <select class="form-control" id="season" name="season">
+            <select class="form-control" id="season" name="season" required>
                 <option selected value="">All Season</option>
 
                 @foreach($season as $season)
@@ -220,6 +220,9 @@
                     data: {'offers': products,'season':season,'disprice':disprice},
                     success: function (data) {
 
+                        if (data.returntype == "0"){
+                            alert('discount price should be less than '+data.productName + ' price');
+                        }
                         location.reload();
                        // alert(data);
 

@@ -91,7 +91,7 @@ class OfferController extends Controller
         $seasone=$r->season;
         $disprice=$r->disprice;
         $offers=$r->offers;
-
+        $returnarray = array();
        // return $seasone;
 
         $seasones=Season::select('startDate','endDate')->where('seasonId',$seasone)->first();
@@ -101,15 +101,22 @@ class OfferController extends Controller
 
             foreach ($offiress as $offiress) {
 
+                if ($this->checkprice($offiress->productId , $disprice) == false){
+                    $returnarray = array(
+                        'productName' => $offiress->productName,
+                        'returntype' => '0'
+                    );
+                    return $returnarray;
+                }
                 $offer = array(
                     'fkproductId' => $offiress->productId,
                     'disPrice' => $disprice,
                     'disStartPrice' => $seasones->startDate,
                     'disEndPrice' => $seasones->endDate,
-                    'state' => $offiress->state,
-                    'status' => Status[0],
-//            'lastExportedBy'=>Auth::user()->userId,
-//                    'product-id-type' => $offiress->productIdType,
+                    'state' => '11',
+                    'status' => 'Bulk Updated',
+                    'lastExportedBy'=>Auth::user()->userId,
+                    'product-id-type' => 'SHOP_SKU',
 
                 );
 
@@ -119,6 +126,20 @@ class OfferController extends Controller
 
         Session::flash('message', 'Offer Added successfully');
 
+    }
+
+    public function checkprice($id , $disprice){
+        $product = Product::select('price')
+            ->where('productId' , $id)
+            ->get();
+        foreach ($product as $p){
+            if ($p->price < $disprice){
+                return false;
+            }
+            else{
+                return true;
+            }
+        }
     }
 
 
