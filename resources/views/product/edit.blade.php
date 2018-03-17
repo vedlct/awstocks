@@ -7,10 +7,6 @@
 
     <div class="row">
 
-
-
-
-
         <div class="col-lg-12">
             <div class="card" style="margin-left: 10px; border-radius: 10px;">
 
@@ -42,6 +38,17 @@
                                     <strong>{{ $errors->first('category') }}</strong>
 							</span>
                                 @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 form-control-label">Product Name<span style="color: red" class="required">*</span></label>
+                            <div class="col-sm-10">
+                                <input id="inputHorizontalSuccess" type="text"  name="productName" placeholder="name" maxlength="70" placeholder="70 characters maximum" class="form-control form-control-success" value="{{$product->productName}}" >
+                                @if ($errors->has('productName'))
+                                    <span class="help-block" style="position: absolute; left: 150px; color: red; font-size:14px">
+								<strong>{{ $errors->first('productName') }}</strong>
+							</span> @endif
                             </div>
                         </div>
 
@@ -97,18 +104,6 @@
                             </div>
                         </div>
 
-
-
-                        <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">Product Name<span style="color: red" class="required">*</span></label>
-                            <div class="col-sm-10">
-                                <input id="inputHorizontalSuccess" type="text"  name="productName" placeholder="name" maxlength="70" placeholder="70 characters maximum" class="form-control form-control-success" value="{{$product->productName}}" required>
-                                @if ($errors->has('productName'))
-                                    <span class="help-block" style="position: absolute; left: 150px; color: red; font-size:14px">
-								<strong>{{ $errors->first('productName') }}</strong>
-							</span> @endif
-                            </div>
-                        </div>
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label">Style<span style="color: red" class="required">*</span></label>
                             @if ($errors->has('style'))
@@ -122,14 +117,13 @@
 
 
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">Size Type<span style="color: red" class="required">*</span></label>
+                            <label class="col-sm-2 form-control-label">Size Type</label>
                             <div class="col-sm-4">
-                                {{$sizeType->sizeType}}
 
                                 <select name="sizeType" class="form-control form-control-warning" id="sizeType">
                                     <option value="">Select Size Type</option>
                                     @foreach($sizeTypes as $size)
-                                        <option @if($sizeType->sizeType == $size->sizeType ) selected @endif value="{{$size->sizeType}}">{{$size->sizeType}}</option>
+                                        <option @if($sizeTypess== $size->sizeType ) selected @endif value="{{$size->sizeType}}">{{$size->sizeType}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -137,18 +131,18 @@
 
 
                         {{--<div class="form-group row">--}}
-                            <label style="text-align: right" class="col-sm-2 form-control-label">Size<span style="color: red" class="required">*</span></label>
+                            <label style="text-align: right" class="col-sm-2 form-control-label">Size</label>
                             <div class="col-sm-4">
-                                <select name="size" id="size" class="form-control form-control-warning" required>
+                                <select name="size" id="size" class="form-control form-control-warning">
                                     <option value="{{$product->size}}">{{$product->size}}</option>
                                 </select>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">Run to Size<span style="color: red" class="required">*</span></label>
+                            <label class="col-sm-2 form-control-label">Run to Size</label>
                             <div class="col-sm-4">
-                                <select name="runToSize" class="form-control form-control-warning" required>
+                                <select name="runToSize" class="form-control form-control-warning">
                                     <option value="">Select Run to Size</option>
                                     @foreach($runToSizes as $value)
                                         <option value="{{$value->runToSizeName}}"
@@ -162,9 +156,9 @@
                         {{--</div>--}}
 
                         {{--<div class="form-group row">--}}
-                            <label style="text-align: right" class="col-sm-2 form-control-label">Care<span style="color: red" class="required">*</span></label>
+                            <label style="text-align: right" class="col-sm-2 form-control-label">Care</label>
                             <div class="col-sm-4">
-                                <select name="care" class="form-control form-control-warning" required>
+                                <select name="care" class="form-control form-control-warning">
                                     <option value="">Select Care</option>
                                     @foreach($cares as $care)
                                         <option value="{{$care->careName}}"
@@ -177,21 +171,65 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label class="col-sm-2 form-control-label">Size Description</label>
+                            <div class="col-sm-10">
+                                <input id="inputHorizontalSuccess" value="{{$product->sizeDescription }}" name="sizeDescription"  type="text"  class="form-control form-control-success">
+                                @if ($errors->has('sizeDescription'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('sizeDescription') }}</strong>
+                                    </span>
+                                @endif
+
+                            </div>
+                        </div>
+
 
 
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">EAN<span style="color: red" class="required">*</span></label>
+                            <label class="col-sm-2 form-control-label">EAN</label>
                             <div class="col-sm-10">
-                                <input id="inputHorizontalSuccess" name="ean" maxlength="13" placeholder="13 characters maximum" type="text" value="{{$product->ean}}" placeholder="ean" class="form-control form-control-success" required>
+                                <input id="inputHorizontalSuccess" name="ean" maxlength="13" placeholder="13 characters maximum" type="text" value="{{$product->ean}}" placeholder="ean" class="form-control form-control-success">
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">Price(£)<span style="color: red" class="required">*</span></label>
+                            <label class="col-sm-2 form-control-label">RRP(£)<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-10">
-                                <input id="inputHorizontalSuccess"  name="price" type="number" value="{{$product->price}}" placeholder="price" class="form-control form-control-success" required>
+                                <input id="inputHorizontalSuccess"  name="price" type="text" value="{{$product->price}}" placeholder="price" class="form-control form-control-success" required>
                             </div>
                         </div>
+
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 form-control-label">Cost price</label>
+                            <div class="col-sm-10">
+
+                                <input id="inputHorizontalSuccess" value="{{ $product->$product }}" name="$product" placeholder="optional" type="number" min="0" class="form-control form-control-success myInputField">
+                                @if ($errors->has('costPrice'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('costPrice') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 form-control-label">Whole sale price</label>
+                            <div class="col-sm-10">
+
+                                <input id="inputHorizontalSuccess" value="{{ $product->wholePrice }}" name="wholePrice" placeholder="optional" type="number" min="0" class="form-control form-control-success myInputField">
+                                @if ($errors->has('wholePrice'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('wholePrice') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
 
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label">Stock Qty<span style="color: red" class="required">*</span></label>
@@ -265,9 +303,9 @@
 
 
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label"><b>Main Image</b> </label>
+                            <label class="col-sm-2 form-control-label"><b>Main Image</b><span style="color: red" class="required">*</span></label>
                             <div class="col-sm-10">
-                                <input type="file" name="mainPic"  value="upload Image" accept=".jpg,.jpeg" id="mainPic">
+                                <input type="file" name="mainPic"  value="upload Image" accept=".jpg,.jpeg" id="mainPic" >
                                 @if ($errors->has('mainPic'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('mainPic') }}</strong>
