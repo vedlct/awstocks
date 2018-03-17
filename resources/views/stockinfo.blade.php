@@ -18,11 +18,12 @@
                             <tr>
                                 <th>Product Name</th>
                                 <th>Category</th>
+                                <th>SKU</th>
                                 <th>Colour</th>
-                                <th>Size</th>
-                                <th>Price</th>
+                                <th>RRP</th>
                                 <th>Stock Quantity</th>
                                 <th>Min Qty Alert</th>
+                                <th>Image</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -70,11 +71,14 @@
 
                     { data: 'productName', name: 'productName' },
                     { data: 'categoryName', name: 'categoryName' },
+                    { data: 'sku', name: 'sku' },
                     { data: 'color', name: 'color' },
-                    { data: 'size', name: 'size' },
                     { data: 'price', name: 'price' },
                     { data: 'stockQty', name: 'stockQty' },
                     { data: 'minQtyAlert', name: 'minQtyAlert' },
+                    { "data": function(data){
+                        return '<img width="100" height="80" src="'+data.mainImage+'">';},
+                        "orderable": false, "searchable":false, "name":"image" },
                     { "data": function(data){
                         return '<a style="cursor: pointer; color: #4881ecfa" data-panel-id="'+data.productId+'"onclick="editProduct(this)">view details</a>';},
                         "orderable": false, "searchable":false, "name":"action" }

@@ -22,7 +22,7 @@ class StockController extends Controller
 
     public function Showinfo() {
 
-        $stockinfo = Product::select('productId','style','sku','brand','product.status','productName','stockQty','minQtyAlert','price','color','size','category.categoryName as categoryName')
+        $stockinfo = Product::select('productId','style','sku','brand','product.status','productName','mainImage','stockQty','minQtyAlert','price','color','size','category.categoryName as categoryName')
             ->leftJoin('category', 'category.categoryId', '=', 'product.fkcategoryId')
             ->get();
         $datatables = Datatables::of($stockinfo);
