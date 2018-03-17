@@ -1,10 +1,11 @@
-<a href="{!! route('settings.addcategory') !!}"><button class="btn btn-success" style="float: right">Insert Category</button></a>
+<a href="{!! route('settings.addSeason') !!}"> <button class="btn btn-success" style="float: right">Insert Season</button></a>
 <br><br>
-<table id="categorytable" class="table" >
+<table id="season" class="table" >
     <thead>
     <tr>
-        <th>Category Name</th>
-        <th>Description</th>
+        <th>Season Name</th>
+        <th>Start Date</th>
+        <th>End Date</th>
         <th>Action</th>
     </tr>
     </thead>
@@ -27,24 +28,23 @@
 
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
-        table =  $('#categorytable').DataTable({
+        table =  $('#season').DataTable({
 
             processing: true,
             serverSide: true,
             stateSave: true,
             "ajax":{
-                "url": "{!! route('settings.categoryajax') !!}",
+                "url": "{!! route('settings.season') !!}",
                 "type": "POST",
                 data : {_token: CSRF_TOKEN}
             },
             columns: [
-                { data: 'categoryName', name: 'categoryName' },
-                { data: 'categoryDesc', name: 'categoryDesc' },
+                { data: 'seasonName', name: 'seasonName' },
+                { data: 'startDate', name: 'startDate' },
+                { data: 'endDate', name: 'endDate' },
                 { "data": function(data){
-                    return '<a class="btn" data-panel-id="'+data.categoryId+'"onclick="editCategory(this)"><i class="fa fa-edit"></i></a>';},
+                    return '<a class="btn" data-panel-id="'+data.seasonId+'"onclick="editruntosize(this)"><i class="fa fa-edit"></i></a>';},
                     "orderable": false, "searchable":false, "name":"selected_rows" }
-
-
             ],
 
         });
@@ -53,15 +53,13 @@
     });
 
 
-    function editCategory(x) {
+    function editruntosize(x) {
         btn = $(x).data('panel-id');
-        var url = '{{route("edit.category", ":id") }}';
+        var url = '{{route("edit.season", ":id") }}';
         //alert(url);
         var newUrl=url.replace(':id', btn);
         window.location.href = newUrl;
-
     }
 
-    
 
 </script>

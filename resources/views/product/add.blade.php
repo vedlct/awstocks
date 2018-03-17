@@ -214,7 +214,7 @@
                         <label class="col-sm-2 form-control-label">Cost price</label>
                         <div class="col-sm-10">
 
-                            <input id="inputHorizontalSuccess" value="{{ old('costPrice') }}" name="costPrice" placeholder="optional" type="number" min="0" class="form-control form-control-success myInputField">
+                            <input id="inputHorizontalSuccess" value="{{ old('costPrice') }}" name="costPrice" placeholder="optional" type="number" min="0" class="form-control form-control-success cost">
                             @if ($errors->has('costPrice'))
                                 <span class="help-block">
                                         <strong>{{ $errors->first('costPrice') }}</strong>
@@ -230,7 +230,7 @@
                         <label class="col-sm-2 form-control-label">Whole sale price</label>
                         <div class="col-sm-10">
 
-                            <input id="inputHorizontalSuccess" value="{{ old('wholePrice') }}" name="wholePrice" placeholder="optional" type="number" min="0" class="form-control form-control-success myInputField">
+                            <input id="inputHorizontalSuccess" value="{{ old('wholePrice') }}" name="wholePrice" placeholder="optional" type="number" min="0" class="form-control form-control-success whole">
                             @if ($errors->has('wholePrice'))
                                 <span class="help-block">
                                         <strong>{{ $errors->first('wholePrice') }}</strong>
@@ -416,18 +416,6 @@
             $('.select').select2();
         });
 
-        {{--function checkspecialChar() {--}}
-
-            {{--var iChars = "!@#$%^&*()+=-[]\\\';,./{}|\":<>?";--}}
-
-//            for (var i = 0; i < document.addProductForm.style.value.length; i++) {
-//                if (iChars.indexOf(document.addProductForm.style.value.charAt(i)) != -1) {
-//                    alert ("Your username has special characters. \nThese are not allowed.\n Please remove them and try again.");
-//                    return false;
-//                }
-//            }
-
-        {{--}--}}
 
         function checkProduct() {
 
@@ -568,6 +556,20 @@
             }
         });
 
+        $('.cost').keyup(function(){
+            clearTimeout(typingTimer);
+            if ($('.cost').val) {
+                typingTimer = setTimeout(cost, doneTypingInterval);
+            }
+        });
+
+        $('.whole').keyup(function(){
+            clearTimeout(typingTimer);
+            if ($('.whole').val) {
+                typingTimer = setTimeout(whole, doneTypingInterval);
+            }
+        });
+
         function doneTyping () {
             var vale = $('.myInputField').val();
             var regexTest = /^\d+(?:\.\d\d?)?$/;
@@ -575,6 +577,26 @@
             if(!ok){
                 alert('please enter only two decimal number');
                 $('.myInputField').val('');
+            }
+        }
+
+        function whole () {
+            var vale = $('.whole').val();
+            var regexTest = /^\d+(?:\.\d\d?)?$/;
+            var ok = regexTest.test(vale);
+            if(!ok){
+                alert('please enter only two decimal number');
+                $('.whole').val('');
+            }
+        }
+
+        function cost () {
+            var vale = $('.cost').val();
+            var regexTest = /^\d+(?:\.\d\d?)?$/;
+            var ok = regexTest.test(vale);
+            if(!ok){
+                alert('please enter only two decimal number');
+                $('.cost').val('');
             }
         }
 
