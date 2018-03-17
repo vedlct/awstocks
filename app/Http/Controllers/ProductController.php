@@ -22,6 +22,9 @@ use Illuminate\Support\Facades\Validator;
 
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
+use Excel;
+use PHPExcel_Worksheet_Drawing;
+
 
 //use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
@@ -519,6 +522,69 @@ class ProductController extends Controller
         ftp_close($ftp_conn);
 
         return $a;
+
+    }
+
+    public function excelExport(Request $r)
+    {
+        $productList=$r->products;
+
+//        Excel::create('Filename', function($excel) {
+//
+//            $excel->sheet('Sheetname', function($sheet) {
+//
+//                // Sheet manipulation
+//
+//            });
+//
+//            // Set the title
+//            $excel->setTitle('Our new awesome title');
+//
+//            // Chain the setters
+//            $excel->setCreator('Maatwebsite')
+//                ->setCompany('Maatwebsite');
+//
+//            // Call them separately
+//            $excel->setDescription('A demonstration to change the file properties');
+//
+//        })->download('xls');
+
+        $data=array('products'=>$productList);
+
+        $filePath=public_path ()."/csv"."/"."test";
+        $fileName="test";
+
+        $fileInfo=array(
+            'fileName'=>$fileName,
+            'filePath'=>$filePath,
+        );
+
+        Excel::create($fileName, function($excel) use($data,$filePath) {
+
+            $excel->sheet('Sheetname', function($sheet) use($data) {
+
+                $sheet->row(1, function($row) use ($sheet) {
+
+                    // call cell manipulation methods
+                    //$row->setBackground('#000000');
+
+                $objDrawing = new PHPExcel_Worksheet_Drawing;
+                $objDrawing->setPath(public_path('productImage/19.jpg')); //your image path
+                $objDrawing->setCoordinates('A2');
+                $objDrawing->setWorksheet($sheet);
+
+                });
+
+
+                //$sheet->fromArray($data);
+
+            });
+
+        })->store('xls',$filePath);
+
+        return $fileInfo;
+
+
 
     }
 

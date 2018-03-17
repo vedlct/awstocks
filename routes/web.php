@@ -31,6 +31,7 @@ Route::post('/getProductPrice', 'ProductController@getProductPrice')->name('getP
 Route::post('/product/ProductList', 'ProductController@ProductList')->name('product.data');
 
 Route::post('/product/csvExport', 'ProductController@csvExport')->name('product.csv');
+Route::post('/product/excelExport', 'ProductController@excelExport')->name('product.excelExport');
 
 
 //Route::get('Product', 'ProductController', [
