@@ -69,10 +69,16 @@ class OfferController extends Controller
 
         ]);
 
+        $product = Product::select('price')
+            ->where('productId' , $r->product)
+            ->get();
+        foreach ($product as $p){
+            $convertprice = round((($p->price * $r->disPrice)/100),2);
+        }
 
         $offer=array(
             'fkproductId'=>$r->product,
-            'disPrice'=>$r->disPrice,
+            'disPrice'=>$convertprice,
             'disStartPrice'=>$r->disStartPrice,
             'disEndPrice'=>$r->disEndPrice,
             'state'=>$r->state,
@@ -101,16 +107,16 @@ class OfferController extends Controller
 
             foreach ($offiress as $offiress) {
 
-                if ($this->checkprice($offiress->productId , $disprice) == false){
-                    $returnarray = array(
-                        'productName' => $offiress->productName,
-                        'returntype' => '0'
-                    );
-                    return $returnarray;
+                $product = Product::select('price')
+                    ->where('productId' , $offiress->productId)
+                    ->get();
+                foreach ($product as $p){
+                    $convertprice = round((($p->price * $disprice)/100),2);
                 }
+
                 $offer = array(
                     'fkproductId' => $offiress->productId,
-                    'disPrice' => $disprice,
+                    'disPrice' => $convertprice,
                     'disStartPrice' => $seasones->startDate,
                     'disEndPrice' => $seasones->endDate,
                     'state' => '11',
@@ -126,20 +132,6 @@ class OfferController extends Controller
 
         Session::flash('message', 'Offer Added successfully');
 
-    }
-
-    public function checkprice($id , $disprice){
-        $product = Product::select('price')
-            ->where('productId' , $id)
-            ->get();
-        foreach ($product as $p){
-            if ($p->price < $disprice){
-                return false;
-            }
-            else{
-                return true;
-            }
-        }
     }
 
 
