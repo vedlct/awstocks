@@ -75,7 +75,11 @@
                     </div>
                     <div class="col-md-3">
                         <a  onclick="return markdownUpdate()" download> <button class="btn btn-danger"  >Markdown Update</button></a>
+
+                        <a  onclick="return excel()"> <button class="btn btn-danger"  >Download selected Products</button></a>
+
                     </div>
+
                 </div>
             </div>
         </div>
@@ -91,6 +95,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <script>
+
+
 
         $(document).ready(function() {
 
@@ -310,5 +316,42 @@
                 alert("Please Select a offer first");
             }
         }
+
+
+        function excel() {
+
+
+            var products=selecteds;
+
+            //alert(products);
+
+            if (products.length >0) {
+
+                $.ajax({
+                    type: 'POST',
+                    url: "{!!route('offer.excelExport') !!}",
+                    cache: false,
+                    data: {'products': products},
+                    success: function (data) {
+//                        console.log(data);
+
+                        var link = document.createElement("a");
+                        link.download = data.fileName+".xls";
+                        var uri = '{{url("public/excel")}}'+"/"+data.fileName+".xls";
+                        link.href = uri;
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                        delete link;
+
+                    }
+
+                });
+            }
+            else {
+                alert("Please Select a product first");
+            }
+        }
+
     </script>
 @endsection

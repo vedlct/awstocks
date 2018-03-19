@@ -14,11 +14,11 @@
         <th>Size</th>
         <th>Size Description</th>
         <th>Main Image</th>
-        {{--<th>Swatch Image</th>--}}
-        {{--<th>Outfit</th>--}}
-        {{--<th>image2</th>--}}
-        {{--<th>image3</th>--}}
-        {{--<th>image4</th>--}}
+        <th>Swatch Image</th>
+        <th>Outfit</th>
+        <th>image2</th>
+        <th>image3</th>
+        <th>image4</th>
         <th>RuntoSize</th>
         <th>Care</th>
         <th>Price</th>
@@ -45,23 +45,37 @@
         <td>{{$list['size']}}</td>
         <td>{{$list['sizeDescription']}}</td>
         @if(!empty($list['mainImage']))
-        <td><img src="{{basename($list['mainImage'])}}" ></td>
+
+        <td><img src="{{public_path('productImage/').basename($list['mainImage'])}}" width="100px" height="100px"></td>
+            @else
+            <td></td>
         @endif
-        {{--@if(!empty($list['swatchImage']))--}}
-        {{--<td><img src="{{$list['swatchImage']}}"></td>--}}
-        {{--@endif--}}
-            {{--@if(!empty($list['outfit']))--}}
-        {{--<td><img src="{{$list['outfit']}}"></td>--}}
-        {{--@endif--}}
-                {{--@if(!empty($list['image2']))--}}
-        {{--<td><img src="{{$list['image2']}}"></td>--}}
-        {{--@endif--}}
-                    {{--@if(!empty($list['image3']))--}}
-        {{--<td><img src="{{$list['image3']}}"></td>--}}
-        {{--@endif--}}
-                        {{--@if(!empty($list['image4']))--}}
-        {{--<td><img src="{{$list['image4']}}"></td>--}}
-        {{--@endif--}}
+        @if(!empty($list['swatchImage']))
+        <td><img src="{{public_path('productImage/').basename($list['swatchImage'])}}"width="100px" height="100px"></td>
+        @else
+            <td></td>
+        @endif
+            @if(!empty($list['outfit']))
+        <td><img src="{{public_path('productImage/').basename($list['outfit'])}}"width="100px" height="100px"></td>
+        @else
+            <td></td>
+        @endif
+                @if(!empty($list['image2']))
+        <td><img src="{{public_path('productImage/').basename($list['image2'])}}"width="100px" height="100px"></td>
+        @else
+            <td></td>
+        @endif
+                    @if(!empty($list['image3']))
+        <td><img src="{{public_path('productImage/').basename($list['image3'])}}"width="100px" height="100px"></td>
+        @else
+            <td></td>
+        @endif
+                        @if(!empty($list['image4']))
+        <td><img src="{{public_path('productImage/').basename($list['image4'])}}"width="100px" height="100px"></td>
+        @else
+            <td></td>
+
+        @endif
         <td>{{$list['runtosize']}}</td>
         <td>{{$list['care']}}</td>
         <td>{{$list['price']}}</td>

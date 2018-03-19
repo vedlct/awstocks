@@ -13,7 +13,7 @@ use App\Product;
 use App\Category;
 
 use Response;
-
+use Excel;
 use DB;
 
 
@@ -474,6 +474,53 @@ class OfferController extends Controller
         $datatables = Datatables::of($productList);
 
         return $datatables->make(true);
+    }
+
+    public function excelExport(Request $r)
+    {
+
+        $productList=$r->products;
+
+        $filePath=public_path ()."/excel";
+        $fileName="offerList";
+
+        $fileInfo=array(
+            'fileName'=>$fileName,
+            'filePath'=>$fileName,
+        );
+
+        $list=array();
+        for ($i=0;$i<count($productList);$i++){
+            $offerId=$productList[$i];
+
+            $newlist=Offer::select('category.categoryName','product.productName','offer.disPrice','offer.disStartPrice','offer.disEndPrice','offer.state','offer.product-id-type','offer.status','offer.lastExportedDate')
+                ->leftJoin('product','product.productId','offer.fkproductId')
+                ->leftJoin('category', 'category.categoryId', '=', 'product.fkcategoryId')
+                ->where('offer.offerId',$offerId)
+                ->get()
+                ->toArray();
+            $list=array_merge($list,$newlist);
+
+        }
+
+
+
+
+        Excel::create($fileName,function($excel) use($list,$filePath) {
+
+            $excel->sheet('First sheet', function($sheet) use($list) {
+
+                $sheet->loadView('offer.localDownloadOfferList')
+                    ->with('productList',$list);
+            });
+
+        })
+            ->store('xls',$filePath);
+
+        return $fileInfo;
+
+
+
     }
 
 
