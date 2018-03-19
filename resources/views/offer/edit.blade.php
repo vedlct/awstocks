@@ -57,7 +57,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label">Discount <span style="color: red" class="required">%</span></label>
                             <div class="col-sm-10">
-                                <input id="" type="number" value="" placeholder="" name="disPercent"  class="form-control form-control-warning" required>
+                                <input id="" type="number" value="{{100-($offer->disPrice*100/$offer->product->price)}}" placeholder="" name="disPercent"  class="form-control form-control-warning" required>
                             </div>
                         </div>
 
@@ -164,7 +164,8 @@
 
             var fromdate =  document.getElementById("fromdate").value;
             var todate =   document.getElementById("todate").value;
-
+//        alert(fromdate);
+//        alert(todate);
 
             if (fromdate > todate) {
                 alert ("End Date Can not be before Start Date!!");
