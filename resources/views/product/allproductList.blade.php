@@ -91,19 +91,7 @@
 @endsection
 @section('foot-js')
 
-    {{--<script src="//code.jquery.com/jquery.js"></script>--}}
-    {{--<script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>--}}
-    {{--    <script src="{{url('assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>--}}
-
-
     <script src="{{url('assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>
-
-
-    {{--    <script src="{{url('cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js')}}"></script>--}}
-    {{--<script src="{{url('cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js')}}"></script>--}}
-
-
-    {{--<script src="{{url('cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js')}}"></script>--}}
 
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
@@ -116,7 +104,6 @@
                 processing: true,
                 serverSide: true,
                 stateSave: true,
-//                bSort:false,
                 "ajax":{
                     "url": "{!! route('product.data') !!}",
                     "type": "POST",

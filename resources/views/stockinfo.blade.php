@@ -44,18 +44,13 @@
 @section('foot-js')
     <script src="{{url('assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>
     {{--<script src="https://cdn.datatables.net/select/1.2.5/js/dataTables.select.min.js"></script>--}}
-
-
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <script>
 
         $(document).ready(function() {
-
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-
             table =  $('#stockinfo').DataTable({
-
                 processing: true,
                 serverSide: true,
                 stateSave: true,
@@ -64,7 +59,6 @@
                     "type": "POST",
                     data:function (d){
                         d._token="{{csrf_token()}}";
-
                     },
                 },
                 columns: [

@@ -39,6 +39,7 @@ return array(
     'App\\Providers\\EventServiceProvider' => $baseDir . '/app/Providers/EventServiceProvider.php',
     'App\\Providers\\RouteServiceProvider' => $baseDir . '/app/Providers/RouteServiceProvider.php',
     'App\\RunToSize' => $baseDir . '/app/RunToSize.php',
+    'App\\Season' => $baseDir . '/app/Season.php',
     'App\\Size' => $baseDir . '/app/Size.php',
     'App\\Test' => $baseDir . '/app/Test.php',
     'App\\User' => $baseDir . '/app/User.php',

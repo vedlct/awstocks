@@ -52,6 +52,9 @@ Route::get('/offer/bulkOffer', 'OfferController@BulkOffer')->name('offer.bulkOff
 Route::post('/offer/bulkOfferdt', 'OfferController@BulkOfferdt')->name('offer.bulkOfferdt');
 
 
+Route::post('/offer/excelExport', 'OfferController@excelExport')->name('offer.excelExport');
+
+
 //Route::view('/offer/generate', 'offer.generate')->name('offer.generate');
 Route::post('/offer/getOfferList', 'OfferController@getOfferList')->name('offer.offerList');
 Route::post('/offer/update', 'OfferController@update')->name('offer.update');
