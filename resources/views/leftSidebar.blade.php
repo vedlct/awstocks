@@ -23,6 +23,11 @@
                 </li>
 
                 <li>
+                    <a href="{{route('offer.bulkOffer')}}"><i class="fa fa-plus-square"></i><span class="hide-menu">Bulk Offer Update</span></a>
+
+                </li>
+
+                <li>
                     <a href="{{route('offer.add')}}"><i class="fa fa-plus"></i><span class="hide-menu">Enter Offer Details</span></a>
 
                 </li>
@@ -31,10 +36,7 @@
                     <a href="{{route('offer.generate')}}"><i class="fa fa-briefcase"></i><span class="hide-menu">Generate Offer Files</span></a>
 
                 </li>
-                <li>
-                    <a href="{{route('offer.bulkOffer')}}"><i class="fa fa-plus-square"></i><span class="hide-menu">Bulk Offer Update</span></a>
 
-                </li>
 
                 {{--<li>--}}
                     {{--<a href="{{route('historic.files')}}"><i class="fa fa-star"></i><span class="hide-menu">Historic uploaded files</span></a>--}}

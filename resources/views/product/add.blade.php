@@ -60,7 +60,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 form-control-label">sku<span style="color: red" class="required">*</span></label>
+                        <label class="col-sm-2 form-control-label">SKU<span style="color: red" class="required">*</span></label>
                         <div class="col-sm-10">
                             <input id="sku" type="text" value="{{ old('sku') }}" name="sku" maxlength="20" placeholder="20 characters maximum"  class="form-control form-control-warning" required>
 
@@ -195,18 +195,6 @@
                         </div>
                     </div>
 
-                    <div class="form-group row">
-                        <label class="col-sm-2 form-control-label">RRP<span style="color: red" class="required">*</span></label>
-                        <div class="col-sm-10">
-
-                            <input id="inputHorizontalSuccess" value="{{ old('price') }}" name="price" type="number" min="0" class="form-control form-control-success myInputField" required>
-							@if ($errors->has('price'))
-                                <span class="help-block">
-                                        <strong>{{ $errors->first('price') }}</strong>
-                                    </span>
-                            @endif
-                        </div>
-                    </div>
 
 
 
@@ -234,6 +222,20 @@
                             @if ($errors->has('wholePrice'))
                                 <span class="help-block">
                                         <strong>{{ $errors->first('wholePrice') }}</strong>
+                                    </span>
+                            @endif
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 form-control-label">RRP(£)<span style="color: red" class="required">*</span></label>
+                        <div class="col-sm-10">
+
+                            <input id="inputHorizontalSuccess" value="{{ old('price') }}" name="price" type="number" min="0" class="form-control form-control-success myInputField" required>
+                            @if ($errors->has('price'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('price') }}</strong>
                                     </span>
                             @endif
                         </div>
@@ -298,6 +300,20 @@
 
 
                     <div class="form-group row">
+                        <label class="col-sm-2 form-control-label"><b>Main Image</b> <span style="color: red" class="required">*</span></label>
+                        <div class="col-sm-10">
+                            <input type="file" name="mainPic"  value="upload Image"  accept=".jpg,.jpeg" id="mainPic" required>
+                            @if ($errors->has('mainPic'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('mainPic') }}</strong>
+                                    </span>
+                            @endif
+                            <img height="50px" width="50px" id="imgMainPic">
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row">
                         <label class="col-sm-2 form-control-label"><b>Swatch</b></label>
                         <div class="col-sm-10">
                             <input type="file" name="swatchPic"  value="upload Image" accept=".jpg, .jpeg" id="swatchPic" >
@@ -325,18 +341,7 @@
                     </div>
 
 
-                    <div class="form-group row">
-                        <label class="col-sm-2 form-control-label"><b>Main Image</b> <span style="color: red" class="required">*</span></label>
-                        <div class="col-sm-10">
-                            <input type="file" name="mainPic"  value="upload Image"  accept=".jpg,.jpeg" id="mainPic" required>
-                            @if ($errors->has('mainPic'))
-                                <span class="help-block">
-                                        <strong>{{ $errors->first('mainPic') }}</strong>
-                                    </span>
-                            @endif
-                            <img height="50px" width="50px" id="imgMainPic">
-                        </div>
-                    </div>
+
 
 
                     <div class="form-group row">

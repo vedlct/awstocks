@@ -14,7 +14,7 @@
         <!-- Page Header-->
         <header class="page-header">
             <div align="center" class="container-fluid">
-                <h2 style="color: #989898;" class="no-margin-bottom"><b>Product List</b></h2>
+                <h2 style="color: #989898;" class="no-margin-bottom"><b>Product List For Offer</b></h2>
             </div>
         </header>
 
@@ -76,7 +76,7 @@
 
 
         <br>
-        <a class="btn btn-danger" onclick="insertBulkOffer()">Insert Bulk Offer</a>
+        <a onclick="insertBulkOffer()"><button class="btn btn-danger"  >Insert Bulk Offer</button></a>
 
 
     </div>
