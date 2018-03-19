@@ -164,8 +164,7 @@
 
             var fromdate =  document.getElementById("fromdate").value;
             var todate =   document.getElementById("todate").value;
-//        alert(fromdate);
-//        alert(todate);
+
 
             if (fromdate > todate) {
                 alert ("End Date Can not be before Start Date!!");
