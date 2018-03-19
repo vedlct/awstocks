@@ -83,7 +83,7 @@
                                 <select name="color" class="form-control form-control-warning" required>
                                     <option value="">Select One</option>
                                     @foreach($sColors as $color)
-                                        <option value="{{$color->colorId}}"
+                                        <option value="{{$color->colorName}}"
                                                 @if($color->color == $product->colorName)
                                                 selected
                                                 @endif
