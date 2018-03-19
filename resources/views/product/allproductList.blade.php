@@ -84,7 +84,7 @@
 
 
         <a  onclick="return myfunc()" download> <button class="btn btn-danger"  >Export Products file</button></a>
-        {{--<a  onclick="return excel()"> <button class="btn btn-danger"  >Local Excel Download</button></a>--}}
+        <a  onclick="return excel()"> <button class="btn btn-danger"  >Download selected Products</button></a>
 
 
     </div>
@@ -277,7 +277,7 @@
 
                         var link = document.createElement("a");
                         link.download = data.fileName+".xls";
-                        var uri = '{{url("public/csv/test")}}'+"/"+data.fileName+".xls";
+                        var uri = '{{url("public/excel")}}'+"/"+data.fileName+".xls";
                         link.href = uri;
                         document.body.appendChild(link);
                         link.click();

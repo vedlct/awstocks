@@ -518,7 +518,6 @@ class ProductController extends Controller
         }
 
 
-
 // close connection
         ftp_close($ftp_conn);
 
@@ -530,66 +529,32 @@ class ProductController extends Controller
     {
         $productList=$r->products;
 
-//        Excel::create('Filename', function($excel) {
-//
-//            $excel->sheet('Sheetname', function($sheet) {
-//
-//                // Sheet manipulation
-//
-//            });
-//
-//            // Set the title
-//            $excel->setTitle('Our new awesome title');
-//
-//            // Chain the setters
-//            $excel->setCreator('Maatwebsite')
-//                ->setCompany('Maatwebsite');
-//
-//            // Call them separately
-//            $excel->setDescription('A demonstration to change the file properties');
-//
-//        })->download('xls');
 
-        $data=array('products'=>$productList);
-
-        $filePath=public_path ()."/csv"."/"."test";
-        $fileName="test";
+        $filePath=public_path ()."/excel";
+        $fileName="productList";
 
         $fileInfo=array(
             'fileName'=>$fileName,
-            'filePath'=>$filePath,
+            'filePath'=>$fileName,
         );
 
-        Excel::create($fileName, function($excel) use($data,$filePath) {
+        $list=array();
+        for ($i=0;$i<count($productList);$i++){
+            $productId=$productList[$i];
+            $newlist=Product::select('category.categoryName','style','sku','ean','productName','productDesc','brand','color','colorDesc','size',
+                'sizeDescription','mainImage','swatchImage','outfit','image2','image3','image4','runtosize','care','price','costPrice',
+                'wholePrice','stockQty','minQtyAlert','LastExportedBy','LastExportedDate')
+                ->leftJoin('category', 'category.categoryId', '=', 'product.fkcategoryId')->where('product.productId',$productId)->get()->toArray();
+            $list=array_merge($list,$newlist);
 
-            $excel->sheet('Sheetname', function($sheet) use($data) {
-
-//                $sheet->row(5, function($row) use ($sheet) {
-//
-//                    // call cell manipulation methods
-//                    //$row->setBackground('#000000');
-//
-//                $objDrawing = new PHPExcel_Worksheet_Drawing;
-//                $objDrawing->setPath(public_path('productImage/19.jpg')); //your image path
-//                $objDrawing->setCoordinates('A1');
-//                $objDrawing->setWorksheet($sheet);
-//
-//                });
-
-                $sheet->cells('A1:A5', function($cells)use($sheet){
-
-                    // manipulate the range of cells
-
-                    $objDrawing = new PHPExcel_Worksheet_Drawing;
-                    $objDrawing->setPath(public_path('productImage/19.jpg')); //your image path
-                    $objDrawing->setCoordinates($cells);
-                    $objDrawing->setWorksheet($sheet);
-
-                });
+        }
 
 
-                //$sheet->fromArray($data);
+        Excel::create($fileName,function($excel) use($list,$filePath) {
 
+            $excel->sheet('First sheet', function($sheet) use($list) {
+
+                $sheet->loadView('product.localDownloadProductList')->with('productList',$list);
             });
 
         })->store('xls',$filePath);
