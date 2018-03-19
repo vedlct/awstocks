@@ -137,10 +137,11 @@ class OfferController extends Controller
 
     public function update(Request $r){
 
+
         $this->validate($r,[
             'product' => 'required|max:70',
             'category' => 'required',
-            'disPrice' => 'required',
+            'disPercent' => 'required',
             'price' => 'required',
             'productIdType'=>'required',
             'disStartPrice'=>'required|date',
@@ -150,9 +151,20 @@ class OfferController extends Controller
 
         ]);
 
+        $offerDes=Offer::findOrFail($r->id);
+
+        $offerPrice=$offerDes->product->price*$r->disPercent/100;
+
+
+        $offerPrice=$offerDes->product->price - $offerPrice;
+
+
+
+
+
         $offer=array(
             'fkproductId'=>$r->product,
-            'disPrice'=>$r->disPrice,
+            'disPrice'=>$offerPrice,
             'disStartPrice'=>date("Y-m-d", strtotime($r->disStartPrice)),
             'disEndPrice'=>date("Y-m-d", strtotime($r->disEndPrice)),
             'state'=>$r->state,
@@ -441,9 +453,8 @@ class OfferController extends Controller
 
     }
     public function BulkOfferdt(Request $r) {
-        $list=Product::select('productId','style','sku','brand','product.status','productName','users.name as userName','LastExportedDate','category.categoryName')
+        $list=Product::select('productId','style','sku','brand','product.status','productName','LastExportedDate','category.categoryName')
             ->leftJoin('category', 'category.categoryId', '=', 'product.fkcategoryId')
-            ->leftJoin('users', 'users.userId', '=', 'product.LastExportedBy')
             ->where ('product.status', Status[1]);
 
         if ($status=$r->status){
