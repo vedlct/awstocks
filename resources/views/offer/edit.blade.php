@@ -49,7 +49,16 @@
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label">Discount Price<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-10">
-                                <input id="inputHorizontalWarning" type="number"  name="disPrice" value="{{$offer->disPrice}}" placeholder="price"  step="0.01" class="form-control form-control-warning myInputField" required>
+                                <input id="inputHorizontalWarning" type="number"  value="{{$offer->disPrice}}" placeholder="price"  step="0.01" class="form-control form-control-warning myInputField" readonly>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 form-control-label">Discount <span style="color: red" class="required">%</span></label>
+                            <div class="col-sm-10">
+                                <input id="inputHorizontalWarning" type="number" value="{{100-($offer->disPrice*100/$offer->product->price)}}" placeholder="price" name="disPercent"  step="0.01" class="form-control form-control-warning" required>
+
                             </div>
                         </div>
 
