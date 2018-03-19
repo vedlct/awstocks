@@ -44,7 +44,7 @@
                     <th >Select</th>
                     <th >Product Category</th>
                     <th >Product name</th>
-                    <th >Last Exported By</th>
+                    <th >SKU</th>
                     <th >Last Exported Date</th>
 
                 </tr>
@@ -125,7 +125,7 @@
                         "orderable": false, "searchable":false, "name":"selected_rows",},
                     { data: 'categoryName',name:'categoryName' },
                     { data: 'productName', name: 'productName' },
-                    { data: 'userName', name: 'userName' },
+                    { data: 'sku', name: 'sku' },
                     { data: 'LastExportedDate', name: 'LastExportedDate' },
 
                 ],

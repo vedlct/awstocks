@@ -58,7 +58,6 @@
                             <label class="col-sm-2 form-control-label">Discount <span style="color: red" class="required">%</span></label>
                             <div class="col-sm-10">
                                 <input id="inputHorizontalWarning" type="number" value="{{100-($offer->disPrice*100/$offer->product->price)}}" placeholder="price" name="disPercent"  step="0.01" class="form-control form-control-warning" required>
-
                             </div>
                         </div>
 
@@ -76,14 +75,12 @@
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label">Product Id Type<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-10">
-
                                 <select name="productIdType" class="form-control form-control-warning" required>
                                     <option selected value="">Select Product Id Type</option>
                                     <?php for ($i=0;$i<count(ProductIdType);$i++){?>
                                     <option @if(ProductIdType[$i] == $offer['product-id-type']) selected @endif value="<?php echo ProductIdType[$i]?>"><?php echo ProductIdType[$i]?></option>
                                     <?php }?>
                                 </select>
-
                             </div>
                         </div>
 

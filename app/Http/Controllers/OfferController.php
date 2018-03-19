@@ -453,9 +453,8 @@ class OfferController extends Controller
 
     }
     public function BulkOfferdt(Request $r) {
-        $list=Product::select('productId','style','sku','brand','product.status','productName','users.name as userName','LastExportedDate','category.categoryName')
+        $list=Product::select('productId','style','sku','brand','product.status','productName','LastExportedDate','category.categoryName')
             ->leftJoin('category', 'category.categoryId', '=', 'product.fkcategoryId')
-            ->leftJoin('users', 'users.userId', '=', 'product.LastExportedBy')
             ->where ('product.status', Status[1]);
 
         if ($status=$r->status){
