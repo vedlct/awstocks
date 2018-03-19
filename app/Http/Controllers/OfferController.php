@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Season;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -14,6 +15,7 @@ use App\Category;
 use Response;
 
 use DB;
+
 
 
 use Symfony\Component\HttpFoundation\StreamedResponse;
@@ -67,10 +69,16 @@ class OfferController extends Controller
 
         ]);
 
+        $product = Product::select('price')
+            ->where('productId' , $r->product)
+            ->get();
+        foreach ($product as $p){
+            $convertprice = round((($p->price * $r->disPrice)/100),2);
+        }
 
         $offer=array(
             'fkproductId'=>$r->product,
-            'disPrice'=>$r->disPrice,
+            'disPrice'=>$convertprice,
             'disStartPrice'=>$r->disStartPrice,
             'disEndPrice'=>$r->disEndPrice,
             'state'=>$r->state,
@@ -83,6 +91,47 @@ class OfferController extends Controller
 
         Session::flash('message', 'Offer Added successfully');
         return back();
+    }
+    public function insertBulkOffer(Request $r){
+
+        $seasone=$r->season;
+        $disprice=$r->disprice;
+        $offers=$r->offers;
+        $returnarray = array();
+       // return $seasone;
+
+        $seasones=Season::select('startDate','endDate')->where('seasonId',$seasone)->first();
+
+        foreach ($offers as $offerId) {
+            $offiress = Product::select('*')->where('productId', $offerId)->get();
+
+            foreach ($offiress as $offiress) {
+
+                $product = Product::select('price')
+                    ->where('productId' , $offiress->productId)
+                    ->get();
+                foreach ($product as $p){
+                    $convertprice = round((($p->price * $disprice)/100),2);
+                }
+
+                $offer = array(
+                    'fkproductId' => $offiress->productId,
+                    'disPrice' => $convertprice,
+                    'disStartPrice' => $seasones->startDate,
+                    'disEndPrice' => $seasones->endDate,
+                    'state' => '11',
+                    'status' => 'Bulk Updated',
+                    'lastExportedBy'=>Auth::user()->userId,
+                    'product-id-type' => 'SHOP_SKU',
+
+                );
+
+                DB::table('offer')->insert($offer);
+            }
+        }
+
+        Session::flash('message', 'Offer Added successfully');
+
     }
 
 
@@ -376,6 +425,44 @@ class OfferController extends Controller
 
 
 
+    }
+
+    public function BulkOffer() {
+
+        $categories=Category::get();
+        $season = Season::get();
+//        $productsList=Product::select('productId','productName')
+//            ->get();
+        return view('offer.bulkoffer')
+            ->with('categories',$categories)
+            ->with('season',$season);
+//            ->with('productsList',$productsList);
+
+
+    }
+    public function BulkOfferdt(Request $r) {
+        $list=Product::select('productId','style','sku','brand','product.status','productName','users.name as userName','LastExportedDate','category.categoryName')
+            ->leftJoin('category', 'category.categoryId', '=', 'product.fkcategoryId')
+            ->leftJoin('users', 'users.userId', '=', 'product.LastExportedBy')
+            ->where ('product.status', Status[1]);
+
+        if ($status=$r->status){
+            $list->where('product.status',$status);
+        }
+        if ($categoryId=$r->categoryId){
+            $list->where('product.fkcategoryId',$categoryId);
+        }
+        if ($productName=$r->productName){
+            $list->where('product.productName',$productName);
+        }
+
+
+//        $productList = $list->get();
+        $productList = $list->orderBy('productId',"desc")->get();
+
+        $datatables = Datatables::of($productList);
+
+        return $datatables->make(true);
     }
 
 

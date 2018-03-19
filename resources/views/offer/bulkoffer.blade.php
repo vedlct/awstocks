@@ -13,9 +13,9 @@
 
         <!-- Page Header-->
         <header class="page-header">
-        <div align="center" class="container-fluid">
-            <h2 style="color: #989898;" class="no-margin-bottom"><b>Product List</b></h2>
-        </div>
+            <div align="center" class="container-fluid">
+                <h2 style="color: #989898;" class="no-margin-bottom"><b>Product List</b></h2>
+            </div>
         </header>
 
 
@@ -33,29 +33,7 @@
 
             </div>
 
-            {{--<div class="col-md-4 dropdown">--}}
-                {{--<label class="form-control-label">Product Name</label> <br>--}}
-                {{--<select class="form-control" id="product" name="product">--}}
-                    {{--<option selected value="">All Product</option>--}}
-                    {{--@foreach($productsList as $products)--}}
-                        {{--<option value="{{$products->productName}}">{{$products->productName}}</option>--}}
-                    {{--@endforeach--}}
-                {{--</select>--}}
-            {{--</div>--}}
 
-            <div class="col-md-4 dropdown">
-                <label class="form-control-label">Status</label> <br>
-                <select class="form-control" id="status" name="status">
-                    <option selected value="">Select Status</option>
-                    <?php for ($i=0;$i<count(Status);$i++){?>
-
-                    <option value="<?php echo Status[$i]?>"><?php echo Status[$i]?></option>
-
-                    <?php } ?>
-
-                </select>
-
-            </div>
 
         </div>
 
@@ -65,26 +43,40 @@
                 <tr>
                     <th >Select</th>
                     <th >Product Category</th>
-                    <th >Style</th>
-                    <th >SKU</th>
                     <th >Product name</th>
-                    <th >Brand name</th>
-                    <th >status</th>
                     <th >Last Exported By</th>
                     <th >Last Exported Date</th>
-                    <th >Action</th>
+
                 </tr>
                 </thead>
 
             </table><br>
 
-            
+
             <input type="checkbox" id="selectall" onClick="selectAll(this)" /><b>Select All</b><br>
+        </div>
+        <div class="row">
+        <div class="col-md-4 dropdown">
+            <label class="form-control-label">Season</label> <br>
+            <select class="form-control" id="season" name="season" required>
+                <option selected value="">All Season</option>
+
+                @foreach($season as $season)
+                    <option value="{{$season->seasonId}}">{{$season->seasonName}}</option>
+                @endforeach
+            </select>
+
+        </div>
+        <div class="col-md-4 ">
+            <label class="form-control-label">Discount Price</label> <br>
+            <input class="form-control" type="number" id="disprice" name="disprice">
+
+        </div>
         </div>
 
 
-        <a  onclick="return myfunc()" download> <button class="btn btn-danger"  >Export Products file</button></a>
-        {{--<a  onclick="return excel()"> <button class="btn btn-danger"  >Local Excel Download</button></a>--}}
+        <br>
+        <a class="btn btn-danger" onclick="insertBulkOffer()">Insert Bulk Offer</a>
 
 
     </div>
@@ -118,7 +110,7 @@
                 stateSave: true,
 //                bSort:false,
                 "ajax":{
-                    "url": "{!! route('product.data') !!}",
+                    "url": "{!! route('offer.bulkOfferdt') !!}",
                     "type": "POST",
                     data:function (d){
                         d._token="{{csrf_token()}}";
@@ -132,17 +124,10 @@
                         return '<input data-panel-id="'+data.productId+'"onclick="selected_rows(this)" type="checkbox" class="chk" name="selected_rows[]" value="'+ data.productId +'" />';},
                         "orderable": false, "searchable":false, "name":"selected_rows",},
                     { data: 'categoryName',name:'categoryName' },
-                    { data: 'style', name: 'style' },
-                    { data: 'sku', name: 'sku' },
                     { data: 'productName', name: 'productName' },
-                    { data: 'brand', name: 'brand' },
-                    { data: 'status', name: 'status' },
                     { data: 'userName', name: 'userName' },
                     { data: 'LastExportedDate', name: 'LastExportedDate' },
-                    { "data": function(data){
-                        var url='{{url("product/edit/", ":id") }}';
-                        return '<a class="btn btn-default btn-sm" data-panel-id="'+data.productId+'"onclick="editProduct(this)"><i class="fa fa-edit"></i></a><a class="btn" data-panel-id="'+data.productId+'"onclick="deleteProduct(this)"><i class="fa fa-trash"></i></a>';},
-                        "orderable": false, "searchable":false, "name":"selected_rows" },
+
                 ],
                 order: [[0,'desc'] ],
             });
@@ -179,7 +164,7 @@
             if (result) {
 
                 var newUrl=url.replace(':id', btn);
-            window.location.href = newUrl;}
+                window.location.href = newUrl;}
         }
 
         var selecteds = [];
@@ -216,38 +201,30 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-        function myfunc() {
 
-
-//            var i;
-//            /* look for all checkboes that have a class 'chk' attached to it and check if it was checked */
-//            $(".chk:checked").each(function () {
-//                selecteds.push($(this).val());
-//            });
-
+        function insertBulkOffer() {
 
             var products=selecteds;
 
-            //alert(products);
+           // alert(products);
 
             if (products.length >0) {
 
+                var disprice=document.getElementById('disprice').value;
+                var season=document.getElementById('season').value;
+
                 $.ajax({
                     type: 'POST',
-                    url: "{!! route('product.csv') !!}",
+                    url: "{!! route('offer.insertBulkOffer') !!}",
                     cache: false,
-                    data: {'products': products},
+                    data: {'offers': products,'season':season,'disprice':disprice},
                     success: function (data) {
 
-                        var link = document.createElement("a");
-                        link.download = data.fileName;
-                        var uri = '{{url("public/csv")}}'+"/"+data.fileName;
-                        link.href = uri;
-                        document.body.appendChild(link);
-                        link.click();
-                        document.body.removeChild(link);
-                        delete link;
-
+                        if (data.returntype == "0"){
+                            alert('discount price should be less than '+data.productName + ' price');
+                        }
+                        location.reload();
+                       // alert(data);
 
                     }
 
@@ -257,46 +234,10 @@
                 alert("Please Select a product first");
             }
         }
-
-        function excel() {
-
-
-            var products=selecteds;
-
-            //alert(products);
-
-            if (products.length >0) {
-
-                $.ajax({
-                    type: 'POST',
-                    url: "{!!route('product.excelExport') !!}",
-                    cache: false,
-                    data: {'products': products},
-                    success: function (data) {
-//                        alert(data);
-
-                        var link = document.createElement("a");
-                        link.download = data.fileName+".xls";
-                        var uri = '{{url("public/csv/test")}}'+"/"+data.fileName+".xls";
-                        link.href = uri;
-                        document.body.appendChild(link);
-                        link.click();
-                        document.body.removeChild(link);
-                        delete link;
-
-                    }
-
-                });
-            }
-            else {
-                alert("Please Select a product first");
-            }
-        }
-
     </script>
 
 @endsection
-<script ></script>
+
 
 
 

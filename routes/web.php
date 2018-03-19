@@ -31,6 +31,7 @@ Route::post('/getProductPrice', 'ProductController@getProductPrice')->name('getP
 Route::post('/product/ProductList', 'ProductController@ProductList')->name('product.data');
 
 Route::post('/product/csvExport', 'ProductController@csvExport')->name('product.csv');
+Route::post('/product/excelExport', 'ProductController@excelExport')->name('product.excelExport');
 
 
 //Route::get('Product', 'ProductController', [
@@ -45,7 +46,11 @@ Route::post('/product/csvExport', 'ProductController@csvExport')->name('product.
 //offer
 Route::get('/offer/add', 'OfferController@add')->name('offer.add');
 Route::post('/offer/add', 'OfferController@insert')->name('offer.insert');
+Route::post('/offer/insertBulkOffer', 'OfferController@insertBulkOffer')->name('offer.insertBulkOffer');
 Route::get('/offer/generate', 'OfferController@index')->name('offer.generate');
+Route::get('/offer/bulkOffer', 'OfferController@BulkOffer')->name('offer.bulkOffer');
+Route::post('/offer/bulkOfferdt', 'OfferController@BulkOfferdt')->name('offer.bulkOfferdt');
+
 
 //Route::view('/offer/generate', 'offer.generate')->name('offer.generate');
 Route::post('/offer/getOfferList', 'OfferController@getOfferList')->name('offer.offerList');
