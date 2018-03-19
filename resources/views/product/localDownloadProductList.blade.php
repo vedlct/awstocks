@@ -13,7 +13,7 @@
         <th>Color Description</th>
         <th>Size</th>
         <th>Size Description</th>
-        {{--<th>Main Image</th>--}}
+        <th>Main Image</th>
         {{--<th>Swatch Image</th>--}}
         {{--<th>Outfit</th>--}}
         {{--<th>image2</th>--}}
@@ -44,9 +44,9 @@
         <td>{{$list['colorDesc']}}</td>
         <td>{{$list['size']}}</td>
         <td>{{$list['sizeDescription']}}</td>
-        {{--@if(!empty($list['mainImage']))--}}
-        {{--<td><img src="{{$list['mainImage']}}"></td>--}}
-        {{--@endif--}}
+        @if(!empty($list['mainImage']))
+        <td><img src="public/productImage/"{{$list['mainImage']}}></td>
+        @endif
         {{--@if(!empty($list['swatchImage']))--}}
         {{--<td><img src="{{$list['swatchImage']}}"></td>--}}
         {{--@endif--}}
