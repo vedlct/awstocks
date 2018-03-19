@@ -397,6 +397,7 @@ class ComposerStaticInit29553d3de4a5092cb755d57b4a5f8245
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
         'App\\RunToSize' => __DIR__ . '/../..' . '/app/RunToSize.php',
+        'App\\Season' => __DIR__ . '/../..' . '/app/Season.php',
         'App\\Size' => __DIR__ . '/../..' . '/app/Size.php',
         'App\\Test' => __DIR__ . '/../..' . '/app/Test.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
