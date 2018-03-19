@@ -70,7 +70,7 @@
                     <th >Product name</th>
                     <th >Brand name</th>
                     <th >status</th>
-                    <th >Last Exported By</th>
+                    {{--<th >Last Exported By</th>--}}
                     <th >Last Exported Date</th>
                     <th >Action</th>
                 </tr>
@@ -137,7 +137,7 @@
                     { data: 'productName', name: 'productName' },
                     { data: 'brand', name: 'brand' },
                     { data: 'status', name: 'status' },
-                    { data: 'userName', name: 'userName' },
+//                    { data: 'userName', name: 'userName' },
                     { data: 'LastExportedDate', name: 'LastExportedDate' },
                     { "data": function(data){
                         var url='{{url("product/edit/", ":id") }}';
