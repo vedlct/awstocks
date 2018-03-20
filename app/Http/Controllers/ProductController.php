@@ -80,16 +80,9 @@ class ProductController extends Controller
 
     public function edit($id){
 
-//        $categories=Category::get();
-//        $sColors=Color::where('colorType','standard')
-//            ->get();
-//        $sizeTypes=Size::groupBy('sizeType')
-//            ->get();
-//        $runToSizes=RunToSize::get();
-//        $cares=Care::get();
 
         $categories=Category::select('categoryId','categoryName')->orderBy('categoryName','ASC')->get();
-        $sColors=Color::select('colorId','colorName')->where('colorType','standard')->orderBy('colorName','ASC')->get();
+        $sColors=Color::select('colorId','colorName')->orderBy('colorName','ASC')->get();
         $sizeTypes=Size::select('sizeId','sizeName','sizeType')->orderBy('sizeType','ASC')->groupBy('sizeType')->get();
         $runToSizes=RunToSize::select('runToSizeId','runToSizeName')->orderBy('runToSizeName','ASC')->get();
         $cares=Care::select('careId','careName')->orderBy('careName','ASC')->get();

@@ -83,7 +83,7 @@
                                     <option value="">Select One</option>
                                     @foreach($sColors as $color)
                                         <option value="{{$color->colorName}}"
-                                                @if($color->color == $product->colorName)
+                                                @if($color->colorName == $product->color)
                                                 selected
                                                 @endif
                                         >{{$color->colorName}}</option>
