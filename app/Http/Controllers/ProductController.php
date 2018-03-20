@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+use App\Offer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use File;
@@ -120,12 +121,12 @@ class ProductController extends Controller
     public function update(Request $r){
 
         $rules=[
-            'productName' => 'required|max:255',
+            'productName' => 'required|max:100',
             'status' => 'required|max:50',
             'description' => 'required|max:1100',
             'style' => 'required|max:255',
             'sku'=>'required|max:20',
-            'brand'=>'required|max:255',
+            'brand'=>'required|max:100',
             'size'=>'max:255',
             'sizeDescription'=>'max:255',
             'runToSize'=>'max:255',
@@ -286,12 +287,12 @@ class ProductController extends Controller
     public function insert(Request $r){
 
         $rules=[
-            'productName' => 'required|max:255',
+            'productName' => 'required|max:100',
             'status' => 'required|max:50',
             'description' => 'required|max:1100',
             'style' => 'required|max:255',
             'sku'=>'required|max:20',
-            'brand'=>'required|max:255',
+            'brand'=>'required|max:100',
             'size'=>'max:255',
             'sizeDescription'=>'max:255',
             'runToSize'=>'max:255',
@@ -412,6 +413,13 @@ class ProductController extends Controller
     }
     public function destroy($id){
         $product=Product::findOrFail($id);
+        $offer = Offer::select('offerId')
+            ->where('fkproductId', $id)
+            ->get();
+        if (!empty($offer)){
+            Session::flash('danger', 'Please Delete the offer related with this product first');
+            return back();
+        }
         if($product->swatch!=null){
             File::delete('productImage/'.$product->swatch);
         }

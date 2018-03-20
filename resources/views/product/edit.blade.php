@@ -44,7 +44,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label">Product Name<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-10">
-                                <input id="inputHorizontalSuccess" type="text"  name="productName" placeholder="name"  placeholder="70 characters maximum" class="form-control form-control-success" value="{{$product->productName}}" >
+                                <input id="inputHorizontalSuccess" type="text"  name="productName" placeholder="name"  placeholder="100 characters maximum" class="form-control form-control-success" value="{{$product->productName}}" >
                                 @if ($errors->has('productName'))
                                     <span class="help-block" style="position: absolute; left: 150px; color: red; font-size:14px">
 								<strong>{{ $errors->first('productName') }}</strong>
@@ -56,7 +56,7 @@
                             <label class="col-sm-2 form-control-label">Brand Name<span style="color: red" class="required">*</span></label>
 
                             <div class="col-sm-10">
-                                <input id="inputHorizontalWarning" type="text"  name="brand" placeholder="brand"  placeholder="255 characters maximum" class="form-control form-control-warning" value="{{$product->brand}}" required>
+                                <input id="inputHorizontalWarning" type="text"  name="brand" placeholder="brand"  placeholder="100 characters maximum" class="form-control form-control-warning" value="{{$product->brand}}" required>
                                 @if ($errors->has('brand'))
                                     <span class="help-block" style="position: absolute; left: 150px; color: red; font-size:14px">
 								<strong>{{ $errors->first('brand') }}</strong>
