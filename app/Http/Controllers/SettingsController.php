@@ -179,11 +179,11 @@ class SettingsController extends Controller
     public function insertSize(Request $r){
 
 
-        $this->validate($r,[
-            'sizeName' => 'required|max:45',
-            'sizeDescription' => 'max:45',
-            'sizeType' => 'required|max:45',
-        ]);
+//        $this->validate($r,[
+//            'sizeName' => 'required|max:45',
+//            'sizeDescription' => 'max:45',
+//            'sizeType' => 'required|max:45',
+//        ]);
 
         $size=new Size;
         $size->sizeName=$r->sizeName;
@@ -314,11 +314,11 @@ class SettingsController extends Controller
 
     public function updateSize(Request $r){
 
-        $this->validate($r,[
-            'sizeName' => 'required|max:45',
-            'sizeDescription' => 'max:45',
-            'sizeType' => 'required|max:45',
-        ]);
+//        $this->validate($r,[
+//            'sizeName' => 'required|max:45',
+//            'sizeDescription' => 'max:45',
+//            'sizeType' => 'required|max:45',
+//        ]);
         $size=Size::findOrFail($r->id);
         $size->sizeName=$r->sizeName;
         $size->sizeDescription=$r->sizeDescription;

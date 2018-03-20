@@ -132,7 +132,7 @@ class ProductController extends Controller
             'style' => 'required|max:15',
             'sku'=>'required|max:20',
             'brand'=>'required|max:45',
-            'size'=>'max:45',
+            'size'=>'max:255',
             'sizeDescription'=>'max:45',
             'runToSize'=>'max:45',
             'color'=>'required|max:45',
@@ -181,8 +181,9 @@ class ProductController extends Controller
             $filename= $product->productId.'swatch'.'.'.$img->getClientOriginalExtension();
             $product->swatchImage=url("public/productImage")."/".$filename;
             $location = public_path('productImage/'.$filename);
-//            Image::make($img)->resize(800,600)->save($location);
             Image::make($img)->save($location);
+            $location2 = public_path('productImage/thumb/'.$filename);
+            Image::make($img)->fit(200)->save($location2);
         }
         if($r->hasFile('outfitPic')){
             $img = $r->file('outfitPic');
@@ -190,6 +191,8 @@ class ProductController extends Controller
             $product->outfit=url("public/productImage")."/".$filename;
             $location = public_path('productImage/'.$filename);
             Image::make($img)->save($location);
+            $location2 = public_path('productImage/thumb/'.$filename);
+            Image::make($img)->fit(200)->save($location2);
         }
         if($r->hasFile('mainPic')){
             $img = $r->file('mainPic');
@@ -197,6 +200,8 @@ class ProductController extends Controller
             $product->mainImage=url("public/productImage")."/".$filename;
             $location = public_path('productImage/'.$filename);
             Image::make($img)->save($location);
+            $location2 = public_path('productImage/thumb/'.$filename);
+            Image::make($img)->fit(200)->save($location2);
         }
         if($r->hasFile('image2Pic')){
             $img = $r->file('image2Pic');
@@ -204,6 +209,8 @@ class ProductController extends Controller
             $product->image2=url("public/productImage")."/".$filename;
             $location = public_path('productImage/'.$filename);
             Image::make($img)->save($location);
+            $location2 = public_path('productImage/thumb/'.$filename);
+            Image::make($img)->fit(200)->save($location2);
         }
         if($r->hasFile('image3Pic')){
             $img = $r->file('image3Pic');
@@ -211,6 +218,8 @@ class ProductController extends Controller
             $product->image3=url("public/productImage")."/".$filename;
             $location = public_path('productImage/'.$filename);
             Image::make($img)->save($location);
+            $location2 = public_path('productImage/thumb/'.$filename);
+            Image::make($img)->fit(200)->save($location2);
         }
         if($r->hasFile('image4Pic')){
             $img = $r->file('image4Pic');
@@ -218,6 +227,8 @@ class ProductController extends Controller
             $product->image4=url("public/productImage")."/".$filename;
             $location = public_path('productImage/'.$filename);
             Image::make($img)->save($location);
+            $location2 = public_path('productImage/thumb/'.$filename);
+            Image::make($img)->fit(200)->save($location2);
         }
         $product->save();
         Session::flash('message', 'Product Updated  successfully');
@@ -274,7 +285,7 @@ class ProductController extends Controller
             'style' => 'required|max:15',
             'sku'=>'required|max:20',
             'brand'=>'required|max:45',
-            'size'=>'max:45',
+            'size'=>'max:255',
             'sizeDescription'=>'max:45',
             'runToSize'=>'max:45',
             'color'=>'required|max:45',
@@ -324,6 +335,8 @@ class ProductController extends Controller
             $product->swatchImage=url("public/productImage")."/".$filename;
             $location = public_path('productImage/'.$filename);
             Image::make($img)->save($location);
+            $location2 = public_path('productImage/thumb/'.$filename);
+            Image::make($img)->fit(200)->save($location2);
         }
         if($r->hasFile('outfitPic')){
             $img = $r->file('outfitPic');
@@ -331,6 +344,8 @@ class ProductController extends Controller
             $product->outfit=url("public/productImage")."/".$filename;
             $location = public_path('productImage/'.$filename);
             Image::make($img)->save($location);
+            $location2 = public_path('productImage/thumb/'.$filename);
+            Image::make($img)->fit(200)->save($location2);
         }
         if($r->hasFile('mainPic')){
             $img = $r->file('mainPic');
@@ -338,6 +353,8 @@ class ProductController extends Controller
             $product->mainImage=url("public/productImage")."/".$filename;
             $location = public_path('productImage/'.$filename);
             Image::make($img)->save($location);
+            $location2 = public_path('productImage/thumb/'.$filename);
+            Image::make($img)->fit(200)->save($location2);
         }
         if($r->hasFile('image2Pic')){
             $img = $r->file('image2Pic');
@@ -345,6 +362,8 @@ class ProductController extends Controller
             $product->image2=url("public/productImage")."/".$filename;
             $location = public_path('productImage/'.$filename);
             Image::make($img)->save($location);
+            $location2 = public_path('productImage/thumb/'.$filename);
+            Image::make($img)->fit(200)->save($location2);
         }
         if($r->hasFile('image3Pic')){
             $img = $r->file('image3Pic');
@@ -352,6 +371,8 @@ class ProductController extends Controller
             $product->image3=url("public/productImage")."/".$filename;
             $location = public_path('productImage/'.$filename);
             Image::make($img)->save($location);
+            $location2 = public_path('productImage/thumb/'.$filename);
+            Image::make($img)->fit(200)->save($location2);
         }
         if($r->hasFile('image4Pic')){
             $img = $r->file('image4Pic');
@@ -359,6 +380,8 @@ class ProductController extends Controller
             $product->image4=url("public/productImage")."/".$filename;
             $location = public_path('productImage/'.$filename);
             Image::make($img)->save($location);
+            $location2 = public_path('productImage/thumb/'.$filename);
+            Image::make($img)->fit(200)->save($location2);
         }
         $product->save();
         Session::flash('message', 'Product Uploaded successfully');

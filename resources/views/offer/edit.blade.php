@@ -49,7 +49,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label">Discount Price<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-10">
-                                <input id="inputHorizontalWarning" type="number"  value="{{$offer->disPrice}}" placeholder="price"  step="0.01" class="form-control form-control-warning myInputField" readonly>
+                                <input id="" type="number"  value="{{$offer->disPrice}}" placeholder="price"  step="0.01" class="form-control form-control-warning " readonly>
                             </div>
                         </div>
 
@@ -57,7 +57,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label">Discount <span style="color: red" class="required">%</span></label>
                             <div class="col-sm-10">
-                                <input id="inputHorizontalWarning" type="number" value="{{100-($offer->disPrice*100/$offer->product->price)}}" placeholder="price" name="disPercent"  step="0.01" class="form-control form-control-warning" required>
+                                <input id="" type="number" value="{{100-($offer->disPrice*100/$offer->product->price)}}" placeholder="" name="disPercent"  class="form-control form-control-warning" required>
                             </div>
                         </div>
 
@@ -164,7 +164,8 @@
 
             var fromdate =  document.getElementById("fromdate").value;
             var todate =   document.getElementById("todate").value;
-
+//        alert(fromdate);
+//        alert(todate);
 
             if (fromdate > todate) {
                 alert ("End Date Can not be before Start Date!!");
@@ -192,35 +193,35 @@
         });
 
 
-        var typingTimer;
-        var doneTypingInterval = 1000;
+//        var typingTimer;
+//        var doneTypingInterval = 1000;
+//
+//        $('.myInputField').keyup(function(){
+//            clearTimeout(typingTimer);
+//            if ($('.myInputField').val) {
+//                typingTimer = setTimeout(doneTyping, doneTypingInterval);
+//            }
+//        });
 
-        $('.myInputField').keyup(function(){
-            clearTimeout(typingTimer);
-            if ($('.myInputField').val) {
-                typingTimer = setTimeout(doneTyping, doneTypingInterval);
-            }
-        });
+//        function doneTyping () {
+//            var vale = $('.myInputField').val();
+//            var price = $('.producprice').val();
+//            var regexTest = /^\d+(?:\.\d\d?)?$/;
+//            var ok = regexTest.test(vale);
+//            if(!ok){
+//                alert('please enter only two decimal number');
+//                $('.myInputField').val('');
+//            }
+//            if (vale >= price){
+//                alert('discount price cannot be more than product price');
+//                $('.myInputField').val('');
+//            }
+//        }
 
-        function doneTyping () {
-            var vale = $('.myInputField').val();
-            var price = $('.producprice').val();
-            var regexTest = /^\d+(?:\.\d\d?)?$/;
-            var ok = regexTest.test(vale);
-            if(!ok){
-                alert('please enter only two decimal number');
-                $('.myInputField').val('');
-            }
-            if (vale >= price){
-                alert('discount price cannot be more than product price');
-                $('.myInputField').val('');
-            }
-        }
-
-
-        function setTwoNumberDecimal(event) {
-            this.value = parseFloat(this.value).toFixed(2);
-        }
+//
+//        function setTwoNumberDecimal(event) {
+//            this.value = parseFloat(this.value).toFixed(2);
+//        }
 
         $( function() {
             $( "#fromdate" ).datepicker();

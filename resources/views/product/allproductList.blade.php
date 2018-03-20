@@ -64,15 +64,15 @@
                 <thead>
                 <tr>
                     <th >Select</th>
-                    <th >Product Category</th>
+                    <th width="20%" >Product Category</th>
                     <th >Style</th>
                     <th >SKU</th>
-                    <th >Product name</th>
+                    <th width="20%">Product name</th>
                     <th >Brand name</th>
                     <th >status</th>
                     {{--<th >Last Exported By</th>--}}
                     <th >Last Exported Date</th>
-                    <th >Action</th>
+                    <th width="10%">Action</th>
                 </tr>
                 </thead>
 
