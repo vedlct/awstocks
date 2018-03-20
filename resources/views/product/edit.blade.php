@@ -280,7 +280,7 @@
                                     </span>
                                 @endif
                                 <img   @if($product->mainImage)
-                                       src="{{$product->mainImage}}"
+                                       src="{{url('public/productImage')."/".basename($product->mainImage)}}"
                                        @endif
                                        height="50px" width="50px" id="imgMainPic">
                             </div>
