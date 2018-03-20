@@ -26,6 +26,8 @@ use Excel;
 use PHPExcel_Worksheet_Drawing;
 
 
+
+
 //use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 class ProductController extends Controller
@@ -176,7 +178,9 @@ class ProductController extends Controller
             $location = public_path('productImage/'.$filename);
             Image::make($img)->save($location);
             $location2 = public_path('productImage/thumb/'.$filename);
-            Image::make($img)->fit(200)->save($location2);
+            Image::make($img)->resize(200, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($location2);
         }
         if($r->hasFile('outfitPic')){
             $img = $r->file('outfitPic');
@@ -185,7 +189,9 @@ class ProductController extends Controller
             $location = public_path('productImage/'.$filename);
             Image::make($img)->save($location);
             $location2 = public_path('productImage/thumb/'.$filename);
-            Image::make($img)->fit(200)->save($location2);
+            Image::make($img)->resize(200, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($location2);
         }
         if($r->hasFile('mainPic')){
             $img = $r->file('mainPic');
@@ -194,7 +200,9 @@ class ProductController extends Controller
             $location = public_path('productImage/'.$filename);
             Image::make($img)->save($location);
             $location2 = public_path('productImage/thumb/'.$filename);
-            Image::make($img)->fit(200)->save($location2);
+            Image::make($img)->resize(200, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($location2);
         }
         if($r->hasFile('image2Pic')){
             $img = $r->file('image2Pic');
@@ -203,7 +211,9 @@ class ProductController extends Controller
             $location = public_path('productImage/'.$filename);
             Image::make($img)->save($location);
             $location2 = public_path('productImage/thumb/'.$filename);
-            Image::make($img)->fit(200)->save($location2);
+            Image::make($img)->resize(200, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($location2);
         }
         if($r->hasFile('image3Pic')){
             $img = $r->file('image3Pic');
@@ -212,7 +222,9 @@ class ProductController extends Controller
             $location = public_path('productImage/'.$filename);
             Image::make($img)->save($location);
             $location2 = public_path('productImage/thumb/'.$filename);
-            Image::make($img)->fit(200)->save($location2);
+            Image::make($img)->resize(200, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($location2);
         }
         if($r->hasFile('image4Pic')){
             $img = $r->file('image4Pic');
@@ -221,7 +233,9 @@ class ProductController extends Controller
             $location = public_path('productImage/'.$filename);
             Image::make($img)->save($location);
             $location2 = public_path('productImage/thumb/'.$filename);
-            Image::make($img)->fit(200)->save($location2);
+            Image::make($img)->resize(200, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($location2);
         }
         $product->save();
         Session::flash('message', 'Product Updated  successfully');
@@ -329,7 +343,9 @@ class ProductController extends Controller
             $location = public_path('productImage/'.$filename);
             Image::make($img)->save($location);
             $location2 = public_path('productImage/thumb/'.$filename);
-            Image::make($img)->fit(200)->save($location2);
+            Image::make($img)->resize(200, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($location2);
         }
         if($r->hasFile('outfitPic')){
             $img = $r->file('outfitPic');
@@ -338,7 +354,9 @@ class ProductController extends Controller
             $location = public_path('productImage/'.$filename);
             Image::make($img)->save($location);
             $location2 = public_path('productImage/thumb/'.$filename);
-            Image::make($img)->fit(200)->save($location2);
+            Image::make($img)->resize(200, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($location2);
         }
         if($r->hasFile('mainPic')){
             $img = $r->file('mainPic');
@@ -347,7 +365,10 @@ class ProductController extends Controller
             $location = public_path('productImage/'.$filename);
             Image::make($img)->save($location);
             $location2 = public_path('productImage/thumb/'.$filename);
-            Image::make($img)->fit(200)->save($location2);
+            Image::make($img)->resize(200, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($location2);
+
         }
         if($r->hasFile('image2Pic')){
             $img = $r->file('image2Pic');
@@ -356,7 +377,9 @@ class ProductController extends Controller
             $location = public_path('productImage/'.$filename);
             Image::make($img)->save($location);
             $location2 = public_path('productImage/thumb/'.$filename);
-            Image::make($img)->fit(200)->save($location2);
+            Image::make($img)->resize(200, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($location2);
         }
         if($r->hasFile('image3Pic')){
             $img = $r->file('image3Pic');
@@ -365,7 +388,9 @@ class ProductController extends Controller
             $location = public_path('productImage/'.$filename);
             Image::make($img)->save($location);
             $location2 = public_path('productImage/thumb/'.$filename);
-            Image::make($img)->fit(200)->save($location2);
+            Image::make($img)->resize(200, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($location2);
         }
         if($r->hasFile('image4Pic')){
             $img = $r->file('image4Pic');
@@ -374,7 +399,9 @@ class ProductController extends Controller
             $location = public_path('productImage/'.$filename);
             Image::make($img)->save($location);
             $location2 = public_path('productImage/thumb/'.$filename);
-            Image::make($img)->fit(200)->save($location2);
+            Image::make($img)->resize(200, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($location2);
         }
         $product->save();
         Session::flash('message', 'Product Uploaded successfully');

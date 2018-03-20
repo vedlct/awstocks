@@ -5,7 +5,6 @@
     <tr>
         <th>Color Name</th>
         <th>Description</th>
-        <th>Type</th>
         <th>Action</th>
     </tr>
     </thead>
@@ -41,7 +40,6 @@
             columns: [
                 { data: 'colorName', name: 'colorName' },
                 { data: 'colorDescription', name: 'colorDescription' },
-                { data: 'colorType', name: 'colorType' },
                 { "data": function(data){
                     return '<a class="btn" data-panel-id="'+data.colorId+'"onclick="editColor(this)"><i class="fa fa-edit"></i></a><a class="btn" data-panel-id="'+data.colorId+'"onclick="deleteOffer(this)"><i class="fa fa-trash"></i></a>';},
                     "orderable": false, "searchable":false, "name":"selected_rows" }
