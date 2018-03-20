@@ -140,7 +140,7 @@ class ProductController extends Controller
             'image3Pic'=>'image|mimes:jpeg,jpg',
             'image4Pic'=>'image|mimes:jpeg,jpg'
         ];
-        
+
         $messages = [
            // 'dimensions' => 'Image dimention should over 800px',
         ];
