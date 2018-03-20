@@ -40,7 +40,7 @@ class ProductController extends Controller
 
 
         $categories=Category::select('categoryId','categoryName')->orderBy('categoryName','ASC')->get();
-        $sColors=Color::select('colorId','colorName')->where('colorType','standard')->orderBy('colorName','ASC')->get();
+        $sColors=Color::select('colorId','colorName')->orderBy('colorName','ASC')->get();
         $sizeTypes=Size::select('sizeId','sizeName','sizeType')->orderBy('sizeType','ASC')->groupBy('sizeType')->get();
         $runToSizes=RunToSize::select('runToSizeId','runToSizeName')->orderBy('runToSizeName','ASC')->get();
         $cares=Care::select('careId','careName')->orderBy('careName','ASC')->get();
@@ -140,7 +140,7 @@ class ProductController extends Controller
             'image3Pic'=>'image|mimes:jpeg,jpg',
             'image4Pic'=>'image|mimes:jpeg,jpg'
         ];
-        
+
         $messages = [
            // 'dimensions' => 'Image dimention should over 800px',
         ];
