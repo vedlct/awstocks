@@ -529,10 +529,8 @@ class ProductController extends Controller
     {
         $productList=$r->products;
 
-
         $filePath=public_path ()."/excel";
         $fileName="productList";
-
         $fileInfo=array(
             'fileName'=>$fileName,
             'filePath'=>$fileName,
@@ -551,9 +549,7 @@ class ProductController extends Controller
 
 
         Excel::create($fileName,function($excel) use($list,$filePath) {
-
             $excel->sheet('First sheet', function($sheet) use($list) {
-
                 $sheet->loadView('product.localDownloadProductList')->with('productList',$list);
             });
 
