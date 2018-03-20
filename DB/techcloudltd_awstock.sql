@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: localhost:3306
--- Generation Time: Mar 17, 2018 at 02:55 PM
+-- Generation Time: Mar 20, 2018 at 03:52 AM
 -- Server version: 10.1.24-MariaDB-cll-lve
 -- PHP Version: 5.6.30
 
@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS `category` (
   `categoryName` varchar(45) DEFAULT NULL,
   `categoryDesc` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`categoryId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=507 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=509 ;
 
 --
 -- Dumping data for table `category`
@@ -567,7 +567,9 @@ INSERT INTO `category` (`categoryId`, `categoryName`, `categoryDesc`) VALUES
 (503, 'Baby.Pyjamas & Underwear.Rompers & Playsuits', 'null'),
 (504, 'Baby.Pyjamas & Underwear.Sleepsuits', 'null'),
 (505, 'Baby.Pyjamas & Underwear.Underwear sets', 'null'),
-(506, 'Womenswear>Gowns', NULL);
+(506, 'Womenswear>Gowns', NULL),
+(507, 'WW Accessories Mirakl / Bags / Tote Bags', NULL),
+(508, 'WW Accessories Mirakl / Bags / Shoulder Bags', NULL);
 
 -- --------------------------------------------------------
 
@@ -581,7 +583,7 @@ CREATE TABLE IF NOT EXISTS `color` (
   `colorDescription` varchar(45) DEFAULT NULL,
   `colorType` varchar(15) DEFAULT NULL,
   PRIMARY KEY (`colorId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=34 ;
 
 --
 -- Dumping data for table `color`
@@ -594,7 +596,6 @@ INSERT INTO `color` (`colorId`, `colorName`, `colorDescription`, `colorType`) VA
 (4, 'Silver', NULL, 'standard'),
 (5, 'White', NULL, 'standard'),
 (6, 'Yellow', NULL, 'standard'),
-(8, 'Black', NULL, NULL),
 (9, 'Blue', NULL, NULL),
 (10, 'Brown', NULL, NULL),
 (11, 'Gold', NULL, NULL),
@@ -605,7 +606,21 @@ INSERT INTO `color` (`colorId`, `colorName`, `colorDescription`, `colorType`) VA
 (16, 'Natural', NULL, NULL),
 (17, 'Navy', NULL, NULL),
 (18, 'Nude', NULL, NULL),
-(19, 'Orange', NULL, NULL);
+(19, 'Orange', NULL, NULL),
+(20, 'Black/Black Lizard', NULL, NULL),
+(21, 'Sand/Sand Croc', NULL, NULL),
+(22, 'Mineral/Mineral Stingray', NULL, NULL),
+(23, 'Mineral/Mineral Stingray', NULL, NULL),
+(24, 'Sand/Black', NULL, NULL),
+(25, 'Yellow Croc', NULL, NULL),
+(26, 'Black Crystal', NULL, NULL),
+(27, 'Sabbia', NULL, NULL),
+(28, 'Marrakech Orange', NULL, NULL),
+(29, 'Black Croc', NULL, NULL),
+(30, 'Sand Brown', NULL, NULL),
+(31, 'Marrakech Orange Croc', NULL, NULL),
+(32, 'Silver', NULL, NULL),
+(33, 'Black', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -666,14 +681,20 @@ CREATE TABLE IF NOT EXISTS `offer` (
   `lastExportedDate` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`offerId`),
   KEY `fk_offer_product1_idx` (`fkproductId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
 -- Dumping data for table `offer`
 --
 
 INSERT INTO `offer` (`offerId`, `fkproductId`, `disPrice`, `disStartPrice`, `disEndPrice`, `state`, `product-id-type`, `status`, `lastExportedBy`, `lastExportedDate`) VALUES
-(8, 13, '12.00', '2018-03-01', '2018-03-27', '11', 'SHOP_SKU', 'Downloaded', 2, '2018-03-09 10:03:03');
+(8, 13, '12.00', '2018-03-01', '2018-03-27', '11', 'SHOP_SKU', 'Downloaded', 2, '2018-03-09 10:03:03'),
+(9, 13, '24.60', '2018-03-17', '2018-03-31', '11', 'SHOP_SKU', 'Bulk Updated', 2, '2018-03-18 04:22:42'),
+(10, 13, '0.00', '2018-03-17', '2018-03-31', '11', 'SHOP_SKU', 'Bulk Updated', 2, '2018-03-18 19:56:10'),
+(11, 13, '109.47', '2018-03-17', '2018-03-31', '11', 'SHOP_SKU', 'Bulk Updated', 2, '2018-03-18 20:33:07'),
+(12, 13, '121.77', '2018-03-17', '2018-03-31', '11', 'SHOP_SKU', 'Bulk Updated', 2, '2018-03-18 20:34:28'),
+(13, 14, '45.00', '2018-03-30', '2018-04-02', '11', 'SHOP_SKU', 'Bulk Updated', 2, '2018-03-19 19:21:57'),
+(14, 13, '62.50', '2018-03-30', '2018-04-02', '11', 'SHOP_SKU', 'Bulk Updated', 2, '2018-03-19 19:21:57');
 
 -- --------------------------------------------------------
 
@@ -685,7 +706,7 @@ CREATE TABLE IF NOT EXISTS `product` (
   `productId` int(11) NOT NULL AUTO_INCREMENT,
   `status` varchar(45) DEFAULT NULL,
   `fkcategoryId` int(11) NOT NULL,
-  `style` varchar(20) DEFAULT NULL,
+  `style` varchar(100) DEFAULT NULL,
   `sku` varchar(25) DEFAULT NULL,
   `ean` varchar(20) DEFAULT NULL,
   `productName` varchar(75) DEFAULT NULL,
@@ -693,7 +714,7 @@ CREATE TABLE IF NOT EXISTS `product` (
   `brand` varchar(45) DEFAULT NULL,
   `color` varchar(25) DEFAULT NULL,
   `colorDesc` mediumtext,
-  `size` varchar(5) DEFAULT NULL,
+  `size` varchar(100) DEFAULT NULL,
   `sizeDescription` varchar(255) DEFAULT NULL,
   `swatchImage` mediumtext,
   `mainImage` mediumtext,
@@ -712,15 +733,30 @@ CREATE TABLE IF NOT EXISTS `product` (
   `LastExportedDate` datetime DEFAULT NULL,
   PRIMARY KEY (`productId`),
   KEY `fk_product_category1_idx` (`fkcategoryId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=32 ;
 
 --
 -- Dumping data for table `product`
 --
 
 INSERT INTO `product` (`productId`, `status`, `fkcategoryId`, `style`, `sku`, `ean`, `productName`, `productDesc`, `brand`, `color`, `colorDesc`, `size`, `sizeDescription`, `swatchImage`, `mainImage`, `outfit`, `image2`, `image3`, `image4`, `runtosize`, `care`, `price`, `costPrice`, `wholePrice`, `stockQty`, `minQtyAlert`, `LastExportedBy`, `LastExportedDate`) VALUES
-(13, 'Downloaded', 506, 'ABCD-123', 'ABCD-123-RDS', 'test ean', 'Bordeaux low-back satin gown', '<ul><li>Rosetta Getty Bordeaux wool blend satin gown</li><li>Draped low back with tied sash, partially lined</li><li><ul><li>Concealed zip fastening at back</li><li>43% wool, 34% acetate, 23% viscose; lining: 100% silk</li><li>Length shoulder to hem: 61 inches/ 154cm</li><li>Midweight</li><li>Slim fit</li></ul>', 'Rosetta Getty', '6', 'Bordeaux', 'S', '', 'http://techcloudltd.com/demo/baker-leather/public/productImage/13swatch.jpg', 'http://techcloudltd.com/demo/baker-leather/public/productImage/13main.jpg', 'http://techcloudltd.com/demo/baker-leather/public/productImage/13outfit.jpg', 'http://techcloudltd.com/demo/baker-leather/public/productImage/13image2.jpg', 'http://techcloudltd.com/demo/baker-leather/public/productImage/13image3.jpg', 'http://techcloudltd.com/demo/baker-leather/public/productImage/13image4.jpg', 'test Run to Size', 'test Care', 123, NULL, NULL, 100, 10, 2, '2018-03-09 10:02:53'),
-(14, 'Downloaded', 506, 'ABCD-123', 'ABCD-123-BLS', 'test ean', 'Cobalt low-back satin gown', '<ul><li>Rosetta Getty cobalt wool blend satin gown</li><li>Draped low back with tied sash, partially lined</li><li><ul><li>Concealed zip fastening at back</li><li>43% wool, 34% acetate, 23% viscose; lining: 100% silk</li><li>Length shoulder to hem: 61 inches/ 154cm</li><li>Midweight</li><li>Slim fit</li></ul>', 'Rosetta Getty', '6', 'Cobalt', 'S', '', 'http://techcloudltd.com/demo/baker-leather/public/productImage/14swatch.jpg', 'http://techcloudltd.com/demo/baker-leather/public/productImage/14main.jpg', 'http://techcloudltd.com/demo/baker-leather/public/productImage/14outfit.jpg', 'http://techcloudltd.com/demo/baker-leather/public/productImage/14image2.jpg', 'http://techcloudltd.com/demo/baker-leather/public/productImage/14image3.jpg', 'http://techcloudltd.com/demo/baker-leather/public/productImage/14image4.jpg', 'test Run to Size', 'test Care', 12, NULL, NULL, 123, 10, 2, '2018-03-09 05:05:18');
+(13, 'Downloaded', 506, 'ABCD-123', 'ABCD-123-RDS', 'test ean', 'Bordeaux low-back satin gown', '<ul><li>Rosetta Getty Bordeaux wool blend satin gown</li><li>Draped low back with tied sash, partially lined</li><li><ul><li>Concealed zip fastening at back</li><li>43% wool, 34% acetate, 23% viscose; lining: 100% silk</li><li>Length shoulder to hem: 61 inches/ 154cm</li><li>Midweight</li><li>Slim fit</li></ul>', 'Rosetta Getty', 'Yellow Croc', 'Bordeaux', 'S', NULL, 'http://techcloudltd.com/demo/baker-leather/public/productImage/13swatch.jpg', 'http://techcloudltd.com/demo/baker-leather/public/productImage/13main.jpg', 'http://techcloudltd.com/demo/baker-leather/public/productImage/13outfit.jpg', 'http://techcloudltd.com/demo/baker-leather/public/productImage/13image2.jpg', 'http://techcloudltd.com/demo/baker-leather/public/productImage/13image3.jpg', 'http://techcloudltd.com/demo/baker-leather/public/productImage/13image4.jpg', 'test Run to Size', 'test Care', 125, NULL, NULL, 100, 10, 2, '2018-03-19 23:20:22'),
+(14, 'Downloaded', 506, 'ABCD-123', 'ABCD-123-BLS', 'test ean', 'Cobalt low-back satin gown', '<ul><li>Rosetta Getty cobalt wool blend satin gown</li><li>Draped low back with tied sash, partially lined</li><li><ul><li>Concealed zip fastening at back</li><li>43% wool, 34% acetate, 23% viscose; lining: 100% silk</li><li>Length shoulder to hem: 61 inches/ 154cm</li><li>Midweight</li><li>Slim fit</li></ul>', 'Rosetta Getty', 'Yellow Croc', 'Cobalt', 'S', NULL, 'http://techcloudltd.com/demo/baker-leather/public/productImage/14swatch.jpg', 'http://techcloudltd.com/demo/baker-leather/public/productImage/14main.jpg', 'http://techcloudltd.com/demo/baker-leather/public/productImage/14outfit.jpg', 'http://techcloudltd.com/demo/baker-leather/public/productImage/14image2.jpg', 'http://techcloudltd.com/demo/baker-leather/public/productImage/14image3.jpg', 'http://techcloudltd.com/demo/baker-leather/public/productImage/14image4.jpg', 'test Run to Size', 'test Care', 90, NULL, NULL, 123, 10, 2, '2018-03-19 23:20:22'),
+(16, 'New', 507, 'The Cagney', 'BLK-6549', NULL, 'AMANDAW MP', 'With its unique hexagon shape, Amanda Wakeley presents the Cagney top handle bag. Perfect for the office to the party. Made from the finest soft touch leather with a contrast texture flap in an exotic print. Hand woven leather braiding details and bespoke polsihed hardware further elevate this beautiful bag. Lined with the signature Amanda Wakeley linen lining and with internal leather trims, the inside is as beautiful as the outside.', 'Mirakl', 'Black/Black Lizard\n', 'test', '(W42 x D14 XH22)16.6 X 5.5 X8.8 Handle drop 16cm/6.3 \n', NULL, NULL, 'http://techcloudltd.com/demo/baker-leather/public/productImage/16main.jpg', NULL, NULL, NULL, NULL, NULL, NULL, 50, NULL, NULL, 10, 4, NULL, NULL),
+(18, 'New', 507, 'The Baguette Redmayne', 'SAB-6551X', NULL, 'AMANDAW MP', 'The East West Redmayne has a chic proportion and fits neatly under the arm making it the perfect evening piece. Intricate hand woven leather braiding details and contrast textures celebrate the craftsmanship required to make this beautfiul bag. A polished chain strap and bespoke lock further elevate this gorgeous bag.', 'Miraki', 'Sabbia', 'test', '(W42', NULL, NULL, 'http://techcloudltd.com/demo/baker-leather/public/productImage/18main.jpg', NULL, NULL, NULL, NULL, NULL, NULL, 50, NULL, NULL, 10, 4, NULL, NULL),
+(19, 'New', 507, 'The Cagney', 'SND-6549X', NULL, 'AMANDAW MP', 'With its unique hexagon shape, Amanda Wakeley presents the Cagney top handle bag. Perfect for the office to the party. Made from the finest soft touch leather with a contrast texture flap in an exotic print. Hand woven leather braiding details and bespoke polsihed hardware further elevate this beautiful bag. Lined with the signature Amanda Wakeley linen lining and with internal leather trims, the inside is as beautiful as the outside.', 'Mirakl', 'Sand/Sand Croc', 'test', '(W42 x D14 XH22)16.6 X 5.5 X8.8 Handle drop 16cm/6.4\n', NULL, NULL, 'http://techcloudltd.com/demo/baker-leather/public/productImage/19main.jpg', NULL, NULL, NULL, NULL, NULL, NULL, 50, NULL, NULL, 10, 4, NULL, NULL),
+(20, 'New', 507, 'The Cagney', 'MIN-6549Y', NULL, 'AMANDAW MP', 'With its unique hexagon shape, Amanda Wakeley presents the Cagney top handle bag. Perfect for the office to the party. Made from the finest soft touch leather with a contrast texture flap in an exotic print. Hand woven leather braiding details and bespoke polsihed hardware further elevate this beautiful bag. Lined with the signature Amanda Wakeley linen lining and with internal leather trims, the inside is as beautiful as the outside.', 'Mirakl', 'Mineral/Mineral Stingray\n', 'test', '(W42 x D14 XH22)16.6 X 5.5 X8.8 Handle drop 16cm/6.6\n', NULL, NULL, 'http://techcloudltd.com/demo/baker-leather/public/productImage/20main.jpg', NULL, NULL, NULL, NULL, NULL, NULL, 50, NULL, NULL, 10, 4, NULL, NULL),
+(21, 'New', 508, 'The Redmayne', 'MIN-6550', NULL, 'AMANDAW MP', 'The Redmayne is the perfect day to evening bag with its chic shape and beautiful hardware. Intricate hand woven leather braiding details on the flap celebrate the craftsmanship required to make this beautfiul bag. A polished chain strap and bespoke lock further elevate this style.', 'Mirakl', 'Mineral/Mineral Stingray\n', 'tes', '(W24XD13XH17 Shoulder Strap min/max 25/46CM\n', NULL, NULL, 'http://techcloudltd.com/demo/baker-leather/public/productImage/21main.jpg', NULL, NULL, NULL, NULL, NULL, NULL, 50, NULL, NULL, 10, 4, NULL, NULL),
+(22, 'New', 508, 'The Redmayne', 'SND-6550X', NULL, 'AMANDAW MP', 'The Redmayne is the perfect day to evening bag with its chic shape and beautiful hardware. Intricate hand woven leather braiding details on the flap celebrate the craftsmanship required to make this beautfiul bag. A polished chain strap and bespoke lock further elevate this style.', 'Mirakl', 'Sand/Black', 'test', '(W24XD13XH17 Shoulder Strap min/max 25/46CM\n', NULL, NULL, 'http://techcloudltd.com/demo/baker-leather/public/productImage/22main.jpg', NULL, NULL, NULL, NULL, NULL, NULL, 50, NULL, NULL, 10, 4, NULL, NULL),
+(23, 'New', 508, 'The Baguette Redmayne', 'YLW-6551', NULL, 'AMANDAW MP', 'The East West Redmayne has a chic proportion and fits neatly under the arm making it the perfect evening piece. Intricate hand woven leather braiding details and contrast textures celebrate the craftsmanship required to make this beautfiul bag. A polished chain strap and bespoke lock further elevate this gorgeous bag.', 'Mirakl', 'Yellow Croc\n', 'test', '(W28XD0.7XH13.5 Shoulder Strap min/max 17/30CM\n', NULL, NULL, 'http://techcloudltd.com/demo/baker-leather/public/productImage/23main.jpg', NULL, NULL, NULL, NULL, NULL, NULL, 50, NULL, NULL, 10, 4, NULL, NULL),
+(24, 'New', 508, 'The Baguette Redmayne', 'BLK-6630', NULL, 'AMANDAW MP', 'The East West Redmayne has a chic proportion and fits neatly under the arm making it the perfect evening piece. Intricate hand woven leather braiding details and contrast textures celebrate the craftsmanship required to make this beautfiul bag. A polished chain strap and bespoke lock further elevate this gorgeous bag.', 'Mirakl', 'Black Crystal', 'test', '(W28XD0.7XH13.5 Shoulder Strap min/max 17/30CM\n', NULL, NULL, 'http://techcloudltd.com/demo/baker-leather/public/productImage/24main.jpg', NULL, NULL, NULL, NULL, NULL, NULL, 50, NULL, NULL, 10, 4, NULL, NULL),
+(25, 'New', 508, 'The Baguette Redmayne', 'SAB-6551X', NULL, 'AMANDAW MP', 'The East West Redmayne has a chic proportion and fits neatly under the arm making it the perfect evening piece. Intricate hand woven leather braiding details and contrast textures celebrate the craftsmanship required to make this beautfiul bag. A polished chain strap and bespoke lock further elevate this gorgeous bag.', 'Mirakl', 'Sabbia', 'test', '(W28XD0.7XH13.5 Shoulder Strap min/max 17/30CM\n', NULL, NULL, 'http://techcloudltd.com/demo/baker-leather/public/productImage/25main.jpg', NULL, NULL, NULL, NULL, NULL, NULL, 50, NULL, NULL, 10, 4, NULL, NULL),
+(26, 'New', 508, 'The Baguette Redmayne', 'ORG-6630X', NULL, 'AMANDAW MP', 'The East West Redmayne has a chic proportion and fits neatly under the arm making it the perfect evening piece. Intricate hand woven leather braiding details and contrast textures celebrate the craftsmanship required to make this beautfiul bag. A polished chain strap and bespoke lock further elevate this gorgeous bag.', 'Mirakl', 'Marrakech Orange', 'test', '(W28XD0.7XH13.5 Shoulder Strap min/max 17/30CM\n', NULL, NULL, 'http://techcloudltd.com/demo/baker-leather/public/productImage/26main.jpg', NULL, NULL, NULL, NULL, NULL, NULL, 50, NULL, NULL, 10, 4, NULL, NULL),
+(27, 'New', 508, 'The Sutherland', 'SND-5813BXZ', NULL, 'AMANDAW MP', 'The perfect tote bag to take you from work to evening, The Sutherland combines style with function. The Sutherland has a chic East-West poportion and is made using beautiful supple leather. Grab handles and a cross body strap add versatility and multiple internal pockets make it easy to stay organised. Lined with the signature Amanda Wakeley linen lining and with internal leather trims, the inside is as beautiful as the outside.', 'Mirakl', 'Sand Brown\n', 'test', '(W46XD12XH26)18.1 X4.7 X10.2 Strap drop 13cm/5.1 ,Shoulder strap drop 52cm/20.2\n', NULL, NULL, 'http://techcloudltd.com/demo/baker-leather/public/productImage/27main.jpg', NULL, NULL, NULL, NULL, NULL, NULL, 50, NULL, NULL, 10, 4, NULL, NULL),
+(28, 'New', 508, 'The Sutherland', 'ORG-5813BXY', NULL, 'AMANDAW MP', 'The perfect tote bag to take you from work to evening, The Sutherland combines style with function. The Sutherland has a chic East-West poportion and is made using beautiful supple leather. Grab handles and a cross body strap add versatility and multiple internal pockets make it easy to stay organised. Lined with the signature Amanda Wakeley linen lining and with internal leather trims, the inside is as beautiful as the outside.', 'Mirakl', 'Marrakech Orange Croc', 'test', '(W46XD12XH26)18.1 X4.7 X10.2 Strap drop 13cm/5.1 ,Shoulder strap drop 52cm/20.2\n', NULL, NULL, 'http://techcloudltd.com/demo/baker-leather/public/productImage/28main.jpg', NULL, NULL, NULL, NULL, NULL, NULL, 50, NULL, NULL, 10, 4, NULL, NULL),
+(29, 'New', 508, 'The Johansson', 'SND-6543', NULL, 'AMANDAW MP', 'The staple summer tote, The Johansson is a clasic style elevated with beautifully crafted hand woven leather braiding details and contrast suede sides. Bespoke polished hardware and the Amanda Wakeley signature linen lining are more gorgeous details. The Johannson also comes with a detachable and reversible guitar strap', 'Mirakl', 'Sand Brown\n', 'test', '(W46xD12xH27) Handle Drop 16cm Shoulder strap drop 40cm\n', NULL, NULL, 'http://techcloudltd.com/demo/baker-leather/public/productImage/29main.jpg', NULL, NULL, NULL, NULL, NULL, NULL, 50, NULL, NULL, 10, 4, NULL, NULL),
+(30, 'New', 508, 'The Johansson', 'SIL-6543X', NULL, 'AMANDAW MP', 'The staple summer tote, The Johansson is a clasic style elevated with beautifully crafted hand woven leather braiding details and contrast suede sides. Bespoke polished hardware and the Amanda Wakeley signature linen lining are more gorgeous details. The Johannson also comes with a detachable and reversible guitar strap', 'Mirakl', 'Silver\n', 'test', '(W46xD12xH27) Handle Drop 16cm Shoulder strap drop 40cm\n', NULL, NULL, 'http://techcloudltd.com/demo/baker-leather/public/productImage/30main.jpg', NULL, NULL, NULL, NULL, NULL, NULL, 50, NULL, NULL, 10, 4, NULL, NULL),
+(31, 'New', 508, 'The Johansson', 'BLK-6543\n', NULL, 'AMANDAW MP', 'The staple summer tote, The Johansson is a clasic style elevated with beautifully crafted hand woven leather braiding details and contrast suede sides. Bespoke polished hardware and the Amanda Wakeley signature linen lining are more gorgeous details. The Johannson also comes with a detachable and reversible guitar strap', 'Mirakl', 'Black', 'test', '(W46xD12xH27) Handle Drop 16cm Shoulder strap drop 40cm\n', NULL, NULL, 'http://techcloudltd.com/demo/baker-leather/public/productImage/31main.jpg', NULL, NULL, NULL, NULL, NULL, NULL, 50, NULL, NULL, 10, 4, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -766,7 +802,7 @@ CREATE TABLE IF NOT EXISTS `season` (
 --
 
 INSERT INTO `season` (`seasonId`, `seasonName`, `startDate`, `endDate`, `status`, `created_at`) VALUES
-(1, 'Summer', '2018-03-17', '2018-03-31', 1, '2018-03-17 10:48:31');
+(1, 'Easter18', '2018-03-30', '2018-04-02', 1, '2018-03-17 10:48:31');
 
 -- --------------------------------------------------------
 
@@ -776,11 +812,11 @@ INSERT INTO `season` (`seasonId`, `seasonName`, `startDate`, `endDate`, `status`
 
 CREATE TABLE IF NOT EXISTS `size` (
   `sizeId` int(11) NOT NULL AUTO_INCREMENT,
-  `sizeName` varchar(45) DEFAULT NULL,
-  `sizeDescription` varchar(45) DEFAULT NULL,
-  `sizeType` varchar(50) DEFAULT NULL,
+  `sizeName` varchar(255) DEFAULT NULL,
+  `sizeDescription` varchar(255) DEFAULT NULL,
+  `sizeType` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`sizeId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=975 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=982 ;
 
 --
 -- Dumping data for table `size`
@@ -1644,49 +1680,12 @@ INSERT INTO `size` (`sizeId`, `sizeName`, `sizeDescription`, `sizeType`) VALUES
 (861, 'XXL', '', 'Babywear accessories'),
 (862, 'XXXL', '', 'Babywear accessories'),
 (863, 'ONE', '', 'Babywear accessories'),
-(932, '', '', ''),
-(933, '', '', ''),
-(934, '', '', ''),
-(935, '', '', ''),
-(936, '', '', ''),
-(937, '', '', ''),
-(938, '', '', ''),
-(939, '', '', ''),
-(940, '', '', ''),
-(941, '', '', ''),
-(942, '', '', ''),
-(943, '', '', ''),
-(944, '', '', ''),
-(945, '', '', ''),
-(946, '', '', ''),
-(947, '', '', ''),
-(948, '', '', ''),
-(949, '', '', ''),
-(950, '', '', ''),
-(951, '', '', ''),
-(952, '', '', ''),
-(953, '', '', ''),
-(954, '', '', ''),
-(955, '', '', ''),
-(956, '', '', ''),
-(957, '', '', ''),
-(958, '', '', ''),
-(959, '', '', ''),
-(960, '', '', ''),
-(961, '', '', ''),
-(962, '', '', ''),
-(963, '', '', ''),
-(964, '', '', ''),
-(965, '', '', ''),
-(966, '', '', ''),
-(967, '', '', ''),
-(968, '', '', ''),
-(969, '', '', ''),
-(970, '', '', ''),
-(971, '', '', ''),
-(972, '', '', ''),
-(973, '', '', ''),
-(974, '', '', '');
+(975, '(W42 x D14 XH22)16.6 X 5.5 X8.8 Handle drop 16cm/6.3 \r\n', NULL, 'WW Accessories Mirakl / Bags / Tote Bags'),
+(977, '(W42 x D14 XH22)16.6 X 5.5 X8.8 Handle drop 16cm/6.4', NULL, 'WW Accessories Mirakl / Bags / Tote Bags'),
+(978, '(W24XD13XH17 Shoulder Strap min/max 25/46CM', NULL, 'WW Accessories Mirakl / Bags / Tote Bags'),
+(979, '(W28XD0.7XH13.5 Shoulder Strap min/max 17/30CM', NULL, 'WW Accessories Mirakl / Bags / Tote Bags'),
+(980, '(W46XD12XH26)18.1 X4.7 X10.2 Strap drop 13cm/5.1 ,Shoulder strap drop 52cm/20.2', NULL, 'WW Accessories Mirakl / Bags / Tote Bags'),
+(981, '(W46xD12xH27) Handle Drop 16cm Shoulder strap drop 40cm', NULL, 'WW Accessories Mirakl / Bags / Tote Bags');
 
 -- --------------------------------------------------------
 
@@ -1712,7 +1711,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`userId`, `name`, `phone`, `address`, `email`, `password`, `status`, `userType`, `remember_token`) VALUES
-(2, 'Admin', NULL, NULL, 'admin@gmail.com', '$2y$10$6uyV1sPMpuqEQR4iFbdFp.HsIxfquF67nk3zdJlYma8U1Mw6ZZ9E6', NULL, NULL, 'FvflWCGxoUd8ISIXGrEcZmh7hvR4zO5uahFJYfNmpGIt1bVER8vOTk29idEN');
+(2, 'Admin', NULL, NULL, 'admin@gmail.com', '$2y$10$6uyV1sPMpuqEQR4iFbdFp.HsIxfquF67nk3zdJlYma8U1Mw6ZZ9E6', NULL, NULL, 'DqDQmpnviPsukecXQOm3QDkaeO3MmKPkpcFwqdSTFXSLJuqnYRXDDYemK33P');
 
 --
 -- Constraints for dumped tables
