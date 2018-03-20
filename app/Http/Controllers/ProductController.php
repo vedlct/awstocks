@@ -468,21 +468,21 @@ class ProductController extends Controller
                 ->where('productId',$productId)
                 ->update($data);
         }
-        $fileName="ProductList-".date_timestamp_get(now()).".csv";
-        $filePath=public_path ()."/csv"."/".$fileName;
-
-        $fileInfo=array(
-            'fileName'=>$fileName,
-            'filePath'=>$filePath,
-            'alllist'=>$list
-        );
+//        $fileName="ProductList-".date_timestamp_get(now()).".csv";
+//        $filePath=public_path ()."/csv"."/".$fileName;
+//
+//        $fileInfo=array(
+//            'fileName'=>$fileName,
+//            'filePath'=>$filePath,
+//            'alllist'=>$list
+//        );
 
 
        // $filePath=public_path ()."/csv/ProductList.csv";
 
         # add headers for each column in the CSV download
 
-        array_unshift($list, array_keys($list[0]));
+       // array_unshift($list, array_keys($list[0]));
         
        // return $r;
 
@@ -511,22 +511,35 @@ class ProductController extends Controller
 //         return Response::stream($callback, 200, $headers); //use Illuminate\Support\Facades\Response;
 
 
-        $response = new StreamedResponse();
+//        $response = new StreamedResponse();
+//
+//        $response->setCallback(function () use ($list,$filePath){
+//
+//            $FH = fopen($filePath, "w");
+//            foreach ($list as $row) {
+//                fputcsv($FH, $row);
+//            }
+//            fclose($FH);
+//        });
+//
+//        $response->send();
 
-        $response->setCallback(function () use ($list,$filePath){
+        $filePath=public_path ()."/csv";
+        $fileName="ProductList-".date_timestamp_get(now());
+        $fileInfo=array(
+            'fileName'=>$fileName,
+            'filePath'=>$filePath,
+        );
 
-            $FH = fopen($filePath, "w");
-            foreach ($list as $row) {
-                fputcsv($FH, $row);
-            }
-            fclose($FH);
-        });
+        Excel::create($fileName,function($excel) use($list,$filePath) {
+            $excel->sheet('First sheet', function($sheet) use($list) {
+                $sheet->loadView('product.serverCSVProductList')->with('productList',$list);
+            });
 
-        $response->send();
+        })->store('csv',$filePath);
 
         return $fileInfo;
-
-
+        
 
     }
 
