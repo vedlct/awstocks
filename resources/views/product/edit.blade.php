@@ -83,7 +83,7 @@
                                     <option value="">Select One</option>
                                     @foreach($sColors as $color)
                                         <option value="{{$color->colorName}}"
-                                                @if($color->color == $product->colorName)
+                                                @if($color->colorName == $product->color)
                                                 selected
                                                 @endif
                                         >{{$color->colorName}}</option>
@@ -280,7 +280,7 @@
                                     </span>
                                 @endif
                                 <img   @if($product->mainImage)
-                                       src="{{url('public/productImage')."/".basename($product->mainImage)}}"
+                                       src="{{url('public/productImage/thumb')."/".basename($product->mainImage)}}"
                                        @endif
                                        height="50px" width="50px" id="imgMainPic">
                             </div>
@@ -298,7 +298,7 @@
                                     </span>
                                 @endif
                                 <img @if($product->swatchImage)
-                                        src="{{$product->swatchImage}}"
+                                        src="{{url('public/productImage/thumb')."/".basename($product->swatchImage)}}"
                                      @endif
                                      height="50px" width="50px" id="imgSwatchPic">
                             </div>
@@ -316,7 +316,7 @@
                                 @endif
                                 <img
                                         @if($product->outfit)
-                                        src="{{$product->outfit}}"
+                                        src="{{url('public/productImage/thumb')."/".basename($product->outfit)}}"
                                         @endif
                                         height="50px" width="50px" id="imgOutfitPic">
                             </div>
@@ -336,7 +336,7 @@
                                     </span>
                                 @endif
                                 <img  @if($product->image2)
-                                        src="{{$product->image2}}"
+                                        src="{{url('public/productImage/thumb')."/".basename($product->image2)}}"
                                       @endif
                                       height="50px" width="50px" id="imgImage2Pic">
                             </div>
@@ -355,7 +355,7 @@
                                 @endif
                                 <img height="50px" width="50px" id="imgImage3Pic"
                                      @if($product->image3)
-                                     src="{{$product->image3}}"
+                                     src="{{url('public/productImage/thumb')."/".basename($product->image3)}}"
                                         @endif
                                 >
                             </div>
@@ -374,7 +374,7 @@
                                 @endif
                                 <img height="50px" width="50px" id="imgImage4Pic"
                                      @if($product->image4)
-                                     src="{{$product->image4}}"
+                                     src="{{url('public/productImage/thumb')."/".basename($product->image4)}}"
                                         @endif
                                 >
                             </div>

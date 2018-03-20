@@ -80,16 +80,9 @@ class ProductController extends Controller
 
     public function edit($id){
 
-//        $categories=Category::get();
-//        $sColors=Color::where('colorType','standard')
-//            ->get();
-//        $sizeTypes=Size::groupBy('sizeType')
-//            ->get();
-//        $runToSizes=RunToSize::get();
-//        $cares=Care::get();
 
         $categories=Category::select('categoryId','categoryName')->orderBy('categoryName','ASC')->get();
-        $sColors=Color::select('colorId','colorName')->where('colorType','standard')->orderBy('colorName','ASC')->get();
+        $sColors=Color::select('colorId','colorName')->orderBy('colorName','ASC')->get();
         $sizeTypes=Size::select('sizeId','sizeName','sizeType')->orderBy('sizeType','ASC')->groupBy('sizeType')->get();
         $runToSizes=RunToSize::select('runToSizeId','runToSizeName')->orderBy('runToSizeName','ASC')->get();
         $cares=Care::select('careId','careName')->orderBy('careName','ASC')->get();
@@ -132,7 +125,7 @@ class ProductController extends Controller
             'style' => 'required|max:15',
             'sku'=>'required|max:20',
             'brand'=>'required|max:45',
-            'size'=>'max:45',
+            'size'=>'max:255',
             'sizeDescription'=>'max:45',
             'runToSize'=>'max:45',
             'color'=>'required|max:45',
@@ -181,8 +174,9 @@ class ProductController extends Controller
             $filename= $product->productId.'swatch'.'.'.$img->getClientOriginalExtension();
             $product->swatchImage=url("public/productImage")."/".$filename;
             $location = public_path('productImage/'.$filename);
-//            Image::make($img)->resize(800,600)->save($location);
             Image::make($img)->save($location);
+            $location2 = public_path('productImage/thumb/'.$filename);
+            Image::make($img)->fit(200)->save($location2);
         }
         if($r->hasFile('outfitPic')){
             $img = $r->file('outfitPic');
@@ -190,6 +184,8 @@ class ProductController extends Controller
             $product->outfit=url("public/productImage")."/".$filename;
             $location = public_path('productImage/'.$filename);
             Image::make($img)->save($location);
+            $location2 = public_path('productImage/thumb/'.$filename);
+            Image::make($img)->fit(200)->save($location2);
         }
         if($r->hasFile('mainPic')){
             $img = $r->file('mainPic');
@@ -197,6 +193,8 @@ class ProductController extends Controller
             $product->mainImage=url("public/productImage")."/".$filename;
             $location = public_path('productImage/'.$filename);
             Image::make($img)->save($location);
+            $location2 = public_path('productImage/thumb/'.$filename);
+            Image::make($img)->fit(200)->save($location2);
         }
         if($r->hasFile('image2Pic')){
             $img = $r->file('image2Pic');
@@ -204,6 +202,8 @@ class ProductController extends Controller
             $product->image2=url("public/productImage")."/".$filename;
             $location = public_path('productImage/'.$filename);
             Image::make($img)->save($location);
+            $location2 = public_path('productImage/thumb/'.$filename);
+            Image::make($img)->fit(200)->save($location2);
         }
         if($r->hasFile('image3Pic')){
             $img = $r->file('image3Pic');
@@ -211,6 +211,8 @@ class ProductController extends Controller
             $product->image3=url("public/productImage")."/".$filename;
             $location = public_path('productImage/'.$filename);
             Image::make($img)->save($location);
+            $location2 = public_path('productImage/thumb/'.$filename);
+            Image::make($img)->fit(200)->save($location2);
         }
         if($r->hasFile('image4Pic')){
             $img = $r->file('image4Pic');
@@ -218,6 +220,8 @@ class ProductController extends Controller
             $product->image4=url("public/productImage")."/".$filename;
             $location = public_path('productImage/'.$filename);
             Image::make($img)->save($location);
+            $location2 = public_path('productImage/thumb/'.$filename);
+            Image::make($img)->fit(200)->save($location2);
         }
         $product->save();
         Session::flash('message', 'Product Updated  successfully');
@@ -274,7 +278,7 @@ class ProductController extends Controller
             'style' => 'required|max:15',
             'sku'=>'required|max:20',
             'brand'=>'required|max:45',
-            'size'=>'max:45',
+            'size'=>'max:255',
             'sizeDescription'=>'max:45',
             'runToSize'=>'max:45',
             'color'=>'required|max:45',
@@ -324,6 +328,8 @@ class ProductController extends Controller
             $product->swatchImage=url("public/productImage")."/".$filename;
             $location = public_path('productImage/'.$filename);
             Image::make($img)->save($location);
+            $location2 = public_path('productImage/thumb/'.$filename);
+            Image::make($img)->fit(200)->save($location2);
         }
         if($r->hasFile('outfitPic')){
             $img = $r->file('outfitPic');
@@ -331,6 +337,8 @@ class ProductController extends Controller
             $product->outfit=url("public/productImage")."/".$filename;
             $location = public_path('productImage/'.$filename);
             Image::make($img)->save($location);
+            $location2 = public_path('productImage/thumb/'.$filename);
+            Image::make($img)->fit(200)->save($location2);
         }
         if($r->hasFile('mainPic')){
             $img = $r->file('mainPic');
@@ -338,6 +346,8 @@ class ProductController extends Controller
             $product->mainImage=url("public/productImage")."/".$filename;
             $location = public_path('productImage/'.$filename);
             Image::make($img)->save($location);
+            $location2 = public_path('productImage/thumb/'.$filename);
+            Image::make($img)->fit(200)->save($location2);
         }
         if($r->hasFile('image2Pic')){
             $img = $r->file('image2Pic');
@@ -345,6 +355,8 @@ class ProductController extends Controller
             $product->image2=url("public/productImage")."/".$filename;
             $location = public_path('productImage/'.$filename);
             Image::make($img)->save($location);
+            $location2 = public_path('productImage/thumb/'.$filename);
+            Image::make($img)->fit(200)->save($location2);
         }
         if($r->hasFile('image3Pic')){
             $img = $r->file('image3Pic');
@@ -352,6 +364,8 @@ class ProductController extends Controller
             $product->image3=url("public/productImage")."/".$filename;
             $location = public_path('productImage/'.$filename);
             Image::make($img)->save($location);
+            $location2 = public_path('productImage/thumb/'.$filename);
+            Image::make($img)->fit(200)->save($location2);
         }
         if($r->hasFile('image4Pic')){
             $img = $r->file('image4Pic');
@@ -359,6 +373,8 @@ class ProductController extends Controller
             $product->image4=url("public/productImage")."/".$filename;
             $location = public_path('productImage/'.$filename);
             Image::make($img)->save($location);
+            $location2 = public_path('productImage/thumb/'.$filename);
+            Image::make($img)->fit(200)->save($location2);
         }
         $product->save();
         Session::flash('message', 'Product Uploaded successfully');
@@ -425,21 +441,21 @@ class ProductController extends Controller
                 ->where('productId',$productId)
                 ->update($data);
         }
-        $fileName="ProductList-".date_timestamp_get(now()).".csv";
-        $filePath=public_path ()."/csv"."/".$fileName;
-
-        $fileInfo=array(
-            'fileName'=>$fileName,
-            'filePath'=>$filePath,
-            'alllist'=>$list
-        );
+//        $fileName="ProductList-".date_timestamp_get(now()).".csv";
+//        $filePath=public_path ()."/csv"."/".$fileName;
+//
+//        $fileInfo=array(
+//            'fileName'=>$fileName,
+//            'filePath'=>$filePath,
+//            'alllist'=>$list
+//        );
 
 
        // $filePath=public_path ()."/csv/ProductList.csv";
 
         # add headers for each column in the CSV download
 
-        array_unshift($list, array_keys($list[0]));
+       // array_unshift($list, array_keys($list[0]));
         
        // return $r;
 
@@ -468,22 +484,35 @@ class ProductController extends Controller
 //         return Response::stream($callback, 200, $headers); //use Illuminate\Support\Facades\Response;
 
 
-        $response = new StreamedResponse();
+//        $response = new StreamedResponse();
+//
+//        $response->setCallback(function () use ($list,$filePath){
+//
+//            $FH = fopen($filePath, "w");
+//            foreach ($list as $row) {
+//                fputcsv($FH, $row);
+//            }
+//            fclose($FH);
+//        });
+//
+//        $response->send();
 
-        $response->setCallback(function () use ($list,$filePath){
+        $filePath=public_path ()."/csv";
+        $fileName="ProductList-".date_timestamp_get(now());
+        $fileInfo=array(
+            'fileName'=>$fileName,
+            'filePath'=>$filePath,
+        );
 
-            $FH = fopen($filePath, "w");
-            foreach ($list as $row) {
-                fputcsv($FH, $row);
-            }
-            fclose($FH);
-        });
+        Excel::create($fileName,function($excel) use($list,$filePath) {
+            $excel->sheet('First sheet', function($sheet) use($list) {
+                $sheet->loadView('product.serverCSVProductList')->with('productList',$list);
+            });
 
-        $response->send();
+        })->store('csv',$filePath);
 
         return $fileInfo;
-
-
+        
 
     }
 
@@ -529,10 +558,8 @@ class ProductController extends Controller
     {
         $productList=$r->products;
 
-
         $filePath=public_path ()."/excel";
         $fileName="productList";
-
         $fileInfo=array(
             'fileName'=>$fileName,
             'filePath'=>$fileName,
@@ -551,9 +578,7 @@ class ProductController extends Controller
 
 
         Excel::create($fileName,function($excel) use($list,$filePath) {
-
             $excel->sheet('First sheet', function($sheet) use($list) {
-
                 $sheet->loadView('product.localDownloadProductList')->with('productList',$list);
             });
 

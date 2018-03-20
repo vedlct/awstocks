@@ -227,8 +227,8 @@
                     success: function (data) {
 
                         var link = document.createElement("a");
-                        link.download = data.fileName;
-                        var uri = '{{url("public/csv")}}'+"/"+data.fileName;
+                        link.download = data.fileName+".csv";
+                        var uri = '{{url("public/csv")}}'+"/"+data.fileName+".csv";
                         link.href = uri;
                         document.body.appendChild(link);
                         link.click();

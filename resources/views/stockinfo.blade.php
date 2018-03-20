@@ -71,7 +71,8 @@
                     { data: 'stockQty', name: 'stockQty' },
                     { data: 'minQtyAlert', name: 'minQtyAlert' },
                     { "data": function(data){
-                        return '<img width="100" height="80" src="'+data.mainImage+'">';},
+                        return'<img width="100" height="80" src="{{url('public/productImage/thumb')."/"}}'+data.mainImage+'">';
+                },
                         "orderable": false, "searchable":false, "name":"image" },
                     { "data": function(data){
                         return '<a style="cursor: pointer; color: #4881ecfa" data-panel-id="'+data.productId+'"onclick="editProduct(this)">view details</a>';},
