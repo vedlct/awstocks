@@ -41,7 +41,8 @@ define('SizeCategory',
         "Boyswear accessories",
         "Babywear clothing",
         "Babywear shoes",
-        "Babywear accessories"
+        "Babywear accessories",
+        "WW Accessories Mirakl / Bags / Shoulder Bags"
         )
 );
 

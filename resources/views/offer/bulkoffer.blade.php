@@ -68,7 +68,7 @@
 
         </div>
         <div class="col-md-4 ">
-            <label class="form-control-label">Discount Price</label> <br>
+            <label class="form-control-label">Discount Price(£) %</label> <br>
             <input class="form-control" type="number" id="disprice" name="disprice">
 
         </div>
