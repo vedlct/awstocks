@@ -37,7 +37,7 @@
                      <div class="form-group row">
                         <label class="col-sm-2 form-control-label">Product Name<span style="color: red" class="required">*</span></label>
                         <div class="col-sm-10">
-                            <input  maxlength="70" placeholder="70 characters maximum" id="inputHorizontalSuccess" type="text" value="{{ old('productName') }}" name="productName"  class="form-control form-control-success" required>
+                            <input   placeholder="255 characters maximum" id="inputHorizontalSuccess" type="text" value="{{ old('productName') }}" name="productName"  class="form-control form-control-success" required>
 
                             @if ($errors->has('productName'))
                                 <span class="help-block">
@@ -51,7 +51,7 @@
                     <div class="form-group row">
                         <label class="col-sm-2 form-control-label">Brand Name<span style="color: red" class="required">*</span></label>
                         <div class="col-sm-10">
-                            <input id="inputHorizontalWarning" type="text" value="{{ old('brand') }}" name="brand" maxlength="45" placeholder="45 characters maximum" class="form-control form-control-warning" required>
+                            <input id="inputHorizontalWarning" type="text" value="{{ old('brand') }}" name="brand" placeholder="255 characters maximum" class="form-control form-control-warning" required>
                             @if ($errors->has('brand'))
                                 <span class="help-block">
                                         <strong>{{ $errors->first('brand') }}</strong>
@@ -62,7 +62,7 @@
                     <div class="form-group row">
                         <label class="col-sm-2 form-control-label">SKU<span style="color: red" class="required">*</span></label>
                         <div class="col-sm-10">
-                            <input id="sku" type="text" value="{{ old('sku') }}" name="sku" maxlength="20" placeholder="20 characters maximum"  class="form-control form-control-warning" required>
+                            <input id="sku" type="text" value="{{ old('sku') }}" name="sku"  placeholder="20 characters maximum"  class="form-control form-control-warning" required>
 
                             @if ($errors->has('sku'))
                                 <span class="help-block">
@@ -89,7 +89,7 @@
                     <div class="form-group row">
                         <label class="col-sm-2 form-control-label">Color Description<span style="color: red" class="required">*</span></label>
                         <div class="col-sm-10">
-                            <input id="inputHorizontalWarning" type="text" maxlength="20" placeholder="20 characters maximum"value="{{ old('colorDesc') }}" name="colorDesc"  class="form-control form-control-warning" required>
+                            <input id="inputHorizontalWarning" type="text"  placeholder="255 characters maximum" value="{{ old('colorDesc') }}" name="colorDesc"  class="form-control form-control-warning" required>
                             @if ($errors->has('colorDesc'))
                                 <span class="help-block">
                                         <strong>{{ $errors->first('colorDesc') }}</strong>
@@ -103,7 +103,7 @@
                     <div class="form-group row">
                         <label class="col-sm-2 form-control-label">Style<span style="color: red" class="required">*</span></label>
                         <div class="col-sm-10">
-                            <input id="style" value="{{ old('style') }}" name="style"  maxlength="15" placeholder="15 characters maximum"type="text"  class="form-control form-control-success" required>
+                            <input id="style" value="{{ old('style') }}" name="style"   placeholder="100 characters maximum" type="text"  class="form-control form-control-success" required>
 
 							@if ($errors->has('style'))
                                 <span class="help-block">
@@ -184,7 +184,7 @@
                     <div class="form-group row">
                         <label class="col-sm-2 form-control-label">EAN</label>
                         <div class="col-sm-10">
-                            <input id="inputHorizontalSuccess" value="{{ old('ean') }}" name="ean"  maxlength="13" placeholder="13 characters maximum"type="text"  class="form-control form-control-success">
+                            <input id="inputHorizontalSuccess" value="{{ old('ean') }}" name="ean"   placeholder="100 characters maximum" type="text"  class="form-control form-control-success">
 
 							@if ($errors->has('ean'))
                                 <span class="help-block">
