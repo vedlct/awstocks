@@ -174,7 +174,7 @@ class ProductController extends Controller
         if($r->hasFile('swatchPic')){
             $img = $r->file('swatchPic');
             $filename= $product->productId.'swatch'.'.'.$img->getClientOriginalExtension();
-            $product->swatchImage=url("public/productImage")."/".$filename;
+            $product->swatchImage=$filename;
             $location = public_path('productImage/'.$filename);
             Image::make($img)->save($location);
             $location2 = public_path('productImage/thumb/'.$filename);
@@ -185,7 +185,7 @@ class ProductController extends Controller
         if($r->hasFile('outfitPic')){
             $img = $r->file('outfitPic');
             $filename= $product->productId.'outfit'.'.'.$img->getClientOriginalExtension();
-            $product->outfit=url("public/productImage")."/".$filename;
+            $product->outfit=$filename;
             $location = public_path('productImage/'.$filename);
             Image::make($img)->save($location);
             $location2 = public_path('productImage/thumb/'.$filename);
@@ -196,7 +196,7 @@ class ProductController extends Controller
         if($r->hasFile('mainPic')){
             $img = $r->file('mainPic');
             $filename= $product->productId.'main'.'.'.$img->getClientOriginalExtension();
-            $product->mainImage=url("public/productImage")."/".$filename;
+            $product->mainImage=$filename;
             $location = public_path('productImage/'.$filename);
             Image::make($img)->save($location);
             $location2 = public_path('productImage/thumb/'.$filename);
@@ -207,7 +207,7 @@ class ProductController extends Controller
         if($r->hasFile('image2Pic')){
             $img = $r->file('image2Pic');
             $filename= $product->productId.'image2'.'.'.$img->getClientOriginalExtension();
-            $product->image2=url("public/productImage")."/".$filename;
+            $product->image2=$filename;
             $location = public_path('productImage/'.$filename);
             Image::make($img)->save($location);
             $location2 = public_path('productImage/thumb/'.$filename);
@@ -218,7 +218,7 @@ class ProductController extends Controller
         if($r->hasFile('image3Pic')){
             $img = $r->file('image3Pic');
             $filename= $product->productId.'image3'.'.'.$img->getClientOriginalExtension();
-            $product->image3=url("public/productImage")."/".$filename;
+            $product->image3=$filename;
             $location = public_path('productImage/'.$filename);
             Image::make($img)->save($location);
             $location2 = public_path('productImage/thumb/'.$filename);
@@ -229,7 +229,7 @@ class ProductController extends Controller
         if($r->hasFile('image4Pic')){
             $img = $r->file('image4Pic');
             $filename= $product->productId.'image4'.'.'.$img->getClientOriginalExtension();
-            $product->image4=url("public/productImage")."/".$filename;
+            $product->image4=$filename;
             $location = public_path('productImage/'.$filename);
             Image::make($img)->save($location);
             $location2 = public_path('productImage/thumb/'.$filename);
@@ -339,7 +339,7 @@ class ProductController extends Controller
         if($r->hasFile('swatchPic')){
             $img = $r->file('swatchPic');
             $filename= $product->productId.'swatch'.'.'.$img->getClientOriginalExtension();
-            $product->swatchImage=url("public/productImage")."/".$filename;
+            $product->swatchImage=$filename;
             $location = public_path('productImage/'.$filename);
             Image::make($img)->save($location);
             $location2 = public_path('productImage/thumb/'.$filename);
@@ -350,7 +350,7 @@ class ProductController extends Controller
         if($r->hasFile('outfitPic')){
             $img = $r->file('outfitPic');
             $filename= $product->productId.'outfit'.'.'.$img->getClientOriginalExtension();
-            $product->outfit=url("public/productImage")."/".$filename;
+            $product->outfit=$filename;
             $location = public_path('productImage/'.$filename);
             Image::make($img)->save($location);
             $location2 = public_path('productImage/thumb/'.$filename);
@@ -361,7 +361,7 @@ class ProductController extends Controller
         if($r->hasFile('mainPic')){
             $img = $r->file('mainPic');
             $filename= $product->productId.'main'.'.'.$img->getClientOriginalExtension();
-            $product->mainImage=url("public/productImage")."/".$filename;
+            $product->mainImage=$filename;
             $location = public_path('productImage/'.$filename);
             Image::make($img)->save($location);
             $location2 = public_path('productImage/thumb/'.$filename);
@@ -373,7 +373,7 @@ class ProductController extends Controller
         if($r->hasFile('image2Pic')){
             $img = $r->file('image2Pic');
             $filename= $product->productId.'image2'.'.'.$img->getClientOriginalExtension();
-            $product->image2=url("public/productImage")."/".$filename;
+            $product->image2=$filename;
             $location = public_path('productImage/'.$filename);
             Image::make($img)->save($location);
             $location2 = public_path('productImage/thumb/'.$filename);
@@ -384,7 +384,7 @@ class ProductController extends Controller
         if($r->hasFile('image3Pic')){
             $img = $r->file('image3Pic');
             $filename= $product->productId.'image3'.'.'.$img->getClientOriginalExtension();
-            $product->image3=url("public/productImage")."/".$filename;
+            $product->image3=$filename;
             $location = public_path('productImage/'.$filename);
             Image::make($img)->save($location);
             $location2 = public_path('productImage/thumb/'.$filename);
@@ -395,7 +395,7 @@ class ProductController extends Controller
         if($r->hasFile('image4Pic')){
             $img = $r->file('image4Pic');
             $filename= $product->productId.'image4'.'.'.$img->getClientOriginalExtension();
-            $product->image4=url("public/productImage")."/".$filename;
+            $product->image4=$filename;
             $location = public_path('productImage/'.$filename);
             Image::make($img)->save($location);
             $location2 = public_path('productImage/thumb/'.$filename);
