@@ -46,32 +46,32 @@
         <td>{{$list['sizeDescription']}}</td>
         @if(!empty($list['mainImage']))
 
-        <td><img src="{{public_path('productImage/').basename($list['mainImage'])}}" width="100px" height="100px"></td>
+        <td><img src="{{public_path('productImage/thumb')."/".basename($list['mainImage'])}}" width="100px" height="100px"></td>
             @else
             <td></td>
         @endif
         @if(!empty($list['swatchImage']))
-        <td><img src="{{public_path('productImage/').basename($list['swatchImage'])}}"width="100px" height="100px"></td>
+        <td><img src="{{public_path('productImage/thumb')."/".basename($list['swatchImage'])}}"width="100px" height="100px"></td>
         @else
             <td></td>
         @endif
             @if(!empty($list['outfit']))
-        <td><img src="{{public_path('productImage/').basename($list['outfit'])}}"width="100px" height="100px"></td>
+        <td><img src="{{public_path('productImage/thumb')."/".basename($list['outfit'])}}"width="100px" height="100px"></td>
         @else
             <td></td>
         @endif
                 @if(!empty($list['image2']))
-        <td><img src="{{public_path('productImage/').basename($list['image2'])}}"width="100px" height="100px"></td>
+        <td><img src="{{public_path('productImage/thumb')."/".basename($list['image2'])}}"width="100px" height="100px"></td>
         @else
             <td></td>
         @endif
                     @if(!empty($list['image3']))
-        <td><img src="{{public_path('productImage/').basename($list['image3'])}}"width="100px" height="100px"></td>
+        <td><img src="{{public_path('productImage/thumb')."/".basename($list['image3'])}}"width="100px" height="100px"></td>
         @else
             <td></td>
         @endif
                         @if(!empty($list['image4']))
-        <td><img src="{{public_path('productImage/').basename($list['image4'])}}"width="100px" height="100px"></td>
+        <td><img src="{{public_path('productImage/thumb')."/".basename($list['image4'])}}"width="100px" height="100px"></td>
         @else
             <td></td>
 
