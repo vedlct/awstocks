@@ -313,7 +313,7 @@ class OfferController extends Controller
             }
             fclose($FH);
         });
-        $response->send();
+        $check=$response->send();
 //        $data1=array(
 //            'historicUploadedFilesName'=>$fileName,
 //            'historicUploadedFilesType'=>"OfferList",
@@ -327,6 +327,12 @@ class OfferController extends Controller
             'fileName'=>$fileName,
             'filePath'=>$filePath,
         );
+        if ($check) {
+            Session::flash('message', $fileName . ' has been sent to server');
+        }else{
+            Session::flash('message',' Someting went wrong');
+        }
+
         return $fileInfo;
     }
     public function BulkOffer() {
@@ -359,13 +365,15 @@ class OfferController extends Controller
     }
     public function excelExport(Request $r)
     {
+
         $productList=$r->products;
         $filePath=public_path ()."/excel";
         $fileName="offerList";
         $fileInfo=array(
             'fileName'=>$fileName,
-            'filePath'=>$fileName,
+            'filePath'=>$filePath,
         );
+
         $list=array();
         for ($i=0;$i<count($productList);$i++){
             $offerId=$productList[$i];

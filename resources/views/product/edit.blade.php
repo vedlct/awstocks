@@ -122,7 +122,7 @@
                                 <select name="sizeType" class="form-control form-control-warning" id="sizeType">
                                     <option value="">Select Size Type</option>
                                     @foreach($sizeTypes as $size)
-                                        <option @if($sizeTypess== $size->sizeType ) selected @endif value="{{$size->sizeType}}">{{$size->sizeType}}</option>
+                                        <option  value="{{$size->sizeType}}">{{$size->sizeType}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -260,9 +260,9 @@
                             <label class="col-sm-2 form-control-label">Status<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-10">
                                 <select name="status" class="form-control form-control-warning" required>
-                                    <?php for ($i=0;$i<count(Status);$i++){ if (Status[$i] != Status[1]){?>
+                                    <?php for ($i=0;$i<count(Status);$i++){?>
                                     <option @if($product->status == Status[$i]) selected @endif value="<?php echo Status[$i]?>"><?php echo Status[$i]?></option>
-                                    <?php }}?>
+                                    <?php }?>
 
                                 </select>
                             </div>

@@ -214,16 +214,17 @@
                         cache: false,
                         data: {'fulloffers': offers},
                         success: function (data) {
+                            $('#SessionMessage').load(document.URL +  ' #SessionMessage');
 
-
-                            var link = document.createElement("a");
-                            link.download = data.fileName;
-                            var uri = '{{url("public/csv")}}'+"/"+data.fileName;
-                            link.href = uri;
-                            document.body.appendChild(link);
-                            link.click();
-                            document.body.removeChild(link);
-                            delete link;
+                            table.ajax.reload();  //just reload table
+                            {{--var link = document.createElement("a");--}}
+                            {{--link.download = data.fileName;--}}
+                            {{--var uri = '{{url("public/csv")}}'+"/"+data.fileName;--}}
+                            {{--link.href = uri;--}}
+                            {{--document.body.appendChild(link);--}}
+                            {{--link.click();--}}
+                            {{--document.body.removeChild(link);--}}
+                            {{--delete link;--}}
 
 
                         }
@@ -245,14 +246,17 @@
                             data: {'priceCreation': offers},
                             success: function (data) {
 
-                                var link = document.createElement("a");
-                                link.download = data.fileName;
-                                var uri = '{{url("public/csv")}}'+"/"+data.fileName;
-                                link.href = uri;
-                                document.body.appendChild(link);
-                                link.click();
-                                document.body.removeChild(link);
-                                delete link;
+                                $('#SessionMessage').load(document.URL +  ' #SessionMessage');
+                                table.ajax.reload();  //just reload table
+
+                                {{--var link = document.createElement("a");--}}
+                                {{--link.download = data.fileName;--}}
+                                {{--var uri = '{{url("public/csv")}}'+"/"+data.fileName;--}}
+                                {{--link.href = uri;--}}
+                                {{--document.body.appendChild(link);--}}
+                                {{--link.click();--}}
+                                {{--document.body.removeChild(link);--}}
+                                {{--delete link;--}}
 
 
                             }
@@ -272,15 +276,16 @@
                     cache: false,
                     data: {'stockUpdate': offers},
                     success: function (data) {
-
-                        var link = document.createElement("a");
-                        link.download = data.fileName;
-                        var uri = '{{url("public/csv")}}'+"/"+data.fileName;
-                        link.href = uri;
-                        document.body.appendChild(link);
-                        link.click();
-                        document.body.removeChild(link);
-                        delete link;
+                        $('#SessionMessage').load(document.URL +  ' #SessionMessage');
+                        table.ajax.reload();  //just reload table
+                        {{--var link = document.createElement("a");--}}
+                        {{--link.download = data.fileName;--}}
+                        {{--var uri = '{{url("public/csv")}}'+"/"+data.fileName;--}}
+                        {{--link.href = uri;--}}
+                        {{--document.body.appendChild(link);--}}
+                        {{--link.click();--}}
+                        {{--document.body.removeChild(link);--}}
+                        {{--delete link;--}}
 
 
                     }
@@ -300,15 +305,16 @@
                     cache: false,
                     data: {'markdownUpdate': offers},
                     success: function (data) {
-
-                        var link = document.createElement("a");
-                        link.download = data.fileName;
-                        var uri = '{{url("public/csv")}}'+"/"+data.fileName;
-                        link.href = uri;
-                        document.body.appendChild(link);
-                        link.click();
-                        document.body.removeChild(link);
-                        delete link;
+                        $('#SessionMessage').load(document.URL +  ' #SessionMessage');
+                        table.ajax.reload();  //just reload table
+                        {{--var link = document.createElement("a");--}}
+                        {{--link.download = data.fileName;--}}
+                        {{--var uri = '{{url("public/csv")}}'+"/"+data.fileName;--}}
+                        {{--link.href = uri;--}}
+                        {{--document.body.appendChild(link);--}}
+                        {{--link.click();--}}
+                        {{--document.body.removeChild(link);--}}
+                        {{--delete link;--}}
 
                     }
 
@@ -334,7 +340,7 @@
                     cache: false,
                     data: {'products': products},
                     success: function (data) {
-//                        console.log(data);
+
 
                         var link = document.createElement("a");
                         link.download = data.fileName+".xls";

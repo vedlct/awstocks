@@ -533,13 +533,17 @@ class ProductController extends Controller
             'filePath'=>$filePath,
         );
 
-        Excel::create($fileName,function($excel) use($list,$filePath) {
+        $check=Excel::create($fileName,function($excel) use($list,$filePath) {
             $excel->sheet('First sheet', function($sheet) use($list) {
                 $sheet->loadView('product.serverCSVProductList')->with('productList',$list);
             });
 
         })->store('csv',$filePath);
-
+        if ($check) {
+            Session::flash('message', $fileName . ' has been sent to server');
+        }else{
+            Session::flash('message',' Someting went wrong');
+        }
         return $fileInfo;
         
 
@@ -604,8 +608,6 @@ class ProductController extends Controller
             $list=array_merge($list,$newlist);
 
         }
-
-
         Excel::create($fileName,function($excel) use($list,$filePath) {
             $excel->sheet('First sheet', function($sheet) use($list) {
                 $sheet->loadView('product.localDownloadProductList')->with('productList',$list);
