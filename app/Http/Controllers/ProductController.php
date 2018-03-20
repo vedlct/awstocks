@@ -119,28 +119,28 @@ class ProductController extends Controller
 
     public function update(Request $r){
 
-
         $rules=[
-            'productName' => 'required|max:70',
-            'status' => 'required|max:8',
+            'productName' => 'required|max:255',
+            'status' => 'required|max:50',
             'description' => 'required|max:1100',
-            'style' => 'required|max:15',
+            'style' => 'required|max:255',
             'sku'=>'required|max:20',
-            'brand'=>'required|max:45',
+            'brand'=>'required|max:255',
             'size'=>'max:255',
-            'sizeDescription'=>'max:45',
-            'runToSize'=>'max:45',
+            'sizeDescription'=>'max:255',
+            'runToSize'=>'max:255',
             'color'=>'required|max:45',
-            'colorDesc'=>'required|max:20',
-            'ean'=>'max:13',
-            'care'=>'max:45',
+            'colorDesc'=>'required|max:255',
+            'ean'=>'max:100',
+            'care'=>'max:255',
             'swatchPic'=>'image|mimes:jpeg,jpg',
             'outfitPic'=>'image|mimes:jpeg,jpg',
-            'mainPic' =>'image|mimes:jpeg,jpg',
+            'mainPic' =>'required|image|mimes:jpeg,jpg',
             'image2Pic'=>'image|mimes:jpeg,jpg',
             'image3Pic'=>'image|mimes:jpeg,jpg',
             'image4Pic'=>'image|mimes:jpeg,jpg'
         ];
+        
         $messages = [
            // 'dimensions' => 'Image dimention should over 800px',
         ];
@@ -286,19 +286,19 @@ class ProductController extends Controller
     public function insert(Request $r){
 
         $rules=[
-            'productName' => 'required|max:70',
-            'status' => 'required|max:8',
+            'productName' => 'required|max:255',
+            'status' => 'required|max:50',
             'description' => 'required|max:1100',
-            'style' => 'required|max:15',
+            'style' => 'required|max:255',
             'sku'=>'required|max:20',
-            'brand'=>'required|max:45',
+            'brand'=>'required|max:255',
             'size'=>'max:255',
-            'sizeDescription'=>'max:45',
-            'runToSize'=>'max:45',
+            'sizeDescription'=>'max:255',
+            'runToSize'=>'max:255',
             'color'=>'required|max:45',
-            'colorDesc'=>'required|max:20',
-            'ean'=>'max:13',
-            'care'=>'max:45',
+            'colorDesc'=>'required|max:255',
+            'ean'=>'max:100',
+            'care'=>'max:255',
             'swatchPic'=>'image|mimes:jpeg,jpg',
             'outfitPic'=>'image|mimes:jpeg,jpg',
             'mainPic' =>'required|image|mimes:jpeg,jpg',

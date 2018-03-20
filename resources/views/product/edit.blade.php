@@ -199,7 +199,7 @@
                             <label class="col-sm-2 form-control-label">Cost price(£)</label>
                             <div class="col-sm-10">
 
-                                <input id="inputHorizontalSuccess" value="{{ $product->$product }}" name="$product" placeholder="optional" type="number" min="0" class="form-control form-control-success cost">
+                                <input id="inputHorizontalSuccess" value="{{ $product->costPrice }}" name="costPrice" placeholder="optional"  type="number" min="0" class="form-control form-control-success cost">
                                 @if ($errors->has('costPrice'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('costPrice') }}</strong>
