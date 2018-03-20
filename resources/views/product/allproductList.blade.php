@@ -226,14 +226,17 @@
                     data: {'products': products},
                     success: function (data) {
 
-                        var link = document.createElement("a");
-                        link.download = data.fileName+".csv";
-                        var uri = '{{url("public/csv")}}'+"/"+data.fileName+".csv";
-                        link.href = uri;
-                        document.body.appendChild(link);
-                        link.click();
-                        document.body.removeChild(link);
-                        delete link;
+                        $('#SessionMessage').load(document.URL +  ' #SessionMessage');
+                        table.ajax.reload();  //just reload table
+
+                        {{--var link = document.createElement("a");--}}
+                        {{--link.download = data.fileName+".csv";--}}
+                        {{--var uri = '{{url("public/csv")}}'+"/"+data.fileName+".csv";--}}
+                        {{--link.href = uri;--}}
+                        {{--document.body.appendChild(link);--}}
+                        {{--link.click();--}}
+                        {{--document.body.removeChild(link);--}}
+                        {{--delete link;--}}
 
 
                     }
@@ -283,7 +286,7 @@
     </script>
 
 @endsection
-<script ></script>
+
 
 
 

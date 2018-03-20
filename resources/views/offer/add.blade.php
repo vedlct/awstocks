@@ -47,10 +47,10 @@
 
                         <div class="form-group row">
 
-                            <label  class="col-sm-2 form-control-label" >Discount Price<span style="color: red" class="required">*</span></label>
+                            <label  class="col-sm-2 form-control-label" >Discount Price(%)<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-4">
 
-                                <input  id="inputHorizontalWarning" type="number" value="{{ old('disPrice') }}" name="disPrice"  class="form-control form-control-warning myInputField" required>
+                                <input  id="inputHorizontalWarning" type="number" value="{{ old('disPrice') }}" name="disPrice"  class="form-control form-control-warning " required>
                                 @if ($errors->has('disPrice'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('disPrice') }}</strong>
@@ -58,7 +58,7 @@
                                 @endif
                             </div>
 
-                            <label  class="col-sm-1 form-control-label" >Price:</label>
+                            <label  class="col-sm-1 form-control-label" >Price(£)</label>
                             <div class="col-sm-5">
 
                                 <input  id="price" type="number" name="price" class="form-control form-control-warning producprice" readonly>

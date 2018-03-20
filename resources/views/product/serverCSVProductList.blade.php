@@ -34,7 +34,6 @@
             <td>{{$list['color']}}</td>
             <td>{{$list['colorDesc']}}</td>
 
-
             @if(!empty($list['swatchImage']))
                 <td><img src="{{public_path('productImage/').basename($list['swatchImage'])}}"width="100px" height="100px"></td>
             @else
