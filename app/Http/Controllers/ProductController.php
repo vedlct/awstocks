@@ -91,6 +91,7 @@ class ProductController extends Controller
 
 
         $product=Product::findOrFail($id);
+
         $sizeTypess=Size::select('sizeType')->where('sizeName',$product->size)->first();
         if($sizeTypess ==null){
             $sizeTypess="none";
@@ -135,7 +136,7 @@ class ProductController extends Controller
             'care'=>'max:255',
             'swatchPic'=>'image|mimes:jpeg,jpg',
             'outfitPic'=>'image|mimes:jpeg,jpg',
-            'mainPic' =>'required|image|mimes:jpeg,jpg',
+            'mainPic' =>'image|mimes:jpeg,jpg',
             'image2Pic'=>'image|mimes:jpeg,jpg',
             'image3Pic'=>'image|mimes:jpeg,jpg',
             'image4Pic'=>'image|mimes:jpeg,jpg'
@@ -171,6 +172,7 @@ class ProductController extends Controller
         $product->runtosize=$r->runToSize;
 //        $product->LastExportedBy=Auth::user()->userId;
 //        $product->save();
+
         if($r->hasFile('swatchPic')){
             $img = $r->file('swatchPic');
             $filename= $product->productId.'swatch'.'.'.$img->getClientOriginalExtension();
