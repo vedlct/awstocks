@@ -196,7 +196,7 @@
 
 
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">Cost price</label>
+                            <label class="col-sm-2 form-control-label">Cost price(£)</label>
                             <div class="col-sm-10">
 
                                 <input id="inputHorizontalSuccess" value="{{ $product->$product }}" name="$product" placeholder="optional" type="number" min="0" class="form-control form-control-success cost">
@@ -212,7 +212,7 @@
 
 
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">Whole sale price</label>
+                            <label class="col-sm-2 form-control-label">Whole sale price(£)</label>
                             <div class="col-sm-10">
 
                                 <input id="inputHorizontalSuccess" value="{{ $product->wholePrice }}" name="wholePrice" placeholder="optional" type="number" min="0" class="form-control form-control-success whole">
@@ -410,7 +410,7 @@
 
         function checkProduct() {
 
-            var iChars = "!@#$%^&*()+= []\\\';,./{}|\":<>?";
+            var iChars = "!@#$%^&*()+=[]\\\';,./{}|\":<>?";
 
             for (var i = 0; i < document.editProduct.style.value.length; i++) {
                 if (iChars.indexOf(document.addProductForm.style.value.charAt(i)) != -1) {
