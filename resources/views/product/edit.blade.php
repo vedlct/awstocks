@@ -188,6 +188,20 @@ this.parentNode.parentNode.style.backgroundColor=/^\d+(?:\.\d{1,2})?$/.test(this
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label class="col-sm-2 form-control-label">Location</label>
+                            <div class="col-sm-10">
+                                <input id="inputHorizontalSuccess" value="{{ $product->location }}" name="location"  type="text"  class="form-control form-control-success">
+                                @if ($errors->has('location'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('location') }}</strong>
+                                    </span>
+                                @endif
+
+                            </div>
+                        </div>
+
+
 
 
                         <div class="form-group row">
