@@ -35,7 +35,7 @@
             <td>{{$list['colorDesc']}}</td>
 
             @if(!empty($list['swatchImage']))
-                <td><img src="{{public_path('productImage/').basename($list['swatchImage'])}}"width="100px" height="100px"></td>
+                <td>{{public_path('productImage/').$list['swatchImage']}}</td>
             @else
                 <td></td>
             @endif
@@ -44,18 +44,18 @@
 
             @if(!empty($list['mainImage']))
 
-                <td><img src="{{public_path('productImage/').basename($list['mainImage'])}}" width="100px" height="100px"></td>
+                <td>{{public_path('productImage/').$list['mainImage']}}</td>
             @else
                 <td></td>
             @endif
 
             @if(!empty($list['outfit']))
-                <td><img src="{{public_path('productImage/').basename($list['outfit'])}}"width="100px" height="100px"></td>
+                <td>{{public_path('productImage/').$list['outfit']}}</td>
             @else
                 <td></td>
             @endif
             @if(!empty($list['image2']))
-                <td><img src="{{public_path('productImage/').basename($list['image2'])}}"width="100px" height="100px"></td>
+                <td>{{public_path('productImage/').$list['image2']}}</td>
             @else
                 <td></td>
             @endif

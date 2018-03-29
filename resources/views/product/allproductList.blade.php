@@ -5,10 +5,6 @@
 
 @section('content')
 
-
-
-
-
     <div  style="padding: 10px; background-color:white";>
 
         <!-- Page Header-->
@@ -78,8 +74,7 @@
 
             </table><br>
 
-            
-            <input type="checkbox" id="selectall" onClick="selectAll(this)" /><b>Select All</b><br>
+            <input style="margin-left: 15px" type="checkbox" id="selectall" onClick="selectAll(this)" /><b>Select All</b><br>
         </div>
 
 

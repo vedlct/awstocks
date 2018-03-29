@@ -533,7 +533,7 @@ class ProductController extends Controller
 //        });
 //
 //        $response->send();
-
+//        return $list;
         $filePath=public_path ()."/csv";
         $fileName="ProductList-".date_timestamp_get(now());
         $fileInfo=array(
