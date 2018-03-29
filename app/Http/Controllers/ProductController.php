@@ -38,8 +38,6 @@ class ProductController extends Controller
         $this->middleware('auth');
     }
     public function add(){
-
-
         $categories=Category::select('categoryId','categoryName')->orderBy('categoryName','ASC')->get();
         $sColors=Color::select('colorId','colorName')->orderBy('colorName','ASC')->get();
         $sizeTypes=Size::select('sizeId','sizeName','sizeType')->orderBy('sizeType','ASC')->groupBy('sizeType')->get();
@@ -51,8 +49,7 @@ class ProductController extends Controller
             ->with('sColors',$sColors)
             ->with('runToSizes',$runToSizes)
             ->with('cares',$cares)
-            ->with('sizeTypes',$sizeTypes);
-    }
+            ->with('sizeTypes',$sizeTypes);}
 
 
     public function getSizeByType(Request $r){
@@ -78,8 +75,7 @@ class ProductController extends Controller
             }
 
 //        return Response($product);
-
-    }
+     }
 
     public function edit($id){
 
@@ -484,61 +480,6 @@ class ProductController extends Controller
                 ->where('productId',$productId)
                 ->update($data);
         }
-//        $fileName="ProductList-".date_timestamp_get(now()).".csv";
-//        $filePath=public_path ()."/csv"."/".$fileName;
-//
-//        $fileInfo=array(
-//            'fileName'=>$fileName,
-//            'filePath'=>$filePath,
-//            'alllist'=>$list
-//        );
-
-
-       // $filePath=public_path ()."/csv/ProductList.csv";
-
-        # add headers for each column in the CSV download
-
-       // array_unshift($list, array_keys($list[0]));
-        
-       // return $r;
-
-//        $callback = function() use ($list,$filePath)
-//        {
-//            $FH = fopen($filePath, "w");
-//
-//            foreach ($list as $row) {
-//                fputcsv($FH, $row);
-//            }
-//            fclose($FH);
-//        };
-
-
-//        $data1=array(
-//            'historicUploadedFilesName'=>$fileName,
-//            'historicUploadedFilesType'=>"ProductList",
-//            'createdBy'=>Auth::user()->userId,
-//
-//        );
-//
-//        DB::table('historicuploadedfiles')
-//            ->insert($data1);
-
-
-//         return Response::stream($callback, 200, $headers); //use Illuminate\Support\Facades\Response;
-
-
-//        $response = new StreamedResponse();
-//
-//        $response->setCallback(function () use ($list,$filePath){
-//
-//            $FH = fopen($filePath, "w");
-//            foreach ($list as $row) {
-//                fputcsv($FH, $row);
-//            }
-//            fclose($FH);
-//        });
-//
-//        $response->send();
 
         $filePath=public_path ()."/csv";
         $fileName="ProductList-".date_timestamp_get(now());
@@ -565,10 +506,6 @@ class ProductController extends Controller
 
     public function sendftp(Request $r)
     {
-       // return $r->products;
-//        return $r->path;
-        //Storage::disk('ftp')->store('test.txt');
-       // Storage::disk('ftp')->putFile('photos', '');
 
         $ftp_server = "ftp.sakibrahman.com";
         $ftp_username = "baker@sakibrahman.com";
@@ -630,8 +567,6 @@ class ProductController extends Controller
         })->store('xls',$filePath);
 
         return $fileInfo;
-
-
 
     }
 
