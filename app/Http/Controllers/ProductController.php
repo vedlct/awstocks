@@ -38,8 +38,6 @@ class ProductController extends Controller
         $this->middleware('auth');
     }
     public function add(){
-
-
         $categories=Category::select('categoryId','categoryName')->orderBy('categoryName','ASC')->get();
         $sColors=Color::select('colorId','colorName')->orderBy('colorName','ASC')->get();
         $sizeTypes=Size::select('sizeId','sizeName','sizeType')->orderBy('sizeType','ASC')->groupBy('sizeType')->get();
@@ -51,8 +49,7 @@ class ProductController extends Controller
             ->with('sColors',$sColors)
             ->with('runToSizes',$runToSizes)
             ->with('cares',$cares)
-            ->with('sizeTypes',$sizeTypes);
-    }
+            ->with('sizeTypes',$sizeTypes);}
 
 
     public function getSizeByType(Request $r){
@@ -78,8 +75,7 @@ class ProductController extends Controller
             }
 
 //        return Response($product);
-
-    }
+     }
 
     public function edit($id){
 
@@ -484,6 +480,7 @@ class ProductController extends Controller
                 ->where('productId',$productId)
                 ->update($data);
         }
+
 //        $fileName="ProductList-".date_timestamp_get(now()).".csv";
 //        $filePath=public_path ()."/csv"."/".$fileName;
 //
@@ -540,6 +537,7 @@ class ProductController extends Controller
 //
 //        $response->send();
 //        return $list;
+
         $filePath=public_path ()."/csv";
         $fileName="ProductList-".date_timestamp_get(now());
         $fileInfo=array(
@@ -565,10 +563,6 @@ class ProductController extends Controller
 
     public function sendftp(Request $r)
     {
-       // return $r->products;
-//        return $r->path;
-        //Storage::disk('ftp')->store('test.txt');
-       // Storage::disk('ftp')->putFile('photos', '');
 
         $ftp_server = "ftp.sakibrahman.com";
         $ftp_username = "baker@sakibrahman.com";
@@ -630,8 +624,6 @@ class ProductController extends Controller
         })->store('xls',$filePath);
 
         return $fileInfo;
-
-
 
     }
 
