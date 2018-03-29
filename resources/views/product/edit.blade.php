@@ -7,6 +7,11 @@
 
     <div class="row">
 
+        <div><label>Amount $
+                <input type="number" placeholder="0.00" required name="price" min="0" value="0" step="0.01" title="Currency" pattern="^\d+(?:\.\d{1,2})?$" onblur="
+this.parentNode.parentNode.style.backgroundColor=/^\d+(?:\.\d{1,2})?$/.test(this.value)?'inherit':'red'
+"></label></div>
+
         <div class="col-lg-12">
             <div class="card" style="margin-left: 10px; border-radius: 10px;">
 
@@ -183,6 +188,20 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label class="col-sm-2 form-control-label">Location</label>
+                            <div class="col-sm-10">
+                                <input id="inputHorizontalSuccess" value="{{ $product->location }}" name="location"  type="text"  class="form-control form-control-success">
+                                @if ($errors->has('location'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('location') }}</strong>
+                                    </span>
+                                @endif
+
+                            </div>
+                        </div>
+
+
 
 
                         <div class="form-group row">
@@ -199,7 +218,7 @@
                             <label class="col-sm-2 form-control-label">Cost price(£)</label>
                             <div class="col-sm-10">
 
-                                <input id="inputHorizontalSuccess" value="{{ $product->costPrice }}" name="costPrice" placeholder="optional"  type="number" min="0" class="form-control form-control-success cost">
+                                <input id="inputHorizontalSuccess" value="{{ $product->costPrice }}" name="costPrice" placeholder="optional"  type="text" min="0" class="form-control form-control-success cost">
                                 @if ($errors->has('costPrice'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('costPrice') }}</strong>
@@ -215,7 +234,7 @@
                             <label class="col-sm-2 form-control-label">Whole sale price(£)</label>
                             <div class="col-sm-10">
 
-                                <input id="inputHorizontalSuccess" value="{{ $product->wholePrice }}" name="wholePrice" placeholder="optional" type="number" min="0" class="form-control form-control-success whole">
+                                <input id="inputHorizontalSuccess" value="{{ $product->wholePrice }}" name="wholePrice" placeholder="optional" type="text" min="0" class="form-control form-control-success whole">
                                 @if ($errors->has('wholePrice'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('wholePrice') }}</strong>
@@ -228,7 +247,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label">RRP(£)<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-10">
-                                <input id="inputHorizontalSuccess"  name="price" type="number" value="{{$product->price}}" placeholder="price" class="form-control form-control-success myInputField" required>
+                                <input id="inputHorizontalSuccess"  name="price" type="text" value="{{$product->price}}" placeholder="price" class="form-control form-control-success myInputField" required>
                             </div>
                         </div>
 
