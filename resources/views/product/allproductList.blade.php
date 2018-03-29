@@ -111,8 +111,9 @@
                 },
                 columns: [
                     { "data": function(data){
-                        return '<input data-panel-id="'+data.productId+'"onclick="selected_rows(this)" type="checkbox" class="chk" name="selected_rows[]" value="'+ data.productId +'" />';},
-                        "orderable": false, "searchable":false, "name":"selected_rows",},
+
+                        return '<input data-panel-id="'+data.productId+'"onclick="selected_rows(this)"  type="checkbox" class="chk" name="selected_rows[]" value="'+ data.productId +'" />';},
+                        "orderable": false, "searchable":false, "name":"selected_rows"},
                     { data: 'categoryName',name:'categoryName' },
                     { data: 'style', name: 'style' },
                     { data: 'sku', name: 'sku' },
@@ -177,6 +178,7 @@
         }
         function selectAll(source) {
 
+
             for(var i=0; i <= selecteds.length; i++) {
                 selecteds.pop(i);
             }
@@ -223,6 +225,10 @@
 
                         $('#SessionMessage').load(document.URL +  ' #SessionMessage');
                         table.ajax.reload();  //just reload table
+
+                        for(var i=0; i <= selecteds.length; i++) {
+                            selecteds.pop(i);
+                        }
 
                         {{--var link = document.createElement("a");--}}
                         {{--link.download = data.fileName+".csv";--}}

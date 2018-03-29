@@ -616,7 +616,7 @@ class ProductController extends Controller
         for ($i=0;$i<count($productList);$i++){
             $productId=$productList[$i];
             $newlist=Product::select('category.categoryName','style','sku','ean','productName','productDesc','brand','color','colorDesc','size',
-                'sizeDescription','mainImage','swatchImage','outfit','image2','image3','image4','runtosize','care','price','costPrice',
+                'sizeDescription','mainImage','swatchImage','outfit','image2','image3','image4','runtosize','care','price','costPrice','location',
                 'wholePrice','stockQty','minQtyAlert','LastExportedBy','LastExportedDate')
                 ->leftJoin('category', 'category.categoryId', '=', 'product.fkcategoryId')->where('product.productId',$productId)->get()->toArray();
             $list=array_merge($list,$newlist);
