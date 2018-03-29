@@ -182,6 +182,20 @@
 
 
                     <div class="form-group row">
+                        <label class="col-sm-2 form-control-label">Location</label>
+                        <div class="col-sm-10">
+                            <input id="inputHorizontalSuccess" value="{{ old('location') }}" name="location"  type="text"  class="form-control form-control-success">
+                            @if ($errors->has('location'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('location') }}</strong>
+                                    </span>
+                            @endif
+
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row">
                         <label class="col-sm-2 form-control-label">EAN</label>
                         <div class="col-sm-10">
                             <input id="inputHorizontalSuccess" value="{{ old('ean') }}" name="ean"   placeholder="100 characters maximum" type="text"  class="form-control form-control-success">

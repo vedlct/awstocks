@@ -9,6 +9,7 @@
         <th>Product Name</th>
         <th >Product Description</th>
         <th>Brand</th>
+        <th>Product Location</th>
         <th>Color</th>
         <th >Color Description</th>
         <th>Size</th>
@@ -40,6 +41,7 @@
         <td valign="middle">{{$list['productName']}}</td>
         <td  valign="middle"width="50">{{$list['productDesc']}}</td>
         <td valign="middle">{{$list['brand']}}</td>
+        <td valign="middle"width="20" >{{$list['location']}}</td>
         <td valign="middle">{{$list['color']}}</td>
         <td  valign="middle"width="30">{{$list['colorDesc']}}</td>
         <td valign="middle">{{$list['size']}}</td>
