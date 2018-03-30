@@ -1,6 +1,11 @@
 @extends('main')
 @section('header')
     {{--<link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">--}}
+    <style>
+        th.dt-center, td.dt-center { text-align: center; }
+        table{font-size: 15px}
+        .container-fluid {padding: 15px  15px;}
+    </style>
 @endsection
 
 @section('content')
@@ -124,7 +129,7 @@
                 columns: [
                     { "data": function(data){
                         return '<input data-panel-id="'+data.productId+'"onclick="selected_rows(this)" type="checkbox" class="chk" name="selected_rows[]" value="'+ data.productId +'" />';},
-                        "orderable": false, "searchable":false, "name":"selected_rows",},
+                        "orderable": false, "searchable":false, "name":"selected_rows","className": "dt-center selectBox"},
                     { data: 'categoryName',name:'categoryName' },
                     { data: 'productName', name: 'productName' },
                     { data: 'sku', name: 'sku' },
