@@ -237,25 +237,25 @@ class OfferController extends Controller
         array_unshift($list, array_keys($list[0]));
         // $filePath=public_path ()."/csv"."/".$fileName;
         if ($offerList=$r->fulloffers){
-            $fileName="FullOfferList-".date_timestamp_get(now()).".csv";
+            $fileName="FullOfferList-".date("Y-m-d_H-i-s").".csv";
             $filePath=public_path ()."/csv"."/".$fileName;
             // $fileName="FullOfferList";
             $fileInfo=array('fileName'=>$fileName);
         }
         if ($offerList=$r->priceCreation){
-            $fileName="PriceUpdateList-".date_timestamp_get(now()).".csv";
+            $fileName="PriceUpdateList-".date("Y-m-d_H-i-s").".csv";
             // $fileName="PriceUpdateList";
             $fileInfo=array('fileName'=>$fileName);
             $filePath=public_path ()."/csv"."/".$fileName;
         }
         if ($offerList=$r->stockUpdate){
-            $fileName="StockUpdateList-".date_timestamp_get(now()).".csv";
+            $fileName="StockUpdateList-".date("Y-m-d_H-i-s").".csv";
 //            $fileName="StockUpdateList";
             $fileInfo=array('fileName'=>$fileName);
             $filePath=public_path ()."/csv"."/".$fileName;
         }
         if ($offerList=$r->markdownUpdate){
-            $fileName="markdownUpdateList-".date_timestamp_get(now()).".csv";
+            $fileName="markdownUpdateList-".date("Y-m-d_H-i-s").".csv";
 //            $fileName="markdownUpdateList";
             $fileInfo=array('fileName'=>$fileName);
             $filePath=public_path ()."/csv"."/".$fileName;
@@ -264,19 +264,19 @@ class OfferController extends Controller
 //        {
 //
 //            if ($offerList=$r->fulloffers){
-//                //$fileName="FullOfferList-".date_timestamp_get(now());
+//                //$fileName="FullOfferList-".date("Y-m-d_H-i-s");
 //                $FH = fopen(public_path ()."/csv/".$fileName.".csv", "w");
 //            }
 //            if ($offerList=$r->priceCreation){
-//               // $fileName="PriceUpdateList-".date_timestamp_get(now());
+//               // $fileName="PriceUpdateList-".date("Y-m-d_H-i-s");
 //                $FH = fopen(public_path ()."/csv/".$fileName.".csv", "w");
 //            }
 //            if ($offerList=$r->stockUpdate){
-//               // $fileName="StockUpdateList-".date_timestamp_get(now());
+//               // $fileName="StockUpdateList-".date("Y-m-d_H-i-s");
 //                $FH = fopen(public_path ()."/csv/".$fileName.".csv", "w");
 //            }
 //            if ($offerList=$r->markdownUpdate){
-//                //$fileName="markdownUpdateList-".date_timestamp_get(now());
+//                //$fileName="markdownUpdateList-".date("Y-m-d_H-i-s");
 //                $FH = fopen(public_path ()."/csv/".$fileName.".csv", "w");
 //            }
 //
@@ -292,19 +292,19 @@ class OfferController extends Controller
         $response = new StreamedResponse();
         $response->setCallback(function () use ($list,$r,$filePath){
             if ($offerList=$r->fulloffers){
-                //$fileName="FullOfferList-".date_timestamp_get(now());
+                //$fileName="FullOfferList-".date("Y-m-d_H-i-s");
                 $FH = fopen($filePath, "w");
             }
             if ($offerList=$r->priceCreation){
-                // $fileName="PriceUpdateList-".date_timestamp_get(now());
+                // $fileName="PriceUpdateList-".date("Y-m-d_H-i-s");
                 $FH = fopen($filePath, "w");
             }
             if ($offerList=$r->stockUpdate){
-                // $fileName="StockUpdateList-".date_timestamp_get(now());
+                // $fileName="StockUpdateList-".date("Y-m-d_H-i-s");
                 $FH = fopen($filePath, "w");
             }
             if ($offerList=$r->markdownUpdate){
-                //$fileName="markdownUpdateList-".date_timestamp_get(now());
+                //$fileName="markdownUpdateList-".date("Y-m-d_H-i-s");
                 $FH = fopen($filePath, "w");
             }
             $FH = fopen($filePath, "w");
@@ -368,7 +368,7 @@ class OfferController extends Controller
 
         $productList=$r->products;
         $filePath=public_path ()."/excel";
-        $fileName="offerList";
+        $fileName="offerList".date("Y-m-d_H-i-s");
         $fileInfo=array(
             'fileName'=>$fileName,
             'filePath'=>$filePath,

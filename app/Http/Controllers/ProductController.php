@@ -542,7 +542,8 @@ class ProductController extends Controller
 //        return $list;
 
         $filePath=public_path ()."/csv";
-        $fileName="ProductList-".date_timestamp_get(now());
+//        $fileName="ProductList-".date_timestamp_get(now());
+        $fileName="ProductList-".date("Y-m-d_H-i-s");
         $fileInfo=array(
             'fileName'=>$fileName,
             'filePath'=>$filePath,
@@ -600,10 +601,10 @@ class ProductController extends Controller
 
     public function excelExport(Request $r)
     {
-        $productList=$r->products;
+        $productList=$r->products; 
 
         $filePath=public_path ()."/excel";
-        $fileName="productList";
+        $fileName="productList".date("Y-m-d_H-i-s");
         $fileInfo=array(
             'fileName'=>$fileName,
             'filePath'=>$fileName,
