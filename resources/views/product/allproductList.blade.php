@@ -1,13 +1,14 @@
 @extends('main')
 @section('header')
     {{--<link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">--}}
+    <style>
+        th.dt-center, td.dt-center { text-align: center; }
+        table{font-size: 15px}
+        .container-fluid {padding: 15px  15px;}
+    </style>
 @endsection
 
 @section('content')
-
-
-
-
 
     <div  style="padding: 10px; background-color:white";>
 
@@ -33,16 +34,6 @@
 
             </div>
 
-            {{--<div class="col-md-4 dropdown">--}}
-                {{--<label class="form-control-label">Product Name</label> <br>--}}
-                {{--<select class="form-control" id="product" name="product">--}}
-                    {{--<option selected value="">All Product</option>--}}
-                    {{--@foreach($productsList as $products)--}}
-                        {{--<option value="{{$products->productName}}">{{$products->productName}}</option>--}}
-                    {{--@endforeach--}}
-                {{--</select>--}}
-            {{--</div>--}}
-
             <div class="col-md-4 dropdown">
                 <label class="form-control-label">Status</label> <br>
                 <select class="form-control" id="status" name="status">
@@ -63,31 +54,29 @@
             <table id="allProductList" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                    <th >Select</th>
-                    <th width="20%" >Product Category</th>
-                    <th >Style</th>
-                    <th >SKU</th>
+
+                    {{--<th >Select</th>--}}
+                    <th width="1%"><input type="checkbox" id="selectall" onClick="selectAll(this)" /></th>
+                    <th width="15%" >Product Category</th>
+                    <th width="10%">Style</th>
+                    <th width="5%">SKU</th>
                     <th width="20%">Product name</th>
-                    <th >Brand name</th>
-                    <th >status</th>
+                    <th width="15%">Brand name</th>
+                    <th width="5%">status</th>
                     {{--<th >Last Exported By</th>--}}
-                    <th >Last Exported Date</th>
+                    <th width="10%">Last Exported Date</th>
                     <th width="10%">Action</th>
                 </tr>
                 </thead>
 
             </table><br>
 
-            
-            <input type="checkbox" id="selectall" onClick="selectAll(this)" /><b>Select All</b><br>
+            {{--<input style="margin-left: 15px" type="checkbox" id="selectall" onClick="selectAll(this)" /><b>Select All</b><br>--}}
         </div>
-
-
-        <a  onclick="return myfunc()" download> <button class="btn btn-danger"  >Export Products file</button></a>
-        <a  onclick="return excel()"> <button class="btn btn-danger"  >Download selected Products</button></a>
-
-
+        <a  onclick="return myfunc()" download> <button class="btn btn-danger"  >Export into Products files</button></a>
+        <a  onclick="return excel()"> <button class="btn btn-danger"  >Download Products into Local Computer</button></a>
     </div>
+
 @endsection
 @section('foot-js')
 
@@ -104,6 +93,10 @@
                 processing: true,
                 serverSide: true,
                 stateSave: true,
+                "lengthMenu": [[10, 25, 50,100, -1], [10, 25, 50,100, "All"]],
+//                "dom": '<"toolbar">lf<br>irtip',
+                "dom": 'lf<"br">irtip',
+
                 "ajax":{
                     "url": "{!! route('product.data') !!}",
                     "type": "POST",
@@ -116,14 +109,15 @@
                 },
                 columns: [
                     { "data": function(data){
-                        return '<input data-panel-id="'+data.productId+'"onclick="selected_rows(this)" type="checkbox" class="chk" name="selected_rows[]" value="'+ data.productId +'" />';},
-                        "orderable": false, "searchable":false, "name":"selected_rows",},
-                    { data: 'categoryName',name:'categoryName' },
+
+                        return '<input  data-panel-id="'+data.productId+'"onclick="selected_rows(this)" type="checkbox" class="chk" name="selected_rows[]" value="'+ data.productId +'" />';},
+                        "orderable": false, "searchable":false, "name":"selected_rows", "className": "dt-center selectBox"},
+                    { data: 'categoryName',name:'categoryName',"orderable": false },
                     { data: 'style', name: 'style' },
                     { data: 'sku', name: 'sku' },
                     { data: 'productName', name: 'productName' },
                     { data: 'brand', name: 'brand' },
-                    { data: 'status', name: 'status' },
+                    { data: 'status', name: 'status',"orderable": false },
 //                    { data: 'userName', name: 'userName' },
                     { data: 'LastExportedDate', name: 'LastExportedDate' },
                     { "data": function(data){
@@ -133,6 +127,8 @@
                 ],
                 order: [[0,'desc'] ],
             });
+//            $("div.toolbar").html('<input style="margin-left: 15px" type="checkbox" id="selectall" onClick="selectAll(this)" /><b>Select All</b>');
+
             $('#status').change(function(){ //button filter event click
                 table.search("").draw(); //just redraw myTableFilter
                 table.ajax.reload();  //just reload table
@@ -164,7 +160,6 @@
             //alert(url);
             var result = confirm("Want to delete?");
             if (result) {
-
                 var newUrl=url.replace(':id', btn);
             window.location.href = newUrl;}
         }
@@ -181,6 +176,7 @@
             }
         }
         function selectAll(source) {
+
 
             for(var i=0; i <= selecteds.length; i++) {
                 selecteds.pop(i);
@@ -226,14 +222,22 @@
                     data: {'products': products},
                     success: function (data) {
 
-                        var link = document.createElement("a");
-                        link.download = data.fileName;
-                        var uri = '{{url("public/csv")}}'+"/"+data.fileName;
-                        link.href = uri;
-                        document.body.appendChild(link);
-                        link.click();
-                        document.body.removeChild(link);
-                        delete link;
+                        $('#SessionMessage').load(document.URL +  ' #SessionMessage');
+                        table.ajax.reload();  //just reload table
+
+                        for(var i=0; i <= selecteds.length; i++) {
+                            selecteds.pop(i);
+                        }
+                        $('#selectall').prop('checked', false);
+
+                        {{--var link = document.createElement("a");--}}
+                        {{--link.download = data.fileName+".csv";--}}
+                        {{--var uri = '{{url("public/csv")}}'+"/"+data.fileName+".csv";--}}
+                        {{--link.href = uri;--}}
+                        {{--document.body.appendChild(link);--}}
+                        {{--link.click();--}}
+                        {{--document.body.removeChild(link);--}}
+                        {{--delete link;--}}
 
 
                     }
@@ -260,8 +264,6 @@
                     cache: false,
                     data: {'products': products},
                     success: function (data) {
-//                        alert(data);
-
                         var link = document.createElement("a");
                         link.download = data.fileName+".xls";
                         var uri = '{{url("public/excel")}}'+"/"+data.fileName+".xls";
@@ -270,6 +272,11 @@
                         link.click();
                         document.body.removeChild(link);
                         delete link;
+
+                        for(var i=0; i <= selecteds.length; i++) {
+                            selecteds.pop(i);
+                        }
+                        $('#selectall').prop('checked', false);
 
                     }
 
@@ -283,7 +290,7 @@
     </script>
 
 @endsection
-<script ></script>
+
 
 
 

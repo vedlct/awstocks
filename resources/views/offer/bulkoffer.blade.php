@@ -1,6 +1,11 @@
 @extends('main')
 @section('header')
     {{--<link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">--}}
+    <style>
+        th.dt-center, td.dt-center { text-align: center; }
+        table{font-size: 15px}
+        .container-fluid {padding: 15px  15px;}
+    </style>
 @endsection
 
 @section('content')
@@ -41,7 +46,7 @@
             <table id="allProductList" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                    <th >Select</th>
+                    <th ><input type="checkbox" id="selectall" onClick="selectAll(this)" /></th>
                     <th >Product Category</th>
                     <th >Product name</th>
                     <th >SKU</th>
@@ -53,7 +58,7 @@
             </table><br>
 
 
-            <input type="checkbox" id="selectall" onClick="selectAll(this)" /><b>Select All</b><br>
+            {{--<input type="checkbox" id="selectall" onClick="selectAll(this)" /><b>Select All</b><br>--}}
         </div>
         <div class="row">
         <div class="col-md-4 dropdown">
@@ -68,7 +73,7 @@
 
         </div>
         <div class="col-md-4 ">
-            <label class="form-control-label">Discount Price</label> <br>
+            <label class="form-control-label">Discount Percentage(%)</label> <br>
             <input class="form-control" type="number" id="disprice" name="disprice">
 
         </div>
@@ -76,7 +81,9 @@
 
 
         <br>
-        <a onclick="insertBulkOffer()"><button class="btn btn-danger"  >Insert Bulk Offer</button></a>
+
+        <a onclick="insertBulkOffer()"><button class="btn btn-danger"  >Update selected Products</button></a>
+
 
 
     </div>
@@ -108,6 +115,8 @@
                 processing: true,
                 serverSide: true,
                 stateSave: true,
+                "lengthMenu": [[10, 25, 50,100, -1], [10, 25, 50,100, "All"]],
+                "dom": 'lf<"br">irtip',
 //                bSort:false,
                 "ajax":{
                     "url": "{!! route('offer.bulkOfferdt') !!}",
@@ -122,7 +131,7 @@
                 columns: [
                     { "data": function(data){
                         return '<input data-panel-id="'+data.productId+'"onclick="selected_rows(this)" type="checkbox" class="chk" name="selected_rows[]" value="'+ data.productId +'" />';},
-                        "orderable": false, "searchable":false, "name":"selected_rows",},
+                        "orderable": false, "searchable":false, "name":"selected_rows","className": "dt-center selectBox"},
                     { data: 'categoryName',name:'categoryName' },
                     { data: 'productName', name: 'productName' },
                     { data: 'sku', name: 'sku' },

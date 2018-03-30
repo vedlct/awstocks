@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+use App\Offer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use File;
@@ -26,6 +27,8 @@ use Excel;
 use PHPExcel_Worksheet_Drawing;
 
 
+
+
 //use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 class ProductController extends Controller
@@ -35,10 +38,8 @@ class ProductController extends Controller
         $this->middleware('auth');
     }
     public function add(){
-
-
         $categories=Category::select('categoryId','categoryName')->orderBy('categoryName','ASC')->get();
-        $sColors=Color::select('colorId','colorName')->where('colorType','standard')->orderBy('colorName','ASC')->get();
+        $sColors=Color::select('colorId','colorName')->orderBy('colorName','ASC')->get();
         $sizeTypes=Size::select('sizeId','sizeName','sizeType')->orderBy('sizeType','ASC')->groupBy('sizeType')->get();
         $runToSizes=RunToSize::select('runToSizeId','runToSizeName')->orderBy('runToSizeName','ASC')->get();
         $cares=Care::select('careId','careName')->orderBy('careName','ASC')->get();
@@ -48,8 +49,7 @@ class ProductController extends Controller
             ->with('sColors',$sColors)
             ->with('runToSizes',$runToSizes)
             ->with('cares',$cares)
-            ->with('sizeTypes',$sizeTypes);
-    }
+            ->with('sizeTypes',$sizeTypes);}
 
 
     public function getSizeByType(Request $r){
@@ -75,27 +75,20 @@ class ProductController extends Controller
             }
 
 //        return Response($product);
-
-    }
+     }
 
     public function edit($id){
 
-//        $categories=Category::get();
-//        $sColors=Color::where('colorType','standard')
-//            ->get();
-//        $sizeTypes=Size::groupBy('sizeType')
-//            ->get();
-//        $runToSizes=RunToSize::get();
-//        $cares=Care::get();
 
         $categories=Category::select('categoryId','categoryName')->orderBy('categoryName','ASC')->get();
-        $sColors=Color::select('colorId','colorName')->where('colorType','standard')->orderBy('colorName','ASC')->get();
+        $sColors=Color::select('colorId','colorName')->orderBy('colorName','ASC')->get();
         $sizeTypes=Size::select('sizeId','sizeName','sizeType')->orderBy('sizeType','ASC')->groupBy('sizeType')->get();
         $runToSizes=RunToSize::select('runToSizeId','runToSizeName')->orderBy('runToSizeName','ASC')->get();
         $cares=Care::select('careId','careName')->orderBy('careName','ASC')->get();
 
 
         $product=Product::findOrFail($id);
+
         $sizeTypess=Size::select('sizeType')->where('sizeName',$product->size)->first();
         if($sizeTypess ==null){
             $sizeTypess="none";
@@ -121,31 +114,160 @@ class ProductController extends Controller
             ->with('sizeTypess',$sizeTypess);
     }
 
+    public function insert(Request $r){
+
+        $rules=[
+            'productName' => 'required|max:100',
+            'status' => 'required|max:50',
+            'description' => 'required|max:1100',
+            'style' => 'required|max:255',
+            'sku'=>'required|max:20',
+            'brand'=>'required|max:100',
+            'size'=>'max:255',
+            'sizeDescription'=>'max:255',
+            'runToSize'=>'max:255',
+            'color'=>'required|max:45',
+            'colorDesc'=>'required|max:255',
+            'ean'=>'max:100',
+            'care'=>'max:255',
+            'swatchPic'=>'image|mimes:jpeg,jpg',
+            'outfitPic'=>'image|mimes:jpeg,jpg',
+            'mainPic' =>'required|image|mimes:jpeg,jpg',
+            'image2Pic'=>'image|mimes:jpeg,jpg',
+            'image3Pic'=>'image|mimes:jpeg,jpg',
+            'image4Pic'=>'image|mimes:jpeg,jpg',
+            'location'=>'max:100'
+        ];
+
+        $messages = [
+            // 'dimensions' => 'Image dimention should be over 800px',
+        ];
+
+        $validator = Validator::make($r->all(), $rules,$messages)->validate();
+
+        $product=new Product();
+        $product->productName=$r->productName;
+        $product->status=$r->status;
+        $product->productDesc=$r->description;
+        $product->style=$r->style;
+        $product->sku=$r->sku;
+        $product->brand=$r->brand;
+        $product->size=$r->size;
+        $product->sizeDescription=$r->sizeDescription;
+        $product->fkcategoryId=$r->category;
+        $product->ean=$r->ean;
+        $product->color=$r->color;
+        $product->colorDesc=$r->colorDesc;
+        $product->care=$r->care;
+        $product->price=$r->price;
+        $product->costPrice=$r->costPrice;
+        $product->wholePrice=$r->wholePrice;
+        $product->stockQty=$r->stockQty;
+        $product->minQtyAlert=$r->minQtyAlert;
+        $product->runtosize=$r->runToSize;
+        $product->location=$r->location;
+        $product->created_at=date(now());
+        //$product->LastExportedBy=Auth::user()->userId;
+        $product->save();
+
+        if($r->hasFile('swatchPic')){
+            $img = $r->file('swatchPic');
+            $filename= $product->productId.'swatch'.'.'.$img->getClientOriginalExtension();
+            $product->swatchImage=$filename;
+            $location = public_path('productImage/'.$filename);
+            Image::make($img)->save($location);
+            $location2 = public_path('productImage/thumb/'.$filename);
+            Image::make($img)->resize(200, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($location2);
+        }
+        if($r->hasFile('outfitPic')){
+            $img = $r->file('outfitPic');
+            $filename= $product->productId.'outfit'.'.'.$img->getClientOriginalExtension();
+            $product->outfit=$filename;
+            $location = public_path('productImage/'.$filename);
+            Image::make($img)->save($location);
+            $location2 = public_path('productImage/thumb/'.$filename);
+            Image::make($img)->resize(200, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($location2);
+        }
+        if($r->hasFile('mainPic')){
+            $img = $r->file('mainPic');
+            $filename= $product->productId.'main'.'.'.$img->getClientOriginalExtension();
+            $product->mainImage=$filename;
+            $location = public_path('productImage/'.$filename);
+            Image::make($img)->save($location);
+            $location2 = public_path('productImage/thumb/'.$filename);
+            Image::make($img)->resize(200, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($location2);
+
+        }
+        if($r->hasFile('image2Pic')){
+            $img = $r->file('image2Pic');
+            $filename= $product->productId.'image2'.'.'.$img->getClientOriginalExtension();
+            $product->image2=$filename;
+            $location = public_path('productImage/'.$filename);
+            Image::make($img)->save($location);
+            $location2 = public_path('productImage/thumb/'.$filename);
+            Image::make($img)->resize(200, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($location2);
+        }
+        if($r->hasFile('image3Pic')){
+            $img = $r->file('image3Pic');
+            $filename= $product->productId.'image3'.'.'.$img->getClientOriginalExtension();
+            $product->image3=$filename;
+            $location = public_path('productImage/'.$filename);
+            Image::make($img)->save($location);
+            $location2 = public_path('productImage/thumb/'.$filename);
+            Image::make($img)->resize(200, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($location2);
+        }
+        if($r->hasFile('image4Pic')){
+            $img = $r->file('image4Pic');
+            $filename= $product->productId.'image4'.'.'.$img->getClientOriginalExtension();
+            $product->image4=$filename;
+            $location = public_path('productImage/'.$filename);
+            Image::make($img)->save($location);
+            $location2 = public_path('productImage/thumb/'.$filename);
+            Image::make($img)->resize(200, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($location2);
+        }
+        $product->save();
+        Session::flash('message', 'Product Uploaded successfully');
+        return back();
+    }
+
 
     public function update(Request $r){
 
-
         $rules=[
-            'productName' => 'required|max:70',
-            'status' => 'required|max:8',
+            'productName' => 'required|max:100',
+            'status' => 'required|max:50',
             'description' => 'required|max:1100',
-            'style' => 'required|max:15',
+            'style' => 'required|max:255',
             'sku'=>'required|max:20',
-            'brand'=>'required|max:45',
-            'size'=>'max:45',
-            'sizeDescription'=>'max:45',
-            'runToSize'=>'max:45',
+            'brand'=>'required|max:100',
+            'size'=>'max:255',
+            'sizeDescription'=>'max:255',
+            'runToSize'=>'max:255',
             'color'=>'required|max:45',
-            'colorDesc'=>'required|max:20',
-            'ean'=>'max:13',
-            'care'=>'max:45',
+            'colorDesc'=>'required|max:255',
+            'ean'=>'max:100',
+            'care'=>'max:255',
             'swatchPic'=>'image|mimes:jpeg,jpg',
             'outfitPic'=>'image|mimes:jpeg,jpg',
             'mainPic' =>'image|mimes:jpeg,jpg',
             'image2Pic'=>'image|mimes:jpeg,jpg',
             'image3Pic'=>'image|mimes:jpeg,jpg',
-            'image4Pic'=>'image|mimes:jpeg,jpg'
+            'image4Pic'=>'image|mimes:jpeg,jpg',
+            'location'=>'max:100'
         ];
+
         $messages = [
            // 'dimensions' => 'Image dimention should over 800px',
         ];
@@ -174,50 +296,75 @@ class ProductController extends Controller
         $product->stockQty=$r->stockQty;
         $product->minQtyAlert=$r->minQtyAlert;
         $product->runtosize=$r->runToSize;
+        $product->location=$r->location;
 //        $product->LastExportedBy=Auth::user()->userId;
 //        $product->save();
+
         if($r->hasFile('swatchPic')){
             $img = $r->file('swatchPic');
             $filename= $product->productId.'swatch'.'.'.$img->getClientOriginalExtension();
-            $product->swatchImage=url("public/productImage")."/".$filename;
+            $product->swatchImage=$filename;
             $location = public_path('productImage/'.$filename);
-//            Image::make($img)->resize(800,600)->save($location);
             Image::make($img)->save($location);
+            $location2 = public_path('productImage/thumb/'.$filename);
+            Image::make($img)->resize(200, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($location2);
         }
         if($r->hasFile('outfitPic')){
             $img = $r->file('outfitPic');
             $filename= $product->productId.'outfit'.'.'.$img->getClientOriginalExtension();
-            $product->outfit=url("public/productImage")."/".$filename;
+            $product->outfit=$filename;
             $location = public_path('productImage/'.$filename);
             Image::make($img)->save($location);
+            $location2 = public_path('productImage/thumb/'.$filename);
+            Image::make($img)->resize(200, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($location2);
         }
         if($r->hasFile('mainPic')){
             $img = $r->file('mainPic');
             $filename= $product->productId.'main'.'.'.$img->getClientOriginalExtension();
-            $product->mainImage=url("public/productImage")."/".$filename;
+            $product->mainImage=$filename;
             $location = public_path('productImage/'.$filename);
             Image::make($img)->save($location);
+            $location2 = public_path('productImage/thumb/'.$filename);
+            Image::make($img)->resize(200, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($location2);
         }
         if($r->hasFile('image2Pic')){
             $img = $r->file('image2Pic');
             $filename= $product->productId.'image2'.'.'.$img->getClientOriginalExtension();
-            $product->image2=url("public/productImage")."/".$filename;
+            $product->image2=$filename;
             $location = public_path('productImage/'.$filename);
             Image::make($img)->save($location);
+            $location2 = public_path('productImage/thumb/'.$filename);
+            Image::make($img)->resize(200, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($location2);
         }
         if($r->hasFile('image3Pic')){
             $img = $r->file('image3Pic');
             $filename= $product->productId.'image3'.'.'.$img->getClientOriginalExtension();
-            $product->image3=url("public/productImage")."/".$filename;
+            $product->image3=$filename;
             $location = public_path('productImage/'.$filename);
             Image::make($img)->save($location);
+            $location2 = public_path('productImage/thumb/'.$filename);
+            Image::make($img)->resize(200, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($location2);
         }
         if($r->hasFile('image4Pic')){
             $img = $r->file('image4Pic');
             $filename= $product->productId.'image4'.'.'.$img->getClientOriginalExtension();
-            $product->image4=url("public/productImage")."/".$filename;
+            $product->image4=$filename;
             $location = public_path('productImage/'.$filename);
             Image::make($img)->save($location);
+            $location2 = public_path('productImage/thumb/'.$filename);
+            Image::make($img)->resize(200, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($location2);
         }
         $product->save();
         Session::flash('message', 'Product Updated  successfully');
@@ -265,110 +412,22 @@ class ProductController extends Controller
 
         return $datatables->make(true);
     }
-    public function insert(Request $r){
 
-        $rules=[
-            'productName' => 'required|max:70',
-            'status' => 'required|max:8',
-            'description' => 'required|max:1100',
-            'style' => 'required|max:15',
-            'sku'=>'required|max:20',
-            'brand'=>'required|max:45',
-            'size'=>'max:45',
-            'sizeDescription'=>'max:45',
-            'runToSize'=>'max:45',
-            'color'=>'required|max:45',
-            'colorDesc'=>'required|max:20',
-            'ean'=>'max:13',
-            'care'=>'max:45',
-            'swatchPic'=>'image|mimes:jpeg,jpg',
-            'outfitPic'=>'image|mimes:jpeg,jpg',
-            'mainPic' =>'required|image|mimes:jpeg,jpg',
-            'image2Pic'=>'image|mimes:jpeg,jpg',
-            'image3Pic'=>'image|mimes:jpeg,jpg',
-            'image4Pic'=>'image|mimes:jpeg,jpg'
-        ];
-
-        $messages = [
-           // 'dimensions' => 'Image dimention should be over 800px',
-        ];
-
-        $validator = Validator::make($r->all(), $rules,$messages)->validate();
-
-        $product=new Product();
-        $product->productName=$r->productName;
-        $product->status=$r->status;
-        $product->productDesc=$r->description;
-        $product->style=$r->style;
-        $product->sku=$r->sku;
-        $product->brand=$r->brand;
-        $product->size=$r->size;
-        $product->sizeDescription=$r->sizeDescription;
-        $product->fkcategoryId=$r->category;
-        $product->ean=$r->ean;
-        $product->color=$r->color;
-        $product->colorDesc=$r->colorDesc;
-        $product->care=$r->care;
-        $product->price=$r->price;
-        $product->costPrice=$r->costPrice;
-        $product->wholePrice=$r->wholePrice;
-        $product->stockQty=$r->stockQty;
-        $product->minQtyAlert=$r->minQtyAlert;
-        $product->runtosize=$r->runToSize;
-        //$product->LastExportedBy=Auth::user()->userId;
-        $product->save();
-
-        if($r->hasFile('swatchPic')){
-            $img = $r->file('swatchPic');
-            $filename= $product->productId.'swatch'.'.'.$img->getClientOriginalExtension();
-            $product->swatchImage=url("public/productImage")."/".$filename;
-            $location = public_path('productImage/'.$filename);
-            Image::make($img)->save($location);
-        }
-        if($r->hasFile('outfitPic')){
-            $img = $r->file('outfitPic');
-            $filename= $product->productId.'outfit'.'.'.$img->getClientOriginalExtension();
-            $product->outfit=url("public/productImage")."/".$filename;
-            $location = public_path('productImage/'.$filename);
-            Image::make($img)->save($location);
-        }
-        if($r->hasFile('mainPic')){
-            $img = $r->file('mainPic');
-            $filename= $product->productId.'main'.'.'.$img->getClientOriginalExtension();
-            $product->mainImage=url("public/productImage")."/".$filename;
-            $location = public_path('productImage/'.$filename);
-            Image::make($img)->save($location);
-        }
-        if($r->hasFile('image2Pic')){
-            $img = $r->file('image2Pic');
-            $filename= $product->productId.'image2'.'.'.$img->getClientOriginalExtension();
-            $product->image2=url("public/productImage")."/".$filename;
-            $location = public_path('productImage/'.$filename);
-            Image::make($img)->save($location);
-        }
-        if($r->hasFile('image3Pic')){
-            $img = $r->file('image3Pic');
-            $filename= $product->productId.'image3'.'.'.$img->getClientOriginalExtension();
-            $product->image3=url("public/productImage")."/".$filename;
-            $location = public_path('productImage/'.$filename);
-            Image::make($img)->save($location);
-        }
-        if($r->hasFile('image4Pic')){
-            $img = $r->file('image4Pic');
-            $filename= $product->productId.'image4'.'.'.$img->getClientOriginalExtension();
-            $product->image4=url("public/productImage")."/".$filename;
-            $location = public_path('productImage/'.$filename);
-            Image::make($img)->save($location);
-        }
-        $product->save();
-        Session::flash('message', 'Product Uploaded successfully');
-        return back();
-    }
     public function Store($val){
         return $val;
     }
+
     public function destroy($id){
         $product=Product::findOrFail($id);
+        $offer = Offer::select('offerId')
+            ->where('fkproductId', $id)
+            ->get();
+
+//        return $offer;
+        if (!$offer->isEmpty()){
+            Session::flash('danger', 'This product is linked with an Offer, Please delete that offer record first from the Offer list. After that you will be able to delete this Product.');
+            return back();
+        }
         if($product->swatch!=null){
             File::delete('productImage/'.$product->swatch);
         }
@@ -425,21 +484,22 @@ class ProductController extends Controller
                 ->where('productId',$productId)
                 ->update($data);
         }
-        $fileName="ProductList-".date_timestamp_get(now()).".csv";
-        $filePath=public_path ()."/csv"."/".$fileName;
 
-        $fileInfo=array(
-            'fileName'=>$fileName,
-            'filePath'=>$filePath,
-            'alllist'=>$list
-        );
+//        $fileName="ProductList-".date_timestamp_get(now()).".csv";
+//        $filePath=public_path ()."/csv"."/".$fileName;
+//
+//        $fileInfo=array(
+//            'fileName'=>$fileName,
+//            'filePath'=>$filePath,
+//            'alllist'=>$list
+//        );
 
 
        // $filePath=public_path ()."/csv/ProductList.csv";
 
         # add headers for each column in the CSV download
 
-        array_unshift($list, array_keys($list[0]));
+       // array_unshift($list, array_keys($list[0]));
         
        // return $r;
 
@@ -468,31 +528,46 @@ class ProductController extends Controller
 //         return Response::stream($callback, 200, $headers); //use Illuminate\Support\Facades\Response;
 
 
-        $response = new StreamedResponse();
+//        $response = new StreamedResponse();
+//
+//        $response->setCallback(function () use ($list,$filePath){
+//
+//            $FH = fopen($filePath, "w");
+//            foreach ($list as $row) {
+//                fputcsv($FH, $row);
+//            }
+//            fclose($FH);
+//        });
+//
+//        $response->send();
+//        return $list;
 
-        $response->setCallback(function () use ($list,$filePath){
+        $filePath=public_path ()."/csv";
+//        $fileName="ProductList-".date_timestamp_get(now());
+        $fileName="ProductList-".date("Y-m-d_H-i-s");
+        $fileInfo=array(
+            'fileName'=>$fileName,
+            'filePath'=>$filePath,
+        );
 
-            $FH = fopen($filePath, "w");
-            foreach ($list as $row) {
-                fputcsv($FH, $row);
-            }
-            fclose($FH);
-        });
+        $check=Excel::create($fileName,function($excel) use($list,$filePath) {
+            $excel->sheet('First sheet', function($sheet) use($list) {
+                $sheet->loadView('product.serverCSVProductList')->with('productList',$list);
+            });
 
-        $response->send();
-
+        })->store('csv',$filePath);
+        if ($check) {
+            Session::flash('message', $fileName . ' has been sent to server');
+        }else{
+            Session::flash('message',' Someting went wrong');
+        }
         return $fileInfo;
-
-
+        
 
     }
 
     public function sendftp(Request $r)
     {
-       // return $r->products;
-//        return $r->path;
-        //Storage::disk('ftp')->store('test.txt');
-       // Storage::disk('ftp')->putFile('photos', '');
 
         $ftp_server = "ftp.sakibrahman.com";
         $ftp_username = "baker@sakibrahman.com";
@@ -528,11 +603,8 @@ class ProductController extends Controller
     public function excelExport(Request $r)
     {
         $productList=$r->products;
-
-
         $filePath=public_path ()."/excel";
-        $fileName="productList";
-
+        $fileName="productList".date("Y-m-d_H-i-s");
         $fileInfo=array(
             'fileName'=>$fileName,
             'filePath'=>$fileName,
@@ -542,26 +614,20 @@ class ProductController extends Controller
         for ($i=0;$i<count($productList);$i++){
             $productId=$productList[$i];
             $newlist=Product::select('category.categoryName','style','sku','ean','productName','productDesc','brand','color','colorDesc','size',
-                'sizeDescription','mainImage','swatchImage','outfit','image2','image3','image4','runtosize','care','price','costPrice',
+                'sizeDescription','mainImage','swatchImage','outfit','image2','image3','image4','runtosize','care','price','costPrice','location',
                 'wholePrice','stockQty','minQtyAlert','LastExportedBy','LastExportedDate')
                 ->leftJoin('category', 'category.categoryId', '=', 'product.fkcategoryId')->where('product.productId',$productId)->get()->toArray();
             $list=array_merge($list,$newlist);
 
         }
-
-
         Excel::create($fileName,function($excel) use($list,$filePath) {
-
             $excel->sheet('First sheet', function($sheet) use($list) {
-
                 $sheet->loadView('product.localDownloadProductList')->with('productList',$list);
             });
 
         })->store('xls',$filePath);
 
         return $fileInfo;
-
-
 
     }
 

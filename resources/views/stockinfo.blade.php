@@ -24,6 +24,8 @@
                                 <th>Stock Quantity</th>
                                 <th>Min Qty Alert</th>
                                 <th>Image</th>
+                                <th>Location</th>
+                                {{--<th>Date</th>--}}
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -63,7 +65,7 @@
                 },
                 columns: [
 
-                    { data: 'productName', name: 'productName' },
+                    { data: 'productName', name: 'productName' ,"orderable": false },
                     { data: 'categoryName', name: 'categoryName' },
                     { data: 'sku', name: 'sku' },
                     { data: 'color', name: 'color' },
@@ -71,8 +73,11 @@
                     { data: 'stockQty', name: 'stockQty' },
                     { data: 'minQtyAlert', name: 'minQtyAlert' },
                     { "data": function(data){
-                        return '<img width="100" height="80" src="'+data.mainImage+'">';},
+                        return'<img width="100" height="80" src="{{url('public/productImage/thumb')."/"}}'+data.mainImage+'">';
+                },
                         "orderable": false, "searchable":false, "name":"image" },
+                    { data: 'location', name: 'location' },
+//                    { data: 'created_at', name: 'created_at' },
                     { "data": function(data){
                         return '<a style="cursor: pointer; color: #4881ecfa" data-panel-id="'+data.productId+'"onclick="editProduct(this)">view details</a>';},
                         "orderable": false, "searchable":false, "name":"action" }
