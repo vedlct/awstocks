@@ -415,13 +415,16 @@ class ProductController extends Controller
     public function Store($val){
         return $val;
     }
+
     public function destroy($id){
         $product=Product::findOrFail($id);
         $offer = Offer::select('offerId')
             ->where('fkproductId', $id)
             ->get();
-        if (!empty($offer)){
-            Session::flash('danger', 'Please Delete the offer related with this product first');
+
+//        return $offer;
+        if (!$offer->isEmpty()){
+            Session::flash('danger', 'This product is linked with an Offer, Please delete that offer record first from the Offer list. After that you will be able to delete this Product.');
             return back();
         }
         if($product->swatch!=null){
@@ -539,7 +542,8 @@ class ProductController extends Controller
 //        return $list;
 
         $filePath=public_path ()."/csv";
-        $fileName="ProductList-".date_timestamp_get(now());
+//        $fileName="ProductList-".date_timestamp_get(now());
+        $fileName="ProductList-".date("Y-m-d_H-i-s");
         $fileInfo=array(
             'fileName'=>$fileName,
             'filePath'=>$filePath,
@@ -597,10 +601,10 @@ class ProductController extends Controller
 
     public function excelExport(Request $r)
     {
-        $productList=$r->products;
+        $productList=$r->products; 
 
         $filePath=public_path ()."/excel";
-        $fileName="productList";
+        $fileName="productList".date("Y-m-d_H-i-s");
         $fileInfo=array(
             'fileName'=>$fileName,
             'filePath'=>$fileName,

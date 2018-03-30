@@ -1,4 +1,12 @@
 @extends('main')
+@section('header')
+    {{--<link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">--}}
+    <style>
+        th.dt-center, td.dt-center { text-align: center; }
+        table{font-size: 15px}
+        .container-fluid {padding: 15px  15px;}
+    </style>
+@endsection
 
 @section('content')
 
@@ -39,11 +47,11 @@
                 </div>
                 <br>
         <div class="table table-responsive">
-         <table id="offerlist" class="table table-hover"  >
+         <table id="offerlist" class="table table-bordered table-striped"  >
             <thead>
             <tr>
 
-                <th>Select</th>
+                <th><input type="checkbox" id="selectall" onClick="selectAll(this)" /></th>
                 <th>Category</th>
                 <th>Sku</th>
                 <th>Price</th>
@@ -60,24 +68,24 @@
             </tbody>
         </table>
             <br>
-            <input type="checkbox" id="selectall" onClick="selectAll(this)" /><b>Select All</b>
+            {{--<input type="checkbox" id="selectall" onClick="selectAll(this)" /><b>Select All</b>--}}
 
         </div>
                 <div class="row">
                     <div class="col-md-2">
-                        <a  onclick="return creationFull()" download> <button class="btn btn-danger" >CREATION #FULL</button></a>
+                        <a  onclick="return creationFull()" download> <button class="btn btn-danger" >Export Full into Offer files</button></a>
                     </div>
                     <div class="col-md-2">
-                        <a  onclick="return priceUpdate()" download> <button class="btn btn-danger"  >Price Update</button></a>
+                        <a  onclick="return priceUpdate()" download> <button class="btn btn-danger"  >Export Price Update</button></a>
                     </div>
                      <div class="col-md-2">
-                        <a  onclick="return stockUpdate()" download> <button class="btn btn-danger"  >Stock Update</button></a>
+                        <a  onclick="return stockUpdate()" download> <button class="btn btn-danger"  >Export Stock Update</button></a>
                     </div>
                     <div class="col-md-2">
-                        <a  onclick="return markdownUpdate()" download> <button class="btn btn-danger"  >Markdown Update</button></a>
+                        <a  onclick="return markdownUpdate()" download> <button class="btn btn-danger"  >Export Markdown Update</button></a>
                     </div>
                     <div class="col-md-2">
-                        <a  onclick="return excel()"> <button class="btn btn-danger"  >Download selected Products</button></a>
+                        <a  onclick="return excel()"> <button class="btn btn-danger"  >Download Offers into Local Computer</button></a>
 
                     </div>
 
@@ -108,6 +116,8 @@
                 processing: true,
                 serverSide: true,
                 stateSave: true,
+                "lengthMenu": [[10, 25, 50,100, -1], [10, 25, 50,100, "All"]],
+                "dom": 'lf<"br">irtip',
                 "ajax":{
                     "url": "{!! route('offer.offerList') !!}",
                     "type": "POST",
@@ -121,7 +131,7 @@
                 columns: [
                     { "data": function(data){
                         return '<input type="checkbox" name="selected_rows[]" class="chk" data-panel-id="'+data.offerId+'"onclick="selected_rows(this)" value="'+ data.offerId +'" />';},
-                        "orderable": false, "searchable":false, "name":"selected_rows" },
+                        "orderable": false, "searchable":false, "name":"selected_rows","className": "dt-center selectBox" },
                     { data: 'categoryName', name: 'categoryName' },
                     { data: 'sku', name: 'sku' },
                     { data: 'price', name: 'price' },
