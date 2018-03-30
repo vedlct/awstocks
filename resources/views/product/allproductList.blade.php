@@ -78,8 +78,8 @@
         </div>
 
 
-        <a  onclick="return myfunc()" download> <button class="btn btn-danger"  >Export Products file</button></a>
-        <a  onclick="return excel()"> <button class="btn btn-danger"  >Download selected Products</button></a>
+        <a  onclick="return myfunc()" download> <button class="btn btn-danger"  >Export into Products files</button></a>
+        <a  onclick="return excel()"> <button class="btn btn-danger"  >Download Products into Local Computer</button></a>
 
 
     </div>
