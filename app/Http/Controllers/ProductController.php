@@ -166,6 +166,7 @@ class ProductController extends Controller
         $product->minQtyAlert=$r->minQtyAlert;
         $product->runtosize=$r->runToSize;
         $product->location=$r->location;
+        $product->created_at=date(now());
         //$product->LastExportedBy=Auth::user()->userId;
         $product->save();
 
@@ -601,8 +602,7 @@ class ProductController extends Controller
 
     public function excelExport(Request $r)
     {
-        $productList=$r->products; 
-
+        $productList=$r->products;
         $filePath=public_path ()."/excel";
         $fileName="productList".date("Y-m-d_H-i-s");
         $fileInfo=array(
