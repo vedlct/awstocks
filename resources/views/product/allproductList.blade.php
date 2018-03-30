@@ -164,7 +164,6 @@
             //alert(url);
             var result = confirm("Want to delete?");
             if (result) {
-
                 var newUrl=url.replace(':id', btn);
             window.location.href = newUrl;}
         }
@@ -263,8 +262,6 @@
                     cache: false,
                     data: {'products': products},
                     success: function (data) {
-//                        alert(data);
-
                         var link = document.createElement("a");
                         link.download = data.fileName+".xls";
                         var uri = '{{url("public/excel")}}'+"/"+data.fileName+".xls";
