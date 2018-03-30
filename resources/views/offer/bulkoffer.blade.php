@@ -41,7 +41,7 @@
             <table id="allProductList" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                    <th >Select</th>
+                    <th ><input type="checkbox" id="selectall" onClick="selectAll(this)" /></th>
                     <th >Product Category</th>
                     <th >Product name</th>
                     <th >SKU</th>
@@ -53,7 +53,7 @@
             </table><br>
 
 
-            <input type="checkbox" id="selectall" onClick="selectAll(this)" /><b>Select All</b><br>
+            {{--<input type="checkbox" id="selectall" onClick="selectAll(this)" /><b>Select All</b><br>--}}
         </div>
         <div class="row">
         <div class="col-md-4 dropdown">
@@ -76,7 +76,7 @@
 
 
         <br>
-        <a onclick="insertBulkOffer()"><button class="btn btn-danger"  >Insert Bulk Offer</button></a>
+        <a onclick="insertBulkOffer()"><button class="btn btn-danger"  >Insert Bulk Offer</button></a><br>
 
 
     </div>
@@ -108,6 +108,8 @@
                 processing: true,
                 serverSide: true,
                 stateSave: true,
+                "lengthMenu": [[10, 25, 50,100, -1], [10, 25, 50,100, "All"]],
+                "dom": 'lf<"br">irtip',
 //                bSort:false,
                 "ajax":{
                     "url": "{!! route('offer.bulkOfferdt') !!}",

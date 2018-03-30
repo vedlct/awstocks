@@ -39,11 +39,11 @@
                 </div>
                 <br>
         <div class="table table-responsive">
-         <table id="offerlist" class="table table-hover"  >
+         <table id="offerlist" class="table table-bordered table-striped"  >
             <thead>
             <tr>
 
-                <th>Select</th>
+                <th><input type="checkbox" id="selectall" onClick="selectAll(this)" /></th>
                 <th>Category</th>
                 <th>Sku</th>
                 <th>Price</th>
@@ -60,7 +60,7 @@
             </tbody>
         </table>
             <br>
-            <input type="checkbox" id="selectall" onClick="selectAll(this)" /><b>Select All</b>
+            {{--<input type="checkbox" id="selectall" onClick="selectAll(this)" /><b>Select All</b>--}}
 
         </div>
                 <div class="row">
@@ -108,6 +108,8 @@
                 processing: true,
                 serverSide: true,
                 stateSave: true,
+                "lengthMenu": [[10, 25, 50,100, -1], [10, 25, 50,100, "All"]],
+                "dom": 'lf<"br">irtip',
                 "ajax":{
                     "url": "{!! route('offer.offerList') !!}",
                     "type": "POST",
