@@ -215,8 +215,8 @@
                         data: {'fulloffers': offers},
                         success: function (data) {
                             $('#SessionMessage').load(document.URL +  ' #SessionMessage');
-
                             table.ajax.reload();  //just reload table
+
                             {{--var link = document.createElement("a");--}}
                             {{--link.download = data.fileName;--}}
                             {{--var uri = '{{url("public/csv")}}'+"/"+data.fileName;--}}
@@ -276,8 +276,10 @@
                     cache: false,
                     data: {'stockUpdate': offers},
                     success: function (data) {
+
                         $('#SessionMessage').load(document.URL +  ' #SessionMessage');
                         table.ajax.reload();  //just reload table
+
                         {{--var link = document.createElement("a");--}}
                         {{--link.download = data.fileName;--}}
                         {{--var uri = '{{url("public/csv")}}'+"/"+data.fileName;--}}
@@ -305,8 +307,10 @@
                     cache: false,
                     data: {'markdownUpdate': offers},
                     success: function (data) {
+
                         $('#SessionMessage').load(document.URL +  ' #SessionMessage');
                         table.ajax.reload();  //just reload table
+
                         {{--var link = document.createElement("a");--}}
                         {{--link.download = data.fileName;--}}
                         {{--var uri = '{{url("public/csv")}}'+"/"+data.fileName;--}}

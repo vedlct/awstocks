@@ -481,6 +481,63 @@ class ProductController extends Controller
                 ->update($data);
         }
 
+//        $fileName="ProductList-".date_timestamp_get(now()).".csv";
+//        $filePath=public_path ()."/csv"."/".$fileName;
+//
+//        $fileInfo=array(
+//            'fileName'=>$fileName,
+//            'filePath'=>$filePath,
+//            'alllist'=>$list
+//        );
+
+
+       // $filePath=public_path ()."/csv/ProductList.csv";
+
+        # add headers for each column in the CSV download
+
+       // array_unshift($list, array_keys($list[0]));
+        
+       // return $r;
+
+//        $callback = function() use ($list,$filePath)
+//        {
+//            $FH = fopen($filePath, "w");
+//
+//            foreach ($list as $row) {
+//                fputcsv($FH, $row);
+//            }
+//            fclose($FH);
+//        };
+
+
+//        $data1=array(
+//            'historicUploadedFilesName'=>$fileName,
+//            'historicUploadedFilesType'=>"ProductList",
+//            'createdBy'=>Auth::user()->userId,
+//
+//        );
+//
+//        DB::table('historicuploadedfiles')
+//            ->insert($data1);
+
+
+//         return Response::stream($callback, 200, $headers); //use Illuminate\Support\Facades\Response;
+
+
+//        $response = new StreamedResponse();
+//
+//        $response->setCallback(function () use ($list,$filePath){
+//
+//            $FH = fopen($filePath, "w");
+//            foreach ($list as $row) {
+//                fputcsv($FH, $row);
+//            }
+//            fclose($FH);
+//        });
+//
+//        $response->send();
+//        return $list;
+
         $filePath=public_path ()."/csv";
         $fileName="ProductList-".date_timestamp_get(now());
         $fileInfo=array(
@@ -553,7 +610,7 @@ class ProductController extends Controller
         for ($i=0;$i<count($productList);$i++){
             $productId=$productList[$i];
             $newlist=Product::select('category.categoryName','style','sku','ean','productName','productDesc','brand','color','colorDesc','size',
-                'sizeDescription','mainImage','swatchImage','outfit','image2','image3','image4','runtosize','care','price','costPrice',
+                'sizeDescription','mainImage','swatchImage','outfit','image2','image3','image4','runtosize','care','price','costPrice','location',
                 'wholePrice','stockQty','minQtyAlert','LastExportedBy','LastExportedDate')
                 ->leftJoin('category', 'category.categoryId', '=', 'product.fkcategoryId')->where('product.productId',$productId)->get()->toArray();
             $list=array_merge($list,$newlist);
