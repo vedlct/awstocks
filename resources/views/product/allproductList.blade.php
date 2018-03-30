@@ -73,13 +73,10 @@
 
             {{--<input style="margin-left: 15px" type="checkbox" id="selectall" onClick="selectAll(this)" /><b>Select All</b><br>--}}
         </div>
-
-
-        <a  onclick="return myfunc()" download> <button class="btn btn-danger"  >Export Products file</button></a>
-        <a  onclick="return excel()"> <button class="btn btn-danger"  >Download selected Products</button></a>
-
-
+        <a  onclick="return myfunc()" download> <button class="btn btn-danger"  >Export into Products files</button></a>
+        <a  onclick="return excel()"> <button class="btn btn-danger"  >Download Products into Local Computer</button></a>
     </div>
+
 @endsection
 @section('foot-js')
 
@@ -163,7 +160,6 @@
             //alert(url);
             var result = confirm("Want to delete?");
             if (result) {
-
                 var newUrl=url.replace(':id', btn);
             window.location.href = newUrl;}
         }
@@ -267,8 +263,6 @@
                     cache: false,
                     data: {'products': products},
                     success: function (data) {
-//                        alert(data);
-
                         var link = document.createElement("a");
                         link.download = data.fileName+".xls";
                         var uri = '{{url("public/excel")}}'+"/"+data.fileName+".xls";

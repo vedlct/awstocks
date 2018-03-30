@@ -6,7 +6,7 @@
 @section('content')
 
     <div class="row">
-        
+
 
         <div class="col-lg-12">
             <div class="card" style="margin-left: 10px; border-radius: 10px;">

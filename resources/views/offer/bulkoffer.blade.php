@@ -73,7 +73,7 @@
 
         </div>
         <div class="col-md-4 ">
-            <label class="form-control-label">Discount Price(£) %</label> <br>
+            <label class="form-control-label">Discount Percentage(%)</label> <br>
             <input class="form-control" type="number" id="disprice" name="disprice">
 
         </div>
@@ -81,7 +81,9 @@
 
 
         <br>
-        <a onclick="insertBulkOffer()"><button class="btn btn-danger"  >Insert Bulk Offer</button></a><br>
+
+        <a onclick="insertBulkOffer()"><button class="btn btn-danger"  >Update selected Products</button></a>
+
 
 
     </div>
