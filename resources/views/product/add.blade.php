@@ -2,13 +2,17 @@
 @section('header')
 
     <link href="{{url('css/select2.min.css')}}" rel="stylesheet" />
+    <style>
+
+        table{font-size: 15px}
+        .container-fluid  {padding: 15px  5px;}
+    </style>
 @endsection
+
 @section('content')
 
+
 <div class="row">
-
-
-
     <div class="col-lg-12">
         <div class="card" style="margin-left: 10px; border-radius: 10px;">
 
@@ -419,10 +423,11 @@
     </div>
 
 
-
-
-
 </div>
+
+
+
+
 
 
 @endsection

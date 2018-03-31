@@ -31,6 +31,13 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 
+        {{--<link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">--}}
+        <style>
+            th.dt-center, td.dt-center { text-align: center; }
+            table{font-size: 15px}
+            .container-fluid  {padding: 15px  15px;}
+        </style>
+
     <!--[endif]-->
 
     @yield('header')

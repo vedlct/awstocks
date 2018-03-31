@@ -33,7 +33,7 @@
                 </li>
 
                 <li>
-                    <a href="{{route('offer.generate')}}"><i class="fa fa-briefcase"></i><span class="hide-menu">Generate Offer Files</span></a>
+                    <a href="{{route('offer.generate')}}"><i class="fa fa-briefcase"></i><span class="hide-menu">Offer List</span></a>
 
                 </li>
 

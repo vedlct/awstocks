@@ -4,7 +4,7 @@
     <style>
         th.dt-center, td.dt-center { text-align: center; }
         table{font-size: 15px}
-        .container-fluid {padding: 15px  15px;}
+        .container-fluid {padding: 15px  5px;}
     </style>
 @endsection
 

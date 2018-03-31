@@ -1,5 +1,12 @@
 @extends('main')
-
+@section('header')
+    {{--<link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">--}}
+    <style>
+        /*th.dt-center, td.dt-center { text-align: center; }*/
+        table{font-size: 15px}
+        .container-fluid {padding: 15px  5px;}
+    </style>
+@endsection
 @section('content')
 
     <!-- Page Header-->
@@ -19,12 +26,12 @@
                                 <th>Product Name</th>
                                 <th>Category</th>
                                 <th>SKU</th>
-                                <th>Colour</th>
+                                <th>Location</th>
                                 <th>RRP</th>
                                 <th>Stock Quantity</th>
                                 <th>Min Qty Alert</th>
                                 <th>Image</th>
-                                <th>Location</th>
+                                <th>Colour</th>
                                 {{--<th>Date</th>--}}
                                 <th>Action</th>
                             </tr>
@@ -68,15 +75,15 @@
                     { data: 'productName', name: 'productName' ,"orderable": false },
                     { data: 'categoryName', name: 'categoryName' },
                     { data: 'sku', name: 'sku' },
-                    { data: 'color', name: 'color' },
+                    { data: 'location', name: 'location' },
                     { data: 'price', name: 'price' },
                     { data: 'stockQty', name: 'stockQty' },
                     { data: 'minQtyAlert', name: 'minQtyAlert' },
                     { "data": function(data){
-                        return'<img width="100" height="80" src="{{url('public/productImage/thumb')."/"}}'+data.mainImage+'">';
+                        return'<img width="80" height="60" src="{{url('public/productImage/thumb')."/"}}'+data.mainImage+'">';
                 },
                         "orderable": false, "searchable":false, "name":"image" },
-                    { data: 'location', name: 'location' },
+                    { data: 'color', name: 'color' },
 //                    { data: 'created_at', name: 'created_at' },
                     { "data": function(data){
                         return '<a style="cursor: pointer; color: #4881ecfa" data-panel-id="'+data.productId+'"onclick="editProduct(this)">view details</a>';},
