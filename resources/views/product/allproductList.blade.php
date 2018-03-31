@@ -55,8 +55,8 @@
                 <thead>
                 <tr>
 
-                    {{--<th >Select</th>--}}
-                    <th width="1%"><input type="checkbox" id="selectall" onClick="selectAll(this)" /></th>
+                    <th >Select</th>
+                    {{--<th width="1%"><input type="checkbox" id="selectall" onClick="selectAll(this)" /></th>--}}
                     <th width="15%" >Product Category</th>
                     <th width="10%">Style</th>
                     <th width="5%">SKU</th>
@@ -71,7 +71,7 @@
 
             </table><br>
 
-            {{--<input style="margin-left: 15px" type="checkbox" id="selectall" onClick="selectAll(this)" /><b>Select All</b><br>--}}
+            <input style="margin-left: 15px" type="checkbox" id="selectall" onClick="selectAll(this)" /><b>Select All</b><br>
         </div>
         <a  onclick="return myfunc()" download> <button class="btn btn-danger"  >Export into Product file</button></a>
         <a  onclick="return excel()"> <button class="btn btn-danger"  >Download Products into Local Computer</button></a>
@@ -94,8 +94,8 @@
                 serverSide: true,
                 stateSave: true,
                 "lengthMenu": [[10, 25, 50,100, -1], [10, 25, 50,100, "All"]],
-//                "dom": '<"toolbar">lf<br>irtip',
-                "dom": 'lf<"br">irtip',
+                "dom": '<"toolbar">lf<br>irtip',
+//                "dom": 'lf<"br">irtip',
 
                 "ajax":{
                     "url": "{!! route('product.data') !!}",
@@ -127,7 +127,7 @@
                 ],
                 order: [[0,'desc'] ],
             });
-//            $("div.toolbar").html('<input style="margin-left: 15px" type="checkbox" id="selectall" onClick="selectAll(this)" /><b>Select All</b>');
+            $("div.toolbar").html('<input style="margin-left: 15px" type="checkbox" id="selectall" onClick="selectAll(this)" /><b>Select All</b>');
 
             $('#status').change(function(){ //button filter event click
                 table.search("").draw(); //just redraw myTableFilter
@@ -158,10 +158,11 @@
             btn = $(x).data('panel-id');
             var url = '{{route("product.destroy", ":id") }}';
             //alert(url);
-            var result = confirm("Want to delete?");
+            var result = confirm("Are you sure you would like to delete the selected product?");
             if (result) {
                 var newUrl=url.replace(':id', btn);
             window.location.href = newUrl;}
+
         }
 
         var selecteds = [];
