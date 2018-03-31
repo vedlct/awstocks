@@ -228,6 +228,7 @@
                         for(var i=0; i <= selecteds.length; i++) {
                             selecteds.pop(i);
                         }
+                        $('#selectall').prop('checked', false);
 
                         {{--var link = document.createElement("a");--}}
                         {{--link.download = data.fileName+".csv";--}}
@@ -271,6 +272,11 @@
                         link.click();
                         document.body.removeChild(link);
                         delete link;
+
+                        for(var i=0; i <= selecteds.length; i++) {
+                            selecteds.pop(i);
+                        }
+                        $('#selectall').prop('checked', false);
 
                     }
 

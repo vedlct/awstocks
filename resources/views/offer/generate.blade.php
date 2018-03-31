@@ -236,6 +236,11 @@
                             {{--document.body.removeChild(link);--}}
                             {{--delete link;--}}
 
+                            for(var i=0; i <= selecteds.length; i++) {
+                                selecteds.pop(i);
+                            }
+                            $('#selectall').prop('checked', false);
+
 
                         }
 
@@ -268,6 +273,11 @@
                                 {{--document.body.removeChild(link);--}}
                                 {{--delete link;--}}
 
+                                for(var i=0; i <= selecteds.length; i++) {
+                                    selecteds.pop(i);
+                                }
+                                $('#selectall').prop('checked', false);
+
 
                             }
 
@@ -299,6 +309,11 @@
                         {{--document.body.removeChild(link);--}}
                         {{--delete link;--}}
 
+                        for(var i=0; i <= selecteds.length; i++) {
+                            selecteds.pop(i);
+                        }
+                        $('#selectall').prop('checked', false);
+
 
                     }
 
@@ -329,6 +344,11 @@
                         {{--link.click();--}}
                         {{--document.body.removeChild(link);--}}
                         {{--delete link;--}}
+
+                        for(var i=0; i <= selecteds.length; i++) {
+                            selecteds.pop(i);
+                        }
+                        $('#selectall').prop('checked', false);
 
                     }
 
