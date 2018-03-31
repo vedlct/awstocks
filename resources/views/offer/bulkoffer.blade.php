@@ -46,7 +46,8 @@
             <table id="allProductList" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                    <th ><input type="checkbox" id="selectall" onClick="selectAll(this)" /></th>
+                    {{--<th ><input type="checkbox" id="selectall" onClick="selectAll(this)" /></th>--}}
+                    <th >Select</th>
                     <th >Product Category</th>
                     <th >Product name</th>
                     <th >SKU</th>
@@ -58,7 +59,7 @@
             </table><br>
 
 
-            {{--<input type="checkbox" id="selectall" onClick="selectAll(this)" /><b>Select All</b><br>--}}
+            <input type="checkbox" id="selectall" onClick="selectAll(this)" /><b>Select All</b><br>
         </div>
         <div class="row">
         <div class="col-md-4 dropdown">
@@ -117,6 +118,7 @@
                 stateSave: true,
                 "lengthMenu": [[10, 25, 50,100, -1], [10, 25, 50,100, "All"]],
                 "dom": 'lf<"br">irtip',
+                "dom": '<"toolbar">lf<br>irtip',
 //                bSort:false,
                 "ajax":{
                     "url": "{!! route('offer.bulkOfferdt') !!}",
@@ -140,6 +142,7 @@
                 ],
                 order: [[0,'desc'] ],
             });
+            $("div.toolbar").html('<input style="margin-left: 15px" type="checkbox" id="selectall" onClick="selectAll(this)" /><b>Select All</b>');
             $('#status').change(function(){ //button filter event click
                 table.search("").draw(); //just redraw myTableFilter
                 table.ajax.reload();  //just reload table

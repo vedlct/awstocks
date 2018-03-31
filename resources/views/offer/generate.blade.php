@@ -51,7 +51,8 @@
             <thead>
             <tr>
 
-                <th><input type="checkbox" id="selectall" onClick="selectAll(this)" /></th>
+                {{--<th><input type="checkbox" id="selectall" onClick="selectAll(this)" /></th>--}}
+                <th>Select</th>
                 <th>Category</th>
                 <th>Sku</th>
                 <th>Price</th>
@@ -68,7 +69,7 @@
             </tbody>
         </table>
             <br>
-            {{--<input type="checkbox" id="selectall" onClick="selectAll(this)" /><b>Select All</b>--}}
+            <input type="checkbox" id="selectall" onClick="selectAll(this)" /><b>Select All</b>
 
         </div>
                 <div class="row">
@@ -117,7 +118,8 @@
                 serverSide: true,
                 stateSave: true,
                 "lengthMenu": [[10, 25, 50,100, -1], [10, 25, 50,100, "All"]],
-                "dom": 'lf<"br">irtip',
+//                "dom": 'lf<"br">irtip',
+                "dom": '<"toolbar">lf<br>irtip',
                 "ajax":{
                     "url": "{!! route('offer.offerList') !!}",
                     "type": "POST",
@@ -148,6 +150,7 @@
                 order: [[0,'desc'] ],
 
             });
+            $("div.toolbar").html('<input style="margin-left: 15px" type="checkbox" id="selectall" onClick="selectAll(this)" /><b>Select All</b>');
 
 
             $('#category').change(function(){ //button filter event click
@@ -202,7 +205,7 @@
             btn = $(x).data('panel-id');
             var url = '{{route("offer.delete", ":id") }}';
 
-            var result = confirm("Want to delete?");
+            var result = confirm("Are you sure you would like to delete the selected Offer?");
             if (result) {
                 var newUrl = url.replace(':id', btn);
                 window.location.href = newUrl;
