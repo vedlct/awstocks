@@ -33,6 +33,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
 
 
+        {{--<link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">--}}
+        <style>
+            th.dt-center, td.dt-center { text-align: center; }
+            table{font-size: 15px}
+            .container-fluid  {padding: 15px  15px;}
+        </style>
+
     <!--[endif]-->
 
     @yield('header')

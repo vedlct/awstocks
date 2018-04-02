@@ -1,5 +1,12 @@
 @extends('main')
-
+@section('header')
+    {{--<link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">--}}
+    <style>
+        /*th.dt-center, td.dt-center { text-align: center; }*/
+        table{font-size: 15px}
+        .container-fluid {padding: 15px  5px;}
+    </style>
+@endsection
 @section('content')
 
     <!-- Page Header-->
@@ -73,7 +80,7 @@
                     { data: 'stockQty', name: 'stockQty' },
                     { data: 'minQtyAlert', name: 'minQtyAlert' },
                     { "data": function(data){
-                        return'<img width="100" height="80" src="{{url('public/productImage/thumb')."/"}}'+data.mainImage+'">';
+                        return'<img width="80" height="60" src="{{url('public/productImage/thumb')."/"}}'+data.mainImage+'">';
                 },
                         "orderable": false, "searchable":false, "name":"image" },
                     { data: 'color', name: 'color' },

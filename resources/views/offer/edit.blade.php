@@ -2,6 +2,11 @@
 @section('header')
 
     <link href="{{url('css/select2.min.css')}}" rel="stylesheet" />
+    <style>
+
+        table{font-size: 15px}
+        .container-fluid  {padding: 15px  5px;}
+    </style>
 @endsection
 @section('content')
 

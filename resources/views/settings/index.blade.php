@@ -1,8 +1,15 @@
 @extends('main')
 
+@section('header')
+    <style>
 
+        table{font-size: 15px}
+        .container-fluid  {padding: 15px  5px;}
+    </style>
+@endsection
 @section('content')
 
+    <div class="row">
     <div class="col-lg-12">
         <div class="card" style="margin-left: 10px; border-radius: 10px;">
 
@@ -22,23 +29,15 @@
 
             </select>
         </div>
-
         <br>
-
 
         <div id="element" class="element">
 
-
-
-
         </div>
-
-
-
-
         </div>
-            </div>
-            </div>
+        </div>
+        </div>
+    </div>
     </div>
 
 @endsection
@@ -122,7 +121,6 @@
 
                 }
             });
-
 
         }
 

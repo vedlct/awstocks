@@ -2,6 +2,11 @@
 @section('header')
 
     <link href="{{url('css/select2.min.css')}}" rel="stylesheet" />
+    <style>
+
+        table{font-size: 15px}
+        .container-fluid  {padding: 15px  5px;}
+    </style>
 @endsection
 @section('content')
 
@@ -184,7 +189,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">Location</label>
+                            <label class="col-sm-2 form-control-label">Product Location</label>
                             <div class="col-sm-10">
                                 <input id="inputHorizontalSuccess" value="{{$product->location}}" name="location"  type="text"  class="form-control form-control-success">
                                 @if ($errors->has('location'))

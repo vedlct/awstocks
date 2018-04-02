@@ -73,7 +73,7 @@
 
             <input style="margin-left: 15px" type="checkbox" class="SelectAll" id="selectall2"  /><b>Select All</b><br>
         </div>
-        <a  onclick="return myfunc()" download> <button class="btn btn-danger"  >Export into Products files</button></a>
+        <a  onclick="return myfunc()" download> <button class="btn btn-danger"  >Export into Product file</button></a>
         <a  onclick="return excel()"> <button class="btn btn-danger"  >Download Products into Local Computer</button></a>
     </div>
 
