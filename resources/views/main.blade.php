@@ -30,6 +30,8 @@
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
+
 
     <!--[endif]-->
 
@@ -77,6 +79,7 @@
 
 </div>
 
+
         @yield('content')
 
 
@@ -118,6 +121,7 @@
 <script src="{{url('js/custom.min.js')}}"></script>
 <script src="{{url('date/jquery-ui.js')}}"></script>
 <script src="{{url('date/script.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
 
 
 @yield('foot-js')

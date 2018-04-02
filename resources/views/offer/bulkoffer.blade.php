@@ -59,7 +59,7 @@
             </table><br>
 
 
-            <input type="checkbox" id="selectall" onClick="selectAll(this)" /><b>Select All</b><br>
+            <input type="checkbox" id="selectall2"  /><b>Select All</b><br>
         </div>
         <div class="row">
         <div class="col-md-4 dropdown">
@@ -117,8 +117,8 @@
                 serverSide: true,
                 stateSave: true,
                 "lengthMenu": [[10, 25, 50,100, -1], [10, 25, 50,100, "All"]],
-                "dom": 'lf<"br">irtip',
-                "dom": '<"toolbar">lf<br>irtip',
+//                "dom": 'lf<"br">irtip',
+                "dom": 'lf<br>i<"toolbar">rtip',
 //                bSort:false,
                 "ajax":{
                     "url": "{!! route('offer.bulkOfferdt') !!}",
@@ -142,7 +142,22 @@
                 ],
                 order: [[0,'desc'] ],
             });
-            $("div.toolbar").html('<input style="margin-left: 15px" type="checkbox" id="selectall" onClick="selectAll(this)" /><b>Select All</b>');
+            $("div.toolbar").html('<input style="margin-left: 15px" type="checkbox" id="selectall1" /><b>Select All</b>');
+
+            $('#allProductList').on( 'length.dt', function ( e, settings, len ) {
+                selecteds=[];
+                $(':checkbox:checked').prop('checked',false);
+            });
+            $('#allProductList').on( 'page.dt', function ( e, settings, len ) {
+                selecteds=[];
+                $(':checkbox:checked').prop('checked',false);
+            });
+            $('#allProductList').on( 'search.dt', function ( e, settings, len ) {
+                selecteds=[];
+                $(':checkbox:checked').prop('checked',false);
+            });
+
+
             $('#status').change(function(){ //button filter event click
                 table.search("").draw(); //just redraw myTableFilter
                 table.ajax.reload();  //just reload table
@@ -150,17 +165,73 @@
             $('#category').change(function(){ //button filter event click
                 table.search("").draw(); //just redraw myTableFilter
                 table.ajax.reload();  //just reload table
+                selecteds=[];
+                $(':checkbox:checked').prop('checked',false);
             });
             $('#product').change(function(){ //button filter event click
                 table.search("").draw(); //just redraw myTableFilter
                 table.ajax.reload();  //just reload table
             });
+
+            // add multiple select / deselect functionality
+            $("#selectall2").click(function () {
+
+                if($('#selectall2').is(":checked")) {
+                    selecteds=[];
+                    $('#selectall1').prop('checked',true);
+                    checkboxes = document.getElementsByName('selected_rows[]');
+                    for(var i in checkboxes) {
+                        checkboxes[i].checked = 'TRUE';
+                    }
+
+                    /* look for all checkboes that have a class 'chk' attached to it and check if it was checked */
+                    $(".chk:checked").each(function () {
+                        selecteds.push($(this).val());
+                    });
+                    //  alert(selecteds);
+
+
+                }
+                else {
+                    selecteds=[];
+                    $(':checkbox:checked').prop('checked',false);
+                }
+
+            });
+
+            // add multiple select / deselect functionality
+            $("#selectall1").click(function () {
+
+                if($('#selectall1').is(":checked")) {
+                    selecteds=[];
+                    $('#selectall2').prop('checked',true);
+                    checkboxes = document.getElementsByName('selected_rows[]');
+                    for(var i in checkboxes) {
+                        checkboxes[i].checked = 'TRUE';
+                    }
+
+                    /* look for all checkboes that have a class 'chk' attached to it and check if it was checked */
+                    $(".chk:checked").each(function () {
+                        selecteds.push($(this).val());
+                    });
+                    // alert(selecteds);
+
+
+                }
+                else {
+                    selecteds=[];
+                    $(':checkbox:checked').prop('checked',false);
+                }
+
+            });
+
+
         });
-        function selectAll(source) {
-            checkboxes = document.getElementsByName('selected_rows[]');
-            for(var i in checkboxes)
-                checkboxes[i].checked = source.checked;
-        }
+//        function selectAll(source) {
+//            checkboxes = document.getElementsByName('selected_rows[]');
+//            for(var i in checkboxes)
+//                checkboxes[i].checked = source.checked;
+//        }
         function editProduct(x) {
             btn = $(x).data('panel-id');
             var url = '{{route("product.edit", ":id") }}';
@@ -190,29 +261,31 @@
                 selecteds.splice(index, 1);
             }
         }
-        function selectAll(source) {
-
-            for(var i=0; i <= selecteds.length; i++) {
-                selecteds.pop(i);
-            }
-            //alert(selecteds);
-
-//            $(':checkbox:checked').prop('checked',false);
-            checkboxes = document.getElementsByName('selected_rows[]');
-            for(var i in checkboxes) {
-                checkboxes[i].checked = source.checked;
-            }
-
-            /* look for all checkboes that have a class 'chk' attached to it and check if it was checked */
-            $(".chk:checked").each(function () {
-                selecteds.push($(this).val());
-            });
-        }
+//        function selectAll(source) {
+//
+//            for(var i=0; i <= selecteds.length; i++) {
+//                selecteds.pop(i);
+//            }
+//            //alert(selecteds);
+//
+////            $(':checkbox:checked').prop('checked',false);
+//            checkboxes = document.getElementsByName('selected_rows[]');
+//            for(var i in checkboxes) {
+//                checkboxes[i].checked = source.checked;
+//            }
+//
+//            /* look for all checkboes that have a class 'chk' attached to it and check if it was checked */
+//            $(".chk:checked").each(function () {
+//                selecteds.push($(this).val());
+//            });
+//        }
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+
+
 
         function insertBulkOffer() {
 

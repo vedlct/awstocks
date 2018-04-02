@@ -34,9 +34,9 @@
                     </div>
 
                     <div class="col-md-4 dropdown">
-                        <label class="form-control-label">Product Status</label> <br>
+                        <label class="form-control-label">Offer Status</label> <br>
                         <select class="form-control" id="product" name="product">
-                            <option selected value="">All Product Status</option>
+                            <option selected value="">All Offer Status</option>
                             <?php for ($i=0;$i<count(Status);$i++){?>
 
                             <option value="<?php echo Status[$i]?>"><?php echo Status[$i]?></option>
@@ -69,7 +69,7 @@
             </tbody>
         </table>
             <br>
-            <input type="checkbox" id="selectall" onClick="selectAll(this)" /><b>Select All</b>
+            <input type="checkbox" id="selectall2" /><b>Select All</b>
 
         </div>
                 <div class="row">
@@ -119,7 +119,7 @@
                 stateSave: true,
                 "lengthMenu": [[10, 25, 50,100, -1], [10, 25, 50,100, "All"]],
 //                "dom": 'lf<"br">irtip',
-                "dom": '<"toolbar">lf<br>irtip',
+                "dom": 'lf<br>i<"toolbar">rtip',
                 "ajax":{
                     "url": "{!! route('offer.offerList') !!}",
                     "type": "POST",
@@ -150,20 +150,94 @@
                 order: [[0,'desc'] ],
 
             });
-            $("div.toolbar").html('<input style="margin-left: 15px" type="checkbox" id="selectall" onClick="selectAll(this)" /><b>Select All</b>');
+            $("div.toolbar").html('<input style="margin-left: 15px" type="checkbox" id="selectall1" /><b>Select All</b>');
+
+            $('#offerlist').on( 'length.dt', function ( e, settings, len ) {
+                selecteds=[];
+                $(':checkbox:checked').prop('checked',false);
+            });
+            $('#offerlist').on( 'page.dt', function ( e, settings, len ) {
+                selecteds=[];
+                $(':checkbox:checked').prop('checked',false);
+            });
+            $('#offerlist').on( 'search.dt', function ( e, settings, len ) {
+                selecteds=[];
+                $(':checkbox:checked').prop('checked',false);
+            });
 
 
             $('#category').change(function(){ //button filter event click
                 table.search("").draw(); //just redraw myTableFilter
                 table.ajax.reload();  //just reload table
+                selecteds=[];
+                // $('.SelectAll').attr('checked', false);
+                $(':checkbox:checked').prop('checked',false);
             });
             $('#product').change(function(){ //button filter event click
                 table.search("").draw(); //just redraw myTableFilter
                 table.ajax.reload();  //just reload table
+                selecteds=[];
+                // $('.SelectAll').attr('checked', false);
+                $(':checkbox:checked').prop('checked',false);
             });
             $('#offer').change(function(){ //button filter event click
                 table.search("").draw(); //just redraw myTableFilter
                 table.ajax.reload();  //just reload table
+                selecteds=[];
+                // $('.SelectAll').attr('checked', false);
+                $(':checkbox:checked').prop('checked',false);
+            });
+
+            // add multiple select / deselect functionality
+            $("#selectall2").click(function () {
+
+                if($('#selectall2').is(":checked")) {
+                    selecteds=[];
+                    $('#selectall1').prop('checked',true);
+                    checkboxes = document.getElementsByName('selected_rows[]');
+                    for(var i in checkboxes) {
+                        checkboxes[i].checked = 'TRUE';
+                    }
+
+                    /* look for all checkboes that have a class 'chk' attached to it and check if it was checked */
+                    $(".chk:checked").each(function () {
+                        selecteds.push($(this).val());
+                    });
+                    //  alert(selecteds);
+
+
+                }
+                else {
+                    selecteds=[];
+                    $(':checkbox:checked').prop('checked',false);
+                }
+
+            });
+
+            // add multiple select / deselect functionality
+            $("#selectall1").click(function () {
+
+                if($('#selectall1').is(":checked")) {
+                    selecteds=[];
+                    $('#selectall2').prop('checked',true);
+                    checkboxes = document.getElementsByName('selected_rows[]');
+                    for(var i in checkboxes) {
+                        checkboxes[i].checked = 'TRUE';
+                    }
+
+                    /* look for all checkboes that have a class 'chk' attached to it and check if it was checked */
+                    $(".chk:checked").each(function () {
+                        selecteds.push($(this).val());
+                    });
+                    // alert(selecteds);
+
+
+                }
+                else {
+                    selecteds=[];
+                    $(':checkbox:checked').prop('checked',false);
+                }
+
             });
 
         });
@@ -179,19 +253,19 @@
             }
         }
 
-        function selectAll(source) {
-            for(var i=0; i <= selecteds.length; i++) {
-                selecteds.pop(i);
-            }
-            checkboxes = document.getElementsByName('selected_rows[]');
-            for(var i in checkboxes) {
-                checkboxes[i].checked = source.checked;
-            }
-
-            $(".chk:checked").each(function () {
-                selecteds.push($(this).val());
-            });
-        }
+//        function selectAll(source) {
+//            for(var i=0; i <= selecteds.length; i++) {
+//                selecteds.pop(i);
+//            }
+//            checkboxes = document.getElementsByName('selected_rows[]');
+//            for(var i in checkboxes) {
+//                checkboxes[i].checked = source.checked;
+//            }
+//
+//            $(".chk:checked").each(function () {
+//                selecteds.push($(this).val());
+//            });
+//        }
 
         function editOffer(x) {
             btn = $(x).data('panel-id');
@@ -205,11 +279,32 @@
             btn = $(x).data('panel-id');
             var url = '{{route("offer.delete", ":id") }}';
 
-            var result = confirm("Are you sure you would like to delete the selected Offer?");
-            if (result) {
-                var newUrl = url.replace(':id', btn);
-                window.location.href = newUrl;
-            }
+            $.confirm({
+                title: 'Confirm!',
+                content: 'Are you sure you would like to delete the selected Offer?',
+                icon: 'fa fa-warning',
+                type: 'red',
+                typeAnimated: true,
+                buttons: {
+                    tryAgain: {
+                        text: 'Yes',
+                        btnClass: 'btn-red',
+                        action: function(){
+                            var newUrl = url.replace(':id', btn);
+                            window.location.href = newUrl;
+                        }
+                    },
+                    No: function () {
+
+                    },
+                }
+            });
+
+//            var result = confirm("Are you sure you would like to delete the selected Offer?");
+//            if (result) {
+//                var newUrl = url.replace(':id', btn);
+//                window.location.href = newUrl;
+//            }
         }
 
         $.ajaxSetup({
@@ -239,10 +334,9 @@
                             {{--document.body.removeChild(link);--}}
                             {{--delete link;--}}
 
-                            for(var i=0; i <= selecteds.length; i++) {
-                                selecteds.pop(i);
-                            }
-                            $('#selectall').prop('checked', false);
+                                selecteds=[];
+
+                            $(':checkbox:checked').prop('checked',false);
 
 
                         }
@@ -276,10 +370,9 @@
                                 {{--document.body.removeChild(link);--}}
                                 {{--delete link;--}}
 
-                                for(var i=0; i <= selecteds.length; i++) {
-                                    selecteds.pop(i);
-                                }
-                                $('#selectall').prop('checked', false);
+                                    selecteds=[];
+
+                                $(':checkbox:checked').prop('checked',false);
 
 
                             }
@@ -312,10 +405,9 @@
                         {{--document.body.removeChild(link);--}}
                         {{--delete link;--}}
 
-                        for(var i=0; i <= selecteds.length; i++) {
-                            selecteds.pop(i);
-                        }
-                        $('#selectall').prop('checked', false);
+                            selecteds=[];
+
+                        $(':checkbox:checked').prop('checked',false);
 
 
                     }
@@ -348,10 +440,9 @@
                         {{--document.body.removeChild(link);--}}
                         {{--delete link;--}}
 
-                        for(var i=0; i <= selecteds.length; i++) {
-                            selecteds.pop(i);
-                        }
-                        $('#selectall').prop('checked', false);
+                            selecteds=[];
+
+                        $(':checkbox:checked').prop('checked',false);
 
                     }
 
