@@ -139,7 +139,10 @@
                     { data: 'price', name: 'price' },
                     { data: 'state', name: 'state' },
                     { data: 'stockQty', name: 'stockQty' },
-                    { data: 'disPrice', name: 'disPrice' },
+
+                    { "data": function(data){return (data.price-data.disPrice)}
+                    },
+
                     { data: 'disStartPrice', name: 'disStartPrice' },
                     { data: 'disEndPrice', name: 'disEndPrice' },
                     { "data": function(data){

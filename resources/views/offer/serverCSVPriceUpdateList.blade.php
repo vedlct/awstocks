@@ -1,7 +1,18 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: TCL
- * Date: 4/5/2018
- * Time: 6:30 PM
- */
+<table class="table">
+    <thead>
+    <tr>
+        <th>sku</th>
+        <th>price</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    @foreach($productList as $list)
+        <tr>
+            <td>{{$list['sku']}}</td>
+            <td>{{$list['price']}}</td>
+
+        </tr>
+    @endforeach
+    </tbody>
+</table>

@@ -165,8 +165,8 @@ class OfferController extends Controller
             'status'=>'required|max:20',
         ]);
         $offerDes=Offer::findOrFail($r->id);
-        $offerPrice=$offerDes->product->price*$r->disPercent/100;
-        $offerPrice=$offerDes->product->price - $offerPrice;
+        $offerPrice=round((($offerDes->product->price*$r->disPercent)/100),2);
+
         $offer=array(
             'fkproductId'=>$r->product,
             'disPrice'=>$offerPrice,
@@ -272,7 +272,7 @@ class OfferController extends Controller
             }
             $check=Excel::create($fileName,function($excel) use($list,$filePath) {
                 $excel->sheet('First sheet', function($sheet) use($list) {
-                    $sheet->loadView('offer.serverCSVFullOfferList.blade')
+                    $sheet->loadView('offer.serverCSVFullOfferList')
                         ->with('productList',$list);
                 });
 
@@ -291,7 +291,7 @@ class OfferController extends Controller
             }
             $check=Excel::create($fileName,function($excel) use($list,$filePath) {
                 $excel->sheet('First sheet', function($sheet) use($list) {
-                    $sheet->loadView('offer.serverCSVPriceUpdateList.blade')
+                    $sheet->loadView('offer.serverCSVPriceUpdateList')
                         ->with('productList',$list);
                 });
 
@@ -311,7 +311,7 @@ class OfferController extends Controller
 
             $check=Excel::create($fileName,function($excel) use($list,$filePath) {
                 $excel->sheet('First sheet', function($sheet) use($list) {
-                    $sheet->loadView('offer.serverCSVStockUpdateList.blade')
+                    $sheet->loadView('offer.serverCSVStockUpdateList')
                         ->with('productList',$list);
                 });
 

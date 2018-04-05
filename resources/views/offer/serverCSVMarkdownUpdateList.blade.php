@@ -1,10 +1,11 @@
 
 <table class="table">
     <thead>
-    <tr>
-        <th>SKU</th>
-
-        <th>dis price</th>
+    <tr style="font-weight:bold">
+        <th>sku</th>
+        <th>discount-price</th>
+        <th>discount-start-date</th>
+        <th>discount-end-date</th>
 
 
 
@@ -15,7 +16,8 @@
         <tr>
             <td>{{$list['sku']}}</td>
             <td>{{($list['price']-$list['disPrice'])}}</td>
-
+            <td>{{$list['disStartPrice']}}</td>
+            <td>{{$list['disEndPrice']}}</td>
         </tr>
     @endforeach
     </tbody>
