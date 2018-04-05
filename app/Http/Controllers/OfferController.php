@@ -72,33 +72,77 @@ class OfferController extends Controller
         return back();
     }
     public function insertBulkOffer(Request $r){
+
         $seasone=$r->season;
         $disprice=$r->disprice;
         $offers=$r->offers;
         $returnarray = array();
         // return $seasone;
         $seasones=Season::select('startDate','endDate')->where('seasonId',$seasone)->first();
+
         foreach ($offers as $offerId) {
+
             $offiress = Product::select('*')->where('productId', $offerId)->get();
-            foreach ($offiress as $offiress) {
-                $product = Product::select('price')
-                    ->where('productId' , $offiress->productId)
-                    ->get();
-                foreach ($product as $p){
-                    $convertprice = round((($p->price * $disprice)/100),2);
+
+            /* check the offer if exist if not then else*/
+
+            $allreadyOffereredProduct=Offer::select('offerId')->where('fkproductId',$offerId)->get();
+            if (!empty($allreadyOffereredProduct)){
+
+
+
+                foreach ($offiress as $offiress) {
+                    $product = Product::select('price')
+                        ->where('productId' , $offiress->productId)
+                        ->get();
+                    foreach ($product as $p){
+                        $convertprice = round((($p->price * $disprice)/100),2);
+                    }
+
+                    $offer = array(
+                        'fkproductId' => $offiress->productId,
+                        'disPrice' => $convertprice,
+                        'disStartPrice' => $seasones->startDate,
+                        'disEndPrice' => $seasones->endDate,
+                        'state' => '11',
+                        'status' => 'Bulk Updated',
+                        'lastExportedBy'=>Auth::user()->userId,
+                        'product-id-type' => 'SHOP_SKU',
+                    );
+                    DB::table('offer')
+                        ->where('offerId',$offerId)
+                        ->update($offer);
                 }
-                $offer = array(
-                    'fkproductId' => $offiress->productId,
-                    'disPrice' => $convertprice,
-                    'disStartPrice' => $seasones->startDate,
-                    'disEndPrice' => $seasones->endDate,
-                    'state' => '11',
-                    'status' => 'Bulk Updated',
-                    'lastExportedBy'=>Auth::user()->userId,
-                    'product-id-type' => 'SHOP_SKU',
-                );
-                DB::table('offer')->insert($offer);
+
+
             }
+            else{
+
+
+                foreach ($offiress as $offiress) {
+                    $product = Product::select('price')
+                        ->where('productId' , $offiress->productId)
+                        ->get();
+                    foreach ($product as $p){
+                        $convertprice = round((($p->price * $disprice)/100),2);
+                    }
+
+                    $offer = array(
+                        'fkproductId' => $offiress->productId,
+                        'disPrice' => $convertprice,
+                        'disStartPrice' => $seasones->startDate,
+                        'disEndPrice' => $seasones->endDate,
+                        'state' => '11',
+                        'status' => 'Bulk Updated',
+                        'lastExportedBy'=>Auth::user()->userId,
+                        'product-id-type' => 'SHOP_SKU',
+                    );
+                    DB::table('offer')->insert($offer);
+                }
+
+            }
+
+
         }
         Session::flash('message', 'Offer Added successfully');
     }
