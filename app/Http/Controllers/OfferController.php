@@ -89,6 +89,10 @@ class OfferController extends Controller
             $allreadyOffereredProduct=Offer::select('offerId')->where('fkproductId',$offerId)->get();
             if (!empty($allreadyOffereredProduct)){
 
+                foreach ($allreadyOffereredProduct as $offerId){
+                    $id=$offerId->offerId;
+                }
+
 
 
                 foreach ($offiress as $offiress) {
@@ -110,9 +114,10 @@ class OfferController extends Controller
                         'product-id-type' => 'SHOP_SKU',
                     );
                     DB::table('offer')
-                        ->where('offerId',$offerId)
+                        ->where('offerId',$id)
                         ->update($offer);
                 }
+
 
 
             }
