@@ -261,6 +261,7 @@
 
         var selecteds = [];
         function selected_rows(x) {
+
             btn = $(x).data('panel-id');
             var index = selecteds.indexOf(btn)
             if (index == "-1"){
@@ -269,6 +270,7 @@
 
                 selecteds.splice(index, 1);
             }
+
         }
 //        function selectAll(source) {
 //
@@ -324,6 +326,9 @@
                         selecteds=[];
 
                         $(':checkbox:checked').prop('checked',false);
+                        //alert(data);
+
+
 
                         {{--var link = document.createElement("a");--}}
                         {{--link.download = data.fileName+".csv";--}}

@@ -1,24 +1,24 @@
 <table class="table">
     <thead>
     <tr>
-        <th>Category</th>
+        <th>Product category</th>
         <th>Style</th>
         <th>SKU</th>
 
-        <th>Product Name</th>
-        <th>Product Description</th>
-        <th>Brand</th>
-        <th>Color</th>
-        <th>Color Description</th>
+        <th>Product name</th>
+        <th>Product description</th>
+        <th>Brand name</th>
+        <th>Standard colour</th>
+        <th>Detailed colour</th>
 
-        <th>Swatch Image</th>
+        <th>Swatch</th>
 
         <th>Size</th>
 
-        <th>Main Image</th>
+        <th>Main image</th>
 
         <th>Outfit</th>
-        <th>image2</th>
+        <th>Image 2</th>
 
     </tr>
     </thead>
@@ -35,7 +35,8 @@
             <td>{{$list['colorDesc']}}</td>
 
             @if(!empty($list['swatchImage']))
-                <td>{{public_path('productImage/').$list['swatchImage']}}</td>
+
+                <td>{{$url.'public/productImage/'.$list['swatchImage']}}</td>
             @else
                 <td></td>
             @endif
@@ -44,18 +45,18 @@
 
             @if(!empty($list['mainImage']))
 
-                <td>{{public_path('productImage/').$list['mainImage']}}</td>
+                <td>{{$url.'public/productImage/'.$list['mainImage']}}</td>
             @else
                 <td></td>
             @endif
 
             @if(!empty($list['outfit']))
-                <td>{{public_path('productImage/').$list['outfit']}}</td>
+                <td>{{$url.'public/productImage/'.$list['outfit']}}</td>
             @else
                 <td></td>
             @endif
             @if(!empty($list['image2']))
-                <td>{{public_path('productImage/').$list['image2']}}</td>
+                <td>{{$url.'public/productImage/'.$list['image2']}}</td>
             @else
                 <td></td>
             @endif

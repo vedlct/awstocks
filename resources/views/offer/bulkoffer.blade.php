@@ -28,7 +28,7 @@
 
             <div class="col-md-4 dropdown">
                 <label class="form-control-label">Category</label> <br>
-                <select class="form-control" id="category" name="category">
+                <select class="form-control" id="category"name="category">
                     <option selected value="">All Category</option>
 
                     @foreach($categories as $category)
@@ -63,9 +63,9 @@
         </div>
         <div class="row">
         <div class="col-md-4 dropdown">
-            <label class="form-control-label">Season</label> <br>
+            <label class="form-control-label">Season</label><span style="color: red" class="required">*</span> <br>
             <select class="form-control" id="season" name="season" required>
-                <option selected value="">All Season</option>
+                <option selected value="">Select Season</option>
 
                 @foreach($season as $season)
                     <option value="{{$season->seasonId}}">{{$season->seasonName}}</option>
@@ -74,7 +74,7 @@
 
         </div>
         <div class="col-md-4 ">
-            <label class="form-control-label">Discount Percentage(%)</label> <br>
+            <label class="form-control-label">Discount Percentage(%)</label><span style="color: red" class="required">*</span> <br>
             <input class="form-control" type="number" id="disprice" name="disprice">
 
         </div>
@@ -291,6 +291,7 @@
 
             var products=selecteds;
 
+
            // alert(products);
 
             if (products.length >0) {
@@ -298,25 +299,65 @@
                 var disprice=document.getElementById('disprice').value;
                 var season=document.getElementById('season').value;
 
-                $.ajax({
-                    type: 'POST',
-                    url: "{!! route('offer.insertBulkOffer') !!}",
-                    cache: false,
-                    data: {'offers': products,'season':season,'disprice':disprice},
-                    success: function (data) {
+                if (season==""){
 
-                        if (data.returntype == "0"){
-                            alert('discount price should be less than '+data.productName + ' price');
+                    $.alert({
+                        title: 'Alert!',
+                        type: 'red',
+                        content: 'Please Select a Season for Discount',
+                    });
+
+                }
+                if (disprice==""){
+
+                    $.alert({
+                        title: 'Alert!',
+                        type: 'red',
+                        content: 'Please Type Discount First',
+                    });
+
+                }
+                if (season !="" && disprice != "") {
+                    $.ajax({
+                        type: 'POST',
+                        url: "{!! route('offer.insertBulkOffer') !!}",
+                        cache: false,
+                        data: {'offers': products, 'season': season, 'disprice': disprice},
+                        success: function (data) {
+
+
+
+                            if (data.returntype == "0") {
+
+                                $.alert({
+                                    title: 'Alert!',
+                                    type: 'red',
+                                    content: 'discount price should be less than ' + data.productName + ' price',
+                                });
+
+                            }else {
+                                location.reload();
+                                selecteds=[];
+                                $(':checkbox:checked').prop('checked',false);
+                                $('#disprice').val("");
+
+
+                            }
+
+                            // alert(data);
+
                         }
-                        location.reload();
-                       // alert(data);
 
-                    }
-
-                });
+                    });
+                }
             }
             else {
-                alert("Please Select a product first");
+                $.alert({
+                    title: 'Alert!',
+                    type: 'red',
+                    content: 'Please Select a product first',
+                });
+
             }
         }
     </script>

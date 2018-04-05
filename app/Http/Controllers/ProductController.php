@@ -26,6 +26,8 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 use Excel;
 use PHPExcel_Worksheet_Drawing;
 
+use Illuminate\Support\Facades\URL;
+
 
 
 
@@ -49,7 +51,8 @@ class ProductController extends Controller
             ->with('sColors',$sColors)
             ->with('runToSizes',$runToSizes)
             ->with('cares',$cares)
-            ->with('sizeTypes',$sizeTypes);}
+            ->with('sizeTypes',$sizeTypes);
+    }
 
 
     public function getSizeByType(Request $r){
@@ -550,9 +553,28 @@ class ProductController extends Controller
             'filePath'=>$filePath,
         );
 
-        $check=Excel::create($fileName,function($excel) use($list,$filePath) {
-            $excel->sheet('First sheet', function($sheet) use($list) {
-                $sheet->loadView('product.serverCSVProductList')->with('productList',$list);
+        // output: /myproject/index.php
+        $currentPath = $_SERVER['PHP_SELF'];
+
+        // output: Array ( [dirname] => /myproject [basename] => index.php [extension] => php [filename] => index )
+        $pathInfo = pathinfo($currentPath);
+
+        // output: localhost
+        $hostName = $_SERVER['HTTP_HOST'];
+
+        // output: http://
+        $protocol = strtolower(substr($_SERVER["SERVER_PROTOCOL"],0,5))=='https'?'https':'http';
+
+        // return: http://localhost/myproject/
+        $url= $protocol.'://'.$hostName.$pathInfo['dirname']."/";
+
+
+
+        $check=Excel::create($fileName,function($excel) use($list,$filePath,$url) {
+            $excel->sheet('First sheet', function($sheet) use($list,$url) {
+                $sheet->loadView('product.serverCSVProductList')
+                    ->with('productList',$list)
+                    ->with('url',$url);
             });
 
         })->store('csv',$filePath);
@@ -562,7 +584,9 @@ class ProductController extends Controller
             Session::flash('message',' Someting went wrong');
         }
         return $fileInfo;
-        
+
+
+
 
     }
 
