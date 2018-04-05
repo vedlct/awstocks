@@ -2,15 +2,15 @@
 <table class="table">
     <thead>
     <tr>
-        <th>Product Name</th>
-        <th>Category</th>
-        <th>dis price</th>
-        <th>Product-id-type</th>
-        <th>State</th>
-        <th>Status</th>
-        <th>Start Date</th>
-        <th>End Date</th>
-        <th>LastExportedDate</th>
+        <th>product name</th>
+        <th>category</th>
+        <th>discount-price</th>
+        <th>product-id-type</th>
+        <th>state</th>
+        <th>status</th>
+        <th>start-date</th>
+        <th>end-date</th>
+        <th>lastExportedDate</th>
 
 
     </tr>
