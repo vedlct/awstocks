@@ -80,6 +80,7 @@ class OfferController extends Controller
         // return $seasone;
         $seasones=Season::select('startDate','endDate')->where('seasonId',$seasone)->first();
 
+
         foreach ($offers as $offerId) {
 
             $offiress = Product::select('*')->where('productId', $offerId)->get();
@@ -88,7 +89,8 @@ class OfferController extends Controller
 
             $allreadyOffereredProduct=Offer::select('offerId')->where('fkproductId',$offerId)->get();
 
-            if (!empty($allreadyOffereredProduct)){
+            if (!$allreadyOffereredProduct->isEmpty()){
+
 
                 foreach ($allreadyOffereredProduct as $offerId){
                     $id=$offerId->offerId;
