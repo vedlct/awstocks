@@ -242,12 +242,12 @@ class OfferController extends Controller
         }
         if ($offerList=$r->priceCreation){
             $fileName="PriceUpdateList-".date("Y-m-d_H-i-s");
-            $filePath=public_path ()."/csv"."/".$fileName;
+            $filePath=public_path ()."/csv"."/";
             // $FH = fopen($filePath, "w");
         }
         if ($offerList=$r->stockUpdate){
             $fileName="StockUpdateList-".date("Y-m-d_H-i-s");
-            $filePath=public_path ()."/csv"."/".$fileName;
+            $filePath=public_path ()."/csv"."/";
             //$FH = fopen($filePath, "w");
         }
         if ($offerList=$r->markdownUpdate){
