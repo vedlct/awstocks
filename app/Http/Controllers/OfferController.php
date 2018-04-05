@@ -331,11 +331,12 @@ class OfferController extends Controller
 
             $check=Excel::create($fileName,function($excel) use($list,$filePath) {
                 $excel->sheet('First sheet', function($sheet) use($list) {
+
                     $sheet->loadView('offer.serverCSVMarkdownUpdateList')
                         ->with('productList',$list);
                 });
 
-            })->store('csv',$filePath);
+            })->store('xls',$filePath);
         }
 
 //
