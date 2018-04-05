@@ -109,7 +109,7 @@ class OfferController extends Controller
                         'disStartPrice' => $seasones->startDate,
                         'disEndPrice' => $seasones->endDate,
                         'state' => '11',
-                        'status' => 'Bulk Updated',
+                        //'status' => 'Bulk Updated',
                         'lastExportedBy'=>Auth::user()->userId,
                         'product-id-type' => 'SHOP_SKU',
                     );
@@ -138,7 +138,7 @@ class OfferController extends Controller
                         'disStartPrice' => $seasones->startDate,
                         'disEndPrice' => $seasones->endDate,
                         'state' => '11',
-                        'status' => 'Bulk Updated',
+                        //'status' => 'Bulk Updated',
                         'lastExportedBy'=>Auth::user()->userId,
                         'product-id-type' => 'SHOP_SKU',
                     );
