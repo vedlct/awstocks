@@ -6,8 +6,8 @@
         <th>Style</th>
         <th>SKU</th>
         <th>EAN</th>
-        <th>Product Name</th>
-        <th >Product Description</th>
+        <th>Product name</th>
+        <th >Product description</th>
         <th>Brand</th>
         <th>Product Location</th>
         <th>Color</th>
