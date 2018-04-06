@@ -2,24 +2,24 @@
 <table class="table">
     <thead>
     <tr>
-        <th>Category</th>
+        <th>Product category</th>
         <th>Style</th>
         <th>SKU</th>
         <th>EAN</th>
         <th>Product name</th>
-        <th >Product description</th>
+        <th>Product description</th>
         <th>Brand</th>
-        <th>Product Location</th>
+        <th>Product location</th>
         <th>Color</th>
-        <th >Color Description</th>
+        <th>Color description</th>
         <th>Size</th>
-        <th>Size Description</th>
-        <th>Main Image</th>
-        <th>Swatch Image</th>
+        <th>Size description</th>
+        <th>Main image</th>
+        <th>Swatch image</th>
         <th>Outfit</th>
-        <th>image2</th>
-        <th>image3</th>
-        <th>image4</th>
+        <th>image 2</th>
+        <th>image 3</th>
+        <th>image 4</th>
         <th>RuntoSize</th>
         <th>Care</th>
         <th>Price</th>

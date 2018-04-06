@@ -107,7 +107,7 @@
     <script>
 
 
-
+        var selecteds = [];
         $(document).ready(function() {
 
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
@@ -232,7 +232,7 @@
                     $(".chk:checked").each(function () {
                         selecteds.push($(this).val());
                     });
-                    // alert(selecteds);
+
 
 
                 }
@@ -245,15 +245,18 @@
 
         });
 
-        var selecteds = [];
+
         function selected_rows(x) {
             btn = $(x).data('panel-id');
-            var index = selecteds.indexOf(btn)
-            if (index == "-1"){
+
+            var index = selecteds.indexOf(btn.toString())
+
+            if (index == '-1'){
                 selecteds.push(btn);
             }else {
                 selecteds.splice(index, 1);
             }
+
         }
 
 //        function selectAll(source) {
