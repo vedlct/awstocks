@@ -205,7 +205,7 @@
                     $(".chk:checked").each(function () {
                         selecteds.push($(this).val());
                     });
-                    alert(selecteds);
+                   // alert(selecteds);
 
 
                 }
@@ -270,7 +270,7 @@
 
                 selecteds.splice(index, 1);
             }
-            alert(selecteds);
+
         }
 //        function selectAll(source) {
 //
