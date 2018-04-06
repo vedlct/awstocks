@@ -54,7 +54,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label">Discount Price(£)<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-10">
-                                
+
 {{--                                <input id="" type="number"  value="{{$offer->disPrice}}" placeholder="price"  step="0.01" class="form-control form-control-warning " readonly>--}}
                                 <input id="" type="number"  value="{{($offer->product->price-($offer->product->price*($offer->disPrice*100/$offer->product->price))/100)}}" placeholder="price"  step="0.01" class="form-control form-control-warning " readonly>
                             </div>

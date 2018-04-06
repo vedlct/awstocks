@@ -88,13 +88,13 @@ class OfferController extends Controller
             /* check the offer if exist if not then else*/
 
             $allreadyOffereredProduct=Offer::select('offerId')->where('fkproductId',$offerId)->get();
+
             if (!$allreadyOffereredProduct->isEmpty()){
+
 
                 foreach ($allreadyOffereredProduct as $offerId){
                     $id=$offerId->offerId;
                 }
-
-
 
                 foreach ($offiress as $offiress) {
                     $product = Product::select('price')
@@ -165,8 +165,8 @@ class OfferController extends Controller
             'status'=>'required|max:20',
         ]);
         $offerDes=Offer::findOrFail($r->id);
-        $offerPrice=$offerDes->product->price*$r->disPercent/100;
-        $offerPrice=$offerDes->product->price - $offerPrice;
+        $offerPrice=round((($offerDes->product->price*$r->disPercent)/100),2);
+
         $offer=array(
             'fkproductId'=>$r->product,
             'disPrice'=>$offerPrice,
@@ -236,6 +236,30 @@ class OfferController extends Controller
         );
         $list=array();
         if ($offerList=$r->fulloffers){
+            $fileName="FullOfferList-".date("Y-m-d_H-i-s");
+            $filePath=public_path ()."/csv"."/";
+            // $FH = fopen($filePath, "w");
+        }
+        if ($offerList=$r->priceCreation){
+            $fileName="PriceUpdateList-".date("Y-m-d_H-i-s");
+            $filePath=public_path ()."/csv"."/";
+            // $FH = fopen($filePath, "w");
+        }
+        if ($offerList=$r->stockUpdate){
+            $fileName="StockUpdateList-".date("Y-m-d_H-i-s");
+            $filePath=public_path ()."/csv"."/";
+            //$FH = fopen($filePath, "w");
+        }
+        if ($offerList=$r->markdownUpdate){
+            $fileName="markdownUpdateList-".date("Y-m-d_H-i-s");
+            $filePath=public_path ()."/csv"."/";
+            //$FH = fopen($filePath, "w");
+        }
+        $fileInfo=array(
+            'fileName'=>$fileName,
+            'filePath'=>$filePath,
+        );
+        if ($offerList=$r->fulloffers){
             for ($i=0;$i<count($offerList);$i++){
                 $productId=$offerList[$i];
                 $newlist=Offer::select('sku','price','stockQty','state','product-id-type','sku as product-Id')
@@ -246,6 +270,13 @@ class OfferController extends Controller
                     ->where('offerId',$productId)
                     ->update($data);
             }
+            $check=Excel::create($fileName,function($excel) use($list,$filePath) {
+                $excel->sheet('First sheet', function($sheet) use($list) {
+                    $sheet->loadView('offer.serverCSVFullOfferList')
+                        ->with('productList',$list);
+                });
+
+            })->store('csv',$filePath);
         }
         if ($offerList=$r->priceCreation){
             for ($i=0;$i<count($offerList);$i++){
@@ -258,6 +289,13 @@ class OfferController extends Controller
                     ->where('offerId',$productId)
                     ->update($data);
             }
+            $check=Excel::create($fileName,function($excel) use($list,$filePath) {
+                $excel->sheet('First sheet', function($sheet) use($list) {
+                    $sheet->loadView('offer.serverCSVPriceUpdateList')
+                        ->with('productList',$list);
+                });
+
+            })->store('csv',$filePath);
         }
         if ($offerList=$r->stockUpdate){
             for ($i=0;$i<count($offerList);$i++){
@@ -270,11 +308,19 @@ class OfferController extends Controller
                     ->where('offerId',$productId)
                     ->update($data);
             }
+
+            $check=Excel::create($fileName,function($excel) use($list,$filePath) {
+                $excel->sheet('First sheet', function($sheet) use($list) {
+                    $sheet->loadView('offer.serverCSVStockUpdateList')
+                        ->with('productList',$list);
+                });
+
+            })->store('csv',$filePath);
         }
         if ($offerList=$r->markdownUpdate){
             for ($i=0;$i<count($offerList);$i++){
                 $productId=$offerList[$i];
-                $newlist=Offer::select('sku','disPrice','disStartPrice','disEndPrice')
+                $newlist=Offer::select('sku','disPrice','price','disStartPrice','disEndPrice')
                     ->leftJoin('product', 'offer.fkproductId', '=','product.productId')
                     ->where('offer.offerId',$productId)->get()->toArray();
                 $list=array_merge($list,$newlist);
@@ -282,34 +328,45 @@ class OfferController extends Controller
                     ->where('offerId',$productId)
                     ->update($data);
             }
+
+            $check=Excel::create($fileName,function($excel) use($list,$filePath) {
+                $excel->sheet('First sheet', function($sheet) use($list) {
+
+                    $sheet->loadView('offer.serverCSVMarkdownUpdateList')
+                        ->with('productList',$list);
+                });
+
+            })->store('xls',$filePath);
         }
-        # add headers for each column in the CSV download
-        array_unshift($list, array_keys($list[0]));
-        // $filePath=public_path ()."/csv"."/".$fileName;
-        if ($offerList=$r->fulloffers){
-            $fileName="FullOfferList-".date("Y-m-d_H-i-s").".csv";
-            $filePath=public_path ()."/csv"."/".$fileName;
-            // $fileName="FullOfferList";
-            $fileInfo=array('fileName'=>$fileName);
-        }
-        if ($offerList=$r->priceCreation){
-            $fileName="PriceUpdateList-".date("Y-m-d_H-i-s").".csv";
-            // $fileName="PriceUpdateList";
-            $fileInfo=array('fileName'=>$fileName);
-            $filePath=public_path ()."/csv"."/".$fileName;
-        }
-        if ($offerList=$r->stockUpdate){
-            $fileName="StockUpdateList-".date("Y-m-d_H-i-s").".csv";
-//            $fileName="StockUpdateList";
-            $fileInfo=array('fileName'=>$fileName);
-            $filePath=public_path ()."/csv"."/".$fileName;
-        }
-        if ($offerList=$r->markdownUpdate){
-            $fileName="markdownUpdateList-".date("Y-m-d_H-i-s").".csv";
-//            $fileName="markdownUpdateList";
-            $fileInfo=array('fileName'=>$fileName);
-            $filePath=public_path ()."/csv"."/".$fileName;
-        }
+
+//
+//        # add headers for each column in the CSV download
+////        array_unshift($list, array_keys($list[0]));
+//        // $filePath=public_path ()."/csv"."/".$fileName;
+//        if ($offerList=$r->fulloffers){
+//            $fileName="FullOfferList-".date("Y-m-d_H-i-s").".csv";
+//            $filePath=public_path ()."/csv"."/".$fileName;
+//            // $fileName="FullOfferList";
+//            $fileInfo=array('fileName'=>$fileName);
+//        }
+//        if ($offerList=$r->priceCreation){
+//            $fileName="PriceUpdateList-".date("Y-m-d_H-i-s").".csv";
+//            // $fileName="PriceUpdateList";
+//            $fileInfo=array('fileName'=>$fileName);
+//            $filePath=public_path ()."/csv"."/".$fileName;
+//        }
+//        if ($offerList=$r->stockUpdate){
+//            $fileName="StockUpdateList-".date("Y-m-d_H-i-s").".csv";
+////            $fileName="StockUpdateList";
+//            $fileInfo=array('fileName'=>$fileName);
+//            $filePath=public_path ()."/csv"."/".$fileName;
+//        }
+//        if ($offerList=$r->markdownUpdate){
+//            $fileName="markdownUpdateList-".date("Y-m-d_H-i-s").".csv";
+////            $fileName="markdownUpdateList";
+//            $fileInfo=array('fileName'=>$fileName);
+//            $filePath=public_path ()."/csv"."/".$fileName;
+//        }
 //        $callback = function() use ($list,$r,$fileName)
 //        {
 //
@@ -339,31 +396,16 @@ class OfferController extends Controller
 //        };
 ////
 //         return Response::stream($callback, 200, $headers); //use Illuminate\Support\Facades\Response;
-        $response = new StreamedResponse();
-        $response->setCallback(function () use ($list,$r,$filePath){
-            if ($offerList=$r->fulloffers){
-                //$fileName="FullOfferList-".date("Y-m-d_H-i-s");
-                $FH = fopen($filePath, "w");
-            }
-            if ($offerList=$r->priceCreation){
-                // $fileName="PriceUpdateList-".date("Y-m-d_H-i-s");
-                $FH = fopen($filePath, "w");
-            }
-            if ($offerList=$r->stockUpdate){
-                // $fileName="StockUpdateList-".date("Y-m-d_H-i-s");
-                $FH = fopen($filePath, "w");
-            }
-            if ($offerList=$r->markdownUpdate){
-                //$fileName="markdownUpdateList-".date("Y-m-d_H-i-s");
-                $FH = fopen($filePath, "w");
-            }
-            $FH = fopen($filePath, "w");
-            foreach ($list as $row) {
-                fputcsv($FH, $row);
-            }
-            fclose($FH);
-        });
-        $check=$response->send();
+//        $response = new StreamedResponse();
+//        $response->setCallback(function () use ($list,$r,$filePath){
+
+//            $FH = fopen($filePath, "w");
+//            foreach ($list as $row) {
+//                fputcsv($FH, $row);
+//            }
+//            fclose($FH);
+//        });
+       // $check=$response->send();
 //        $data1=array(
 //            'historicUploadedFilesName'=>$fileName,
 //            'historicUploadedFilesType'=>"OfferList",
@@ -373,15 +415,20 @@ class OfferController extends Controller
 //
 //        DB::table('historicuploadedfiles')
 //            ->insert($data1);
-        $fileInfo=array(
-            'fileName'=>$fileName,
-            'filePath'=>$filePath,
-        );
+
+//        if ($check) {
+//            Session::flash('message', $fileName . ' has been sent to server');
+//        }else{
+//            Session::flash('message',' Someting went wrong');
+//        }
+
+
         if ($check) {
             Session::flash('message', $fileName . ' has been sent to server');
         }else{
             Session::flash('message',' Someting went wrong');
         }
+
 
         return $fileInfo;
     }

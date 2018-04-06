@@ -577,7 +577,7 @@ class ProductController extends Controller
                     ->with('url',$url);
             });
 
-        })->store('csv',$filePath);
+        })->store('xls',$filePath);
         if ($check) {
             Session::flash('message', $fileName . ' has been sent to server');
         }else{
