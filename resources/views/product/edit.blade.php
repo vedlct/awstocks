@@ -50,7 +50,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label">Product Name<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-10">
-                                <input id="inputHorizontalSuccess" type="text"  name="productName" placeholder="name"  placeholder="100 characters maximum" class="form-control form-control-success" value="{{$product->productName}}" >
+                                <input id="inputHorizontalSuccess" type="text"  name="productName" placeholder="name" maxlength="70" placeholder="70 characters maximum" class="form-control form-control-success" value="{{$product->productName}}" >
                                 @if ($errors->has('productName'))
                                     <span class="help-block" style="position: absolute; left: 150px; color: red; font-size:14px">
 								<strong>{{ $errors->first('productName') }}</strong>
@@ -73,7 +73,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label">SKU<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-10">
-                                <input id="inputHorizontalWarning" type="text" name="sku"  placeholder="20 characters maximum" class="form-control form-control-warning" value="{{$product->sku}}" required>
+                                <input id="inputHorizontalWarning" type="text" name="sku" maxlength="20" placeholder="20 characters maximum" class="form-control form-control-warning" value="{{$product->sku}}" required>
                                 @if ($errors->has('category'))
                                     <span class="help-block" style="position: absolute; left: 150px; color: red; font-size:14px">
 								<strong>{{ $errors->first('category') }}</strong>
@@ -105,7 +105,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label">Color Description<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-10">
-                                <input id="inputHorizontalWarning" type="text"  name="colorDesc" value="{{$product->colorDesc}}" placeholder="255 characters maximum" class="form-control form-control-warning" required>
+                                <input id="inputHorizontalWarning" type="text" maxlength="20" name="colorDesc" value="{{$product->colorDesc}}" placeholder="20 characters maximum" class="form-control form-control-warning" required>
                             </div>
                         </div>
 
@@ -116,7 +116,7 @@
 								<strong>{{ $errors->first('style') }}</strong>
 							</span> @endif
                             <div class="col-sm-10">
-                                <input id="inputHorizontalSuccess" name="style" type="text"  placeholder="255 characters maximum" class="form-control form-control-success" value="{{$product->style}}" required>
+                                <input id="inputHorizontalSuccess" name="style" type="text" maxlength="15"  placeholder="15 characters maximum" class="form-control form-control-success" value="{{$product->style}}" required>
                             </div>
                         </div>
 
@@ -207,7 +207,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label">EAN</label>
                             <div class="col-sm-10">
-                                <input id="inputHorizontalSuccess" name="ean"  placeholder="100 characters maximum" type="text" value="{{$product->ean}}" class="form-control form-control-success">
+                                <input id="inputHorizontalSuccess" name="ean" maxlength="13" placeholder="13 digit maximum" onkeypress="return isNumberKey(event)" type="text" value="{{$product->ean}}" class="form-control form-control-success">
                             </div>
                         </div>
 
@@ -271,7 +271,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 form-control-label">Product Description<span style="color: red" class="required">*</span></label>
                             <div class="col-sm-10">
-                                <textarea class="form-control" rows="5" id="comment"  name="description" required>{{$product->productDesc}}</textarea>
+                                <textarea class="form-control" rows="5" id="comment" maxlength="1100" name="description" required>{{$product->productDesc}}</textarea>
                             </div>
                         </div>
 
@@ -604,5 +604,18 @@
         }
 
 </script>
+
+    <SCRIPT language=Javascript>
+        <!--
+        function isNumberKey(evt)
+        {
+            var charCode = (evt.which) ? evt.which : event.keyCode
+            if (charCode > 31 && (charCode < 48 || charCode > 57))
+                return false;
+
+            return true;
+        }
+        //-->
+    </SCRIPT>
 
     @endsection
