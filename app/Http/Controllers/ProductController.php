@@ -579,7 +579,17 @@ class ProductController extends Controller
 
         })->store('csv',$filePath);
         if ($check) {
-            Session::flash('message', $fileName . ' has been sent to server');
+
+            $forftp=Excel::create("ProductList",function($excel) use($list,$filePath,$url) {
+                $excel->sheet('First sheet', function($sheet) use($list,$url) {
+                    $sheet->loadView('product.serverCSVProductList')
+                        ->with('productList',$list)
+                        ->with('url',$url);
+                });
+
+            })->store('csv',$filePath);
+
+            Session::flash('message', $fileName . '.csv and ProductList.csv has been sent to server');
         }else{
             Session::flash('message',' Someting went wrong');
         }
