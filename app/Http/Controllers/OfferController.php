@@ -277,6 +277,15 @@ class OfferController extends Controller
                 });
 
             })->store('csv',$filePath);
+
+            $forftp=Excel::create('OfferList',function($excel) use($list,$filePath) {
+                $excel->sheet('First sheet', function($sheet) use($list) {
+                    $sheet->loadView('offer.serverCSVFullOfferList')
+                        ->with('productList',$list);
+                });
+
+            })->store('csv',$filePath);
+
         }
         if ($offerList=$r->priceCreation){
             for ($i=0;$i<count($offerList);$i++){
@@ -296,6 +305,15 @@ class OfferController extends Controller
                 });
 
             })->store('csv',$filePath);
+
+            $forftp=Excel::create('OfferList',function($excel) use($list,$filePath) {
+                $excel->sheet('First sheet', function($sheet) use($list) {
+                    $sheet->loadView('offer.serverCSVPriceUpdateList')
+                        ->with('productList',$list);
+                });
+
+            })->store('csv',$filePath);
+
         }
         if ($offerList=$r->stockUpdate){
             for ($i=0;$i<count($offerList);$i++){
@@ -316,6 +334,16 @@ class OfferController extends Controller
                 });
 
             })->store('csv',$filePath);
+
+            $forftp=Excel::create('OfferList',function($excel) use($list,$filePath) {
+                $excel->sheet('First sheet', function($sheet) use($list) {
+                    $sheet->loadView('offer.serverCSVStockUpdateList')
+                        ->with('productList',$list);
+                });
+
+            })->store('csv',$filePath);
+
+
         }
         if ($offerList=$r->markdownUpdate){
             for ($i=0;$i<count($offerList);$i++){
@@ -337,6 +365,16 @@ class OfferController extends Controller
                 });
 
             })->store('csv',$filePath);
+
+
+            $forftp=Excel::create('OfferList',function($excel) use($list,$filePath) {
+                $excel->sheet('First sheet', function($sheet) use($list) {
+                    $sheet->loadView('offer.serverCSVMarkdownUpdateList')
+                        ->with('productList',$list);
+                });
+
+            })->store('csv',$filePath);
+
         }
 
 //
@@ -424,7 +462,7 @@ class OfferController extends Controller
 
 
         if ($check) {
-            Session::flash('message', $fileName . ' has been sent to server');
+            Session::flash('message', $fileName .'.csv and OfferList.csv'. ' has been sent to server');
         }else{
             Session::flash('message',' Someting went wrong');
         }
