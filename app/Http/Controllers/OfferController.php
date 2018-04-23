@@ -336,7 +336,7 @@ class OfferController extends Controller
                         ->with('productList',$list);
                 });
 
-            })->store('xls',$filePath);
+            })->store('csv',$filePath);
         }
 
 //
