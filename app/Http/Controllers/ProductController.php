@@ -609,7 +609,7 @@ class ProductController extends Controller
 
             })->store('csv',$filePath);
 
-            Session::flash('message', $fileName . '.csv and ProductList.csv,OfferList.csv has been sent to server');
+            Session::flash('message', $fileName . '.csv , ProductList.csv and OfferList.csv has been sent to server');
         }else{
             Session::flash('message',' Someting went wrong');
         }
