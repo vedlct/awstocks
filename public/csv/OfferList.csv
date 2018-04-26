@@ -1,2 +1,4 @@
-"sku","price"
-"test2","654"
+"sku","price","quantity","state","product-id-type","product-id","min-quantity-alert"
+"erwe","50","3","11","SHOP_SKU","erwe","1"
+"updateproduct","21.65","20","11","SHOP_SKU","updateproduct","10"
+"erwe","50","3","11","SHOP_SKU","erwe","1"
