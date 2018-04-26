@@ -477,16 +477,27 @@ class ProductController extends Controller
         );
 
         $list=array();
+//        $OfferList=array();
         for ($i=0;$i<count($productList);$i++){
             $productId=$productList[$i];
-            $newlist=Product::select('category.categoryName','style','sku','productName','productDesc','brand','color','colorDesc','swatchImage','size','mainImage','outfit','image2')
+            $newlist=Product::select('product.price','product.stockQty','product.sku as product-Id','product.minQtyAlert','category.categoryName','style','sku','productName','productDesc','brand','color','colorDesc','swatchImage','size','mainImage','outfit','image2')
                 ->leftJoin('category', 'category.categoryId', '=', 'product.fkcategoryId')->where('product.productId',$productId)->get()->toArray();
             $list=array_merge($list,$newlist);
+
+
+//            $newOfferList=Product::select('product.sku','product.price','product.stockQty','product.sku as product-Id','product.minQtyAlert')
+//
+//                ->where('product.productId',$productId)->get()->toArray();
+//            $OfferList=array_merge($OfferList,$newOfferList);
+
+
 
             DB::table('product')
                 ->where('productId',$productId)
                 ->update($data);
         }
+
+
 
 //        $fileName="ProductList-".date_timestamp_get(now()).".csv";
 //        $filePath=public_path ()."/csv"."/".$fileName;
@@ -589,7 +600,16 @@ class ProductController extends Controller
 
             })->store('csv',$filePath);
 
-            Session::flash('message', $fileName . '.csv and ProductList.csv has been sent to server');
+            $forftp=Excel::create("OfferList",function($excel) use($list,$filePath,$url) {
+                $excel->sheet('First sheet', function($sheet) use($list,$url) {
+                    $sheet->loadView('offer.serverCSVPriceAndQuantityForProductList')
+                        ->with('productList',$list)
+                        ->with('url',$url);
+                });
+
+            })->store('csv',$filePath);
+
+            Session::flash('message', $fileName . '.csv and ProductList.csv,OfferList.csv has been sent to server');
         }else{
             Session::flash('message',' Someting went wrong');
         }
