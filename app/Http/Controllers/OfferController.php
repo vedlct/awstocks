@@ -366,6 +366,7 @@ class OfferController extends Controller
 
             })->store('csv',$filePath);
 
+
             $forftp=Excel::create('OfferList',function($excel) use($list,$filePath) {
                 $excel->sheet('First sheet', function($sheet) use($list) {
                     $sheet->loadView('offer.serverCSVMarkdownUpdateList')
