@@ -1,0 +1,3 @@
+"Product category","Style","SKU","Product name","Product description","Brand name","Standard colour","Detailed colour","Swatch","Size","Main image","Outfit","Image 2"
+"Men->Pant","updateproduct","updateproduct","update product","update product","update product","White","update product","","","http://localhost/awstocks/public/productImage/11main.jpg","",""
+"Women->Gown","asdad","adasd","asdasd","dfd","asa","Silver","asdasd","http://localhost/awstocks/public/productImage/10swatch.jpg","Mensw","http://localhost/awstocks/public/productImage/10main.jpg","http://localhost/awstocks/public/productImage/10outfit.jpg","http://localhost/awstocks/public/productImage/10image2.jpg"
