@@ -73,10 +73,16 @@
 
             <input style="margin-left: 15px" type="checkbox" class="SelectAll" id="selectall2"  /><b>Select All</b><br>
         </div>
-        <a  onclick="return myfunc()" download> <button class="btn btn-danger"  >Export into Product file</button></a>
+        <div class="row">
+            <div style="text-align: left" class="col-md-4 col-sm-4">
+        <a  onclick="return myfunc()" download> <button class="btn btn-danger"  >Export Product and Offer File</button></a>
+            </div>
+            <div style="text-align: right" class="col-md-8 col-sm-8">
         <a  href="{{url("public/csv/ProductList.csv")}}" download > <button class="btn btn-danger">Download Exported Product File</button></a>
         <a  href="{{url("public/csv/OfferList.csv")}}" download > <button class="btn btn-danger">Download Exported Offer File</button></a>
         <a  onclick="return excel()"> <button class="btn btn-danger"  >Download Products into Local Computer</button></a>
+            </div>
+        </div>
     </div>
 
 @endsection
