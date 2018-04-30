@@ -255,6 +255,11 @@ class OfferController extends Controller
             $filePath=public_path ()."/csv"."/";
             //$FH = fopen($filePath, "w");
         }
+        if ($offerList=$r->priceAndQuantityUpdate){
+            $fileName="OfferList-".date("Y-m-d_H-i-s");
+            $filePath=public_path ()."/csv"."/";
+            //$FH = fopen($filePath, "w");
+        }
         $fileInfo=array(
             'fileName'=>$fileName,
             'filePath'=>$filePath,
@@ -370,6 +375,37 @@ class OfferController extends Controller
             $forftp=Excel::create('OfferList',function($excel) use($list,$filePath) {
                 $excel->sheet('First sheet', function($sheet) use($list) {
                     $sheet->loadView('offer.serverCSVMarkdownUpdateList')
+                        ->with('productList',$list);
+                });
+
+            })->store('csv',$filePath);
+
+        }
+        if ($offerList=$r->priceAndQuantityUpdate){
+            for ($i=0;$i<count($offerList);$i++){
+                $productId=$offerList[$i];
+                $newlist=Offer::select('product.sku','product.stockQty','product.price','product.minQtyAlert','product.sku as product-Id')
+                    ->leftJoin('product', 'offer.fkproductId', '=','product.productId')
+                    ->where('offer.offerId',$productId)->get()->toArray();
+                $list=array_merge($list,$newlist);
+                DB::table('offer')
+                    ->where('offerId',$productId)
+                    ->update($data);
+            }
+
+            $check=Excel::create($fileName,function($excel) use($list,$filePath) {
+                $excel->sheet('First sheet', function($sheet) use($list) {
+
+                    $sheet->loadView('offer.serverCSVPriceAndQuantityForProductList')
+                        ->with('productList',$list);
+                });
+
+            })->store('csv',$filePath);
+
+
+            $forftp=Excel::create('OfferList',function($excel) use($list,$filePath) {
+                $excel->sheet('First sheet', function($sheet) use($list) {
+                    $sheet->loadView('offer.serverCSVPriceAndQuantityForProductList')
                         ->with('productList',$list);
                 });
 

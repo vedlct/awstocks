@@ -73,6 +73,7 @@
 
         </div>
                 <div class="row">
+                    {{--<div style="text-align: left" class="col-md-8">--}}
                     <div class="col-md-2">
                         <a  onclick="return creationFull()" download> <button class="btn btn-danger" >Export Full into Offer files</button></a>
                     </div>
@@ -86,9 +87,23 @@
                         <a  onclick="return markdownUpdate()" download> <button class="btn btn-danger">Export Markdown Update</button></a>
                     </div>
                     <div class="col-md-2">
+                        <a  onclick="return priceAndQuantityUpdate()" download> <button class="btn btn-danger">Export Price & Quantity Update</button></a>
+                    </div>
+                    </div>
+                <br>
+                    <div  class="row">
+
+                    <div class="col-md-3">
                         <a  onclick="return excel()"> <button class="btn btn-danger"  >Download Offers into Local Computer</button></a>
 
                     </div>
+                    <div class="col-md-3">
+                        <a  href="{{url("public/csv/OfferList.csv")}}" download > <button class="btn btn-danger">Download Price & Quantity Update</button></a>
+
+                    </div>
+                        <div class="col-md-6"></div>
+                    </div>
+                <br>
 
                 </div>
             </div>
@@ -432,6 +447,39 @@
                     url: "{!! route('offer.csv') !!}",
                     cache: false,
                     data: {'markdownUpdate': offers},
+                    success: function (data) {
+
+                        $('#SessionMessage').load(document.URL +  ' #SessionMessage');
+                        table.ajax.reload();  //just reload table
+
+                        {{--var link = document.createElement("a");--}}
+                        {{--link.download = data.fileName;--}}
+                        {{--var uri = '{{url("public/csv")}}'+"/"+data.fileName;--}}
+                        {{--link.href = uri;--}}
+                        {{--document.body.appendChild(link);--}}
+                        {{--link.click();--}}
+                        {{--document.body.removeChild(link);--}}
+                        {{--delete link;--}}
+
+                            selecteds=[];
+
+                        $(':checkbox:checked').prop('checked',false);
+
+                    }
+
+                });
+            }else {
+                alert("Please Select a offer first");
+            }
+        }
+        function priceAndQuantityUpdate() {
+            var offers = selecteds;
+            if (offers.length >0) {
+                $.ajax({
+                    type: 'POST',
+                    url: "{!! route('offer.csv') !!}",
+                    cache: false,
+                    data: {'priceAndQuantityUpdate': offers},
                     success: function (data) {
 
                         $('#SessionMessage').load(document.URL +  ' #SessionMessage');
