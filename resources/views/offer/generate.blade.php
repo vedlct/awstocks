@@ -73,37 +73,66 @@
 
         </div>
                 <div class="row">
+
+                    <div class="col-md-4">
+                    <form action="javascript:exporttype()">
+                        <select name="" class="form-control form-control-warning" id="selectExport" >
+                            <option selected value="">Select Export Type</option>
+
+                            <option value="fulloffer">Export Full into Offer files</option>
+                            <option value="price">Export Price Update</option>
+                            <option value="stock">Export Stock Update</option>
+                            <option value="markdown">Export Markdown Update</option>
+                            <option value="quantity">Export Price & Quantity Update</option>
+
+                        </select>
+
+                        <div></div>
+
+                    </form>
+
+                    </div>
+
+                    <div class="col-md-2">
+                        <button class="btn btn-primary" type="submit">submit</button>
+                    </div>
+
+
+
+                {{--<div class="row">--}}
+
                     {{--<div style="text-align: left" class="col-md-8">--}}
-                    <div class="col-md-2">
-                        <a  onclick="return creationFull()" download> <button class="btn btn-danger" >Export Full into Offer files</button></a>
-                    </div>
-                    <div class="col-md-2">
-                        <a  onclick="return priceUpdate()" download> <button class="btn btn-danger">Export Price Update</button></a>
-                    </div>
-                     <div class="col-md-2">
-                        <a  onclick="return stockUpdate()" download> <button class="btn btn-danger">Export Stock Update</button></a>
-                    </div>
-                    <div class="col-md-2">
-                        <a  onclick="return markdownUpdate()" download> <button class="btn btn-danger">Export Markdown Update</button></a>
-                    </div>
-                    <div class="col-md-2">
-                        <a  onclick="return priceAndQuantityUpdate()" download> <button class="btn btn-danger">Export Price & Quantity Update</button></a>
-                    </div>
-                    </div>
-                <br>
-                    <div  class="row">
+                    {{--<div class="col-md-2">--}}
+                        {{--<a  onclick="return creationFull()" download> <button class="btn btn-danger" >Export Full into Offer files</button></a>--}}
+                    {{--</div>--}}
+                    {{--<div class="col-md-2">--}}
+                        {{--<a  onclick="return priceUpdate()" download> <button class="btn btn-danger">Export Price Update</button></a>--}}
+                    {{--</div>--}}
+                     {{--<div class="col-md-2">--}}
+                        {{--<a  onclick="return stockUpdate()" download> <button class="btn btn-danger">Export Stock Update</button></a>--}}
+                    {{--</div>--}}
+                    {{--<div class="col-md-2">--}}
+                        {{--<a  onclick="return markdownUpdate()" download> <button class="btn btn-danger">Export Markdown Update</button></a>--}}
+                    {{--</div>--}}
+                    {{--<div class="col-md-2">--}}
+                        {{--<a  onclick="return priceAndQuantityUpdate()" download> <button class="btn btn-danger">Export Price & Quantity Update</button></a>--}}
+                    {{--</div>--}}
+                    {{--</div>--}}
 
-                    <div class="col-md-3">
-                        <a  onclick="return excel()"> <button class="btn btn-danger"  >Download Offers into Local Computer</button></a>
 
-                    </div>
-                    <div class="col-md-3">
-                        <a  href="{{url("public/csv/OfferList.csv")}}" download > <button class="btn btn-danger">Download last exported offer file</button></a>
+
+
+                    <div class="col-md-3" >
+                        <a style="float: right" onclick="return excel()"> <button class="btn btn-danger">Download Offers into Local Computer</button></a>
 
                     </div>
-                        <div class="col-md-6"></div>
+                    <div class="col-md-3" >
+                        <a  style="float: right" href="{{url("public/csv/OfferList.csv")}}" download > <button class="btn btn-danger">Download last exported offer file</button></a>
+
                     </div>
-                <br>
+
+
+
 
                 </div>
             </div>
@@ -542,5 +571,27 @@
             }
         }
 
+        function exporttype() {
+            var x = document.getElementById("selectExport").value
+            if (x == "fulloffer"){
+                creationFull();
+
+            }else if (x == "price")
+            {
+                priceUpdate();
+
+            }else if (x == "stock")
+            {
+                stockUpdate();
+
+            }else if (x == "markdown")
+            {
+                markdownUpdate();
+
+            }else if (x == "quantity")
+            {
+                priceAndQuantityUpdate();
+            }
+        }
     </script>
 @endsection
