@@ -1,2 +1,4 @@
 "sku","price","quantity","product-id-type","product-id","state","min-quantity-alert"
 "ABCD-123-RDS","125","100","SHOP_SKU","ABCD-123-RDS","11","10"
+"ABCD-123-RDS","125","100","SHOP_SKU","ABCD-123-RDS","11","10"
+"ABCD-123-RDS","125","100","SHOP_SKU","ABCD-123-RDS","11","10"

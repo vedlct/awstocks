@@ -15,137 +15,137 @@
         <div class="col-lg-12">
             <div class="card" style="margin-left: 10px; border-radius: 10px;">
 
-            <div class="card-body" style="padding: 1%;">
-                <div align="center" style="margin-bottom: 3%;">
-                    <h2 style="color: #989898;"><b>Offer List</b></h2>
-                </div>
-
-                <div class="row">
-
-                    <div class="col-md-4 dropdown">
-                        <label class="form-control-label">Category</label> <br>
-                        <select class="form-control" id="category" name="category">
-                            <option selected value="">All Category</option>
-                            @foreach($categories as $category)
-                                <option value="{{$category->categoryId}}">{{$category->categoryName}}</option>
-                            @endforeach
-                        </select>
-
+                <div class="card-body" style="padding: 1%;">
+                    <div align="center" style="margin-bottom: 3%;">
+                        <h2 style="color: #989898;"><b>Offer List</b></h2>
                     </div>
 
-                    <div class="col-md-4 dropdown">
-                        <label class="form-control-label">Offer Status</label> <br>
-                        <select class="form-control" id="product" name="product">
-                            <option selected value="">All Offer Status</option>
-                            <?php for ($i=0;$i<count(Status);$i++){?>
-
-                            <option value="<?php echo Status[$i]?>"><?php echo Status[$i]?></option>
-
-                            <?php } ?>
-                        </select>
-                    </div>
-                </div>
-                <br>
-        <div class="table table-responsive">
-         <table id="offerlist" class="table table-bordered table-striped"  >
-            <thead>
-            <tr>
-
-                {{--<th><input type="checkbox" id="selectall" onClick="selectAll(this)" /></th>--}}
-                <th>Select</th>
-                <th>Category</th>
-                <th>Sku</th>
-                <th>Price</th>
-                <th>State</th>
-                <th>Quantity</th>
-                <th>Discount Price</th>
-                <th>Discount Start Date</th>
-                <th>Discount End Date</th>
-                <th>Action</th>
-            </tr>
-            </thead>
-            <tbody>
-
-            </tbody>
-        </table>
-            <br>
-            <input type="checkbox" id="selectall2" /><b>Select All</b>
-
-        </div>
-                <form action="javascript:exporttype()">
-                <div class="row">
-                    <div class="col-md-12">
-                        <label class="col-sm-2 form-control-label">Select Export Type</label>
-                    </div>
-                </div>
                     <div class="row">
 
+                        <div class="col-md-4 dropdown">
+                            <label class="form-control-label">Category</label> <br>
+                            <select class="form-control" id="category" name="category">
+                                <option selected value="">All Category</option>
+                                @foreach($categories as $category)
+                                    <option value="{{$category->categoryId}}">{{$category->categoryName}}</option>
+                                @endforeach
+                            </select>
 
-                    <div class="col-md-4">
+                        </div>
 
-                        <select name="" class="form-control form-control-warning" id="selectExport" >
-                            <option selected value="">Select Export Type</option>
+                        <div class="col-md-4 dropdown">
+                            <label class="form-control-label">Offer Status</label> <br>
+                            <select class="form-control" id="product" name="product">
+                                <option selected value="">All Offer Status</option>
+                                <?php for ($i=0;$i<count(Status);$i++){?>
 
-                            <option value="fulloffer">Export Full into Offer files</option>
-                            <option value="price">Export Price Update</option>
-                            <option value="stock">Export Stock Update</option>
-                            <option value="markdown">Export Markdown Update</option>
-                            <option value="quantity">Export Price & Quantity Update</option>
+                                <option value="<?php echo Status[$i]?>"><?php echo Status[$i]?></option>
 
-                        </select>
+                                <?php } ?>
+                            </select>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="table table-responsive">
+                        <table id="offerlist" class="table table-bordered table-striped"  >
+                            <thead>
+                            <tr>
 
+                                {{--<th><input type="checkbox" id="selectall" onClick="selectAll(this)" /></th>--}}
+                                <th>Select</th>
+                                <th>Category</th>
+                                <th>Sku</th>
+                                <th>Price</th>
+                                <th>State</th>
+                                <th>Quantity</th>
+                                <th>Discount Price</th>
+                                <th>Discount Start Date</th>
+                                <th>Discount End Date</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
 
-
-
+                            </tbody>
+                        </table>
+                        <br>
+                        <input type="checkbox" id="selectall2" /><b>Select All</b>
 
                     </div>
-
-                    <div class="col-md-2">
-                        <button class="btn btn-primary" type="submit">submit</button>
-                    </div>
-
+                    <div class="row">
+                        <div style="text-align: left" class="col-md-6">
+                            <form action="javascript:exporttype()">
 
 
-                {{--<div class="row">--}}
+                                {{--<div class="col-md-4">--}}
 
-                    {{--<div style="text-align: left" class="col-md-8">--}}
-                    {{--<div class="col-md-2">--}}
+                                <select name="" class="col-md-5 form-control form-control-warning" id="selectExport" >
+                                    <option selected value="">Select Export Type</option>
+
+                                    <option value="fulloffer">Export Full with Discount</option>
+                                    <option value="quantity">Export Price & Quantity Update</option>
+                                    <option value="price">Export Only Price Update</option>
+                                    <option value="stock">Export Only Stock Update</option>
+                                    <option value="markdown">Export Markdown Update</option>
+
+
+                                </select>
+
+                                {{--</div>--}}
+
+                                {{--<div class="col-md-2">--}}
+                                <button class="col-md-2 btn btn-primary" type="submit">submit</button>
+                                {{--</div>--}}
+
+
+                            </form>
+                        </div>
+
+
+
+                        {{--<div class="row">--}}
+
+                        {{--<div style="text-align: left" class="col-md-8">--}}
+                        {{--<div class="col-md-2">--}}
                         {{--<a  onclick="return creationFull()" download> <button class="btn btn-danger" >Export Full into Offer files</button></a>--}}
-                    {{--</div>--}}
-                    {{--<div class="col-md-2">--}}
+                        {{--</div>--}}
+                        {{--<div class="col-md-2">--}}
                         {{--<a  onclick="return priceUpdate()" download> <button class="btn btn-danger">Export Price Update</button></a>--}}
-                    {{--</div>--}}
-                     {{--<div class="col-md-2">--}}
+                        {{--</div>--}}
+                        {{--<div class="col-md-2">--}}
                         {{--<a  onclick="return stockUpdate()" download> <button class="btn btn-danger">Export Stock Update</button></a>--}}
-                    {{--</div>--}}
-                    {{--<div class="col-md-2">--}}
+                        {{--</div>--}}
+                        {{--<div class="col-md-2">--}}
                         {{--<a  onclick="return markdownUpdate()" download> <button class="btn btn-danger">Export Markdown Update</button></a>--}}
-                    {{--</div>--}}
-                    {{--<div class="col-md-2">--}}
+                        {{--</div>--}}
+                        {{--<div class="col-md-2">--}}
                         {{--<a  onclick="return priceAndQuantityUpdate()" download> <button class="btn btn-danger">Export Price & Quantity Update</button></a>--}}
-                    {{--</div>--}}
-                    {{--</div>--}}
+                        {{--</div>--}}
+                        {{--</div>--}}
 
 
 
+                        <div style="text-align: right" class="col-md-6">
+                            {{--<div class="col-md-3" >--}}
+                            <a   href="{{url("public/csv/OfferList.csv")}}" download > <button class="col-md-5 btn btn-danger">Download Last Exported Offer File</button></a>
 
-                    <div class="col-md-3" >
-                        <a style="float: right" onclick="return excel()"> <button class="btn btn-danger">Download Offers into Local Computer</button></a>
+                            <a  onclick="return excel()"> <button class="col-md-5 btn btn-danger">Download Selected Offer Details</button></a>
+
+                            {{--</div>--}}
+                            {{--<div class="col-md-3" >--}}
+
+                            {{--</div>--}}
+                        </div>
+
 
                     </div>
-                    <div class="col-md-3" >
-                        <a  style="float: right" href="{{url("public/csv/OfferList.csv")}}" download > <button class="btn btn-danger">Download last exported offer file</button></a>
-
-                    </div>
-
 
 
 
                 </div>
-                </form>
+
             </div>
         </div>
-    </div>
     </div>
 
 @endsection
@@ -157,15 +157,10 @@
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <script>
-
-
         var selecteds = [];
         $(document).ready(function() {
-
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-
             table =  $('#offerlist').DataTable({
-
                 processing: true,
                 serverSide: true,
                 stateSave: true,
@@ -191,22 +186,17 @@
                     { data: 'price', name: 'price' },
                     { data: 'state', name: 'state' },
                     { data: 'stockQty', name: 'stockQty' },
-
                     { "data": function(data){return (data.price-data.disPrice)}
                     },
-
                     { data: 'disStartPrice', name: 'disStartPrice' },
                     { data: 'disEndPrice', name: 'disEndPrice' },
                     { "data": function(data){
                         return '<a class="btn" data-panel-id="'+data.offerId+'"onclick="editOffer(this)"><i class="fa fa-edit"></i></a><a class="btn" data-panel-id="'+data.offerId+'"onclick="deleteOffer(this)"><i class="fa fa-trash"></i></a>';},
                         "orderable": false, "searchable":false, "name":"selected_rows" }
-
                 ],
                 order: [[0,'desc'] ],
-
             });
             $("div.toolbar").html('<input style="margin-left: 15px" type="checkbox" id="selectall1" /><b>Select All</b>');
-
             $('#offerlist').on( 'length.dt', function ( e, settings, len ) {
                 selecteds=[];
                 $(':checkbox:checked').prop('checked',false);
@@ -219,8 +209,6 @@
                 selecteds=[];
                 $(':checkbox:checked').prop('checked',false);
             });
-
-
             $('#category').change(function(){ //button filter event click
                 table.search("").draw(); //just redraw myTableFilter
                 table.ajax.reload();  //just reload table
@@ -242,10 +230,8 @@
                 // $('.SelectAll').attr('checked', false);
                 $(':checkbox:checked').prop('checked',false);
             });
-
             // add multiple select / deselect functionality
             $("#selectall2").click(function () {
-
                 if($('#selectall2').is(":checked")) {
                     selecteds=[];
                     $('#selectall1').prop('checked',true);
@@ -253,25 +239,19 @@
                     for(var i in checkboxes) {
                         checkboxes[i].checked = 'TRUE';
                     }
-
                     /* look for all checkboes that have a class 'chk' attached to it and check if it was checked */
                     $(".chk:checked").each(function () {
                         selecteds.push($(this).val());
                     });
                     //  alert(selecteds);
-
-
                 }
                 else {
                     selecteds=[];
                     $(':checkbox:checked').prop('checked',false);
                 }
-
             });
-
             // add multiple select / deselect functionality
             $("#selectall1").click(function () {
-
                 if($('#selectall1').is(":checked")) {
                     selecteds=[];
                     $('#selectall2').prop('checked',true);
@@ -279,52 +259,39 @@
                     for(var i in checkboxes) {
                         checkboxes[i].checked = 'TRUE';
                     }
-
                     /* look for all checkboes that have a class 'chk' attached to it and check if it was checked */
                     $(".chk:checked").each(function () {
                         selecteds.push($(this).val());
                     });
-
-
-
                 }
                 else {
                     selecteds=[];
                     $(':checkbox:checked').prop('checked',false);
                 }
-
             });
-
         });
-
-
         function selected_rows(x) {
             btn = $(x).data('panel-id');
-
             var index = selecteds.indexOf(btn.toString())
-
             if (index == '-1'){
                 selecteds.push(btn);
             }else {
                 selecteds.splice(index, 1);
             }
-
         }
-
-//        function selectAll(source) {
-//            for(var i=0; i <= selecteds.length; i++) {
-//                selecteds.pop(i);
-//            }
-//            checkboxes = document.getElementsByName('selected_rows[]');
-//            for(var i in checkboxes) {
-//                checkboxes[i].checked = source.checked;
-//            }
-//
-//            $(".chk:checked").each(function () {
-//                selecteds.push($(this).val());
-//            });
-//        }
-
+        //        function selectAll(source) {
+        //            for(var i=0; i <= selecteds.length; i++) {
+        //                selecteds.pop(i);
+        //            }
+        //            checkboxes = document.getElementsByName('selected_rows[]');
+        //            for(var i in checkboxes) {
+        //                checkboxes[i].checked = source.checked;
+        //            }
+        //
+        //            $(".chk:checked").each(function () {
+        //                selecteds.push($(this).val());
+        //            });
+        //        }
         function editOffer(x) {
             btn = $(x).data('panel-id');
             var url = '{{route("offer.edit", ":id") }}';
@@ -333,10 +300,8 @@
             window.location.href = newUrl;
         }
         function deleteOffer(x) {
-
             btn = $(x).data('panel-id');
             var url = '{{route("offer.delete", ":id") }}';
-
             $.confirm({
                 title: 'Confirm!',
                 content: 'Are you sure you would like to delete the selected Offer?',
@@ -353,94 +318,143 @@
                         }
                     },
                     No: function () {
-
                     },
                 }
             });
-
 //            var result = confirm("Are you sure you would like to delete the selected Offer?");
 //            if (result) {
 //                var newUrl = url.replace(':id', btn);
 //                window.location.href = newUrl;
 //            }
         }
-
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-
-            function creationFull() {
-                var offers = selecteds;
-                if (offers.length >0) {
-                    $.ajax({
-                        type: 'POST',
-                        url: "{!! route('offer.csv') !!}",
-                        cache: false,
-                        data: {'fulloffers': offers},
-                        success: function (data) {
-                            $('#SessionMessage').load(document.URL +  ' #SessionMessage');
-                            table.ajax.reload();  //just reload table
-
-                            {{--var link = document.createElement("a");--}}
-                            {{--link.download = data.fileName;--}}
-                            {{--var uri = '{{url("public/csv")}}'+"/"+data.fileName;--}}
-                            {{--link.href = uri;--}}
-                            {{--document.body.appendChild(link);--}}
-                            {{--link.click();--}}
-                            {{--document.body.removeChild(link);--}}
-                            {{--delete link;--}}
-
-                                selecteds=[];
-
-                            $(':checkbox:checked').prop('checked',false);
-
-
+        function creationFull() {
+            var offers = selecteds;
+            if (offers.length >0) {
+                $.ajax({
+                    type: 'POST',
+                    url: "{!! route('offer.csv') !!}",
+                    cache: false,
+                    data: {'fulloffers': offers},
+                    success: function (data) {
+                        $('#SessionMessage').load(document.URL +  ' #SessionMessage');
+                        table.ajax.reload();  //just reload table
+                        selecteds=[];
+                        $(':checkbox:checked').prop('checked',false);
+                        if (data.success=='1'){
+                            $.alert({
+                                title: 'Success!',
+                                type: 'green',
+                                content: data.message,
+                                buttons: {
+                                    tryAgain: {
+                                        text: 'Ok',
+                                        btnClass: 'btn-blue',
+                                        action: function () {
+                                        }
+                                    }
+                                }
+                            });
+                        }else if(data.success=='0'){
+                            $.alert({
+                                title: 'Alert!',
+                                type: 'Red',
+                                content: data.message,
+                                buttons: {
+                                    tryAgain: {
+                                        text: 'Ok',
+                                        btnClass: 'btn-red',
+                                        action: function () {
+                                        }
+                                    }
+                                }
+                            });
                         }
-
-                    });
-                }
-                else {
-                    alert("Please Select a offer first");
-                }
-            }
-
-                function priceUpdate() {
-                    var offers = selecteds;
-                    if (offers.length >0) {
-                        $.ajax({
-                            type: 'POST',
-                            url: "{!! route('offer.csv') !!}",
-                            cache: false,
-                            data: {'priceCreation': offers},
-                            success: function (data) {
-
-                                $('#SessionMessage').load(document.URL +  ' #SessionMessage');
-                                table.ajax.reload();  //just reload table
-
-                                {{--var link = document.createElement("a");--}}
-                                {{--link.download = data.fileName;--}}
-                                {{--var uri = '{{url("public/csv")}}'+"/"+data.fileName;--}}
-                                {{--link.href = uri;--}}
-                                {{--document.body.appendChild(link);--}}
-                                {{--link.click();--}}
-                                {{--document.body.removeChild(link);--}}
-                                {{--delete link;--}}
-
-                                    selecteds=[];
-
-                                $(':checkbox:checked').prop('checked',false);
-
-
-                            }
-
-                        });
-                    }else {
-                        alert("Please Select a offer first");
                     }
-                }
-
+                });
+            }
+            else {
+                //  alert("Please Select a offer first");
+                $.alert({
+                    title: 'Alert!',
+                    type: 'Red',
+                    content: 'Please select your Product(s) for exporting into the offer file',
+                    buttons: {
+                        tryAgain: {
+                            text: 'Ok',
+                            btnClass: 'btn-red',
+                            action: function () {
+                            }
+                        }
+                    }
+                });
+            }
+        }
+        function priceUpdate() {
+            var offers = selecteds;
+            if (offers.length >0) {
+                $.ajax({
+                    type: 'POST',
+                    url: "{!! route('offer.csv') !!}",
+                    cache: false,
+                    data: {'priceCreation': offers},
+                    success: function (data) {
+                        $('#SessionMessage').load(document.URL +  ' #SessionMessage');
+                        table.ajax.reload();  //just reload table
+                        selecteds=[];
+                        $(':checkbox:checked').prop('checked',false);
+                        if (data.success=='1'){
+                            $.alert({
+                                title: 'Success!',
+                                type: 'green',
+                                content: data.message,
+                                buttons: {
+                                    tryAgain: {
+                                        text: 'Ok',
+                                        btnClass: 'btn-blue',
+                                        action: function () {
+                                        }
+                                    }
+                                }
+                            });
+                        }else if(data.success=='0'){
+                            $.alert({
+                                title: 'Alert!',
+                                type: 'Red',
+                                content: data.message,
+                                buttons: {
+                                    tryAgain: {
+                                        text: 'Ok',
+                                        btnClass: 'btn-red',
+                                        action: function () {
+                                        }
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
+            }else {
+                // alert("Please Select a offer first");
+                $.alert({
+                    title: 'Alert!',
+                    type: 'Red',
+                    content: 'Please select your Product(s) for exporting into the offer file',
+                    buttons: {
+                        tryAgain: {
+                            text: 'Ok',
+                            btnClass: 'btn-red',
+                            action: function () {
+                            }
+                        }
+                    }
+                });
+            }
+        }
         function stockUpdate() {
             var offers = selecteds;
             if (offers.length >0) {
@@ -450,32 +464,58 @@
                     cache: false,
                     data: {'stockUpdate': offers},
                     success: function (data) {
-
                         $('#SessionMessage').load(document.URL +  ' #SessionMessage');
                         table.ajax.reload();  //just reload table
-
-                        {{--var link = document.createElement("a");--}}
-                        {{--link.download = data.fileName;--}}
-                        {{--var uri = '{{url("public/csv")}}'+"/"+data.fileName;--}}
-                        {{--link.href = uri;--}}
-                        {{--document.body.appendChild(link);--}}
-                        {{--link.click();--}}
-                        {{--document.body.removeChild(link);--}}
-                        {{--delete link;--}}
-
-                            selecteds=[];
-
+                        selecteds=[];
                         $(':checkbox:checked').prop('checked',false);
-
-
+                        if (data.success=='1'){
+                            $.alert({
+                                title: 'Success!',
+                                type: 'green',
+                                content: data.message,
+                                buttons: {
+                                    tryAgain: {
+                                        text: 'Ok',
+                                        btnClass: 'btn-blue',
+                                        action: function () {
+                                        }
+                                    }
+                                }
+                            });
+                        }else if(data.success=='0'){
+                            $.alert({
+                                title: 'Alert!',
+                                type: 'Red',
+                                content: data.message,
+                                buttons: {
+                                    tryAgain: {
+                                        text: 'Ok',
+                                        btnClass: 'btn-red',
+                                        action: function () {
+                                        }
+                                    }
+                                }
+                            });
+                        }
                     }
-
                 });
             }else {
-                alert("Please Select a offer first");
+                // alert("Please Select a offer first");
+                $.alert({
+                    title: 'Alert!',
+                    type: 'Red',
+                    content: 'Please select your Product(s) for exporting into the offer file',
+                    buttons: {
+                        tryAgain: {
+                            text: 'Ok',
+                            btnClass: 'btn-red',
+                            action: function () {
+                            }
+                        }
+                    }
+                });
             }
         }
-
         function markdownUpdate() {
             var offers = selecteds;
             if (offers.length >0) {
@@ -485,28 +525,56 @@
                     cache: false,
                     data: {'markdownUpdate': offers},
                     success: function (data) {
-
                         $('#SessionMessage').load(document.URL +  ' #SessionMessage');
                         table.ajax.reload();  //just reload table
-
-                        {{--var link = document.createElement("a");--}}
-                        {{--link.download = data.fileName;--}}
-                        {{--var uri = '{{url("public/csv")}}'+"/"+data.fileName;--}}
-                        {{--link.href = uri;--}}
-                        {{--document.body.appendChild(link);--}}
-                        {{--link.click();--}}
-                        {{--document.body.removeChild(link);--}}
-                        {{--delete link;--}}
-
-                            selecteds=[];
-
+                        selecteds=[];
                         $(':checkbox:checked').prop('checked',false);
-
+                        if (data.success=='1'){
+                            $.alert({
+                                title: 'Success!',
+                                type: 'green',
+                                content: data.message,
+                                buttons: {
+                                    tryAgain: {
+                                        text: 'Ok',
+                                        btnClass: 'btn-blue',
+                                        action: function () {
+                                        }
+                                    }
+                                }
+                            });
+                        }else if(data.success=='0'){
+                            $.alert({
+                                title: 'Alert!',
+                                type: 'Red',
+                                content: data.message,
+                                buttons: {
+                                    tryAgain: {
+                                        text: 'Ok',
+                                        btnClass: 'btn-red',
+                                        action: function () {
+                                        }
+                                    }
+                                }
+                            });
+                        }
                     }
-
                 });
             }else {
-                alert("Please Select a offer first");
+                // alert("Please Select a offer first");
+                $.alert({
+                    title: 'Alert!',
+                    type: 'Red',
+                    content: 'Please select your Product(s) for exporting into the offer file',
+                    buttons: {
+                        tryAgain: {
+                            text: 'Ok',
+                            btnClass: 'btn-red',
+                            action: function () {
+                            }
+                        }
+                    }
+                });
             }
         }
         function priceAndQuantityUpdate() {
@@ -518,49 +586,68 @@
                     cache: false,
                     data: {'priceAndQuantityUpdate': offers},
                     success: function (data) {
-
                         $('#SessionMessage').load(document.URL +  ' #SessionMessage');
                         table.ajax.reload();  //just reload table
-
-                        {{--var link = document.createElement("a");--}}
-                        {{--link.download = data.fileName;--}}
-                        {{--var uri = '{{url("public/csv")}}'+"/"+data.fileName;--}}
-                        {{--link.href = uri;--}}
-                        {{--document.body.appendChild(link);--}}
-                        {{--link.click();--}}
-                        {{--document.body.removeChild(link);--}}
-                        {{--delete link;--}}
-
-                            selecteds=[];
-
+                        selecteds=[];
                         $(':checkbox:checked').prop('checked',false);
-
+                        if (data.success=='1'){
+                            $.alert({
+                                title: 'Success!',
+                                type: 'green',
+                                content: data.message,
+                                buttons: {
+                                    tryAgain: {
+                                        text: 'Ok',
+                                        btnClass: 'btn-blue',
+                                        action: function () {
+                                        }
+                                    }
+                                }
+                            });
+                        }else if(data.success=='0'){
+                            $.alert({
+                                title: 'Alert!',
+                                type: 'Red',
+                                content: data.message,
+                                buttons: {
+                                    tryAgain: {
+                                        text: 'Ok',
+                                        btnClass: 'btn-red',
+                                        action: function () {
+                                        }
+                                    }
+                                }
+                            });
+                        }
                     }
-
                 });
             }else {
-                alert("Please Select a offer first");
+                //  alert("Please Select a offer first");
+                $.alert({
+                    title: 'Alert!',
+                    type: 'Red',
+                    content: 'Please select your Product(s) for exporting into the offer file',
+                    buttons: {
+                        tryAgain: {
+                            text: 'Ok',
+                            btnClass: 'btn-red',
+                            action: function () {
+                            }
+                        }
+                    }
+                });
             }
         }
-
-
         function excel() {
-
-
             var products=selecteds;
-
             //alert(products);
-
             if (products.length >0) {
-
                 $.ajax({
                     type: 'POST',
                     url: "{!!route('offer.excelExport') !!}",
                     cache: false,
                     data: {'products': products},
                     success: function (data) {
-
-
                         var link = document.createElement("a");
                         link.download = data.fileName+".xls";
                         var uri = '{{url("public/excel")}}'+"/"+data.fileName+".xls";
@@ -569,34 +656,57 @@
                         link.click();
                         document.body.removeChild(link);
                         delete link;
-
+                        table.ajax.reload();  //just reload table
+                        selecteds=[];
+                        $(':checkbox:checked').prop('checked',false);
                     }
-
                 });
             }
             else {
-                alert("Please Select a product first");
+                //alert("Please Select a product first");
+                $.alert({
+                    title: 'Alert!',
+                    type: 'Red',
+                    content: 'Please select your Product(s) for exporting into the offer file',
+                    buttons: {
+                        tryAgain: {
+                            text: 'Ok',
+                            btnClass: 'btn-red',
+                            action: function () {
+                            }
+                        }
+                    }
+                });
             }
         }
-
         function exporttype() {
             var x = document.getElementById("selectExport").value;
 
-            if (x == "fulloffer"){
+            if (x == ""){
+                $.alert({
+                    title: 'Alert!',
+                    type: 'Red',
+                    content: 'Please select A Export Type',
+                    buttons: {
+                        tryAgain: {
+                            text: 'Ok',
+                            btnClass: 'btn-red',
+                            action: function () {
+                            }
+                        }
+                    }
+                });
+            }if (x == "fulloffer"){
                 creationFull();
-
             }else if (x == "price")
             {
                 priceUpdate();
-
             }else if (x == "stock")
             {
                 stockUpdate();
-
             }else if (x == "markdown")
             {
                 markdownUpdate();
-
             }else if (x == "quantity")
             {
                 priceAndQuantityUpdate();

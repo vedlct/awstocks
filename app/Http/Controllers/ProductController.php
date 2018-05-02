@@ -609,11 +609,22 @@ class ProductController extends Controller
 
             })->store('csv',$filePath);
 
-            Session::flash('message', $fileName . '.csv , ProductList.csv and OfferList.csv has been sent to server');
+            $message=array('message'=>$fileName .'.csv <br><div align="center">ProductList.csv and</div> OfferList.csv'. ' has been sent to server',
+                'success'=>'1');
+            $fileInfo=array_merge($fileInfo,$message);
+
+          //  Session::flash('message', $fileName . '.csv , ProductList.csv and OfferList.csv has been sent to server');
         }else{
-            Session::flash('message',' Someting went wrong');
+
+            $message=array('message'=>'Someting went wrong',
+                'success'=>'0');
+            $fileInfo=array_merge($fileInfo,$message);
+
+           // Session::flash('message',' Someting went wrong');
         }
         return $fileInfo;
+
+
 
 
 
