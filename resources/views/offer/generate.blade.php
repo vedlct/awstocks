@@ -74,6 +74,12 @@
         </div>
                 <form action="javascript:exporttype()">
                 <div class="row">
+                    <div class="col-md-12">
+                        <label class="col-sm-2 form-control-label">Select Export Type</label>
+                    </div>
+                </div>
+                    <div class="row">
+
 
                     <div class="col-md-4">
 
@@ -575,7 +581,7 @@
 
         function exporttype() {
             var x = document.getElementById("selectExport").value;
-            
+
             if (x == "fulloffer"){
                 creationFull();
 
