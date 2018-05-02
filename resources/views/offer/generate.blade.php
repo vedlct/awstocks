@@ -72,10 +72,11 @@
             <input type="checkbox" id="selectall2" /><b>Select All</b>
 
         </div>
+                <form action="javascript:exporttype()">
                 <div class="row">
 
                     <div class="col-md-4">
-                    <form action="javascript:exporttype()">
+
                         <select name="" class="form-control form-control-warning" id="selectExport" >
                             <option selected value="">Select Export Type</option>
 
@@ -87,9 +88,9 @@
 
                         </select>
 
-                        <div></div>
 
-                    </form>
+
+
 
                     </div>
 
@@ -135,6 +136,7 @@
 
 
                 </div>
+                </form>
             </div>
         </div>
     </div>
@@ -572,7 +574,8 @@
         }
 
         function exporttype() {
-            var x = document.getElementById("selectExport").value
+            var x = document.getElementById("selectExport").value;
+            
             if (x == "fulloffer"){
                 creationFull();
 
