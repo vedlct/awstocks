@@ -98,7 +98,7 @@
 
                     </div>
                     <div class="col-md-3">
-                        <a  href="{{url("public/csv/OfferList.csv")}}" download > <button class="btn btn-danger">Download Price & Quantity Update</button></a>
+                        <a  href="{{url("public/csv/OfferList.csv")}}" download > <button class="btn btn-danger">Download last exported offer file</button></a>
 
                     </div>
                         <div class="col-md-6"></div>
