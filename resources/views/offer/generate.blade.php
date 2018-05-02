@@ -72,30 +72,33 @@
             <input type="checkbox" id="selectall2" /><b>Select All</b>
 
         </div>
-                <form action="javascript:exporttype()">
                 <div class="row">
+                    <div style="text-align: left" class="col-md-6">
+                <form action="javascript:exporttype()">
 
-                    <div class="col-md-4">
 
-                        <select name="" class="form-control form-control-warning" id="selectExport" >
+                    {{--<div class="col-md-4">--}}
+
+                        <select name="" class="col-md-5 form-control form-control-warning" id="selectExport" >
                             <option selected value="">Select Export Type</option>
 
-                            <option value="fulloffer">Export Full into Offer files</option>
-                            <option value="price">Export Price Update</option>
-                            <option value="stock">Export Stock Update</option>
-                            <option value="markdown">Export Markdown Update</option>
+                            <option value="fulloffer">Export Full with Discount</option>
                             <option value="quantity">Export Price & Quantity Update</option>
+                            <option value="price">Export Only Price Update</option>
+                            <option value="stock">Export Only Stock Update</option>
+                            <option value="markdown">Export Markdown Update</option>
+
 
                         </select>
 
+                    {{--</div>--}}
+
+                    {{--<div class="col-md-2">--}}
+                        <button class="col-md-2 btn btn-primary" type="submit">submit</button>
+                    {{--</div>--}}
 
 
-
-
-                    </div>
-
-                    <div class="col-md-2">
-                        <button class="btn btn-primary" type="submit">submit</button>
+                </form>
                     </div>
 
 
@@ -122,22 +125,25 @@
 
 
 
+<div style="text-align: right" class="col-md-6">
+                    {{--<div class="col-md-3" >--}}
+    <a   href="{{url("public/csv/OfferList.csv")}}" download > <button class="col-md-5 btn btn-danger">Download Last Exported Offer File</button></a>
 
-                    <div class="col-md-3" >
-                        <a style="float: right" onclick="return excel()"> <button class="btn btn-danger">Download Offers into Local Computer</button></a>
+    <a  onclick="return excel()"> <button class="col-md-5 btn btn-danger">Download Selected Offer Details</button></a>
 
-                    </div>
-                    <div class="col-md-3" >
-                        <a  style="float: right" href="{{url("public/csv/OfferList.csv")}}" download > <button class="btn btn-danger">Download last exported offer file</button></a>
+                    {{--</div>--}}
+                    {{--<div class="col-md-3" >--}}
 
-                    </div>
-
-
+                    {{--</div>--}}
+</div>
 
 
                 </div>
-                </form>
+
+
+
             </div>
+
         </div>
     </div>
     </div>
@@ -377,18 +383,52 @@
                             $('#SessionMessage').load(document.URL +  ' #SessionMessage');
                             table.ajax.reload();  //just reload table
 
-                            {{--var link = document.createElement("a");--}}
-                            {{--link.download = data.fileName;--}}
-                            {{--var uri = '{{url("public/csv")}}'+"/"+data.fileName;--}}
-                            {{--link.href = uri;--}}
-                            {{--document.body.appendChild(link);--}}
-                            {{--link.click();--}}
-                            {{--document.body.removeChild(link);--}}
-                            {{--delete link;--}}
-
                                 selecteds=[];
 
                             $(':checkbox:checked').prop('checked',false);
+                            if (data.success=='1'){
+
+                                $.alert({
+                                    title: 'Success!',
+                                    type: 'green',
+                                    content: data.message,
+                                    buttons: {
+                                        tryAgain: {
+                                            text: 'Ok',
+                                            btnClass: 'btn-blue',
+                                            action: function () {
+
+
+                                            }
+                                        }
+
+                                    }
+                                });
+
+
+                            }else if(data.success=='0'){
+
+                                $.alert({
+                                    title: 'Alert!',
+                                    type: 'Red',
+                                    content: data.message,
+                                    buttons: {
+                                        tryAgain: {
+                                            text: 'Ok',
+                                            btnClass: 'btn-red',
+                                            action: function () {
+
+
+                                            }
+                                        }
+
+                                    }
+                                });
+
+
+                            }
+
+
 
 
                         }
@@ -396,7 +436,23 @@
                     });
                 }
                 else {
-                    alert("Please Select a offer first");
+                  //  alert("Please Select a offer first");
+                    $.alert({
+                        title: 'Alert!',
+                        type: 'Red',
+                        content: 'Please select your Product(s) for exporting into the offer file',
+                        buttons: {
+                            tryAgain: {
+                                text: 'Ok',
+                                btnClass: 'btn-red',
+                                action: function () {
+
+
+                                }
+                            }
+
+                        }
+                    });
                 }
             }
 
@@ -413,25 +469,75 @@
                                 $('#SessionMessage').load(document.URL +  ' #SessionMessage');
                                 table.ajax.reload();  //just reload table
 
-                                {{--var link = document.createElement("a");--}}
-                                {{--link.download = data.fileName;--}}
-                                {{--var uri = '{{url("public/csv")}}'+"/"+data.fileName;--}}
-                                {{--link.href = uri;--}}
-                                {{--document.body.appendChild(link);--}}
-                                {{--link.click();--}}
-                                {{--document.body.removeChild(link);--}}
-                                {{--delete link;--}}
-
                                     selecteds=[];
 
                                 $(':checkbox:checked').prop('checked',false);
+
+                                if (data.success=='1'){
+
+                                    $.alert({
+                                        title: 'Success!',
+                                        type: 'green',
+                                        content: data.message,
+                                        buttons: {
+                                            tryAgain: {
+                                                text: 'Ok',
+                                                btnClass: 'btn-blue',
+                                                action: function () {
+
+
+                                                }
+                                            }
+
+                                        }
+                                    });
+
+
+                                }else if(data.success=='0'){
+
+                                    $.alert({
+                                        title: 'Alert!',
+                                        type: 'Red',
+                                        content: data.message,
+                                        buttons: {
+                                            tryAgain: {
+                                                text: 'Ok',
+                                                btnClass: 'btn-red',
+                                                action: function () {
+
+
+                                                }
+                                            }
+
+                                        }
+                                    });
+
+
+                                }
 
 
                             }
 
                         });
                     }else {
-                        alert("Please Select a offer first");
+                       // alert("Please Select a offer first");
+
+                        $.alert({
+                            title: 'Alert!',
+                            type: 'Red',
+                            content: 'Please select your Product(s) for exporting into the offer file',
+                            buttons: {
+                                tryAgain: {
+                                    text: 'Ok',
+                                    btnClass: 'btn-red',
+                                    action: function () {
+
+
+                                    }
+                                }
+
+                            }
+                        });
                     }
                 }
 
@@ -448,25 +554,75 @@
                         $('#SessionMessage').load(document.URL +  ' #SessionMessage');
                         table.ajax.reload();  //just reload table
 
-                        {{--var link = document.createElement("a");--}}
-                        {{--link.download = data.fileName;--}}
-                        {{--var uri = '{{url("public/csv")}}'+"/"+data.fileName;--}}
-                        {{--link.href = uri;--}}
-                        {{--document.body.appendChild(link);--}}
-                        {{--link.click();--}}
-                        {{--document.body.removeChild(link);--}}
-                        {{--delete link;--}}
 
                             selecteds=[];
 
                         $(':checkbox:checked').prop('checked',false);
+
+                        if (data.success=='1'){
+
+                            $.alert({
+                                title: 'Success!',
+                                type: 'green',
+                                content: data.message,
+                                buttons: {
+                                    tryAgain: {
+                                        text: 'Ok',
+                                        btnClass: 'btn-blue',
+                                        action: function () {
+
+
+                                        }
+                                    }
+
+                                }
+                            });
+
+
+                        }else if(data.success=='0'){
+
+                            $.alert({
+                                title: 'Alert!',
+                                type: 'Red',
+                                content: data.message,
+                                buttons: {
+                                    tryAgain: {
+                                        text: 'Ok',
+                                        btnClass: 'btn-red',
+                                        action: function () {
+
+
+                                        }
+                                    }
+
+                                }
+                            });
+
+
+                        }
 
 
                     }
 
                 });
             }else {
-                alert("Please Select a offer first");
+               // alert("Please Select a offer first");
+                $.alert({
+                    title: 'Alert!',
+                    type: 'Red',
+                    content: 'Please select your Product(s) for exporting into the offer file',
+                    buttons: {
+                        tryAgain: {
+                            text: 'Ok',
+                            btnClass: 'btn-red',
+                            action: function () {
+
+
+                            }
+                        }
+
+                    }
+                });
             }
         }
 
@@ -483,24 +639,74 @@
                         $('#SessionMessage').load(document.URL +  ' #SessionMessage');
                         table.ajax.reload();  //just reload table
 
-                        {{--var link = document.createElement("a");--}}
-                        {{--link.download = data.fileName;--}}
-                        {{--var uri = '{{url("public/csv")}}'+"/"+data.fileName;--}}
-                        {{--link.href = uri;--}}
-                        {{--document.body.appendChild(link);--}}
-                        {{--link.click();--}}
-                        {{--document.body.removeChild(link);--}}
-                        {{--delete link;--}}
 
                             selecteds=[];
 
                         $(':checkbox:checked').prop('checked',false);
 
+                        if (data.success=='1'){
+
+                            $.alert({
+                                title: 'Success!',
+                                type: 'green',
+                                content: data.message,
+                                buttons: {
+                                    tryAgain: {
+                                        text: 'Ok',
+                                        btnClass: 'btn-blue',
+                                        action: function () {
+
+
+                                        }
+                                    }
+
+                                }
+                            });
+
+
+                        }else if(data.success=='0'){
+
+                            $.alert({
+                                title: 'Alert!',
+                                type: 'Red',
+                                content: data.message,
+                                buttons: {
+                                    tryAgain: {
+                                        text: 'Ok',
+                                        btnClass: 'btn-red',
+                                        action: function () {
+
+
+                                        }
+                                    }
+
+                                }
+                            });
+
+
+                        }
+
                     }
 
                 });
             }else {
-                alert("Please Select a offer first");
+               // alert("Please Select a offer first");
+                $.alert({
+                    title: 'Alert!',
+                    type: 'Red',
+                    content: 'Please select your Product(s) for exporting into the offer file',
+                    buttons: {
+                        tryAgain: {
+                            text: 'Ok',
+                            btnClass: 'btn-red',
+                            action: function () {
+
+
+                            }
+                        }
+
+                    }
+                });
             }
         }
         function priceAndQuantityUpdate() {
@@ -516,24 +722,74 @@
                         $('#SessionMessage').load(document.URL +  ' #SessionMessage');
                         table.ajax.reload();  //just reload table
 
-                        {{--var link = document.createElement("a");--}}
-                        {{--link.download = data.fileName;--}}
-                        {{--var uri = '{{url("public/csv")}}'+"/"+data.fileName;--}}
-                        {{--link.href = uri;--}}
-                        {{--document.body.appendChild(link);--}}
-                        {{--link.click();--}}
-                        {{--document.body.removeChild(link);--}}
-                        {{--delete link;--}}
 
                             selecteds=[];
 
                         $(':checkbox:checked').prop('checked',false);
 
+                        if (data.success=='1'){
+
+                            $.alert({
+                                title: 'Success!',
+                                type: 'green',
+                                content: data.message,
+                                buttons: {
+                                    tryAgain: {
+                                        text: 'Ok',
+                                        btnClass: 'btn-blue',
+                                        action: function () {
+
+
+                                        }
+                                    }
+
+                                }
+                            });
+
+
+                        }else if(data.success=='0'){
+
+                            $.alert({
+                                title: 'Alert!',
+                                type: 'Red',
+                                content: data.message,
+                                buttons: {
+                                    tryAgain: {
+                                        text: 'Ok',
+                                        btnClass: 'btn-red',
+                                        action: function () {
+
+
+                                        }
+                                    }
+
+                                }
+                            });
+
+
+                        }
+
                     }
 
                 });
             }else {
-                alert("Please Select a offer first");
+              //  alert("Please Select a offer first");
+                $.alert({
+                    title: 'Alert!',
+                    type: 'Red',
+                    content: 'Please select your Product(s) for exporting into the offer file',
+                    buttons: {
+                        tryAgain: {
+                            text: 'Ok',
+                            btnClass: 'btn-red',
+                            action: function () {
+
+
+                            }
+                        }
+
+                    }
+                });
             }
         }
 
@@ -563,20 +819,60 @@
                         link.click();
                         document.body.removeChild(link);
                         delete link;
+                        table.ajax.reload();  //just reload table
+
+                        selecteds=[];
+
+                        $(':checkbox:checked').prop('checked',false);
 
                     }
 
                 });
             }
             else {
-                alert("Please Select a product first");
+                //alert("Please Select a product first");
+                $.alert({
+                    title: 'Alert!',
+                    type: 'Red',
+                    content: 'Please select your Product(s) for exporting into the offer file',
+                    buttons: {
+                        tryAgain: {
+                            text: 'Ok',
+                            btnClass: 'btn-red',
+                            action: function () {
+
+
+                            }
+                        }
+
+                    }
+                });
             }
         }
 
         function exporttype() {
             var x = document.getElementById("selectExport").value;
             
-            if (x == "fulloffer"){
+            if (x == ""){
+
+                $.alert({
+                    title: 'Alert!',
+                    type: 'Red',
+                    content: 'Please select your Product(s) for exporting into the offer file',
+                    buttons: {
+                        tryAgain: {
+                            text: 'Ok',
+                            btnClass: 'btn-red',
+                            action: function () {
+
+
+                            }
+                        }
+
+                    }
+                });
+
+            }if (x == "fulloffer"){
                 creationFull();
 
             }else if (x == "price")

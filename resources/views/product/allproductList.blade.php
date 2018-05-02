@@ -80,7 +80,7 @@
             <div style="text-align: right" class="col-md-8 col-sm-8">
         <a  href="{{url("public/csv/ProductList.csv")}}" download > <button class="btn btn-danger">Download Exported Product File</button></a>
         <a  href="{{url("public/csv/OfferList.csv")}}" download > <button class="btn btn-danger">Download Exported Offer File</button></a>
-        <a  onclick="return excel()"> <button class="btn btn-danger"  >Download Products into Local Computer</button></a>
+        <a  onclick="return excel()"> <button class="btn btn-danger"  >Download Selected Product(s) Details</button></a>
             </div>
         </div>
     </div>
@@ -336,16 +336,47 @@
                         $(':checkbox:checked').prop('checked',false);
                         //alert(data);
 
+                        if (data.success=='1'){
+
+                            $.alert({
+                                title: 'Success!',
+                                type: 'green',
+                                content: data.message,
+                                buttons: {
+                                    tryAgain: {
+                                        text: 'Ok',
+                                        btnClass: 'btn-blue',
+                                        action: function () {
 
 
-                        {{--var link = document.createElement("a");--}}
-                        {{--link.download = data.fileName+".csv";--}}
-                        {{--var uri = '{{url("public/csv")}}'+"/"+data.fileName+".csv";--}}
-                        {{--link.href = uri;--}}
-                        {{--document.body.appendChild(link);--}}
-                        {{--link.click();--}}
-                        {{--document.body.removeChild(link);--}}
-                        {{--delete link;--}}
+                                        }
+                                    }
+
+                                }
+                            });
+
+
+                        }else if(data.success=='0'){
+
+                            $.alert({
+                                title: 'Alert!',
+                                type: 'Red',
+                                content: data.message,
+                                buttons: {
+                                    tryAgain: {
+                                        text: 'Ok',
+                                        btnClass: 'btn-red',
+                                        action: function () {
+
+
+                                        }
+                                    }
+
+                                }
+                            });
+
+
+                        }
 
 
                     }
@@ -353,7 +384,24 @@
                 });
             }
             else {
-                alert("Please Select a product first");
+               // alert("Please Select a product first");
+
+                $.alert({
+                    title: 'Alert!',
+                    type: 'Red',
+                    content: 'Please select your Product(s) for exporting into the Product and Offer file',
+                    buttons: {
+                        tryAgain: {
+                            text: 'Ok',
+                            btnClass: 'btn-red',
+                            action: function () {
+
+
+                            }
+                        }
+
+                    }
+                });
             }
         }
 
@@ -389,7 +437,24 @@
                 });
             }
             else {
-                alert("Please Select a product first");
+              //  alert("Please Select a product first");
+
+                $.alert({
+                    title: 'Alert!',
+                    type: 'Red',
+                    content: 'Please select your Product(s) for downloading the Product(s) details',
+                    buttons: {
+                        tryAgain: {
+                            text: 'Ok',
+                            btnClass: 'btn-red',
+                            action: function () {
+
+
+                            }
+                        }
+
+                    }
+                });
             }
         }
 
