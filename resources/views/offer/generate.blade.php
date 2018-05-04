@@ -127,9 +127,9 @@
 
                         <div style="text-align: right" class="col-md-6">
                             {{--<div class="col-md-3" >--}}
-                            <a   href="{{url("public/csv/OfferList.csv")}}" download > <button class="col-md-5 btn btn-danger">Download Last Exported Offer File</button></a>
+                            <a   href="{{url("public/csv/OfferList.csv")}}" download > <button class="col-md-4 btn btn-danger">Download Last Exported Offer File</button></a>
 
-                            <a  onclick="return excel()"> <button class="col-md-5 btn btn-danger">Download Selected Offer Details</button></a>
+                            <a  onclick="return excel()"> <button class="col-md-4 btn btn-danger">Download Selected Offer Details</button></a>
 
                             {{--</div>--}}
                             {{--<div class="col-md-3" >--}}
@@ -667,7 +667,7 @@
                 $.alert({
                     title: 'Alert!',
                     type: 'Red',
-                    content: 'Please select your Product(s) for exporting into the offer file',
+                    content: 'Please select your Product(s) for downloading the offer details',
                     buttons: {
                         tryAgain: {
                             text: 'Ok',
