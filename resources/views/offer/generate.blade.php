@@ -82,8 +82,8 @@
                                 <select name="" class="col-md-5 form-control form-control-warning" id="selectExport" >
                                     <option selected value="">Select Export Type</option>
 
-                                    <option value="fulloffer">Export Full with Discount</option>
-                                    <option value="quantity">Export Price & Quantity Update</option>
+                                    {{--<option value="fulloffer">Export Full with Discount</option>--}}
+                                    <option value="quantity">Export Full with Price & Quantity</option>
                                     <option value="price">Export Only Price Update</option>
                                     <option value="stock">Export Only Stock Update</option>
                                     <option value="markdown">Export Markdown Update</option>
